@@ -1,0 +1,11 @@
+{
+  "systems": [
+    "facebook/m2m100_418M"
+  ],
+  "fallback_used": false,
+  "fallback_reason": null,
+  "n_source_rows": 370,
+  "n_translations": 1480,
+  "n_empty": 1,
+  "seconds": 168.5
+}

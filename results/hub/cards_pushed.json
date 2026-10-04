@@ -1,0 +1,21 @@
+{
+ "repo_id": "gauravgandhi2411/multilingual-intent-router",
+ "private_before": true,
+ "private_after": true,
+ "commit_message": "docs: publish-mode model card",
+ "branches": {
+  "main": {
+   "version": "v1",
+   "local_sha256": "dd9944ee7c11ef29f60e7439c77fa9828120d66292115117a4a3581316f1f65a",
+   "remote_sha256": "dd9944ee7c11ef29f60e7439c77fa9828120d66292115117a4a3581316f1f65a",
+   "result": "PASS"
+  },
+  "robust-v3": {
+   "version": "v3",
+   "local_sha256": "620733127fe40bfaf4c00ef696ae9e3a6a00495fd07f957a4e24491f9f1f0f0e",
+   "remote_sha256": "620733127fe40bfaf4c00ef696ae9e3a6a00495fd07f957a4e24491f9f1f0f0e",
+   "result": "PASS"
+  }
+ },
+ "ok": true
+}

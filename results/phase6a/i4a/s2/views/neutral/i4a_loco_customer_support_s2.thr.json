@@ -1,0 +1,15 @@
+{
+  "scorer": "maha_ft",
+  "thr_rule": "global",
+  "mode": "neutral",
+  "per_retention": {
+    "95": {
+      "global": -142.68465278444324
+    },
+    "90": {
+      "global": -130.62935339727957
+    }
+  },
+  "weights": "i4a",
+  "run_id": "i4a_loco_customer_support_s2"
+}

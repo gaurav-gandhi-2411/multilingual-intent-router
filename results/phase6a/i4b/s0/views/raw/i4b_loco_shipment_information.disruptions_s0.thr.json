@@ -1,0 +1,15 @@
+{
+  "scorer": "maha_ft",
+  "thr_rule": "global",
+  "mode": "raw",
+  "per_retention": {
+    "95": {
+      "global": -148.69549882412812
+    },
+    "90": {
+      "global": -145.81864416890585
+    }
+  },
+  "weights": "i4b",
+  "run_id": "i4b_loco_shipment_information.disruptions_s0"
+}

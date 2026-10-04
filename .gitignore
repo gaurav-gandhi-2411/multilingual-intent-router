@@ -1,0 +1,38 @@
+# Confidential inputs (never commit)
+data/
+docs/
+
+# Secrets
+.env
+.env.*
+*.netrc
+
+# Tracking / outputs
+wandb/
+outputs/
+/runs/
+/checkpoints/
+/artifacts/
+*.safetensors
+*.bin
+*.pt
+*.ckpt
+*.onnx
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.venv-serve/
+# Packaged serve dir (model weights + OOD bank), built by intent_router.package
+serve_model*/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+*.egg-info/
+build/
+
+# Colab local-run outputs (may hold per-row predictions) and scratch
+results_colab/
+results_colab_dryrun/
+results_rerun/final_wandb_dryrun/

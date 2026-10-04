@@ -1,0 +1,71 @@
+# Robustness and open-set training fixes data preparation (pre-registered 2026-10-02). Pre-registered data
+# generation, NOT evaluation. Texts (synthetic / translated) go to outputs_dir only (gitignored);
+# results_dir gets counts / ids / statistics only.
+data_path: data/dataset.csv
+splits_path: splits/splits.csv
+eda_rows_path: results/eda_rows.csv
+frozen_e5_path: outputs/trackb/frozen_e5.npz
+final_config: configs/final.yaml          # source of the e5 model name and max_len
+trackb_config: configs/trackb.yaml        # source of the headline holdout / LOCO classes
+llm_audit_config: configs/llm_audit.yaml  # label descriptions are the in-code LABEL_DESCRIPTIONS
+outputs_dir: outputs/phase4c
+results_dir: results/phase4c_data
+seed: 42
+gpu_lock_expected_s: 1800
+
+synthetic:
+  model_tag: "qwen3:8b"
+  think: false
+  base_url: http://127.0.0.1:11434   # validated loopback-only (llm_audit.validate_loopback_url)
+  n_target: 800                      # requested before dedupe; ~600 expected to survive
+  batch_size: 20
+  temperature: 0.8
+  batch_seed_base: 42000             # per-batch seed = base + batch index (+ 7919 per retry)
+  max_attempts: 4
+  num_ctx: 2048
+  num_predict: 2048
+  timeout_s: 600
+  lang_quota: {en: 0.75, es: 0.0625, fr: 0.0625, de: 0.0625, zh: 0.0625}
+  lang_names: {en: English, es: Spanish, fr: French, de: German, zh: "Simplified Chinese"}
+  kind_quota: {logistics_novel: 0.75, generic_oos: 0.25}
+  dedupe_cos: 0.95                   # within-set near-duplicate drop
+  dataset_flag_cos: 0.85             # diagnostic flag only (never drops)
+
+a3:
+  model: facebook/nllb-200-distilled-600M
+  num_beams: 4
+  max_new_tokens: 128
+  batch_size: 16
+  fp16: true
+  targets: {es: spa_Latn, fr: fra_Latn, de: deu_Latn, zh: zho_Hans}
+  src_codes:                         # eda_rows.csv lang -> NLLB code (undetermined -> English)
+    en: eng_Latn
+    es: spa_Latn
+    fr: fra_Latn
+    de: deu_Latn
+    zh: zho_Hans
+    it: ita_Latn
+    nl: nld_Latn
+    ar: arb_Arab
+    undetermined: eng_Latn
+  noise_rate: 0.05
+  noise_name: a3_noise_5
+  noise_mode: mixed
+
+eval_mt:
+  primary_model: facebook/m2m100_418M   # greedy
+  max_new_tokens: 128
+  batch_size: 16
+  fallback_pattern: "Helsinki-NLP/opus-mt-en-{lang}"
+  targets: [es, fr, de, zh]
+  labse_model: sentence-transformers/LaBSE
+  labse_min_cos: 0.80
+  labse_max_len: 128
+  labse_batch_size: 64
+
+embed:
+  leakage_cos: 0.85                  # per-holdout OE drop threshold (applied by the trainer)
+
+samples:                             # stdout only
+  n_synthetic: 20
+  n_eval_per_lang: 2

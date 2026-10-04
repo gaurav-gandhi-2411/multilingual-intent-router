@@ -1,0 +1,234 @@
+{
+  "candidate": "current",
+  "deployed_epoch": 9,
+  "smoke": false,
+  "oof_accuracy": 0.9295774647887324,
+  "oof_macro_f1": 0.930903371693427,
+  "n_rows": 426,
+  "swap": {
+    "pooled": {
+      "n": 84,
+      "n_flips": 23,
+      "flip_rate": 0.27380952380952384,
+      "accuracy_swapped": 0.7023809523809523,
+      "accuracy_clean": 0.9404761904761905
+    },
+    "per_swap": {
+      "LD->REF": {
+        "n": 38,
+        "n_flips": 9,
+        "flip_rate": 0.23684210526315788,
+        "accuracy_swapped": 0.7368421052631579,
+        "accuracy_clean": 0.9736842105263158
+      },
+      "PO->REF": {
+        "n": 19,
+        "n_flips": 7,
+        "flip_rate": 0.3684210526315789,
+        "accuracy_swapped": 0.5789473684210527,
+        "accuracy_clean": 0.8947368421052632
+      },
+      "other->REF": {
+        "n": 27,
+        "n_flips": 7,
+        "flip_rate": 0.25925925925925924,
+        "accuracy_swapped": 0.7407407407407407,
+        "accuracy_clean": 0.9259259259259259
+      }
+    }
+  },
+  "noise": {
+    "n": 426,
+    "accuracy_clean": 0.9295774647887324,
+    "accuracy_noisy": 0.7816901408450704,
+    "drop": 0.147887323943662,
+    "flip_rate": 0.20422535211267606
+  },
+  "translation": {
+    "es": {
+      "filtered": {
+        "n": 355,
+        "agreement": 0.895774647887324,
+        "accuracy": 0.8816901408450705
+      },
+      "unfiltered": {
+        "n": 370,
+        "agreement": 0.8945945945945946,
+        "accuracy": 0.8810810810810811
+      }
+    },
+    "fr": {
+      "filtered": {
+        "n": 356,
+        "agreement": 0.8707865168539326,
+        "accuracy": 0.8595505617977528
+      },
+      "unfiltered": {
+        "n": 370,
+        "agreement": 0.8702702702702703,
+        "accuracy": 0.8594594594594595
+      }
+    },
+    "de": {
+      "filtered": {
+        "n": 357,
+        "agreement": 0.8795518207282913,
+        "accuracy": 0.8823529411764706
+      },
+      "unfiltered": {
+        "n": 370,
+        "agreement": 0.8810810810810811,
+        "accuracy": 0.8837837837837837
+      }
+    },
+    "zh": {
+      "filtered": {
+        "n": 278,
+        "agreement": 0.8201438848920863,
+        "accuracy": 0.7877697841726619
+      },
+      "unfiltered": {
+        "n": 370,
+        "agreement": 0.8162162162162162,
+        "accuracy": 0.7837837837837838
+      }
+    },
+    "mean_filtered": {
+      "agreement": 0.8665642175904085,
+      "accuracy": 0.852840856997989
+    },
+    "mean_unfiltered": {
+      "agreement": 0.8655405405405405,
+      "accuracy": 0.852027027027027
+    }
+  },
+  "folds": [
+    {
+      "fold": 0,
+      "dir": "outputs\\robustness\\fold_models\\fold0",
+      "run_meta": {
+        "fold": 0,
+        "run_id": "robust_fs0_ms0_f0",
+        "n_train": 340,
+        "n_eval": 86,
+        "stop_epoch": 9,
+        "model_seed": 0,
+        "attn_implementation": "eager",
+        "fingerprint": "a964b430a7663d9ed9d13417c626d6da95b8f1ca3d407995274d2001c5d75db7",
+        "final_epoch_eval": {
+          "epoch": 9,
+          "train_loss": 0.03578955510800535,
+          "eval_loss": 0.2017885384171508,
+          "macro_f1": 0.947028897028897,
+          "accuracy": 0.9534883720930233
+        },
+        "wall_clock_s": 60.65341070000068,
+        "gpu_exclusive": true,
+        "lock_waited_s": 2.0,
+        "git_sha": "f8e36d43fd6f810a9ea0458cb199b541f1f68a52"
+      }
+    },
+    {
+      "fold": 1,
+      "dir": "outputs\\robustness\\fold_models\\fold1",
+      "run_meta": {
+        "fold": 1,
+        "run_id": "robust_fs0_ms0_f1",
+        "n_train": 341,
+        "n_eval": 85,
+        "stop_epoch": 9,
+        "model_seed": 0,
+        "attn_implementation": "eager",
+        "fingerprint": "ec02df1d6d6cb673467251dff7b085bd4ea4bbd7b4ecc3f2c1eaeef4d455477d",
+        "final_epoch_eval": {
+          "epoch": 9,
+          "train_loss": 0.03399577355858954,
+          "eval_loss": 0.28255403076901153,
+          "macro_f1": 0.8998752455274195,
+          "accuracy": 0.8941176470588236
+        },
+        "wall_clock_s": 52.94851860000017,
+        "gpu_exclusive": true,
+        "lock_waited_s": 0.3,
+        "git_sha": "f8e36d43fd6f810a9ea0458cb199b541f1f68a52"
+      }
+    },
+    {
+      "fold": 2,
+      "dir": "outputs\\robustness\\fold_models\\fold2",
+      "run_meta": {
+        "fold": 2,
+        "run_id": "robust_fs0_ms0_f2",
+        "n_train": 341,
+        "n_eval": 85,
+        "stop_epoch": 9,
+        "model_seed": 0,
+        "attn_implementation": "eager",
+        "fingerprint": "0a20f3a445722594d8936bb237d71b106473d46f8367fc9ec3ee0016173a9a4c",
+        "final_epoch_eval": {
+          "epoch": 9,
+          "train_loss": 0.03338333422487432,
+          "eval_loss": 0.31694592640680425,
+          "macro_f1": 0.9133772953625895,
+          "accuracy": 0.9176470588235294
+        },
+        "wall_clock_s": 54.39777150000009,
+        "gpu_exclusive": true,
+        "lock_waited_s": 0.3,
+        "git_sha": "f8e36d43fd6f810a9ea0458cb199b541f1f68a52"
+      }
+    },
+    {
+      "fold": 3,
+      "dir": "outputs\\robustness\\fold_models\\fold3",
+      "run_meta": {
+        "fold": 3,
+        "run_id": "robust_fs0_ms0_f3",
+        "n_train": 341,
+        "n_eval": 85,
+        "stop_epoch": 9,
+        "model_seed": 0,
+        "attn_implementation": "eager",
+        "fingerprint": "2bcc6d352684534740eaeadd7653b069269c2dbea53dbf6da926729b4996fabd",
+        "final_epoch_eval": {
+          "epoch": 9,
+          "train_loss": 0.03435869912870906,
+          "eval_loss": 0.20780518335454604,
+          "macro_f1": 0.9191239316239317,
+          "accuracy": 0.9176470588235294
+        },
+        "wall_clock_s": 54.18484720000015,
+        "gpu_exclusive": true,
+        "lock_waited_s": 0.3,
+        "git_sha": "f8e36d43fd6f810a9ea0458cb199b541f1f68a52"
+      }
+    },
+    {
+      "fold": 4,
+      "dir": "outputs\\robustness\\fold_models\\fold4",
+      "run_meta": {
+        "fold": 4,
+        "run_id": "robust_fs0_ms0_f4",
+        "n_train": 341,
+        "n_eval": 85,
+        "stop_epoch": 9,
+        "model_seed": 0,
+        "attn_implementation": "eager",
+        "fingerprint": "9e2a1afbfc419d626581d96863adc706d10cd849748e250d1eac3027a98a7165",
+        "final_epoch_eval": {
+          "epoch": 9,
+          "train_loss": 0.03541240138425068,
+          "eval_loss": 0.15977228476720698,
+          "macro_f1": 0.9694870030783344,
+          "accuracy": 0.9647058823529412
+        },
+        "wall_clock_s": 50.34766500000114,
+        "gpu_exclusive": true,
+        "lock_waited_s": 0.3,
+        "git_sha": "f8e36d43fd6f810a9ea0458cb199b541f1f68a52"
+      }
+    }
+  ],
+  "git_sha": "5ee1293452c151d186f3f9ad17cb63d81cc7d824-dirty",
+  "clean_preds_equal_phase4a": true
+}

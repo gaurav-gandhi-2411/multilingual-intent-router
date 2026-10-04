@@ -1,0 +1,63 @@
+{
+  "i4_standalone": {
+    "i4a": {
+      "f1": 0.920932865248666,
+      "flip": 0.04365079365079364,
+      "eligible_a": false
+    },
+    "i4b": {
+      "f1": 0.9205633296452496,
+      "flip": 0.027777777777777776,
+      "eligible_a": false
+    }
+  },
+  "i4_pick": null,
+  "i3_type": "i3u",
+  "soup_type": "uniform",
+  "i1_scorer": "i1b",
+  "i1_neutral_rej95_on_i3": {
+    "i1a": 0.12955026455026455,
+    "i1b": 0.29526455026455023
+  },
+  "i6_variant": "i6b",
+  "i6_neutral_rej95_standalone": {
+    "i6a": 0.4171693121693121,
+    "i6b": 0.9748148148148148
+  },
+  "combos": {
+    "i3i4": {
+      "formed": false,
+      "weights": "i3i4",
+      "scorer": "maha_ft",
+      "thr": "global",
+      "reason": "no I4 variant is eligible on axis (a)"
+    },
+    "i3i1": {
+      "formed": true,
+      "weights": "i3u",
+      "scorer": "i1b",
+      "thr": "global",
+      "reason": null
+    },
+    "i3i4i1": {
+      "formed": false,
+      "weights": "i3i4",
+      "scorer": "i1b",
+      "thr": "global",
+      "reason": "no I4 variant is eligible on axis (a)"
+    },
+    "i3i4i1i6": {
+      "formed": false,
+      "weights": "i3i4",
+      "scorer": "i1b",
+      "thr": "i6b",
+      "reason": "no I4 variant is eligible on axis (a)"
+    }
+  },
+  "i3_standalone_cv_f1": {
+    "i3u": 0.9235981424130346,
+    "i3g": 0.9188670870047346
+  },
+  "git_sha": "334f4b803a84bc3672aed1f2c940044366a6d6fe-dirty",
+  "smoke": false
+}

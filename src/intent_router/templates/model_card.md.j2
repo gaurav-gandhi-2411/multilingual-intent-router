@@ -1,0 +1,148 @@
+---
+license: mit
+language:
+  - en
+  - es
+  - fr
+  - de
+  - zh
+library_name: transformers
+pipeline_tag: text-classification
+tags:
+  - intent-classification
+  - open-set
+  - abstention
+  - multilingual
+  - e5
+base_model: {{ m.base_model }}
+model-index:
+  - name: multilingual-intent-router{% if not m.shipped %} (robustness variant {{ m.version }}){% endif %}
+
+    results:
+      - task:
+          type: text-classification
+        dataset:
+          name: assessment synthetic logistics intents (not redistributed)
+          type: custom
+          split: test
+        metrics:
+          - type: f1
+            name: macro-F1
+            value: {{ m.test.macro_f1.point | round(4) }}
+            args:
+              average: macro
+            verified: false
+          - type: accuracy
+            name: accuracy
+            value: {{ m.test.accuracy.point | round(4) }}
+            verified: false
+---
+
+# Multilingual intent router ({{ m.version }}{% if m.shipped %}, shipped{% else %}, robustness variant{% endif %})
+
+{% if m.shipped -%}
+This is **{{ m.version }}, the shipped model** (branch `main`): a {{ eda.n_classes }}-class intent classifier for logistics chat messages, fine-tuned from `{{ m.base_model }}`, with an optional abstention flag for messages unlike the training data. A robustness variant ({{ peer.version }}) is on branch `{{ peer.branch }}`.
+{%- else -%}
+**This is the robustness variant {{ m.version }} (branch `{{ m.branch }}`), NOT the shipped model** (the shipped model is {{ peer.version }}, on branch `{{ peer.branch }}`): a {{ eda.n_classes }}-class logistics intent classifier fine-tuned from `{{ m.base_model }}` with training-only identifier-randomisation and machine-translation augmentation ({{ m.factors | join(' + ') | upper }}).
+{%- endif %}
+
+Model fingerprint (sha256 of fp32 state dict): `{{ m.fingerprint }}`
+
+## Label map
+
+| id | label |
+|---|---|
+{% for i, lab in labels -%}
+| {{ i }} | `{{ lab }}` |
+{% endfor %}
+## Usage
+
+```python
+import torch
+from transformers import AutoModelForSequenceClassification, AutoTokenizer
+
+repo = "{{ repo_id }}"
+tok = AutoTokenizer.from_pretrained(repo{% if not m.shipped %}, revision="{{ m.branch }}"{% endif %})
+model = AutoModelForSequenceClassification.from_pretrained(repo{% if not m.shipped %}, revision="{{ m.branch }}"{% endif %}).eval()
+text = "{{ m.query_prefix }}" + "where is my shipment?"   # the E5 prefix is required
+with torch.no_grad():
+    logits = model(**tok(text, return_tensors="pt", truncation=True, max_length={{ m.max_length }})).logits
+print(model.config.id2label[int(logits.argmax(-1))])
+```
+
+Abstention (the out-of-distribution flag) is NOT part of the plain model: it needs `predict.py` and `ood_bank.safetensors` from the same repository, used as follows. Confidences are temperature-scaled (T = {{ m.temperature | f4 }}); messages whose Mahalanobis score falls below the threshold ({{ thresholds.v1 | f2 }} v1 / {{ thresholds.v3 | f2 }} v3; this model's threshold = {{ m.ood_threshold | f2 }}, set to retain {{ m.retention | pct }}% of validation rows) are flagged `abstained`.
+
+```python
+from huggingface_hub import snapshot_download
+import sys
+path = snapshot_download("{{ repo_id }}", revision="{{ m.branch }}"){% if not publish %}  # private repo: needs an authorised token{% endif %}
+sys.path.insert(0, path)
+from predict import IntentRouter          # needs only torch, transformers, safetensors, numpy
+router = IntentRouter.from_pretrained(path)
+router.predict("...")   # {label, confidence, ood_score, abstained, top3}
+```
+
+## Training data
+
+A {{ eda.n_rows }}-row synthetic logistics intent dataset ({{ eda.n_classes }} classes, per-class counts {{ eda.min_class }} to {{ eda.max_class }}) provided for an assessment. It is **not redistributed** and no dataset text is included. Fixed splits: {{ m.n_train }} training rows, {{ m.n_val }} validation rows (epoch, temperature and threshold selection), {{ m.test.n }} test rows (one logged evaluation); model seed {{ m.model_seed }}.
+{%- if m.factors %} {{ m.version }} adds training-only augmentation (identifier-prefix randomisation and machine-translated / character-noise copies of training rows); validation and test rows are never augmented.{% endif %}
+
+## Intended and out-of-scope use
+
+Intended: routing short, single-turn logistics chat messages (shipment status, analytics, disruptions, appointments, orders, documents, yard operations, support, knowledge-base, chit-chat) to one of the {{ eda.n_classes }} intents; research and portfolio demonstration of the evaluation methodology.
+
+Out of scope: safety or security controls; regulated or high-stakes decisions; languages other than English, Spanish, French, German and Chinese; messages longer than a short chat turn; relying on the abstention flag to catch new intents (it is a weak detector, see below); any claim of generalisation beyond a {{ eda.n_rows }}-row synthetic dataset.
+
+## Track A: closed-set classification
+
+Test split, n = {{ m.test.n }}, one logged evaluation; 95% percentile-bootstrap intervals over rows.
+
+| metric | {{ m.version }} point [95% CI] |
+|---|---|
+| test macro-F1 | {{ m.test.macro_f1 | ci }} |
+| test accuracy | {{ m.test.accuracy | ci }} |
+| out-of-fold macro-F1 (post-selection, optimistic; {{ m.oof_n }} train+val rows) | {{ m.oof.macro_f1 | ci }} |
+
+Per-class test F1:
+
+| class | F1 | support |
+|---|---|---|
+{% for c in m.test.per_class -%}
+| `{{ c.label }}` | {{ c.f1 | f3 }} | {{ c.support }} |
+{% endfor %}
+## Track B: open-set rejection
+
+Whole classes are held out ({{ tb.seeds | length }} model seeds: {{ tb.seeds | join(', ') }}; {{ tb.n_known }} known and {{ tb.n_unknown }} unknown evaluation rows). The threshold keeps 95% of known rows.
+
+| headline holdout | {{ m.version }} point [95% CI] |
+|---|---|
+| AUROC | {{ tbv.headline.auroc | ci }} |
+| strict rejection recall @95% retention | {{ tbv.headline.strict_recall_95 | ci }} |
+| known retention @95 | {{ tbv.headline.retention_95 | ci }} |
+
+**Open-set rejection is weak:** most unseen-intent messages are not rejected at that operating point. A supervised oracle probe (it sees the held-out class labels, so it is an upper bound) reaches AUROC {{ oracle.unseen_known_auroc | f3 }} on unseen-known rows against {{ oracle.unsup_auroc | f3 }} for the unsupervised score used here{% if not m.shipped %} (measured on v1){% endif %}.
+
+## v1 vs v3
+
+Source: `results/tradeoff_v1_v3.json` (one logged test evaluation each; paired delta is v3 minus v1).
+
+| metric | v1 | v3 | paired delta [95% CI] |
+|---|---|---|---|
+{% for r in trade_rows -%}
+| {{ r.label }} | {{ r.v1 | ci_or_f3 }} | {{ r.v3 | ci_or_f3 }} | {% if r.delta is none %}no paired CI{% elif r.lo is none %}{{ r.delta | f3 }}{% else %}{{ r.delta | f3 }} [{{ r.lo | f3 }}, {{ r.hi | f3 }}]{% endif %} |
+{% endfor %}
+## Limitations
+
+- **Weak open-set rejection** (measured): strict rejection recall at 95% retention is {{ tbv.headline.strict_recall_95.point | pct }}% on the headline holdout (CI {{ tbv.headline.strict_recall_95.lo | pct }}% to {{ tbv.headline.strict_recall_95.hi | pct }}%). Do not rely on `abstained` to catch new intents.
+- **Identifier-prefix shortcut**: {% if m.shipped %}the shipped model keys on identifier prefixes: the cross-validated neutral-swap flip rate is {{ swap.v1 | f3 }} (the robustness variant v3 reduces it to {{ swap.v3 | f3 }}){% else %}v3 reduces the shortcut but the measurement is limited: the cross-validated neutral-swap flip rate is {{ swap.v3 | f3 }} against {{ swap.v1 | f3 }} for v1 (paired change {{ swap.delta | f3 }}; source `results/phase4e/axes.json`){% endif %}{% if m.test_idswap %}; on the test split the swaps flip {{ m.test_idswap.flip_rate | f3 }} of {{ m.test_idswap.n }} pairs{% if not m.shipped %} (too few pairs to claim the shortcut is gone){% endif %}{% endif %}.
+- **Small test set**: n = {{ m.test.n }}; differences between v1 and v3 on Track A are inside the noise.
+- **Synthetic data**: {{ eda.n_rows }} synthetic rows from one source; real-world performance is unmeasured.
+- **Language coverage**: {{ eda.pct_non_english }}% of messages have a non-English primary language, so non-English behaviour is thinly measured. Under machine translation the prediction agreement with the English prediction is {{ transl.v1 | f3 }} for v1 and {{ transl.v3 | f3 }} for v3 (synthetic translations, not native text).
+- **LLM baselines**: only local 8B-class open-weight models ({{ llm_tags | join(', ') }}) were tested; no frontier or hosted LLM was evaluated.
+
+## Links
+
+- Report: [report.pdf]({{ repo_url }}/blob/main/report.pdf)
+- GitHub: {{ repo_url }}
+- W&B report: {{ links.wandb }}
+- Colab: [notebook]({{ colab_url }})

@@ -1,0 +1,217 @@
+{
+  "threshold": 0.85,
+  "n_synthetic": 684,
+  "heldout_rows_source": "all 500 dataset rows of the held-out classes (frozen e5)",
+  "holdouts": {
+    "headline": {
+      "held_out_classes": [
+        "document_processing",
+        "yard_management"
+      ],
+      "n_heldout_rows": 80,
+      "n_synthetic": 684,
+      "n_dropped": 54,
+      "n_kept": 630,
+      "max_cos_distribution": {
+        "min": 0.7350341081619263,
+        "q05": 0.7764347225427628,
+        "q25": 0.8008365035057068,
+        "q50": 0.8166736960411072,
+        "q75": 0.8319926708936691,
+        "q95": 0.8557087123394013,
+        "max": 0.8967792987823486,
+        "mean": 0.8163302372596417
+      }
+    },
+    "loco_ai_agent_performance": {
+      "held_out_classes": [
+        "ai_agent_performance"
+      ],
+      "n_heldout_rows": 40,
+      "n_synthetic": 684,
+      "n_dropped": 20,
+      "n_kept": 664,
+      "max_cos_distribution": {
+        "min": 0.7193491458892822,
+        "q05": 0.7594697713851929,
+        "q25": 0.7906432002782822,
+        "q50": 0.8059461116790771,
+        "q75": 0.8209235072135925,
+        "q95": 0.8431017905473709,
+        "max": 0.8603931665420532,
+        "mean": 0.8044107315833109
+      }
+    },
+    "loco_appointment_manager": {
+      "held_out_classes": [
+        "appointment_manager"
+      ],
+      "n_heldout_rows": 45,
+      "n_synthetic": 684,
+      "n_dropped": 41,
+      "n_kept": 643,
+      "max_cos_distribution": {
+        "min": 0.7295039892196655,
+        "q05": 0.7713844358921051,
+        "q25": 0.8019448816776276,
+        "q50": 0.8201210796833038,
+        "q75": 0.8320135474205017,
+        "q95": 0.8518539160490036,
+        "max": 0.880854606628418,
+        "mean": 0.8159132266950886
+      }
+    },
+    "loco_customer_support": {
+      "held_out_classes": [
+        "customer_support"
+      ],
+      "n_heldout_rows": 40,
+      "n_synthetic": 684,
+      "n_dropped": 63,
+      "n_kept": 621,
+      "max_cos_distribution": {
+        "min": 0.7299878597259521,
+        "q05": 0.7683985233306885,
+        "q25": 0.7981533706188202,
+        "q50": 0.8180559873580933,
+        "q75": 0.8327692598104477,
+        "q95": 0.860099783539772,
+        "max": 0.9400120973587036,
+        "mean": 0.8155048212461304
+      }
+    },
+    "loco_document_processing": {
+      "held_out_classes": [
+        "document_processing"
+      ],
+      "n_heldout_rows": 40,
+      "n_synthetic": 684,
+      "n_dropped": 39,
+      "n_kept": 645,
+      "max_cos_distribution": {
+        "min": 0.7312098741531372,
+        "q05": 0.7682945311069489,
+        "q25": 0.7944760620594025,
+        "q50": 0.8114131689071655,
+        "q75": 0.8271020203828812,
+        "q95": 0.8513620793819427,
+        "max": 0.8967792987823486,
+        "mean": 0.8106090363703276
+      }
+    },
+    "loco_knowledge_base": {
+      "held_out_classes": [
+        "knowledge_base"
+      ],
+      "n_heldout_rows": 40,
+      "n_synthetic": 684,
+      "n_dropped": 61,
+      "n_kept": 623,
+      "max_cos_distribution": {
+        "min": 0.7306525111198425,
+        "q05": 0.7669962882995606,
+        "q25": 0.7971024662256241,
+        "q50": 0.8147653341293335,
+        "q75": 0.8302295207977295,
+        "q95": 0.8609981656074523,
+        "max": 0.9202348589897156,
+        "mean": 0.814423270305695
+      }
+    },
+    "loco_orders": {
+      "held_out_classes": [
+        "orders"
+      ],
+      "n_heldout_rows": 45,
+      "n_synthetic": 684,
+      "n_dropped": 54,
+      "n_kept": 630,
+      "max_cos_distribution": {
+        "min": 0.7218544483184814,
+        "q05": 0.763411408662796,
+        "q25": 0.7958790361881256,
+        "q50": 0.8163244426250458,
+        "q75": 0.8336210548877716,
+        "q95": 0.8538576424121856,
+        "max": 0.8837462067604065,
+        "mean": 0.8133062386547613
+      }
+    },
+    "loco_shipment_information.analytics": {
+      "held_out_classes": [
+        "shipment_information.analytics"
+      ],
+      "n_heldout_rows": 55,
+      "n_synthetic": 684,
+      "n_dropped": 45,
+      "n_kept": 639,
+      "max_cos_distribution": {
+        "min": 0.7349033355712891,
+        "q05": 0.7695614248514175,
+        "q25": 0.7910925298929214,
+        "q50": 0.8103951513767242,
+        "q75": 0.8279903382062912,
+        "q95": 0.8535776913166047,
+        "max": 0.8967974185943604,
+        "mean": 0.8105321645039564
+      }
+    },
+    "loco_shipment_information.disruptions": {
+      "held_out_classes": [
+        "shipment_information.disruptions"
+      ],
+      "n_heldout_rows": 35,
+      "n_synthetic": 684,
+      "n_dropped": 14,
+      "n_kept": 670,
+      "max_cos_distribution": {
+        "min": 0.7301012873649597,
+        "q05": 0.7598043084144592,
+        "q25": 0.7826669365167618,
+        "q50": 0.8024949133396149,
+        "q75": 0.8168371617794037,
+        "q95": 0.8416247725486755,
+        "max": 0.8876820802688599,
+        "mean": 0.8009739559121997
+      }
+    },
+    "loco_shipment_information.realtime_query": {
+      "held_out_classes": [
+        "shipment_information.realtime_query"
+      ],
+      "n_heldout_rows": 55,
+      "n_synthetic": 684,
+      "n_dropped": 30,
+      "n_kept": 654,
+      "max_cos_distribution": {
+        "min": 0.7388017773628235,
+        "q05": 0.7667420357465744,
+        "q25": 0.7941835224628448,
+        "q50": 0.8113643527030945,
+        "q75": 0.8268811851739883,
+        "q95": 0.8491853237152099,
+        "max": 0.8727914094924927,
+        "mean": 0.8099728024493881
+      }
+    },
+    "loco_yard_management": {
+      "held_out_classes": [
+        "yard_management"
+      ],
+      "n_heldout_rows": 40,
+      "n_synthetic": 684,
+      "n_dropped": 18,
+      "n_kept": 666,
+      "max_cos_distribution": {
+        "min": 0.7180904150009155,
+        "q05": 0.7648608416318894,
+        "q25": 0.7904196977615356,
+        "q50": 0.8057141005992889,
+        "q75": 0.820513442158699,
+        "q95": 0.8418651133775711,
+        "max": 0.8811808228492737,
+        "mean": 0.8048063313577607
+      }
+    }
+  }
+}

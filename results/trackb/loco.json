@@ -1,0 +1,1750 @@
+{
+  "label": "measured, 1 model seed per class",
+  "complete": true,
+  "n_runs": 10,
+  "expected_runs": 10,
+  "per_class": {
+    "ai_agent_performance": {
+      "n_eval_unknown": 40,
+      "n_eval_known": 68,
+      "closed_set_macro_f1": 0.940241576605213,
+      "methods": {
+        "msp": {
+          "auroc": 0.8915441176470589,
+          "strict_rejection_recall": 0.075,
+          "lenient_rejection_recall": 0.075,
+          "retention_known": 0.9705882352941176
+        },
+        "msp_temp": {
+          "auroc": 0.8926470588235295,
+          "strict_rejection_recall": 0.1,
+          "lenient_rejection_recall": 0.1,
+          "retention_known": 0.9705882352941176
+        },
+        "max_logit": {
+          "auroc": 0.8919117647058824,
+          "strict_rejection_recall": 0.05,
+          "lenient_rejection_recall": 0.05,
+          "retention_known": 0.9705882352941176
+        },
+        "neg_energy": {
+          "auroc": 0.893014705882353,
+          "strict_rejection_recall": 0.1,
+          "lenient_rejection_recall": 0.1,
+          "retention_known": 0.9705882352941176
+        },
+        "maha_ft": {
+          "auroc": 0.8838235294117647,
+          "strict_rejection_recall": 0.125,
+          "lenient_rejection_recall": 0.125,
+          "retention_known": 0.9558823529411765
+        },
+        "knn1_ft": {
+          "auroc": 0.8775735294117647,
+          "strict_rejection_recall": 0.1,
+          "lenient_rejection_recall": 0.1,
+          "retention_known": 0.9558823529411765
+        },
+        "knn5_ft": {
+          "auroc": 0.8805147058823529,
+          "strict_rejection_recall": 0.05,
+          "lenient_rejection_recall": 0.05,
+          "retention_known": 0.9705882352941176
+        },
+        "maha_frozen": {
+          "auroc": 0.6930147058823529,
+          "strict_rejection_recall": 0.0,
+          "lenient_rejection_recall": 0.0,
+          "retention_known": 0.9558823529411765
+        },
+        "knn1_frozen": {
+          "auroc": 0.7172794117647059,
+          "strict_rejection_recall": 0.125,
+          "lenient_rejection_recall": 0.125,
+          "retention_known": 0.8823529411764706
+        },
+        "knn5_frozen": {
+          "auroc": 0.7143382352941177,
+          "strict_rejection_recall": 0.075,
+          "lenient_rejection_recall": 0.075,
+          "retention_known": 0.9264705882352942
+        }
+      }
+    },
+    "appointment_manager": {
+      "n_eval_unknown": 45,
+      "n_eval_known": 67,
+      "closed_set_macro_f1": 0.9571369806663924,
+      "methods": {
+        "msp": {
+          "auroc": 0.8809286898839138,
+          "strict_rejection_recall": 0.26666666666666666,
+          "lenient_rejection_recall": 0.26666666666666666,
+          "retention_known": 0.9850746268656716
+        },
+        "msp_temp": {
+          "auroc": 0.8835820895522388,
+          "strict_rejection_recall": 0.26666666666666666,
+          "lenient_rejection_recall": 0.26666666666666666,
+          "retention_known": 0.9850746268656716
+        },
+        "max_logit": {
+          "auroc": 0.9018242122719735,
+          "strict_rejection_recall": 0.37777777777777777,
+          "lenient_rejection_recall": 0.37777777777777777,
+          "retention_known": 0.9850746268656716
+        },
+        "neg_energy": {
+          "auroc": 0.9058043117744611,
+          "strict_rejection_recall": 0.4444444444444444,
+          "lenient_rejection_recall": 0.4444444444444444,
+          "retention_known": 0.9850746268656716
+        },
+        "maha_ft": {
+          "auroc": 0.9283582089552239,
+          "strict_rejection_recall": 0.2,
+          "lenient_rejection_recall": 0.2,
+          "retention_known": 1.0
+        },
+        "knn1_ft": {
+          "auroc": 0.9164179104477612,
+          "strict_rejection_recall": 0.24444444444444444,
+          "lenient_rejection_recall": 0.24444444444444444,
+          "retention_known": 0.9850746268656716
+        },
+        "knn5_ft": {
+          "auroc": 0.9164179104477612,
+          "strict_rejection_recall": 0.28888888888888886,
+          "lenient_rejection_recall": 0.28888888888888886,
+          "retention_known": 0.9850746268656716
+        },
+        "maha_frozen": {
+          "auroc": 0.6268656716417911,
+          "strict_rejection_recall": 0.0,
+          "lenient_rejection_recall": 0.0,
+          "retention_known": 0.9402985074626866
+        },
+        "knn1_frozen": {
+          "auroc": 0.6421227197346601,
+          "strict_rejection_recall": 0.08888888888888889,
+          "lenient_rejection_recall": 0.08888888888888889,
+          "retention_known": 0.8955223880597015
+        },
+        "knn5_frozen": {
+          "auroc": 0.6122719734660034,
+          "strict_rejection_recall": 0.0,
+          "lenient_rejection_recall": 0.0,
+          "retention_known": 0.9253731343283582
+        }
+      }
+    },
+    "customer_support": {
+      "n_eval_unknown": 40,
+      "n_eval_known": 68,
+      "closed_set_macro_f1": 1.0,
+      "methods": {
+        "msp": {
+          "auroc": 0.8963235294117647,
+          "strict_rejection_recall": 0.5,
+          "lenient_rejection_recall": 0.5,
+          "retention_known": 0.9852941176470589
+        },
+        "msp_temp": {
+          "auroc": 0.8955882352941177,
+          "strict_rejection_recall": 0.5,
+          "lenient_rejection_recall": 0.5,
+          "retention_known": 0.9852941176470589
+        },
+        "max_logit": {
+          "auroc": 0.8860294117647058,
+          "strict_rejection_recall": 0.75,
+          "lenient_rejection_recall": 0.75,
+          "retention_known": 0.9411764705882353
+        },
+        "neg_energy": {
+          "auroc": 0.8841911764705882,
+          "strict_rejection_recall": 0.775,
+          "lenient_rejection_recall": 0.775,
+          "retention_known": 0.9411764705882353
+        },
+        "maha_ft": {
+          "auroc": 0.8643382352941177,
+          "strict_rejection_recall": 0.675,
+          "lenient_rejection_recall": 0.675,
+          "retention_known": 0.9411764705882353
+        },
+        "knn1_ft": {
+          "auroc": 0.8768382352941176,
+          "strict_rejection_recall": 0.5,
+          "lenient_rejection_recall": 0.5,
+          "retention_known": 0.9852941176470589
+        },
+        "knn5_ft": {
+          "auroc": 0.8761029411764706,
+          "strict_rejection_recall": 0.475,
+          "lenient_rejection_recall": 0.475,
+          "retention_known": 0.9705882352941176
+        },
+        "maha_frozen": {
+          "auroc": 0.6691176470588235,
+          "strict_rejection_recall": 0.025,
+          "lenient_rejection_recall": 0.025,
+          "retention_known": 0.9411764705882353
+        },
+        "knn1_frozen": {
+          "auroc": 0.638235294117647,
+          "strict_rejection_recall": 0.025,
+          "lenient_rejection_recall": 0.025,
+          "retention_known": 0.9117647058823529
+        },
+        "knn5_frozen": {
+          "auroc": 0.5514705882352942,
+          "strict_rejection_recall": 0.025,
+          "lenient_rejection_recall": 0.025,
+          "retention_known": 0.9117647058823529
+        }
+      }
+    },
+    "document_processing": {
+      "n_eval_unknown": 40,
+      "n_eval_known": 68,
+      "closed_set_macro_f1": 0.9724019296211811,
+      "methods": {
+        "msp": {
+          "auroc": 0.788235294117647,
+          "strict_rejection_recall": 0.225,
+          "lenient_rejection_recall": 0.225,
+          "retention_known": 0.9852941176470589
+        },
+        "msp_temp": {
+          "auroc": 0.788235294117647,
+          "strict_rejection_recall": 0.225,
+          "lenient_rejection_recall": 0.225,
+          "retention_known": 0.9852941176470589
+        },
+        "max_logit": {
+          "auroc": 0.7952205882352941,
+          "strict_rejection_recall": 0.275,
+          "lenient_rejection_recall": 0.275,
+          "retention_known": 0.9852941176470589
+        },
+        "neg_energy": {
+          "auroc": 0.7955882352941176,
+          "strict_rejection_recall": 0.325,
+          "lenient_rejection_recall": 0.325,
+          "retention_known": 0.9705882352941176
+        },
+        "maha_ft": {
+          "auroc": 0.8110294117647059,
+          "strict_rejection_recall": 0.275,
+          "lenient_rejection_recall": 0.275,
+          "retention_known": 0.9852941176470589
+        },
+        "knn1_ft": {
+          "auroc": 0.7933823529411764,
+          "strict_rejection_recall": 0.35,
+          "lenient_rejection_recall": 0.35,
+          "retention_known": 0.9705882352941176
+        },
+        "knn5_ft": {
+          "auroc": 0.7941176470588235,
+          "strict_rejection_recall": 0.275,
+          "lenient_rejection_recall": 0.275,
+          "retention_known": 0.9705882352941176
+        },
+        "maha_frozen": {
+          "auroc": 0.7338235294117647,
+          "strict_rejection_recall": 0.05,
+          "lenient_rejection_recall": 0.05,
+          "retention_known": 0.9411764705882353
+        },
+        "knn1_frozen": {
+          "auroc": 0.6580882352941176,
+          "strict_rejection_recall": 0.025,
+          "lenient_rejection_recall": 0.025,
+          "retention_known": 0.9117647058823529
+        },
+        "knn5_frozen": {
+          "auroc": 0.6525735294117647,
+          "strict_rejection_recall": 0.075,
+          "lenient_rejection_recall": 0.075,
+          "retention_known": 0.9264705882352942
+        }
+      }
+    },
+    "knowledge_base": {
+      "n_eval_unknown": 40,
+      "n_eval_known": 68,
+      "closed_set_macro_f1": 0.9694775812422872,
+      "methods": {
+        "msp": {
+          "auroc": 0.893014705882353,
+          "strict_rejection_recall": 0.375,
+          "lenient_rejection_recall": 0.5,
+          "retention_known": 0.9852941176470589
+        },
+        "msp_temp": {
+          "auroc": 0.893014705882353,
+          "strict_rejection_recall": 0.375,
+          "lenient_rejection_recall": 0.5,
+          "retention_known": 0.9852941176470589
+        },
+        "max_logit": {
+          "auroc": 0.9003676470588236,
+          "strict_rejection_recall": 0.425,
+          "lenient_rejection_recall": 0.55,
+          "retention_known": 0.9852941176470589
+        },
+        "neg_energy": {
+          "auroc": 0.9025735294117647,
+          "strict_rejection_recall": 0.45,
+          "lenient_rejection_recall": 0.575,
+          "retention_known": 0.9852941176470589
+        },
+        "maha_ft": {
+          "auroc": 0.9106617647058823,
+          "strict_rejection_recall": 0.625,
+          "lenient_rejection_recall": 0.725,
+          "retention_known": 0.9558823529411765
+        },
+        "knn1_ft": {
+          "auroc": 0.9047794117647059,
+          "strict_rejection_recall": 0.475,
+          "lenient_rejection_recall": 0.6,
+          "retention_known": 0.9852941176470589
+        },
+        "knn5_ft": {
+          "auroc": 0.9018382352941177,
+          "strict_rejection_recall": 0.425,
+          "lenient_rejection_recall": 0.55,
+          "retention_known": 0.9852941176470589
+        },
+        "maha_frozen": {
+          "auroc": 0.8654411764705883,
+          "strict_rejection_recall": 0.25,
+          "lenient_rejection_recall": 0.275,
+          "retention_known": 0.9558823529411765
+        },
+        "knn1_frozen": {
+          "auroc": 0.8386029411764706,
+          "strict_rejection_recall": 0.15,
+          "lenient_rejection_recall": 0.2,
+          "retention_known": 0.9558823529411765
+        },
+        "knn5_frozen": {
+          "auroc": 0.8691176470588236,
+          "strict_rejection_recall": 0.175,
+          "lenient_rejection_recall": 0.25,
+          "retention_known": 0.9558823529411765
+        }
+      }
+    },
+    "orders": {
+      "n_eval_unknown": 45,
+      "n_eval_known": 67,
+      "closed_set_macro_f1": 0.9554915672562732,
+      "methods": {
+        "msp": {
+          "auroc": 0.844776119402985,
+          "strict_rejection_recall": 0.35555555555555557,
+          "lenient_rejection_recall": 0.35555555555555557,
+          "retention_known": 0.9552238805970149
+        },
+        "msp_temp": {
+          "auroc": 0.844776119402985,
+          "strict_rejection_recall": 0.35555555555555557,
+          "lenient_rejection_recall": 0.35555555555555557,
+          "retention_known": 0.9552238805970149
+        },
+        "max_logit": {
+          "auroc": 0.857379767827529,
+          "strict_rejection_recall": 0.37777777777777777,
+          "lenient_rejection_recall": 0.37777777777777777,
+          "retention_known": 0.9552238805970149
+        },
+        "neg_energy": {
+          "auroc": 0.8613598673300166,
+          "strict_rejection_recall": 0.3111111111111111,
+          "lenient_rejection_recall": 0.3111111111111111,
+          "retention_known": 0.9701492537313433
+        },
+        "maha_ft": {
+          "auroc": 0.87893864013267,
+          "strict_rejection_recall": 0.28888888888888886,
+          "lenient_rejection_recall": 0.28888888888888886,
+          "retention_known": 0.9701492537313433
+        },
+        "knn1_ft": {
+          "auroc": 0.8796019900497513,
+          "strict_rejection_recall": 0.37777777777777777,
+          "lenient_rejection_recall": 0.37777777777777777,
+          "retention_known": 0.9701492537313433
+        },
+        "knn5_ft": {
+          "auroc": 0.8812603648424544,
+          "strict_rejection_recall": 0.37777777777777777,
+          "lenient_rejection_recall": 0.37777777777777777,
+          "retention_known": 0.9701492537313433
+        },
+        "maha_frozen": {
+          "auroc": 0.5691542288557214,
+          "strict_rejection_recall": 0.0,
+          "lenient_rejection_recall": 0.0,
+          "retention_known": 0.9402985074626866
+        },
+        "knn1_frozen": {
+          "auroc": 0.5774461028192371,
+          "strict_rejection_recall": 0.022222222222222223,
+          "lenient_rejection_recall": 0.022222222222222223,
+          "retention_known": 0.9104477611940298
+        },
+        "knn5_frozen": {
+          "auroc": 0.5174129353233831,
+          "strict_rejection_recall": 0.0,
+          "lenient_rejection_recall": 0.0,
+          "retention_known": 0.9253731343283582
+        }
+      }
+    },
+    "shipment_information.analytics": {
+      "n_eval_unknown": 55,
+      "n_eval_known": 66,
+      "closed_set_macro_f1": 0.93955598768433,
+      "methods": {
+        "msp": {
+          "auroc": 0.8787878787878788,
+          "strict_rejection_recall": 0.32727272727272727,
+          "lenient_rejection_recall": 0.32727272727272727,
+          "retention_known": 0.9242424242424242
+        },
+        "msp_temp": {
+          "auroc": 0.8776859504132232,
+          "strict_rejection_recall": 0.32727272727272727,
+          "lenient_rejection_recall": 0.32727272727272727,
+          "retention_known": 0.9242424242424242
+        },
+        "max_logit": {
+          "auroc": 0.8870523415977961,
+          "strict_rejection_recall": 0.2727272727272727,
+          "lenient_rejection_recall": 0.2727272727272727,
+          "retention_known": 0.9696969696969697
+        },
+        "neg_energy": {
+          "auroc": 0.8947658402203856,
+          "strict_rejection_recall": 0.2545454545454545,
+          "lenient_rejection_recall": 0.2545454545454545,
+          "retention_known": 0.9696969696969697
+        },
+        "maha_ft": {
+          "auroc": 0.9038567493112948,
+          "strict_rejection_recall": 0.21818181818181817,
+          "lenient_rejection_recall": 0.21818181818181817,
+          "retention_known": 0.9848484848484849
+        },
+        "knn1_ft": {
+          "auroc": 0.9027548209366392,
+          "strict_rejection_recall": 0.36363636363636365,
+          "lenient_rejection_recall": 0.36363636363636365,
+          "retention_known": 0.9545454545454546
+        },
+        "knn5_ft": {
+          "auroc": 0.8991735537190083,
+          "strict_rejection_recall": 0.41818181818181815,
+          "lenient_rejection_recall": 0.41818181818181815,
+          "retention_known": 0.9393939393939394
+        },
+        "maha_frozen": {
+          "auroc": 0.5765840220385675,
+          "strict_rejection_recall": 0.05454545454545454,
+          "lenient_rejection_recall": 0.05454545454545454,
+          "retention_known": 0.9393939393939394
+        },
+        "knn1_frozen": {
+          "auroc": 0.6377410468319559,
+          "strict_rejection_recall": 0.10909090909090909,
+          "lenient_rejection_recall": 0.10909090909090909,
+          "retention_known": 0.8939393939393939
+        },
+        "knn5_frozen": {
+          "auroc": 0.6460055096418733,
+          "strict_rejection_recall": 0.05454545454545454,
+          "lenient_rejection_recall": 0.05454545454545454,
+          "retention_known": 0.9242424242424242
+        }
+      }
+    },
+    "shipment_information.disruptions": {
+      "n_eval_unknown": 35,
+      "n_eval_known": 69,
+      "closed_set_macro_f1": 0.956423968188674,
+      "methods": {
+        "msp": {
+          "auroc": 0.8397515527950311,
+          "strict_rejection_recall": 0.2857142857142857,
+          "lenient_rejection_recall": 0.2857142857142857,
+          "retention_known": 0.9710144927536232
+        },
+        "msp_temp": {
+          "auroc": 0.8405797101449275,
+          "strict_rejection_recall": 0.2857142857142857,
+          "lenient_rejection_recall": 0.2857142857142857,
+          "retention_known": 0.9710144927536232
+        },
+        "max_logit": {
+          "auroc": 0.8587991718426501,
+          "strict_rejection_recall": 0.37142857142857144,
+          "lenient_rejection_recall": 0.37142857142857144,
+          "retention_known": 0.9855072463768116
+        },
+        "neg_energy": {
+          "auroc": 0.8579710144927536,
+          "strict_rejection_recall": 0.42857142857142855,
+          "lenient_rejection_recall": 0.42857142857142855,
+          "retention_known": 0.9855072463768116
+        },
+        "maha_ft": {
+          "auroc": 0.8853002070393374,
+          "strict_rejection_recall": 0.37142857142857144,
+          "lenient_rejection_recall": 0.37142857142857144,
+          "retention_known": 0.9420289855072463
+        },
+        "knn1_ft": {
+          "auroc": 0.8832298136645963,
+          "strict_rejection_recall": 0.42857142857142855,
+          "lenient_rejection_recall": 0.42857142857142855,
+          "retention_known": 0.9565217391304348
+        },
+        "knn5_ft": {
+          "auroc": 0.8703933747412008,
+          "strict_rejection_recall": 0.42857142857142855,
+          "lenient_rejection_recall": 0.42857142857142855,
+          "retention_known": 0.9565217391304348
+        },
+        "maha_frozen": {
+          "auroc": 0.7010351966873706,
+          "strict_rejection_recall": 0.14285714285714285,
+          "lenient_rejection_recall": 0.14285714285714285,
+          "retention_known": 0.9420289855072463
+        },
+        "knn1_frozen": {
+          "auroc": 0.6761904761904762,
+          "strict_rejection_recall": 0.17142857142857143,
+          "lenient_rejection_recall": 0.17142857142857143,
+          "retention_known": 0.8840579710144928
+        },
+        "knn5_frozen": {
+          "auroc": 0.6219461697722567,
+          "strict_rejection_recall": 0.08571428571428572,
+          "lenient_rejection_recall": 0.08571428571428572,
+          "retention_known": 0.927536231884058
+        }
+      }
+    },
+    "shipment_information.realtime_query": {
+      "n_eval_unknown": 55,
+      "n_eval_known": 66,
+      "closed_set_macro_f1": 0.9557775557775557,
+      "methods": {
+        "msp": {
+          "auroc": 0.9162534435261708,
+          "strict_rejection_recall": 0.4,
+          "lenient_rejection_recall": 0.4,
+          "retention_known": 0.9696969696969697
+        },
+        "msp_temp": {
+          "auroc": 0.9168044077134986,
+          "strict_rejection_recall": 0.41818181818181815,
+          "lenient_rejection_recall": 0.41818181818181815,
+          "retention_known": 0.9545454545454546
+        },
+        "max_logit": {
+          "auroc": 0.9305785123966942,
+          "strict_rejection_recall": 0.41818181818181815,
+          "lenient_rejection_recall": 0.41818181818181815,
+          "retention_known": 0.9848484848484849
+        },
+        "neg_energy": {
+          "auroc": 0.9355371900826446,
+          "strict_rejection_recall": 0.38181818181818183,
+          "lenient_rejection_recall": 0.38181818181818183,
+          "retention_known": 0.9848484848484849
+        },
+        "maha_ft": {
+          "auroc": 0.8942148760330578,
+          "strict_rejection_recall": 0.21818181818181817,
+          "lenient_rejection_recall": 0.21818181818181817,
+          "retention_known": 0.9545454545454546
+        },
+        "knn1_ft": {
+          "auroc": 0.928374655647383,
+          "strict_rejection_recall": 0.5636363636363636,
+          "lenient_rejection_recall": 0.5636363636363636,
+          "retention_known": 0.9242424242424242
+        },
+        "knn5_ft": {
+          "auroc": 0.9245179063360881,
+          "strict_rejection_recall": 0.5818181818181818,
+          "lenient_rejection_recall": 0.5818181818181818,
+          "retention_known": 0.9393939393939394
+        },
+        "maha_frozen": {
+          "auroc": 0.5911845730027548,
+          "strict_rejection_recall": 0.0,
+          "lenient_rejection_recall": 0.0,
+          "retention_known": 0.9393939393939394
+        },
+        "knn1_frozen": {
+          "auroc": 0.615426997245179,
+          "strict_rejection_recall": 0.05454545454545454,
+          "lenient_rejection_recall": 0.05454545454545454,
+          "retention_known": 0.8787878787878788
+        },
+        "knn5_frozen": {
+          "auroc": 0.5537190082644629,
+          "strict_rejection_recall": 0.03636363636363636,
+          "lenient_rejection_recall": 0.03636363636363636,
+          "retention_known": 0.9242424242424242
+        }
+      }
+    },
+    "yard_management": {
+      "n_eval_unknown": 40,
+      "n_eval_known": 68,
+      "closed_set_macro_f1": 0.9424379542026601,
+      "methods": {
+        "msp": {
+          "auroc": 0.8580882352941176,
+          "strict_rejection_recall": 0.2,
+          "lenient_rejection_recall": 0.2,
+          "retention_known": 0.9705882352941176
+        },
+        "msp_temp": {
+          "auroc": 0.8595588235294118,
+          "strict_rejection_recall": 0.2,
+          "lenient_rejection_recall": 0.2,
+          "retention_known": 0.9705882352941176
+        },
+        "max_logit": {
+          "auroc": 0.8639705882352942,
+          "strict_rejection_recall": 0.15,
+          "lenient_rejection_recall": 0.15,
+          "retention_known": 0.9852941176470589
+        },
+        "neg_energy": {
+          "auroc": 0.8654411764705883,
+          "strict_rejection_recall": 0.325,
+          "lenient_rejection_recall": 0.325,
+          "retention_known": 0.9852941176470589
+        },
+        "maha_ft": {
+          "auroc": 0.9025735294117647,
+          "strict_rejection_recall": 0.3,
+          "lenient_rejection_recall": 0.3,
+          "retention_known": 0.9705882352941176
+        },
+        "knn1_ft": {
+          "auroc": 0.8786764705882353,
+          "strict_rejection_recall": 0.3,
+          "lenient_rejection_recall": 0.3,
+          "retention_known": 0.9852941176470589
+        },
+        "knn5_ft": {
+          "auroc": 0.8727941176470588,
+          "strict_rejection_recall": 0.225,
+          "lenient_rejection_recall": 0.225,
+          "retention_known": 0.9852941176470589
+        },
+        "maha_frozen": {
+          "auroc": 0.7349264705882353,
+          "strict_rejection_recall": 0.1,
+          "lenient_rejection_recall": 0.1,
+          "retention_known": 0.9411764705882353
+        },
+        "knn1_frozen": {
+          "auroc": 0.6202205882352941,
+          "strict_rejection_recall": 0.15,
+          "lenient_rejection_recall": 0.15,
+          "retention_known": 0.8823529411764706
+        },
+        "knn5_frozen": {
+          "auroc": 0.6264705882352941,
+          "strict_rejection_recall": 0.075,
+          "lenient_rejection_recall": 0.075,
+          "retention_known": 0.9117647058823529
+        }
+      }
+    }
+  },
+  "mean_across_classes": {
+    "msp": {
+      "auroc": {
+        "mean": 0.8687703566748921,
+        "std": 0.0370978402440865,
+        "n": 10,
+        "values": [
+          0.8915441176470589,
+          0.8809286898839138,
+          0.8963235294117647,
+          0.788235294117647,
+          0.893014705882353,
+          0.844776119402985,
+          0.8787878787878788,
+          0.8397515527950311,
+          0.9162534435261708,
+          0.8580882352941176
+        ]
+      },
+      "strict_rejection_recall": {
+        "mean": 0.3010209235209235,
+        "std": 0.11879487049409883,
+        "n": 10,
+        "values": [
+          0.075,
+          0.26666666666666666,
+          0.5,
+          0.225,
+          0.375,
+          0.35555555555555557,
+          0.32727272727272727,
+          0.2857142857142857,
+          0.4,
+          0.2
+        ]
+      },
+      "lenient_rejection_recall": {
+        "mean": 0.31352092352092353,
+        "std": 0.1331529030939646,
+        "n": 10,
+        "values": [
+          0.075,
+          0.26666666666666666,
+          0.5,
+          0.225,
+          0.5,
+          0.35555555555555557,
+          0.32727272727272727,
+          0.2857142857142857,
+          0.4,
+          0.2
+        ]
+      },
+      "retention_known": {
+        "mean": 0.9702311217685116,
+        "std": 0.01898052456388572,
+        "n": 10,
+        "values": [
+          0.9705882352941176,
+          0.9850746268656716,
+          0.9852941176470589,
+          0.9852941176470589,
+          0.9852941176470589,
+          0.9552238805970149,
+          0.9242424242424242,
+          0.9710144927536232,
+          0.9696969696969697,
+          0.9705882352941176
+        ]
+      },
+      "aupr": {
+        "mean": 0.7893956569265789,
+        "std": 0.07065255571895299,
+        "n": 10,
+        "values": [
+          0.7252439422072462,
+          0.8218552751135626,
+          0.8955488558046534,
+          0.6904382497940978,
+          0.8483647121833255,
+          0.7531377076364463,
+          0.8259951702394536,
+          0.7405526546598193,
+          0.8674042246764219,
+          0.7254157769507624
+        ]
+      },
+      "fpr_at_95tpr": {
+        "mean": 0.5485642135642135,
+        "std": 0.11619395819468989,
+        "n": 10,
+        "values": [
+          0.675,
+          0.4888888888888889,
+          0.3,
+          0.575,
+          0.45,
+          0.6,
+          0.6909090909090909,
+          0.6285714285714286,
+          0.5272727272727272,
+          0.55
+        ]
+      }
+    },
+    "msp_temp": {
+      "auroc": {
+        "mean": 0.8692472394873931,
+        "std": 0.03715155108949605,
+        "n": 10,
+        "values": [
+          0.8926470588235295,
+          0.8835820895522388,
+          0.8955882352941177,
+          0.788235294117647,
+          0.893014705882353,
+          0.844776119402985,
+          0.8776859504132232,
+          0.8405797101449275,
+          0.9168044077134986,
+          0.8595588235294118
+        ]
+      },
+      "strict_rejection_recall": {
+        "mean": 0.30533910533910535,
+        "std": 0.11550723682969577,
+        "n": 10,
+        "values": [
+          0.1,
+          0.26666666666666666,
+          0.5,
+          0.225,
+          0.375,
+          0.35555555555555557,
+          0.32727272727272727,
+          0.2857142857142857,
+          0.41818181818181815,
+          0.2
+        ]
+      },
+      "lenient_rejection_recall": {
+        "mean": 0.31783910533910537,
+        "std": 0.12976689335775493,
+        "n": 10,
+        "values": [
+          0.1,
+          0.26666666666666666,
+          0.5,
+          0.225,
+          0.5,
+          0.35555555555555557,
+          0.32727272727272727,
+          0.2857142857142857,
+          0.41818181818181815,
+          0.2
+        ]
+      },
+      "retention_known": {
+        "mean": 0.9687159702533601,
+        "std": 0.01962181555520033,
+        "n": 10,
+        "values": [
+          0.9705882352941176,
+          0.9850746268656716,
+          0.9852941176470589,
+          0.9852941176470589,
+          0.9852941176470589,
+          0.9552238805970149,
+          0.9242424242424242,
+          0.9710144927536232,
+          0.9545454545454546,
+          0.9705882352941176
+        ]
+      },
+      "aupr": {
+        "mean": 0.7908674885849041,
+        "std": 0.06952620446625707,
+        "n": 10,
+        "values": [
+          0.7297382923044107,
+          0.8258612008700978,
+          0.893887726236547,
+          0.6904382497940978,
+          0.8485049660735795,
+          0.7536787303996912,
+          0.8249160868233666,
+          0.7426403838642532,
+          0.8684432010240213,
+          0.7305660484589748
+        ]
+      },
+      "fpr_at_95tpr": {
+        "mean": 0.5528823953823954,
+        "std": 0.1219181882058515,
+        "n": 10,
+        "values": [
+          0.7,
+          0.4888888888888889,
+          0.3,
+          0.575,
+          0.45,
+          0.6,
+          0.7090909090909091,
+          0.6285714285714286,
+          0.5272727272727272,
+          0.55
+        ]
+      }
+    },
+    "max_logit": {
+      "auroc": {
+        "mean": 0.8773134005936642,
+        "std": 0.036531212265070875,
+        "n": 10,
+        "values": [
+          0.8919117647058824,
+          0.9018242122719735,
+          0.8860294117647058,
+          0.7952205882352941,
+          0.9003676470588236,
+          0.857379767827529,
+          0.8870523415977961,
+          0.8587991718426501,
+          0.9305785123966942,
+          0.8639705882352942
+        ]
+      },
+      "strict_rejection_recall": {
+        "mean": 0.34678932178932176,
+        "std": 0.18671700027195973,
+        "n": 10,
+        "values": [
+          0.05,
+          0.37777777777777777,
+          0.75,
+          0.275,
+          0.425,
+          0.37777777777777777,
+          0.2727272727272727,
+          0.37142857142857144,
+          0.41818181818181815,
+          0.15
+        ]
+      },
+      "lenient_rejection_recall": {
+        "mean": 0.35928932178932177,
+        "std": 0.19646439125130163,
+        "n": 10,
+        "values": [
+          0.05,
+          0.37777777777777777,
+          0.75,
+          0.275,
+          0.55,
+          0.37777777777777777,
+          0.2727272727272727,
+          0.37142857142857144,
+          0.41818181818181815,
+          0.15
+        ]
+      },
+      "retention_known": {
+        "mean": 0.9747998267208484,
+        "std": 0.01566705923770045,
+        "n": 10,
+        "values": [
+          0.9705882352941176,
+          0.9850746268656716,
+          0.9411764705882353,
+          0.9852941176470589,
+          0.9852941176470589,
+          0.9552238805970149,
+          0.9696969696969697,
+          0.9855072463768116,
+          0.9848484848484849,
+          0.9852941176470589
+        ]
+      },
+      "aupr": {
+        "mean": 0.8089175122649467,
+        "std": 0.07429177443200365,
+        "n": 10,
+        "values": [
+          0.7223666295750335,
+          0.8604609680297953,
+          0.8857732412837561,
+          0.6983106574540258,
+          0.8735758805160174,
+          0.7741795676230557,
+          0.8518243926154204,
+          0.761229109712272,
+          0.9046563467767081,
+          0.7567983290633832
+        ]
+      },
+      "fpr_at_95tpr": {
+        "mean": 0.4667604617604617,
+        "std": 0.1380079225581029,
+        "n": 10,
+        "values": [
+          0.7,
+          0.28888888888888886,
+          0.275,
+          0.575,
+          0.35,
+          0.4222222222222222,
+          0.5454545454545454,
+          0.5428571428571428,
+          0.41818181818181815,
+          0.55
+        ]
+      }
+    },
+    "neg_energy": {
+      "auroc": {
+        "mean": 0.8796247047429674,
+        "std": 0.03776155074471955,
+        "n": 10,
+        "values": [
+          0.893014705882353,
+          0.9058043117744611,
+          0.8841911764705882,
+          0.7955882352941176,
+          0.9025735294117647,
+          0.8613598673300166,
+          0.8947658402203856,
+          0.8579710144927536,
+          0.9355371900826446,
+          0.8654411764705883
+        ]
+      },
+      "strict_rejection_recall": {
+        "mean": 0.3795490620490621,
+        "std": 0.17396457634802895,
+        "n": 10,
+        "values": [
+          0.1,
+          0.4444444444444444,
+          0.775,
+          0.325,
+          0.45,
+          0.3111111111111111,
+          0.2545454545454545,
+          0.42857142857142855,
+          0.38181818181818183,
+          0.325
+        ]
+      },
+      "lenient_rejection_recall": {
+        "mean": 0.3920490620490621,
+        "std": 0.18380191599269677,
+        "n": 10,
+        "values": [
+          0.1,
+          0.4444444444444444,
+          0.775,
+          0.325,
+          0.575,
+          0.3111111111111111,
+          0.2545454545454545,
+          0.42857142857142855,
+          0.38181818181818183,
+          0.325
+        ]
+      },
+      "retention_known": {
+        "mean": 0.974821775798987,
+        "std": 0.013964731017767882,
+        "n": 10,
+        "values": [
+          0.9705882352941176,
+          0.9850746268656716,
+          0.9411764705882353,
+          0.9705882352941176,
+          0.9852941176470589,
+          0.9701492537313433,
+          0.9696969696969697,
+          0.9855072463768116,
+          0.9848484848484849,
+          0.9852941176470589
+        ]
+      },
+      "aupr": {
+        "mean": 0.8138978437407373,
+        "std": 0.07795831687812577,
+        "n": 10,
+        "values": [
+          0.7189569237644112,
+          0.866399090122903,
+          0.8831194719414458,
+          0.6951498203619287,
+          0.8802011534799803,
+          0.7795571015666753,
+          0.8693938973801728,
+          0.7581944138408174,
+          0.9163352674436613,
+          0.7716712975053766
+        ]
+      },
+      "fpr_at_95tpr": {
+        "mean": 0.4496392496392496,
+        "std": 0.15293886350913163,
+        "n": 10,
+        "values": [
+          0.75,
+          0.24444444444444444,
+          0.35,
+          0.625,
+          0.375,
+          0.4,
+          0.36363636363636365,
+          0.5428571428571428,
+          0.34545454545454546,
+          0.5
+        ]
+      }
+    },
+    "maha_ft": {
+      "auroc": {
+        "mean": 0.8863095152059819,
+        "std": 0.031985070748618456,
+        "n": 10,
+        "values": [
+          0.8838235294117647,
+          0.9283582089552239,
+          0.8643382352941177,
+          0.8110294117647059,
+          0.9106617647058823,
+          0.87893864013267,
+          0.9038567493112948,
+          0.8853002070393374,
+          0.8942148760330578,
+          0.9025735294117647
+        ]
+      },
+      "strict_rejection_recall": {
+        "mean": 0.32966810966810967,
+        "std": 0.18175440084714023,
+        "n": 10,
+        "values": [
+          0.125,
+          0.2,
+          0.675,
+          0.275,
+          0.625,
+          0.28888888888888886,
+          0.21818181818181817,
+          0.37142857142857144,
+          0.21818181818181817,
+          0.3
+        ]
+      },
+      "lenient_rejection_recall": {
+        "mean": 0.3396681096681097,
+        "std": 0.20148844414399342,
+        "n": 10,
+        "values": [
+          0.125,
+          0.2,
+          0.675,
+          0.275,
+          0.725,
+          0.28888888888888886,
+          0.21818181818181817,
+          0.37142857142857144,
+          0.21818181818181817,
+          0.3
+        ]
+      },
+      "retention_known": {
+        "mean": 0.9660395708044295,
+        "std": 0.019574751969112247,
+        "n": 10,
+        "values": [
+          0.9558823529411765,
+          1.0,
+          0.9411764705882353,
+          0.9852941176470589,
+          0.9558823529411765,
+          0.9701492537313433,
+          0.9848484848484849,
+          0.9420289855072463,
+          0.9545454545454546,
+          0.9705882352941176
+        ]
+      },
+      "aupr": {
+        "mean": 0.8189668215413575,
+        "std": 0.06004398775619264,
+        "n": 10,
+        "values": [
+          0.712049926311764,
+          0.8954046635997945,
+          0.8550872208707345,
+          0.7470206038991802,
+          0.885279647254628,
+          0.8001754169943838,
+          0.8712801765878478,
+          0.789885785022047,
+          0.8299677186577724,
+          0.8035170562154219
+        ]
+      },
+      "fpr_at_95tpr": {
+        "mean": 0.5447510822510823,
+        "std": 0.18859525606867997,
+        "n": 10,
+        "values": [
+          0.825,
+          0.24444444444444444,
+          0.325,
+          0.5,
+          0.375,
+          0.6222222222222222,
+          0.5454545454545454,
+          0.6285714285714286,
+          0.7818181818181819,
+          0.6
+        ]
+      }
+    },
+    "knn1_ft": {
+      "auroc": {
+        "mean": 0.8841629190746131,
+        "std": 0.03675098912854788,
+        "n": 10,
+        "values": [
+          0.8775735294117647,
+          0.9164179104477612,
+          0.8768382352941176,
+          0.7933823529411764,
+          0.9047794117647059,
+          0.8796019900497513,
+          0.9027548209366392,
+          0.8832298136645963,
+          0.928374655647383,
+          0.8786764705882353
+        ]
+      },
+      "strict_rejection_recall": {
+        "mean": 0.3703066378066378,
+        "std": 0.13454239337083007,
+        "n": 10,
+        "values": [
+          0.1,
+          0.24444444444444444,
+          0.5,
+          0.35,
+          0.475,
+          0.37777777777777777,
+          0.36363636363636365,
+          0.42857142857142855,
+          0.5636363636363636,
+          0.3
+        ]
+      },
+      "lenient_rejection_recall": {
+        "mean": 0.3828066378066378,
+        "std": 0.15024082189527188,
+        "n": 10,
+        "values": [
+          0.1,
+          0.24444444444444444,
+          0.5,
+          0.35,
+          0.6,
+          0.37777777777777777,
+          0.36363636363636365,
+          0.42857142857142855,
+          0.5636363636363636,
+          0.3
+        ]
+      },
+      "retention_known": {
+        "mean": 0.9672886439691798,
+        "std": 0.019914814279511292,
+        "n": 10,
+        "values": [
+          0.9558823529411765,
+          0.9850746268656716,
+          0.9852941176470589,
+          0.9705882352941176,
+          0.9852941176470589,
+          0.9701492537313433,
+          0.9545454545454546,
+          0.9565217391304348,
+          0.9242424242424242,
+          0.9852941176470589
+        ]
+      },
+      "aupr": {
+        "mean": 0.8086509035692261,
+        "std": 0.07237309692107487,
+        "n": 10,
+        "values": [
+          0.6946213887387886,
+          0.8623445338074056,
+          0.8762329887469706,
+          0.7054077832009553,
+          0.8717955624389162,
+          0.7871648206959331,
+          0.8617976995623248,
+          0.7770450259152819,
+          0.8851259070195434,
+          0.7649733255661423
+        ]
+      },
+      "fpr_at_95tpr": {
+        "mean": 0.5001226551226551,
+        "std": 0.14973604287291822,
+        "n": 10,
+        "values": [
+          0.775,
+          0.35555555555555557,
+          0.275,
+          0.525,
+          0.325,
+          0.5333333333333333,
+          0.6181818181818182,
+          0.5714285714285714,
+          0.4727272727272727,
+          0.55
+        ]
+      }
+    },
+    "knn5_ft": {
+      "auroc": {
+        "mean": 0.8817130757145335,
+        "std": 0.035994330772876615,
+        "n": 10,
+        "values": [
+          0.8805147058823529,
+          0.9164179104477612,
+          0.8761029411764706,
+          0.7941176470588235,
+          0.9018382352941177,
+          0.8812603648424544,
+          0.8991735537190083,
+          0.8703933747412008,
+          0.9245179063360881,
+          0.8727941176470588
+        ]
+      },
+      "strict_rejection_recall": {
+        "mean": 0.3545238095238096,
+        "std": 0.14957845338493042,
+        "n": 10,
+        "values": [
+          0.05,
+          0.28888888888888886,
+          0.475,
+          0.275,
+          0.425,
+          0.37777777777777777,
+          0.41818181818181815,
+          0.42857142857142855,
+          0.5818181818181818,
+          0.225
+        ]
+      },
+      "lenient_rejection_recall": {
+        "mean": 0.36702380952380953,
+        "std": 0.16091577198863935,
+        "n": 10,
+        "values": [
+          0.05,
+          0.28888888888888886,
+          0.475,
+          0.275,
+          0.55,
+          0.37777777777777777,
+          0.41818181818181815,
+          0.42857142857142855,
+          0.5818181818181818,
+          0.225
+        ]
+      },
+      "retention_known": {
+        "mean": 0.9672886439691798,
+        "std": 0.017248947393831673,
+        "n": 10,
+        "values": [
+          0.9705882352941176,
+          0.9850746268656716,
+          0.9705882352941176,
+          0.9705882352941176,
+          0.9852941176470589,
+          0.9701492537313433,
+          0.9393939393939394,
+          0.9565217391304348,
+          0.9393939393939394,
+          0.9852941176470589
+        ]
+      },
+      "aupr": {
+        "mean": 0.805720002035342,
+        "std": 0.0739852395526462,
+        "n": 10,
+        "values": [
+          0.6960874009408257,
+          0.8655500279481848,
+          0.8746139031449729,
+          0.7024835819847497,
+          0.8668041875027119,
+          0.7910671081366636,
+          0.8672796144976008,
+          0.7546354925217152,
+          0.8807604491737332,
+          0.7579182545022621
+        ]
+      },
+      "fpr_at_95tpr": {
+        "mean": 0.4894624819624819,
+        "std": 0.1575926906523722,
+        "n": 10,
+        "values": [
+          0.775,
+          0.3333333333333333,
+          0.25,
+          0.575,
+          0.325,
+          0.4888888888888889,
+          0.6181818181818182,
+          0.5428571428571428,
+          0.43636363636363634,
+          0.55
+        ]
+      }
+    },
+    "maha_frozen": {
+      "auroc": {
+        "mean": 0.6761147221637971,
+        "std": 0.09102791980562727,
+        "n": 10,
+        "values": [
+          0.6930147058823529,
+          0.6268656716417911,
+          0.6691176470588235,
+          0.7338235294117647,
+          0.8654411764705883,
+          0.5691542288557214,
+          0.5765840220385675,
+          0.7010351966873706,
+          0.5911845730027548,
+          0.7349264705882353
+        ]
+      },
+      "strict_rejection_recall": {
+        "mean": 0.06224025974025974,
+        "std": 0.08183307573043393,
+        "n": 10,
+        "values": [
+          0.0,
+          0.0,
+          0.025,
+          0.05,
+          0.25,
+          0.0,
+          0.05454545454545454,
+          0.14285714285714285,
+          0.0,
+          0.1
+        ]
+      },
+      "lenient_rejection_recall": {
+        "mean": 0.06474025974025974,
+        "std": 0.0883304135143304,
+        "n": 10,
+        "values": [
+          0.0,
+          0.0,
+          0.025,
+          0.05,
+          0.275,
+          0.0,
+          0.05454545454545454,
+          0.14285714285714285,
+          0.0,
+          0.1
+        ]
+      },
+      "retention_known": {
+        "mean": 0.9436707996867557,
+        "std": 0.006488728947129927,
+        "n": 10,
+        "values": [
+          0.9558823529411765,
+          0.9402985074626866,
+          0.9411764705882353,
+          0.9411764705882353,
+          0.9558823529411765,
+          0.9402985074626866,
+          0.9393939393939394,
+          0.9420289855072463,
+          0.9393939393939394,
+          0.9411764705882353
+        ]
+      },
+      "aupr": {
+        "mean": 0.50993248141126,
+        "std": 0.07640406505934949,
+        "n": 10,
+        "values": [
+          0.4692597682536617,
+          0.4485878493767427,
+          0.46636344397107676,
+          0.5109275067778815,
+          0.7056230792766122,
+          0.4344449836673067,
+          0.4929021626340717,
+          0.5199800804037604,
+          0.5124779863160709,
+          0.5387579534354159
+        ]
+      },
+      "fpr_at_95tpr": {
+        "mean": 0.9377597402597402,
+        "std": 0.08183307573043391,
+        "n": 10,
+        "values": [
+          1.0,
+          1.0,
+          0.975,
+          0.95,
+          0.75,
+          1.0,
+          0.9454545454545454,
+          0.8571428571428571,
+          1.0,
+          0.9
+        ]
+      }
+    },
+    "knn1_frozen": {
+      "auroc": {
+        "mean": 0.6621353813409744,
+        "std": 0.07232118954933306,
+        "n": 10,
+        "values": [
+          0.7172794117647059,
+          0.6421227197346601,
+          0.638235294117647,
+          0.6580882352941176,
+          0.8386029411764706,
+          0.5774461028192371,
+          0.6377410468319559,
+          0.6761904761904762,
+          0.615426997245179,
+          0.6202205882352941
+        ]
+      },
+      "strict_rejection_recall": {
+        "mean": 0.09211760461760463,
+        "std": 0.057423687605023345,
+        "n": 10,
+        "values": [
+          0.125,
+          0.08888888888888889,
+          0.025,
+          0.025,
+          0.15,
+          0.022222222222222223,
+          0.10909090909090909,
+          0.17142857142857143,
+          0.05454545454545454,
+          0.15
+        ]
+      },
+      "lenient_rejection_recall": {
+        "mean": 0.09711760461760462,
+        "std": 0.06473497991526969,
+        "n": 10,
+        "values": [
+          0.125,
+          0.08888888888888889,
+          0.025,
+          0.025,
+          0.2,
+          0.022222222222222223,
+          0.10909090909090909,
+          0.17142857142857143,
+          0.05454545454545454,
+          0.15
+        ]
+      },
+      "retention_known": {
+        "mean": 0.9006873040054322,
+        "std": 0.023304280781035,
+        "n": 10,
+        "values": [
+          0.8823529411764706,
+          0.8955223880597015,
+          0.9117647058823529,
+          0.9117647058823529,
+          0.9558823529411765,
+          0.9104477611940298,
+          0.8939393939393939,
+          0.8840579710144928,
+          0.8787878787878788,
+          0.8823529411764706
+        ]
+      },
+      "aupr": {
+        "mean": 0.4867505864168321,
+        "std": 0.06964049461939718,
+        "n": 10,
+        "values": [
+          0.5000755020893853,
+          0.47015384246104586,
+          0.4330566389201912,
+          0.450461417453503,
+          0.6594893171239684,
+          0.425943488760256,
+          0.5355209940605875,
+          0.44423420852294515,
+          0.49621807642756777,
+          0.4523523783488711
+        ]
+      },
+      "fpr_at_95tpr": {
+        "mean": 0.9685064935064934,
+        "std": 0.04530174275239023,
+        "n": 10,
+        "values": [
+          0.975,
+          1.0,
+          1.0,
+          0.975,
+          0.85,
+          1.0,
+          0.9636363636363636,
+          0.9714285714285714,
+          1.0,
+          0.95
+        ]
+      }
+    },
+    "knn5_frozen": {
+      "auroc": {
+        "mean": 0.6365326184703273,
+        "std": 0.09982333605702412,
+        "n": 10,
+        "values": [
+          0.7143382352941177,
+          0.6122719734660034,
+          0.5514705882352942,
+          0.6525735294117647,
+          0.8691176470588236,
+          0.5174129353233831,
+          0.6460055096418733,
+          0.6219461697722567,
+          0.5537190082644629,
+          0.6264705882352941
+        ]
+      },
+      "strict_rejection_recall": {
+        "mean": 0.06016233766233765,
+        "std": 0.05117984706101058,
+        "n": 10,
+        "values": [
+          0.075,
+          0.0,
+          0.025,
+          0.075,
+          0.175,
+          0.0,
+          0.05454545454545454,
+          0.08571428571428572,
+          0.03636363636363636,
+          0.075
+        ]
+      },
+      "lenient_rejection_recall": {
+        "mean": 0.06766233766233766,
+        "std": 0.0713851369974834,
+        "n": 10,
+        "values": [
+          0.075,
+          0.0,
+          0.025,
+          0.075,
+          0.25,
+          0.0,
+          0.05454545454545454,
+          0.08571428571428572,
+          0.03636363636363636,
+          0.075
+        ]
+      },
+      "retention_known": {
+        "mean": 0.9259120290202094,
+        "std": 0.012055113284890154,
+        "n": 10,
+        "values": [
+          0.9264705882352942,
+          0.9253731343283582,
+          0.9117647058823529,
+          0.9264705882352942,
+          0.9558823529411765,
+          0.9253731343283582,
+          0.9242424242424242,
+          0.927536231884058,
+          0.9242424242424242,
+          0.9117647058823529
+        ]
+      },
+      "aupr": {
+        "mean": 0.4722133684655967,
+        "std": 0.09426941208796881,
+        "n": 10,
+        "values": [
+          0.49361057759999827,
+          0.4455215872541631,
+          0.36896777525140984,
+          0.4509674760122955,
+          0.7050628529309175,
+          0.394038450334691,
+          0.5237152029546779,
+          0.4105919239023429,
+          0.48495681630862886,
+          0.4447010221068415
+        ]
+      },
+      "fpr_at_95tpr": {
+        "mean": 0.9549675324675324,
+        "std": 0.09216027905184067,
+        "n": 10,
+        "values": [
+          0.975,
+          1.0,
+          1.0,
+          1.0,
+          0.7,
+          1.0,
+          1.0,
+          0.9428571428571428,
+          0.9818181818181818,
+          0.95
+        ]
+      }
+    }
+  },
+  "selection": {
+    "rule": "best mean LOCO AUROC (strict mode) across the leave-one-class-out runs",
+    "note": "a design choice made across holdout experiments",
+    "n_loco_runs": 10,
+    "mean_auroc_by_method": {
+      "msp": 0.8687703566748921,
+      "msp_temp": 0.8692472394873931,
+      "max_logit": 0.8773134005936642,
+      "neg_energy": 0.8796247047429674,
+      "maha_ft": 0.8863095152059819,
+      "knn1_ft": 0.8841629190746131,
+      "knn5_ft": 0.8817130757145335,
+      "maha_frozen": 0.6761147221637971,
+      "knn1_frozen": 0.6621353813409744,
+      "knn5_frozen": 0.6365326184703273
+    },
+    "ranking": [
+      "maha_ft",
+      "knn1_ft",
+      "knn5_ft",
+      "neg_energy",
+      "max_logit",
+      "msp_temp",
+      "msp",
+      "maha_frozen",
+      "knn1_frozen",
+      "knn5_frozen"
+    ],
+    "shipped_method": "maha_ft"
+  }
+}

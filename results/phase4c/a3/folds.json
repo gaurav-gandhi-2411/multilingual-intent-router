@@ -1,0 +1,303 @@
+{
+  "candidate": "a3",
+  "deployed_epoch": 9,
+  "smoke": false,
+  "oof_accuracy": 0.9577464788732394,
+  "oof_macro_f1": 0.9572597019393038,
+  "n_rows": 426,
+  "swap": {
+    "pooled": {
+      "n": 84,
+      "n_flips": 31,
+      "flip_rate": 0.36904761904761907,
+      "accuracy_swapped": 0.5952380952380952,
+      "accuracy_clean": 0.9523809523809523
+    },
+    "per_swap": {
+      "LD->REF": {
+        "n": 38,
+        "n_flips": 21,
+        "flip_rate": 0.5526315789473685,
+        "accuracy_swapped": 0.4473684210526316,
+        "accuracy_clean": 1.0
+      },
+      "PO->REF": {
+        "n": 19,
+        "n_flips": 1,
+        "flip_rate": 0.05263157894736842,
+        "accuracy_swapped": 0.8421052631578947,
+        "accuracy_clean": 0.8947368421052632
+      },
+      "other->REF": {
+        "n": 27,
+        "n_flips": 9,
+        "flip_rate": 0.3333333333333333,
+        "accuracy_swapped": 0.6296296296296297,
+        "accuracy_clean": 0.9259259259259259
+      }
+    }
+  },
+  "noise": {
+    "n": 426,
+    "accuracy_clean": 0.9577464788732394,
+    "accuracy_noisy": 0.8427230046948356,
+    "drop": 0.11502347417840375,
+    "flip_rate": 0.12441314553990611
+  },
+  "translation": {
+    "es": {
+      "filtered": {
+        "n": 355,
+        "agreement": 0.9183098591549296,
+        "accuracy": 0.8929577464788733
+      },
+      "unfiltered": {
+        "n": 370,
+        "agreement": 0.9162162162162162,
+        "accuracy": 0.8918918918918919
+      }
+    },
+    "fr": {
+      "filtered": {
+        "n": 356,
+        "agreement": 0.9353932584269663,
+        "accuracy": 0.9101123595505618
+      },
+      "unfiltered": {
+        "n": 370,
+        "agreement": 0.9351351351351351,
+        "accuracy": 0.9108108108108108
+      }
+    },
+    "de": {
+      "filtered": {
+        "n": 357,
+        "agreement": 0.9355742296918768,
+        "accuracy": 0.907563025210084
+      },
+      "unfiltered": {
+        "n": 370,
+        "agreement": 0.9297297297297298,
+        "accuracy": 0.9054054054054054
+      }
+    },
+    "zh": {
+      "filtered": {
+        "n": 278,
+        "agreement": 0.8705035971223022,
+        "accuracy": 0.841726618705036
+      },
+      "unfiltered": {
+        "n": 370,
+        "agreement": 0.8621621621621621,
+        "accuracy": 0.8351351351351352
+      }
+    },
+    "mean_filtered": {
+      "agreement": 0.9149452360990187,
+      "accuracy": 0.8880899374861387
+    },
+    "mean_unfiltered": {
+      "agreement": 0.9108108108108107,
+      "accuracy": 0.8858108108108108
+    }
+  },
+  "folds": [
+    {
+      "fold": 0,
+      "dir": "outputs\\phase4c\\a3\\fold_models\\fold0",
+      "run_meta": {
+        "fold": 0,
+        "run_id": "p4c_a3_fs0_ms0_f0",
+        "n_train": 340,
+        "n_eval": 86,
+        "stop_epoch": 9,
+        "model_seed": 0,
+        "recipe": {
+          "a1": false,
+          "a2": false,
+          "a3": true
+        },
+        "attn_implementation": "eager",
+        "fingerprint": "9a8248ed0dc188d4a00dab6ca0885dbe276c90908971897579fdc0ffe7760b1f",
+        "extras": {
+          "factors": [
+            "a3"
+          ],
+          "a3": {
+            "n_rows": 680,
+            "n_excluded_not_train": 172
+          }
+        },
+        "final_epoch_eval": {
+          "epoch": 9,
+          "train_loss": 0.004472674769203877,
+          "eval_loss": 0.14280269469329437,
+          "macro_f1": 0.9587214528390998,
+          "accuracy": 0.9651162790697675
+        },
+        "wall_clock_s": 125.96255319999909,
+        "gpu_exclusive": true,
+        "lock_waited_s": 0.2,
+        "git_sha": "5ee1293452c151d186f3f9ad17cb63d81cc7d824-dirty"
+      }
+    },
+    {
+      "fold": 1,
+      "dir": "outputs\\phase4c\\a3\\fold_models\\fold1",
+      "run_meta": {
+        "fold": 1,
+        "run_id": "p4c_a3_fs0_ms0_f1",
+        "n_train": 341,
+        "n_eval": 85,
+        "stop_epoch": 9,
+        "model_seed": 0,
+        "recipe": {
+          "a1": false,
+          "a2": false,
+          "a3": true
+        },
+        "attn_implementation": "eager",
+        "fingerprint": "f069b87a6e6edd4f4eb99e3c9d4af47b536689b0fefc3dfe9bf6215119a9f1c6",
+        "extras": {
+          "factors": [
+            "a3"
+          ],
+          "a3": {
+            "n_rows": 682,
+            "n_excluded_not_train": 170
+          }
+        },
+        "final_epoch_eval": {
+          "epoch": 9,
+          "train_loss": 0.004501029103266774,
+          "eval_loss": 0.2579752390327699,
+          "macro_f1": 0.9559878438554908,
+          "accuracy": 0.9529411764705882
+        },
+        "wall_clock_s": 138.84080440000253,
+        "gpu_exclusive": false,
+        "lock_waited_s": 0.3,
+        "git_sha": "5ee1293452c151d186f3f9ad17cb63d81cc7d824-dirty"
+      }
+    },
+    {
+      "fold": 2,
+      "dir": "outputs\\phase4c\\a3\\fold_models\\fold2",
+      "run_meta": {
+        "fold": 2,
+        "run_id": "p4c_a3_fs0_ms0_f2",
+        "n_train": 341,
+        "n_eval": 85,
+        "stop_epoch": 9,
+        "model_seed": 0,
+        "recipe": {
+          "a1": false,
+          "a2": false,
+          "a3": true
+        },
+        "attn_implementation": "eager",
+        "fingerprint": "fd2e142b75b0404307d7723d7a04ed73dbfa0f6df6bd1d887fa2ee8be5ae0dd9",
+        "extras": {
+          "factors": [
+            "a3"
+          ],
+          "a3": {
+            "n_rows": 682,
+            "n_excluded_not_train": 170
+          }
+        },
+        "final_epoch_eval": {
+          "epoch": 9,
+          "train_loss": 0.004389700305182487,
+          "eval_loss": 0.44673438545535593,
+          "macro_f1": 0.9124684003360474,
+          "accuracy": 0.9176470588235294
+        },
+        "wall_clock_s": 126.65287430000171,
+        "gpu_exclusive": true,
+        "lock_waited_s": 0.2,
+        "git_sha": "5ee1293452c151d186f3f9ad17cb63d81cc7d824-dirty"
+      }
+    },
+    {
+      "fold": 3,
+      "dir": "outputs\\phase4c\\a3\\fold_models\\fold3",
+      "run_meta": {
+        "fold": 3,
+        "run_id": "p4c_a3_fs0_ms0_f3",
+        "n_train": 341,
+        "n_eval": 85,
+        "stop_epoch": 9,
+        "model_seed": 0,
+        "recipe": {
+          "a1": false,
+          "a2": false,
+          "a3": true
+        },
+        "attn_implementation": "eager",
+        "fingerprint": "8df312423b231dd132cd7e92d2254a949cbb0daff86dcb09aa30c1b4da03637c",
+        "extras": {
+          "factors": [
+            "a3"
+          ],
+          "a3": {
+            "n_rows": 682,
+            "n_excluded_not_train": 170
+          }
+        },
+        "final_epoch_eval": {
+          "epoch": 9,
+          "train_loss": 0.004516499713645317,
+          "eval_loss": 0.15042751448995928,
+          "macro_f1": 0.9651398030074501,
+          "accuracy": 0.9647058823529412
+        },
+        "wall_clock_s": 140.01042880000023,
+        "gpu_exclusive": false,
+        "lock_waited_s": 0.3,
+        "git_sha": "5ee1293452c151d186f3f9ad17cb63d81cc7d824-dirty"
+      }
+    },
+    {
+      "fold": 4,
+      "dir": "outputs\\phase4c\\a3\\fold_models\\fold4",
+      "run_meta": {
+        "fold": 4,
+        "run_id": "p4c_a3_fs0_ms0_f4",
+        "n_train": 341,
+        "n_eval": 85,
+        "stop_epoch": 9,
+        "model_seed": 0,
+        "recipe": {
+          "a1": false,
+          "a2": false,
+          "a3": true
+        },
+        "attn_implementation": "eager",
+        "fingerprint": "5d1967ffc9c8f6840e24870d1138294f9a3f692fd2f9e076ba1ec139db31c2f5",
+        "extras": {
+          "factors": [
+            "a3"
+          ],
+          "a3": {
+            "n_rows": 682,
+            "n_excluded_not_train": 170
+          }
+        },
+        "final_epoch_eval": {
+          "epoch": 9,
+          "train_loss": 0.004491896001127316,
+          "eval_loss": 0.1029531750608893,
+          "macro_f1": 0.9886877828054299,
+          "accuracy": 0.9882352941176471
+        },
+        "wall_clock_s": 116.76058659999762,
+        "gpu_exclusive": true,
+        "lock_waited_s": 0.3,
+        "git_sha": "5ee1293452c151d186f3f9ad17cb63d81cc7d824-dirty"
+      }
+    }
+  ],
+  "git_sha": "5ee1293452c151d186f3f9ad17cb63d81cc7d824-dirty"
+}

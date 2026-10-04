@@ -1,0 +1,148 @@
+{
+  "label": "measured, report-only",
+  "design": {
+    "model": "v1 headline, seeds [42, 43, 44], epoch 9",
+    "score": "maha_ft",
+    "retention": 0.95,
+    "bootstrap": "2000 resamples of the known-calibration (val) rows; threshold = ceil rule on each resample; retention on known test rows and rejection of unknown rows evaluated at that threshold (eval rows fixed: threshold-induced spread only)",
+    "crossfit": "5-fold StratifiedGroupKFold (class, dup_group) over known train+val rows; Gaussian refit per fold, encoder fixed (train rows are in-sample for the encoder); threshold = ceil-rule 95% of the OOF scores"
+  },
+  "per_seed": {
+    "42": {
+      "n_cal": 62,
+      "n_known_eval": 62,
+      "n_unknown": 80,
+      "calibration_threshold": {
+        "threshold": -115.418469,
+        "retention_known_eval": 0.967741935483871,
+        "rejection_unknown": 0.375
+      },
+      "bootstrap": {
+        "threshold": {
+          "mean": -113.96484425269999,
+          "sd": 8.158481518255675,
+          "p2_5": -129.211744,
+          "p97_5": -99.6463013
+        },
+        "retention_known": {
+          "mean": 0.9514193548387099,
+          "sd": 0.023912099357954117,
+          "p2_5": 0.9193548387096774,
+          "p97_5": 0.9838709677419355
+        },
+        "rejection_unknown": {
+          "mean": 0.3810125,
+          "sd": 0.09385229869713031,
+          "p2_5": 0.175,
+          "p97_5": 0.5
+        }
+      },
+      "bootstrap_binomial_sd_retention_finite_test_set": 0.0276790359705331,
+      "crossfit_oof_threshold": {
+        "threshold": -37.64380541484916,
+        "retention_known_eval": 0.3064516129032258,
+        "rejection_unknown": 0.9875,
+        "n_oof_rows": 358,
+        "oof_retention_at_threshold": 0.952513966480447
+      }
+    },
+    "43": {
+      "n_cal": 62,
+      "n_known_eval": 62,
+      "n_unknown": 80,
+      "calibration_threshold": {
+        "threshold": -115.47125,
+        "retention_known_eval": 0.967741935483871,
+        "rejection_unknown": 0.425
+      },
+      "bootstrap": {
+        "threshold": {
+          "mean": -118.35298989535,
+          "sd": 10.490522509940828,
+          "p2_5": -137.917273,
+          "p97_5": -99.683292
+        },
+        "retention_known": {
+          "mean": 0.9679435483870972,
+          "sd": 0.010001769068402855,
+          "p2_5": 0.9354838709677419,
+          "p97_5": 0.9838709677419355
+        },
+        "rejection_unknown": {
+          "mean": 0.40214374999999997,
+          "sd": 0.08224081551642046,
+          "p2_5": 0.2375,
+          "p97_5": 0.55
+        }
+      },
+      "bootstrap_binomial_sd_retention_finite_test_set": 0.0276790359705331,
+      "crossfit_oof_threshold": {
+        "threshold": -37.52596316614802,
+        "retention_known_eval": 0.3709677419354839,
+        "rejection_unknown": 0.9625,
+        "n_oof_rows": 358,
+        "oof_retention_at_threshold": 0.952513966480447
+      }
+    },
+    "44": {
+      "n_cal": 62,
+      "n_known_eval": 62,
+      "n_unknown": 80,
+      "calibration_threshold": {
+        "threshold": -120.599362,
+        "retention_known_eval": 0.967741935483871,
+        "rejection_unknown": 0.225
+      },
+      "bootstrap": {
+        "threshold": {
+          "mean": -116.71997498514997,
+          "sd": 7.161260858323332,
+          "p2_5": -123.129791,
+          "p97_5": -97.587496
+        },
+        "retention_known": {
+          "mean": 0.9653951612903227,
+          "sd": 0.017273155909927333,
+          "p2_5": 0.9193548387096774,
+          "p97_5": 0.9838709677419355
+        },
+        "rejection_unknown": {
+          "mean": 0.3018125,
+          "sd": 0.11882705301409274,
+          "p2_5": 0.1875,
+          "p97_5": 0.625
+        }
+      },
+      "bootstrap_binomial_sd_retention_finite_test_set": 0.0276790359705331,
+      "crossfit_oof_threshold": {
+        "threshold": -40.90286079749413,
+        "retention_known_eval": 0.43548387096774194,
+        "rejection_unknown": 0.95,
+        "n_oof_rows": 358,
+        "oof_retention_at_threshold": 0.952513966480447
+      }
+    }
+  },
+  "pooled_over_seeds": {
+    "threshold": {
+      "mean": -116.34593637773332,
+      "sd": 8.900542507152256,
+      "p2_5": -137.917273,
+      "p97_5": -99.6463013
+    },
+    "retention_known": {
+      "mean": 0.9615860215053764,
+      "sd": 0.019392245331979308,
+      "p2_5": 0.9193548387096774,
+      "p97_5": 0.9838709677419355
+    },
+    "rejection_unknown": {
+      "mean": 0.36165625,
+      "sd": 0.1084402823834916,
+      "p2_5": 0.175,
+      "p97_5": 0.55
+    }
+  },
+  "smoke": false,
+  "git_sha": "4536308e25696d84e01dd26bffcdac8d8f0dbdbc-dirty"
+}

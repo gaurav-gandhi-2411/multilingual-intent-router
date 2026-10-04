@@ -1,0 +1,840 @@
+{
+  "rows": [
+    {
+      "candidate": "current",
+      "artifact_key": "current",
+      "guard": {
+        "macro_f1_at_argmax": 0.9415202887068211,
+        "argmax_epoch": 8,
+        "deployed_epoch": 9,
+        "macro_f1_at_deployed": 0.9297784745242345,
+        "passed": true,
+        "threshold": 0.9341
+      },
+      "oof_accuracy": 0.9295774647887324,
+      "oof_macro_f1": 0.930903371693427,
+      "neutral_swap": {
+        "pooled": {
+          "n": 84,
+          "n_flips": 23,
+          "flip_rate": 0.27380952380952384,
+          "accuracy_swapped": 0.7023809523809523,
+          "accuracy_clean": 0.9404761904761905
+        },
+        "per_swap": {
+          "LD->REF": {
+            "n": 38,
+            "n_flips": 9,
+            "flip_rate": 0.23684210526315788,
+            "accuracy_swapped": 0.7368421052631579,
+            "accuracy_clean": 0.9736842105263158
+          },
+          "PO->REF": {
+            "n": 19,
+            "n_flips": 7,
+            "flip_rate": 0.3684210526315789,
+            "accuracy_swapped": 0.5789473684210527,
+            "accuracy_clean": 0.8947368421052632
+          },
+          "other->REF": {
+            "n": 27,
+            "n_flips": 7,
+            "flip_rate": 0.25925925925925924,
+            "accuracy_swapped": 0.7407407407407407,
+            "accuracy_clean": 0.9259259259259259
+          }
+        }
+      },
+      "noise_char_mixed_10": {
+        "n": 426,
+        "accuracy_clean": 0.9295774647887324,
+        "accuracy_noisy": 0.7816901408450704,
+        "drop": 0.147887323943662,
+        "flip_rate": 0.20422535211267606
+      },
+      "translation": {
+        "es": {
+          "filtered": {
+            "n": 355,
+            "agreement": 0.895774647887324,
+            "accuracy": 0.8816901408450705
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.8945945945945946,
+            "accuracy": 0.8810810810810811
+          }
+        },
+        "fr": {
+          "filtered": {
+            "n": 356,
+            "agreement": 0.8707865168539326,
+            "accuracy": 0.8595505617977528
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.8702702702702703,
+            "accuracy": 0.8594594594594595
+          }
+        },
+        "de": {
+          "filtered": {
+            "n": 357,
+            "agreement": 0.8795518207282913,
+            "accuracy": 0.8823529411764706
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.8810810810810811,
+            "accuracy": 0.8837837837837837
+          }
+        },
+        "zh": {
+          "filtered": {
+            "n": 278,
+            "agreement": 0.8201438848920863,
+            "accuracy": 0.7877697841726619
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.8162162162162162,
+            "accuracy": 0.7837837837837838
+          }
+        },
+        "mean_filtered": {
+          "agreement": 0.8665642175904085,
+          "accuracy": 0.852840856997989
+        },
+        "mean_unfiltered": {
+          "agreement": 0.8655405405405405,
+          "accuracy": 0.852027027027027
+        }
+      },
+      "dev": {
+        "maha_ft": {
+          "auroc_mean": 0.8935194112254463,
+          "rej95_mean": 0.43206349206349204,
+          "auroc_per_class": {
+            "appointment_manager": 0.9283582089552239,
+            "customer_support": 0.8643382352941177,
+            "knowledge_base": 0.9106617647058823,
+            "orders": 0.87893864013267,
+            "shipment_information.disruptions": 0.8853002070393374
+          },
+          "rej95_per_class": {
+            "appointment_manager": 0.2,
+            "customer_support": 0.675,
+            "knowledge_base": 0.625,
+            "orders": 0.28888888888888886,
+            "shipment_information.disruptions": 0.37142857142857144
+          }
+        },
+        "neg_energy": {
+          "auroc_mean": 0.8823799798959169,
+          "rej95_mean": 0.4818253968253968,
+          "auroc_per_class": {
+            "appointment_manager": 0.9058043117744611,
+            "customer_support": 0.8841911764705882,
+            "knowledge_base": 0.9025735294117647,
+            "orders": 0.8613598673300166,
+            "shipment_information.disruptions": 0.8579710144927536
+          },
+          "rej95_per_class": {
+            "appointment_manager": 0.4444444444444444,
+            "customer_support": 0.775,
+            "knowledge_base": 0.45,
+            "orders": 0.3111111111111111,
+            "shipment_information.disruptions": 0.42857142857142855
+          }
+        },
+        "fuse_maha_energy": {
+          "auroc_mean": 0.8904657820839779,
+          "rej95_mean": 0.4715873015873016,
+          "auroc_per_class": {
+            "appointment_manager": 0.9240464344941957,
+            "customer_support": 0.8748161764705882,
+            "knowledge_base": 0.90625,
+            "orders": 0.875787728026534,
+            "shipment_information.disruptions": 0.8714285714285714
+          },
+          "rej95_per_class": {
+            "appointment_manager": 0.3111111111111111,
+            "customer_support": 0.7,
+            "knowledge_base": 0.55,
+            "orders": 0.3111111111111111,
+            "shipment_information.disruptions": 0.4857142857142857
+          }
+        }
+      }
+    },
+    {
+      "candidate": "a1",
+      "artifact_key": "a1",
+      "guard": {
+        "macro_f1_at_argmax": 0.9260866040277806,
+        "argmax_epoch": 7,
+        "deployed_epoch": 7,
+        "macro_f1_at_deployed": 0.9260866040277806,
+        "passed": false,
+        "threshold": 0.9341
+      },
+      "oof_accuracy": 0.9272300469483568,
+      "oof_macro_f1": 0.9274329512698051,
+      "neutral_swap": {
+        "pooled": {
+          "n": 84,
+          "n_flips": 2,
+          "flip_rate": 0.023809523809523808,
+          "accuracy_swapped": 0.8214285714285714,
+          "accuracy_clean": 0.8452380952380952
+        },
+        "per_swap": {
+          "LD->REF": {
+            "n": 38,
+            "n_flips": 0,
+            "flip_rate": 0.0,
+            "accuracy_swapped": 0.9736842105263158,
+            "accuracy_clean": 0.9736842105263158
+          },
+          "PO->REF": {
+            "n": 19,
+            "n_flips": 0,
+            "flip_rate": 0.0,
+            "accuracy_swapped": 0.631578947368421,
+            "accuracy_clean": 0.631578947368421
+          },
+          "other->REF": {
+            "n": 27,
+            "n_flips": 2,
+            "flip_rate": 0.07407407407407407,
+            "accuracy_swapped": 0.7407407407407407,
+            "accuracy_clean": 0.8148148148148148
+          }
+        }
+      },
+      "noise_char_mixed_10": {
+        "n": 426,
+        "accuracy_clean": 0.9272300469483568,
+        "accuracy_noisy": 0.7535211267605634,
+        "drop": 0.17370892018779338,
+        "flip_rate": 0.22769953051643194
+      },
+      "translation": {
+        "es": {
+          "filtered": {
+            "n": 355,
+            "agreement": 0.8845070422535212,
+            "accuracy": 0.8450704225352113
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.8837837837837837,
+            "accuracy": 0.845945945945946
+          }
+        },
+        "fr": {
+          "filtered": {
+            "n": 356,
+            "agreement": 0.8679775280898876,
+            "accuracy": 0.8314606741573034
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.8675675675675676,
+            "accuracy": 0.8324324324324325
+          }
+        },
+        "de": {
+          "filtered": {
+            "n": 357,
+            "agreement": 0.8599439775910365,
+            "accuracy": 0.8403361344537815
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.8621621621621621,
+            "accuracy": 0.8432432432432433
+          }
+        },
+        "zh": {
+          "filtered": {
+            "n": 278,
+            "agreement": 0.7446043165467626,
+            "accuracy": 0.7446043165467626
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.7594594594594595,
+            "accuracy": 0.7567567567567568
+          }
+        },
+        "mean_filtered": {
+          "agreement": 0.8392582161203019,
+          "accuracy": 0.8153678869232648
+        },
+        "mean_unfiltered": {
+          "agreement": 0.8432432432432432,
+          "accuracy": 0.8195945945945946
+        }
+      },
+      "dev": {
+        "maha_ft": {
+          "auroc_mean": 0.8786476383761379,
+          "rej95_mean": 0.40658730158730155,
+          "auroc_per_class": {
+            "appointment_manager": 0.9041459369817578,
+            "customer_support": 0.8426470588235294,
+            "knowledge_base": 0.8933823529411765,
+            "orders": 0.8155887230514096,
+            "shipment_information.disruptions": 0.9374741200828157
+          },
+          "rej95_per_class": {
+            "appointment_manager": 0.3111111111111111,
+            "customer_support": 0.475,
+            "knowledge_base": 0.65,
+            "orders": 0.1111111111111111,
+            "shipment_information.disruptions": 0.4857142857142857
+          }
+        },
+        "neg_energy": {
+          "auroc_mean": 0.8636725011224475,
+          "rej95_mean": 0.48126984126984135,
+          "auroc_per_class": {
+            "appointment_manager": 0.8832504145936981,
+            "customer_support": 0.8735294117647059,
+            "knowledge_base": 0.89375,
+            "orders": 0.7386401326699834,
+            "shipment_information.disruptions": 0.929192546583851
+          },
+          "rej95_per_class": {
+            "appointment_manager": 0.4,
+            "customer_support": 0.675,
+            "knowledge_base": 0.525,
+            "orders": 0.17777777777777778,
+            "shipment_information.disruptions": 0.6285714285714286
+          }
+        },
+        "fuse_maha_energy": {
+          "auroc_mean": 0.8756868842064189,
+          "rej95_mean": 0.45579365079365075,
+          "auroc_per_class": {
+            "appointment_manager": 0.9038142620232172,
+            "customer_support": 0.8634191176470588,
+            "knowledge_base": 0.9009191176470588,
+            "orders": 0.7769485903814262,
+            "shipment_information.disruptions": 0.9333333333333333
+          },
+          "rej95_per_class": {
+            "appointment_manager": 0.37777777777777777,
+            "customer_support": 0.6,
+            "knowledge_base": 0.625,
+            "orders": 0.13333333333333333,
+            "shipment_information.disruptions": 0.5428571428571428
+          }
+        }
+      }
+    },
+    {
+      "candidate": "a2",
+      "artifact_key": "a2",
+      "guard": {
+        "macro_f1_at_argmax": 0.9214016474581491,
+        "argmax_epoch": 7,
+        "deployed_epoch": 7,
+        "macro_f1_at_deployed": 0.9214016474581491,
+        "passed": false,
+        "threshold": 0.9341
+      },
+      "oof_accuracy": 0.9248826291079812,
+      "oof_macro_f1": 0.9236519579771563,
+      "neutral_swap": {
+        "pooled": {
+          "n": 84,
+          "n_flips": 18,
+          "flip_rate": 0.21428571428571427,
+          "accuracy_swapped": 0.7976190476190477,
+          "accuracy_clean": 0.9285714285714286
+        },
+        "per_swap": {
+          "LD->REF": {
+            "n": 38,
+            "n_flips": 5,
+            "flip_rate": 0.13157894736842105,
+            "accuracy_swapped": 0.868421052631579,
+            "accuracy_clean": 0.9473684210526315
+          },
+          "PO->REF": {
+            "n": 19,
+            "n_flips": 5,
+            "flip_rate": 0.2631578947368421,
+            "accuracy_swapped": 0.7368421052631579,
+            "accuracy_clean": 0.9473684210526315
+          },
+          "other->REF": {
+            "n": 27,
+            "n_flips": 8,
+            "flip_rate": 0.2962962962962963,
+            "accuracy_swapped": 0.7407407407407407,
+            "accuracy_clean": 0.8888888888888888
+          }
+        }
+      },
+      "noise_char_mixed_10": {
+        "n": 426,
+        "accuracy_clean": 0.9248826291079812,
+        "accuracy_noisy": 0.7769953051643192,
+        "drop": 0.147887323943662,
+        "flip_rate": 0.19718309859154928
+      },
+      "translation": {
+        "es": {
+          "filtered": {
+            "n": 355,
+            "agreement": 0.8816901408450705,
+            "accuracy": 0.856338028169014
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.8783783783783784,
+            "accuracy": 0.8540540540540541
+          }
+        },
+        "fr": {
+          "filtered": {
+            "n": 356,
+            "agreement": 0.8848314606741573,
+            "accuracy": 0.8539325842696629
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.8864864864864865,
+            "accuracy": 0.8567567567567568
+          }
+        },
+        "de": {
+          "filtered": {
+            "n": 357,
+            "agreement": 0.8711484593837535,
+            "accuracy": 0.8627450980392157
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.8675675675675676,
+            "accuracy": 0.8594594594594595
+          }
+        },
+        "zh": {
+          "filtered": {
+            "n": 278,
+            "agreement": 0.8633093525179856,
+            "accuracy": 0.8057553956834532
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.8405405405405405,
+            "accuracy": 0.7972972972972973
+          }
+        },
+        "mean_filtered": {
+          "agreement": 0.8752448533552417,
+          "accuracy": 0.8446927765403365
+        },
+        "mean_unfiltered": {
+          "agreement": 0.8682432432432433,
+          "accuracy": 0.841891891891892
+        }
+      },
+      "dev": {
+        "maha_ft": {
+          "auroc_mean": 0.8567324131685986,
+          "rej95_mean": 0.30587301587301585,
+          "auroc_per_class": {
+            "appointment_manager": 0.9081260364842454,
+            "customer_support": 0.8051470588235294,
+            "knowledge_base": 0.8584558823529411,
+            "orders": 0.839469320066335,
+            "shipment_information.disruptions": 0.8724637681159421
+          },
+          "rej95_per_class": {
+            "appointment_manager": 0.2,
+            "customer_support": 0.425,
+            "knowledge_base": 0.425,
+            "orders": 0.2222222222222222,
+            "shipment_information.disruptions": 0.2571428571428571
+          }
+        },
+        "neg_energy": {
+          "auroc_mean": 0.8213462487525834,
+          "rej95_mean": 0.13714285714285715,
+          "auroc_per_class": {
+            "appointment_manager": 0.7966832504145936,
+            "customer_support": 0.8007352941176471,
+            "knowledge_base": 0.9378676470588235,
+            "orders": 0.7466003316749585,
+            "shipment_information.disruptions": 0.8248447204968944
+          },
+          "rej95_per_class": {
+            "appointment_manager": 0.0,
+            "customer_support": 0.025,
+            "knowledge_base": 0.575,
+            "orders": 0.0,
+            "shipment_information.disruptions": 0.08571428571428572
+          }
+        },
+        "fuse_maha_energy": {
+          "auroc_mean": 0.8547042736627422,
+          "rej95_mean": 0.28436507936507943,
+          "auroc_per_class": {
+            "appointment_manager": 0.8805970149253731,
+            "customer_support": 0.8136029411764706,
+            "knowledge_base": 0.9113970588235294,
+            "orders": 0.8124378109452737,
+            "shipment_information.disruptions": 0.8554865424430642
+          },
+          "rej95_per_class": {
+            "appointment_manager": 0.06666666666666667,
+            "customer_support": 0.45,
+            "knowledge_base": 0.575,
+            "orders": 0.044444444444444446,
+            "shipment_information.disruptions": 0.2857142857142857
+          }
+        }
+      }
+    },
+    {
+      "candidate": "a3",
+      "artifact_key": "a3",
+      "guard": {
+        "macro_f1_at_argmax": 0.9562010565687036,
+        "argmax_epoch": 9,
+        "deployed_epoch": 9,
+        "macro_f1_at_deployed": 0.9562010565687036,
+        "passed": true,
+        "threshold": 0.9341
+      },
+      "oof_accuracy": 0.9577464788732394,
+      "oof_macro_f1": 0.9572597019393038,
+      "neutral_swap": {
+        "pooled": {
+          "n": 84,
+          "n_flips": 31,
+          "flip_rate": 0.36904761904761907,
+          "accuracy_swapped": 0.5952380952380952,
+          "accuracy_clean": 0.9523809523809523
+        },
+        "per_swap": {
+          "LD->REF": {
+            "n": 38,
+            "n_flips": 21,
+            "flip_rate": 0.5526315789473685,
+            "accuracy_swapped": 0.4473684210526316,
+            "accuracy_clean": 1.0
+          },
+          "PO->REF": {
+            "n": 19,
+            "n_flips": 1,
+            "flip_rate": 0.05263157894736842,
+            "accuracy_swapped": 0.8421052631578947,
+            "accuracy_clean": 0.8947368421052632
+          },
+          "other->REF": {
+            "n": 27,
+            "n_flips": 9,
+            "flip_rate": 0.3333333333333333,
+            "accuracy_swapped": 0.6296296296296297,
+            "accuracy_clean": 0.9259259259259259
+          }
+        }
+      },
+      "noise_char_mixed_10": {
+        "n": 426,
+        "accuracy_clean": 0.9577464788732394,
+        "accuracy_noisy": 0.8427230046948356,
+        "drop": 0.11502347417840375,
+        "flip_rate": 0.12441314553990611
+      },
+      "translation": {
+        "es": {
+          "filtered": {
+            "n": 355,
+            "agreement": 0.9183098591549296,
+            "accuracy": 0.8929577464788733
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.9162162162162162,
+            "accuracy": 0.8918918918918919
+          }
+        },
+        "fr": {
+          "filtered": {
+            "n": 356,
+            "agreement": 0.9353932584269663,
+            "accuracy": 0.9101123595505618
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.9351351351351351,
+            "accuracy": 0.9108108108108108
+          }
+        },
+        "de": {
+          "filtered": {
+            "n": 357,
+            "agreement": 0.9355742296918768,
+            "accuracy": 0.907563025210084
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.9297297297297298,
+            "accuracy": 0.9054054054054054
+          }
+        },
+        "zh": {
+          "filtered": {
+            "n": 278,
+            "agreement": 0.8705035971223022,
+            "accuracy": 0.841726618705036
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.8621621621621621,
+            "accuracy": 0.8351351351351352
+          }
+        },
+        "mean_filtered": {
+          "agreement": 0.9149452360990187,
+          "accuracy": 0.8880899374861387
+        },
+        "mean_unfiltered": {
+          "agreement": 0.9108108108108107,
+          "accuracy": 0.8858108108108108
+        }
+      },
+      "dev": {
+        "maha_ft": {
+          "auroc_mean": 0.8775613665323366,
+          "rej95_mean": 0.4133333333333334,
+          "auroc_per_class": {
+            "appointment_manager": 0.9041459369817578,
+            "customer_support": 0.8400735294117647,
+            "knowledge_base": 0.9003676470588236,
+            "orders": 0.8918739635157545,
+            "shipment_information.disruptions": 0.8513457556935817
+          },
+          "rej95_per_class": {
+            "appointment_manager": 0.3111111111111111,
+            "customer_support": 0.575,
+            "knowledge_base": 0.425,
+            "orders": 0.35555555555555557,
+            "shipment_information.disruptions": 0.4
+          }
+        },
+        "neg_energy": {
+          "auroc_mean": 0.8661013544504975,
+          "rej95_mean": 0.4068253968253968,
+          "auroc_per_class": {
+            "appointment_manager": 0.8961857379767828,
+            "customer_support": 0.8772058823529412,
+            "knowledge_base": 0.8661764705882353,
+            "orders": 0.8723051409618574,
+            "shipment_information.disruptions": 0.8186335403726708
+          },
+          "rej95_per_class": {
+            "appointment_manager": 0.26666666666666666,
+            "customer_support": 0.6,
+            "knowledge_base": 0.45,
+            "orders": 0.28888888888888886,
+            "shipment_information.disruptions": 0.42857142857142855
+          }
+        },
+        "fuse_maha_energy": {
+          "auroc_mean": 0.8742091038232296,
+          "rej95_mean": 0.4101587301587301,
+          "auroc_per_class": {
+            "appointment_manager": 0.902653399668325,
+            "customer_support": 0.8551470588235294,
+            "knowledge_base": 0.8871323529411764,
+            "orders": 0.887396351575456,
+            "shipment_information.disruptions": 0.8387163561076605
+          },
+          "rej95_per_class": {
+            "appointment_manager": 0.3111111111111111,
+            "customer_support": 0.575,
+            "knowledge_base": 0.425,
+            "orders": 0.3111111111111111,
+            "shipment_information.disruptions": 0.42857142857142855
+          }
+        }
+      }
+    },
+    {
+      "candidate": "comb",
+      "artifact_key": "a3",
+      "guard": {
+        "macro_f1_at_argmax": 0.9562010565687036,
+        "argmax_epoch": 9,
+        "deployed_epoch": 9,
+        "macro_f1_at_deployed": 0.9562010565687036,
+        "passed": true,
+        "threshold": 0.9341
+      },
+      "oof_accuracy": 0.9577464788732394,
+      "oof_macro_f1": 0.9572597019393038,
+      "neutral_swap": {
+        "pooled": {
+          "n": 84,
+          "n_flips": 31,
+          "flip_rate": 0.36904761904761907,
+          "accuracy_swapped": 0.5952380952380952,
+          "accuracy_clean": 0.9523809523809523
+        },
+        "per_swap": {
+          "LD->REF": {
+            "n": 38,
+            "n_flips": 21,
+            "flip_rate": 0.5526315789473685,
+            "accuracy_swapped": 0.4473684210526316,
+            "accuracy_clean": 1.0
+          },
+          "PO->REF": {
+            "n": 19,
+            "n_flips": 1,
+            "flip_rate": 0.05263157894736842,
+            "accuracy_swapped": 0.8421052631578947,
+            "accuracy_clean": 0.8947368421052632
+          },
+          "other->REF": {
+            "n": 27,
+            "n_flips": 9,
+            "flip_rate": 0.3333333333333333,
+            "accuracy_swapped": 0.6296296296296297,
+            "accuracy_clean": 0.9259259259259259
+          }
+        }
+      },
+      "noise_char_mixed_10": {
+        "n": 426,
+        "accuracy_clean": 0.9577464788732394,
+        "accuracy_noisy": 0.8427230046948356,
+        "drop": 0.11502347417840375,
+        "flip_rate": 0.12441314553990611
+      },
+      "translation": {
+        "es": {
+          "filtered": {
+            "n": 355,
+            "agreement": 0.9183098591549296,
+            "accuracy": 0.8929577464788733
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.9162162162162162,
+            "accuracy": 0.8918918918918919
+          }
+        },
+        "fr": {
+          "filtered": {
+            "n": 356,
+            "agreement": 0.9353932584269663,
+            "accuracy": 0.9101123595505618
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.9351351351351351,
+            "accuracy": 0.9108108108108108
+          }
+        },
+        "de": {
+          "filtered": {
+            "n": 357,
+            "agreement": 0.9355742296918768,
+            "accuracy": 0.907563025210084
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.9297297297297298,
+            "accuracy": 0.9054054054054054
+          }
+        },
+        "zh": {
+          "filtered": {
+            "n": 278,
+            "agreement": 0.8705035971223022,
+            "accuracy": 0.841726618705036
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.8621621621621621,
+            "accuracy": 0.8351351351351352
+          }
+        },
+        "mean_filtered": {
+          "agreement": 0.9149452360990187,
+          "accuracy": 0.8880899374861387
+        },
+        "mean_unfiltered": {
+          "agreement": 0.9108108108108107,
+          "accuracy": 0.8858108108108108
+        }
+      },
+      "dev": {
+        "maha_ft": {
+          "auroc_mean": 0.8775613665323366,
+          "rej95_mean": 0.4133333333333334,
+          "auroc_per_class": {
+            "appointment_manager": 0.9041459369817578,
+            "customer_support": 0.8400735294117647,
+            "knowledge_base": 0.9003676470588236,
+            "orders": 0.8918739635157545,
+            "shipment_information.disruptions": 0.8513457556935817
+          },
+          "rej95_per_class": {
+            "appointment_manager": 0.3111111111111111,
+            "customer_support": 0.575,
+            "knowledge_base": 0.425,
+            "orders": 0.35555555555555557,
+            "shipment_information.disruptions": 0.4
+          }
+        },
+        "neg_energy": {
+          "auroc_mean": 0.8661013544504975,
+          "rej95_mean": 0.4068253968253968,
+          "auroc_per_class": {
+            "appointment_manager": 0.8961857379767828,
+            "customer_support": 0.8772058823529412,
+            "knowledge_base": 0.8661764705882353,
+            "orders": 0.8723051409618574,
+            "shipment_information.disruptions": 0.8186335403726708
+          },
+          "rej95_per_class": {
+            "appointment_manager": 0.26666666666666666,
+            "customer_support": 0.6,
+            "knowledge_base": 0.45,
+            "orders": 0.28888888888888886,
+            "shipment_information.disruptions": 0.42857142857142855
+          }
+        },
+        "fuse_maha_energy": {
+          "auroc_mean": 0.8742091038232296,
+          "rej95_mean": 0.4101587301587301,
+          "auroc_per_class": {
+            "appointment_manager": 0.902653399668325,
+            "customer_support": 0.8551470588235294,
+            "knowledge_base": 0.8871323529411764,
+            "orders": 0.887396351575456,
+            "shipment_information.disruptions": 0.8387163561076605
+          },
+          "rej95_per_class": {
+            "appointment_manager": 0.3111111111111111,
+            "customer_support": 0.575,
+            "knowledge_base": 0.425,
+            "orders": 0.3111111111111111,
+            "shipment_information.disruptions": 0.42857142857142855
+          }
+        }
+      }
+    }
+  ],
+  "git_sha": "5ee1293452c151d186f3f9ad17cb63d81cc7d824-dirty"
+}

@@ -1,0 +1,37 @@
+{
+  "smoke": false,
+  "n_texts": 74,
+  "model_fingerprint": "7ca22e16d2ace345d9dcf7737887e85fedf400a1dfc863678c2fc2663bf102bd",
+  "precision": "fp32, eager attention, eval mode",
+  "max_len": 64,
+  "query_prefix": "query: ",
+  "warmup": 10,
+  "torch": "2.11.0+cu128",
+  "metrics_computed": false,
+  "gpu_name": "NVIDIA GeForce RTX 3070 Laptop GPU",
+  "gpu_batch1": {
+    "n": 74,
+    "p50_s": 0.017228849997991347,
+    "p95_s": 0.02298459500107128,
+    "mean_s": 0.018427548648597202,
+    "throughput_msg_per_s": 54.266577669630784
+  },
+  "gpu_batch32_throughput_msg_per_s": 816.6526511165924,
+  "cpu_threads_default": 8,
+  "cpu_batch1_1thread": {
+    "threads": 1,
+    "n": 74,
+    "p50_s": 0.1585656499992183,
+    "p95_s": 0.19833979999984877,
+    "mean_s": 0.16018295810819247,
+    "throughput_msg_per_s": 6.242861361847054
+  },
+  "cpu_batch1_default_threads": {
+    "threads": 8,
+    "n": 74,
+    "p50_s": 0.06143605000033858,
+    "p95_s": 0.0707124599999588,
+    "mean_s": 0.0614809351353796,
+    "throughput_msg_per_s": 16.265204779303097
+  }
+}

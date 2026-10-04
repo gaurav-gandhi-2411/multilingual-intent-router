@@ -1,0 +1,15 @@
+{
+  "scorer": "i1b",
+  "thr_rule": "global",
+  "mode": "neutral",
+  "per_retention": {
+    "95": {
+      "global": -126.3809577115449
+    },
+    "90": {
+      "global": -121.2809899736422
+    }
+  },
+  "weights": "ref",
+  "run_id": "ref_loco_shipment_information.realtime_query_s42"
+}

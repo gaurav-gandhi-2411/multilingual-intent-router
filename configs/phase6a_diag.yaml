@@ -1,0 +1,89 @@
+# Open-set improvement round report-only diagnostics D1-D4 (pre-registered
+# 2026-10-03 before any 6a run). Nothing here is a selection input; D1 is an ORACLE (uses held-out
+# labels). Wiring only: no pre-registered rule is changed. Training settings (model, lr, 20-epoch
+# schedule, eager attention) come from final.yaml via the phase4e/trackb_improve configs.
+phase4e_config: configs/phase4e.yaml        # env: DEV/CONFIRM classes, A1/A3 factors + inputs
+results_dir: results/phase6a/diag           # ids + numbers only: NO dataset text
+outputs_dir: outputs/phase6a_diag           # per-run npz, frozen features (gitignored)
+smoke_root: outputs/phase6a_diag_smoke      # --smoke writes ONLY here
+gpu_lock_expected_s: 900                    # per training run, incl. waiting headroom
+gpu_lock_poll_s: 30
+
+trackb:
+  score: maha_ft                            # the shipped v1 scorer; the only score D2-D4 report
+  retention: 0.95                           # known-calibration retention (ceil rule)
+
+# recipe key -> epoch the Track B models stop at. v1 = its SHIPPED epoch 9 (the D-section says v1
+# epoch 9, not the open-set improvement round ref epoch 8); v3 = a1a3 (e* 6) and A1 (e* 11) from 4e. Each is checked
+# against results/phase4e/<key>/epoch.json at start-up (fail closed on a mismatch).
+recipes:
+  v1: {epoch: 9}
+  a1a3: {epoch: 6}
+  a1: {epoch: 11}
+epoch_files: results/phase4e                # <dir>/<recipe>/epoch.json -> e_star
+
+seeds:
+  headline: [42, 43, 44]
+  loco: [42]                                # DEV and CONFIRM: one model seed (4e CONFIRM convention)
+
+neutralise:                                 # pre-registered pattern, used verbatim (no word boundary)
+  pattern: "[A-Z]{2,4}-\\d+"
+  replacement_prefix: "REF-"
+
+bootstrap:                                  # D2: exactly 4e (rows resampled within holdout,
+  n_resamples: 10000                        # stratified known/unknown, seeds averaged inside)
+  seed: 42
+  level: 0.95
+
+# raw-vs-saved reference score tables (maha_ft only, bitwise comparison where a table exists)
+reference_scores:
+  v1: results/trackb_improve/scores         # run ids without the `v1_` prefix
+  a1a3: results/phase4e/confirm_a1a3_runs/scores
+
+d1:                                         # ORACLE probes
+  n_splits: 5
+  seed: 42
+  probe: {C: 1.0, class_weight: balanced, max_iter: 5000}   # fixed a priori; NOT tuned (tuning on
+                                                            # oracle labels would be leakage)
+  n_boot: 2000                              # resamples of dup_groups for the AUROC CIs
+  level: 0.95
+  max_len: 64                               # same truncation as fine-tuning
+  encode_batch_size: 16
+  n2_margin: 0.02                           # pre-registered: frozen e5-large >= frozen e5-base + 0.02
+  unsupervised_reference: results/trackb    # headline.json / loco.json (v1, open-set evaluation models)
+  encoders:
+    e5_base:
+      name: intfloat/multilingual-e5-base
+      prefix: "query: "
+      pooling: mean
+    e5_large:
+      name: intfloat/multilingual-e5-large
+      prefix: "query: "
+      pooling: mean
+    bge_m3:
+      name: BAAI/bge-m3
+      prefix: ""
+      pooling: cls
+    labse:
+      name: sentence-transformers/LaBSE     # CLS -> Dense(768, tanh) -> L2 (modules.json)
+      prefix: ""
+      pooling: cls_dense_tanh
+
+d3:                                         # threshold stability, v1 headline
+  n_boot: 2000
+  seed: 42
+  n_splits: 5                               # cross-fitting folds (grouped by dup_group)
+  level: 0.95
+
+d4:                                         # learning curve, v1 headline
+  fractions: [0.25, 0.5, 0.75, 1.0]
+  seeds: [42, 43, 44]
+  n_boot: 2000                              # seed-bootstrap of the log2(fraction) slope
+  seed: 42
+  level: 0.95
+
+smoke:                                      # --smoke: tiny, 1 epoch, no test rows (outputs/phase6a_diag_smoke)
+  n_boot: 200
+  headline_seeds: [42]
+  d4_seeds: [42]
+  d4_fractions: [0.25, 1.0]

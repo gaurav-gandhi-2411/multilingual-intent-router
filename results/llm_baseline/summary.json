@@ -1,0 +1,427 @@
+{
+  "smoke": false,
+  "git_sha": "46e80275c23ad45d0db7aac5eefb6168451a2f22-dirty",
+  "label": "Phase 4d zero-/few-shot LLM baseline (pre-registered)",
+  "models": {
+    "qwen3|zero": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+    "qwen3|five": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+    "llama3|zero": "46e0c10c039e019119339687c3c1757cc81b9da49709a3b3924863ba87ca666e",
+    "llama3|five": "46e0c10c039e019119339687c3c1757cc81b9da49709a3b3924863ba87ca666e"
+  },
+  "track_a": {
+    "n": 74,
+    "llm": {
+      "qwen3|zero": {
+        "n": 74,
+        "macro_f1": {
+          "point": 0.6612404302621694,
+          "lo": 0.5236630820869951,
+          "hi": 0.7489118214838995
+        },
+        "accuracy": {
+          "point": 0.6756756756756757,
+          "lo": 0.5675675675675675,
+          "hi": 0.7837837837837838
+        },
+        "parse_failure_rate": 0.0,
+        "unknown_rate": 0.04054054054054054,
+        "bootstrap": {
+          "n_resamples": 10000,
+          "seed": 42,
+          "method": "percentile, row resampling"
+        },
+        "delta_macro_f1_llm_minus_final": {
+          "delta": -0.2852756353715433,
+          "lo": -0.4137171114739808,
+          "hi": -0.19316249457755738,
+          "frac_resamples_le_zero": 1.0
+        },
+        "mcnemar_exact_on_correctness_a_is_llm": {
+          "a_only_correct": 0,
+          "b_only_correct": 20,
+          "n_discordant": 20,
+          "p_value": 1.9073486328125e-06
+        }
+      },
+      "qwen3|five": {
+        "n": 74,
+        "macro_f1": {
+          "point": 0.601065601065601,
+          "lo": 0.477361777933324,
+          "hi": 0.6853406629311235
+        },
+        "accuracy": {
+          "point": 0.6621621621621622,
+          "lo": 0.5540540540540541,
+          "hi": 0.7702702702702703
+        },
+        "parse_failure_rate": 0.0,
+        "unknown_rate": 0.0,
+        "bootstrap": {
+          "n_resamples": 10000,
+          "seed": 42,
+          "method": "percentile, row resampling"
+        },
+        "delta_macro_f1_llm_minus_final": {
+          "delta": -0.3454504645681117,
+          "lo": -0.46483346996933605,
+          "hi": -0.24451783949707004,
+          "frac_resamples_le_zero": 1.0
+        },
+        "mcnemar_exact_on_correctness_a_is_llm": {
+          "a_only_correct": 1,
+          "b_only_correct": 22,
+          "n_discordant": 23,
+          "p_value": 5.7220458984375e-06
+        }
+      },
+      "llama3|zero": {
+        "n": 74,
+        "macro_f1": {
+          "point": 0.6801948051948052,
+          "lo": 0.5300309628111353,
+          "hi": 0.7739826458926207
+        },
+        "accuracy": {
+          "point": 0.7027027027027027,
+          "lo": 0.5945945945945946,
+          "hi": 0.7972972972972973
+        },
+        "parse_failure_rate": 0.0,
+        "unknown_rate": 0.0,
+        "bootstrap": {
+          "n_resamples": 10000,
+          "seed": 42,
+          "method": "percentile, row resampling"
+        },
+        "delta_macro_f1_llm_minus_final": {
+          "delta": -0.26632126043890747,
+          "lo": -0.41132106338127494,
+          "hi": -0.1589059919555277,
+          "frac_resamples_le_zero": 1.0
+        },
+        "mcnemar_exact_on_correctness_a_is_llm": {
+          "a_only_correct": 2,
+          "b_only_correct": 20,
+          "n_discordant": 22,
+          "p_value": 0.00012111663818359375
+        }
+      },
+      "llama3|five": {
+        "n": 74,
+        "macro_f1": {
+          "point": 0.6535021351197822,
+          "lo": 0.5205248229025404,
+          "hi": 0.7477532153836501
+        },
+        "accuracy": {
+          "point": 0.7027027027027027,
+          "lo": 0.5945945945945946,
+          "hi": 0.8108108108108109
+        },
+        "parse_failure_rate": 0.0,
+        "unknown_rate": 0.0,
+        "bootstrap": {
+          "n_resamples": 10000,
+          "seed": 42,
+          "method": "percentile, row resampling"
+        },
+        "delta_macro_f1_llm_minus_final": {
+          "delta": -0.29301393051393054,
+          "lo": -0.41983168094101597,
+          "hi": -0.1888191306955608,
+          "frac_resamples_le_zero": 1.0
+        },
+        "mcnemar_exact_on_correctness_a_is_llm": {
+          "a_only_correct": 1,
+          "b_only_correct": 19,
+          "n_discordant": 20,
+          "p_value": 4.00543212890625e-05
+        }
+      }
+    },
+    "final_model": {
+      "macro_f1": {
+        "point": 0.9465160656337127,
+        "lo": 0.8650649587985115,
+        "hi": 0.9892037786774629
+      },
+      "accuracy": {
+        "point": 0.9459459459459459,
+        "lo": 0.8918918918918919,
+        "hi": 0.9864864864864865
+      }
+    },
+    "labels_offered": [
+      "ai_agent_performance",
+      "appointment_manager",
+      "chitchat",
+      "customer_support",
+      "document_processing",
+      "knowledge_base",
+      "orders",
+      "other",
+      "shipment_information.analytics",
+      "shipment_information.disruptions",
+      "shipment_information.realtime_query",
+      "yard_management",
+      "unknown"
+    ],
+    "fewshot_ids": {
+      "zero": [],
+      "five": [
+        "syn-0172",
+        "syn-0102",
+        "syn-0336",
+        "syn-0061",
+        "syn-0308"
+      ]
+    }
+  },
+  "track_b": {
+    "llm": {
+      "qwen3|zero": {
+        "n_known": 62,
+        "n_unknown": 80,
+        "strict_rejection_recall": 0.0,
+        "retention_known": 0.9838709677419355,
+        "n_known_accepted": 61,
+        "parse_failures_known": 0,
+        "parse_failures_unknown": 0,
+        "known_accepted_macro_f1_present": 0.685958485958486,
+        "known_accepted_accuracy": 0.7213114754098361
+      },
+      "qwen3|five": {
+        "n_known": 62,
+        "n_unknown": 80,
+        "strict_rejection_recall": 0.0,
+        "retention_known": 1.0,
+        "n_known_accepted": 62,
+        "parse_failures_known": 0,
+        "parse_failures_unknown": 0,
+        "known_accepted_macro_f1_present": 0.7599067599067599,
+        "known_accepted_accuracy": 0.7741935483870968
+      },
+      "llama3|zero": {
+        "n_known": 62,
+        "n_unknown": 80,
+        "strict_rejection_recall": 0.0,
+        "retention_known": 1.0,
+        "n_known_accepted": 62,
+        "parse_failures_known": 0,
+        "parse_failures_unknown": 0,
+        "known_accepted_macro_f1_present": 0.6119014319014319,
+        "known_accepted_accuracy": 0.6774193548387096
+      },
+      "llama3|five": {
+        "n_known": 62,
+        "n_unknown": 80,
+        "strict_rejection_recall": 0.0125,
+        "retention_known": 1.0,
+        "n_known_accepted": 62,
+        "parse_failures_known": 0,
+        "parse_failures_unknown": 0,
+        "known_accepted_macro_f1_present": 0.7143288850961486,
+        "known_accepted_accuracy": 0.7580645161290323
+      }
+    },
+    "n_known": 62,
+    "n_unknown": 80,
+    "n_test_rows_logged": 74,
+    "n_non_test_rows": 68,
+    "shipped_maha_ft": {
+      "strict_rejection_recall": {
+        "mean": 0.34166666666666673,
+        "std": 0.10408329997330662
+      },
+      "retention_known": {
+        "mean": 0.967741935483871,
+        "std": 0.0
+      },
+      "known_accepted_macro_f1_present": {
+        "mean": 0.9694195347136524,
+        "std": 0.016067901470386805
+      }
+    },
+    "shipped_note": "mean/std over model seeds 42-44 (results/trackb/headline.json)",
+    "fewshot_ids": {
+      "zero": [],
+      "five": [
+        "syn-0102",
+        "syn-0336",
+        "syn-0054",
+        "syn-0450",
+        "syn-0075"
+      ]
+    }
+  },
+  "latency": {
+    "llm": {
+      "note": "sequential wall seconds per message (retry included); model load excluded (load_s = first tiny chat after unload, reported separately)",
+      "smoke": false,
+      "configs": {
+        "qwen3|zero": {
+          "load_s": 10.87,
+          "model_tag": "qwen3:8b",
+          "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+          "n": 74,
+          "p50_s": 0.1815,
+          "p95_s": 0.22224999999999998,
+          "mean_s": 0.18243783783783782,
+          "throughput_msg_per_s": 5.481319072027496
+        },
+        "qwen3|five": {
+          "load_s": 0.14,
+          "model_tag": "qwen3:8b",
+          "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+          "n": 74,
+          "p50_s": 0.1846,
+          "p95_s": 0.23293499999999998,
+          "mean_s": 0.18915135135135136,
+          "throughput_msg_per_s": 5.286771640042294
+        },
+        "llama3|zero": {
+          "load_s": 6.56,
+          "model_tag": "llama3.1:8b",
+          "model_digest": "46e0c10c039e019119339687c3c1757cc81b9da49709a3b3924863ba87ca666e",
+          "n": 74,
+          "p50_s": 0.17035,
+          "p95_s": 0.208115,
+          "mean_s": 0.17399054054054053,
+          "throughput_msg_per_s": 5.747438894627698
+        },
+        "llama3|five": {
+          "load_s": 0.14,
+          "model_tag": "llama3.1:8b",
+          "model_digest": "46e0c10c039e019119339687c3c1757cc81b9da49709a3b3924863ba87ca666e",
+          "n": 74,
+          "p50_s": 0.17049999999999998,
+          "p95_s": 0.21496999999999997,
+          "mean_s": 0.1739554054054054,
+          "throughput_msg_per_s": 5.7485997498582275
+        }
+      }
+    },
+    "finetuned": {
+      "smoke": false,
+      "n_texts": 74,
+      "model_fingerprint": "7ca22e16d2ace345d9dcf7737887e85fedf400a1dfc863678c2fc2663bf102bd",
+      "precision": "fp32, eager attention, eval mode",
+      "max_len": 64,
+      "query_prefix": "query: ",
+      "warmup": 10,
+      "torch": "2.11.0+cu128",
+      "metrics_computed": false,
+      "gpu_name": "NVIDIA GeForce RTX 3070 Laptop GPU",
+      "gpu_batch1": {
+        "n": 74,
+        "p50_s": 0.017228849997991347,
+        "p95_s": 0.02298459500107128,
+        "mean_s": 0.018427548648597202,
+        "throughput_msg_per_s": 54.266577669630784
+      },
+      "gpu_batch32_throughput_msg_per_s": 816.6526511165924,
+      "cpu_threads_default": 8,
+      "cpu_batch1_1thread": {
+        "threads": 1,
+        "n": 74,
+        "p50_s": 0.1585656499992183,
+        "p95_s": 0.19833979999984877,
+        "mean_s": 0.16018295810819247,
+        "throughput_msg_per_s": 6.242861361847054
+      },
+      "cpu_batch1_default_threads": {
+        "threads": 8,
+        "n": 74,
+        "p50_s": 0.06143605000033858,
+        "p95_s": 0.0707124599999588,
+        "mean_s": 0.0614809351353796,
+        "throughput_msg_per_s": 16.265204779303097
+      }
+    }
+  },
+  "cost": {
+    "label": "ESTIMATES, not measured cloud cost",
+    "formula": "usd_per_1k_messages = latency_s x 1000 / 3600 x usd_per_hr",
+    "assumptions": {
+      "gpu_usd_per_hr": 0.35,
+      "cpu_usd_per_vcpu_per_hr": 0.05,
+      "gpu_note": "GPU rows are priced as a T4-class stand-in from RTX 3070 timings (optimistic, a lower bound)",
+      "cpu_note": "CPU rows count vCPUs = threads used, each priced at cpu_usd_per_vcpu_per_hr",
+      "llm_note": "The LLM latency is measured on the local RTX 3070 and used as a stand-in for a T4-class GPU. A T4 is slower than a 3070, so the LLM $/1k figure is OPTIMISTIC (a lower bound).",
+      "latency_basis": "p50 per message, batch 1 (ft batch32: 1/throughput)"
+    },
+    "rows": {
+      "llm|qwen3|zero": {
+        "latency_p50_s": 0.1815,
+        "usd_per_hr": 0.35,
+        "usd_per_hr_basis": "1 T4-class GPU at $0.35/hr",
+        "hardware": "T4-class GPU (stand-in)",
+        "usd_per_1k_messages": 0.017645833333333333,
+        "optimistic": true,
+        "usd_per_1k_messages_p95": 0.021607638888888885
+      },
+      "llm|qwen3|five": {
+        "latency_p50_s": 0.1846,
+        "usd_per_hr": 0.35,
+        "usd_per_hr_basis": "1 T4-class GPU at $0.35/hr",
+        "hardware": "T4-class GPU (stand-in)",
+        "usd_per_1k_messages": 0.017947222222222222,
+        "optimistic": true,
+        "usd_per_1k_messages_p95": 0.02264645833333333
+      },
+      "llm|llama3|zero": {
+        "latency_p50_s": 0.17035,
+        "usd_per_hr": 0.35,
+        "usd_per_hr_basis": "1 T4-class GPU at $0.35/hr",
+        "hardware": "T4-class GPU (stand-in)",
+        "usd_per_1k_messages": 0.016561805555555552,
+        "optimistic": true,
+        "usd_per_1k_messages_p95": 0.020233402777777774
+      },
+      "llm|llama3|five": {
+        "latency_p50_s": 0.17049999999999998,
+        "usd_per_hr": 0.35,
+        "usd_per_hr_basis": "1 T4-class GPU at $0.35/hr",
+        "hardware": "T4-class GPU (stand-in)",
+        "usd_per_1k_messages": 0.016576388888888884,
+        "optimistic": true,
+        "usd_per_1k_messages_p95": 0.020899861111111105
+      },
+      "ft|gpu_batch1": {
+        "latency_p50_s": 0.017228849997991347,
+        "usd_per_hr": 0.35,
+        "usd_per_hr_basis": "1 T4-class GPU at $0.35/hr",
+        "hardware": "T4-class GPU (3070-measured stand-in)",
+        "optimistic": true,
+        "usd_per_1k_messages": 0.0016750270831380476
+      },
+      "ft|gpu_batch32": {
+        "latency_p50_s": 0.0012245108108480643,
+        "usd_per_hr": 0.35,
+        "usd_per_hr_basis": "1 T4-class GPU at $0.35/hr",
+        "hardware": "T4-class GPU (3070-measured stand-in)",
+        "optimistic": true,
+        "usd_per_1k_messages": 0.00011904966216578401
+      },
+      "ft|cpu_batch1_1thread": {
+        "latency_p50_s": 0.1585656499992183,
+        "usd_per_hr": 0.05,
+        "usd_per_hr_basis": "1 vCPU x $0.05/hr",
+        "n_vcpu": 1,
+        "hardware": "1 vCPU(s) = threads used",
+        "usd_per_1k_messages": 0.0022023006944335874
+      },
+      "ft|cpu_batch1_default_threads": {
+        "latency_p50_s": 0.06143605000033858,
+        "usd_per_hr": 0.4,
+        "usd_per_hr_basis": "8 vCPU x $0.05/hr",
+        "n_vcpu": 8,
+        "hardware": "8 vCPU(s) = threads used",
+        "usd_per_1k_messages": 0.006826227777815399
+      }
+    }
+  },
+  "figure": "results\\figures\\llm_baseline.png",
+  "wandb_url": "https://wandb.ai/gauravgandhi429-gaurav-gandhi/intent-router/runs/nmu1ybbu"
+}

@@ -1,0 +1,196 @@
+{
+  "results": [
+    {
+      "source": "test",
+      "swap": "PO->LD",
+      "n": 4,
+      "n_flips": 3,
+      "flip_rate": 0.75,
+      "accuracy_clean": 0.75,
+      "accuracy_swapped": 0.5,
+      "flipped_ids": [
+        "syn-0028",
+        "syn-0199",
+        "syn-0344"
+      ]
+    },
+    {
+      "source": "test",
+      "swap": "PO->REF",
+      "n": 4,
+      "n_flips": 2,
+      "flip_rate": 0.5,
+      "accuracy_clean": 0.75,
+      "accuracy_swapped": 0.75,
+      "flipped_ids": [
+        "syn-0199",
+        "syn-0344"
+      ]
+    },
+    {
+      "source": "test",
+      "swap": "LD->PO",
+      "n": 6,
+      "n_flips": 4,
+      "flip_rate": 0.6666666666666666,
+      "accuracy_clean": 1.0,
+      "accuracy_swapped": 0.3333333333333333,
+      "flipped_ids": [
+        "syn-0212",
+        "syn-0387",
+        "syn-0395",
+        "syn-0475"
+      ]
+    },
+    {
+      "source": "test",
+      "swap": "LD->REF",
+      "n": 6,
+      "n_flips": 0,
+      "flip_rate": 0.0,
+      "accuracy_clean": 1.0,
+      "accuracy_swapped": 1.0,
+      "flipped_ids": []
+    },
+    {
+      "source": "test",
+      "swap": "other->REF",
+      "n": 5,
+      "n_flips": 1,
+      "flip_rate": 0.2,
+      "accuracy_clean": 1.0,
+      "accuracy_swapped": 0.8,
+      "flipped_ids": [
+        "syn-0238"
+      ]
+    },
+    {
+      "source": "oof",
+      "swap": "PO->LD",
+      "n": 19,
+      "n_flips": 12,
+      "flip_rate": 0.631578947368421,
+      "accuracy_clean": 0.8947368421052632,
+      "accuracy_swapped": 0.3157894736842105,
+      "flipped_ids": [
+        "syn-0064",
+        "syn-0071",
+        "syn-0117",
+        "syn-0124",
+        "syn-0170",
+        "syn-0223",
+        "syn-0228",
+        "syn-0234",
+        "syn-0240",
+        "syn-0268",
+        "syn-0276",
+        "syn-0334"
+      ]
+    },
+    {
+      "source": "oof",
+      "swap": "PO->REF",
+      "n": 19,
+      "n_flips": 7,
+      "flip_rate": 0.3684210526315789,
+      "accuracy_clean": 0.8947368421052632,
+      "accuracy_swapped": 0.5789473684210527,
+      "flipped_ids": [
+        "syn-0064",
+        "syn-0117",
+        "syn-0223",
+        "syn-0228",
+        "syn-0234",
+        "syn-0240",
+        "syn-0334"
+      ]
+    },
+    {
+      "source": "oof",
+      "swap": "LD->PO",
+      "n": 38,
+      "n_flips": 31,
+      "flip_rate": 0.8157894736842105,
+      "accuracy_clean": 0.9736842105263158,
+      "accuracy_swapped": 0.18421052631578946,
+      "flipped_ids": [
+        "syn-0019",
+        "syn-0026",
+        "syn-0053",
+        "syn-0086",
+        "syn-0098",
+        "syn-0107",
+        "syn-0123",
+        "syn-0146",
+        "syn-0172",
+        "syn-0174",
+        "syn-0176",
+        "syn-0188",
+        "syn-0262",
+        "syn-0269",
+        "syn-0270",
+        "syn-0295",
+        "syn-0300",
+        "syn-0302",
+        "syn-0310",
+        "syn-0328",
+        "syn-0386",
+        "syn-0406",
+        "syn-0409",
+        "syn-0410",
+        "syn-0435",
+        "syn-0437",
+        "syn-0450",
+        "syn-0473",
+        "syn-0485",
+        "syn-0488",
+        "syn-0491"
+      ]
+    },
+    {
+      "source": "oof",
+      "swap": "LD->REF",
+      "n": 38,
+      "n_flips": 9,
+      "flip_rate": 0.23684210526315788,
+      "accuracy_clean": 0.9736842105263158,
+      "accuracy_swapped": 0.7368421052631579,
+      "flipped_ids": [
+        "syn-0026",
+        "syn-0053",
+        "syn-0086",
+        "syn-0146",
+        "syn-0262",
+        "syn-0270",
+        "syn-0295",
+        "syn-0302",
+        "syn-0450"
+      ]
+    },
+    {
+      "source": "oof",
+      "swap": "other->REF",
+      "n": 27,
+      "n_flips": 7,
+      "flip_rate": 0.25925925925925924,
+      "accuracy_clean": 0.9259259259259259,
+      "accuracy_swapped": 0.7407407407407407,
+      "flipped_ids": [
+        "syn-0050",
+        "syn-0061",
+        "syn-0085",
+        "syn-0114",
+        "syn-0402",
+        "syn-0453",
+        "syn-0482"
+      ]
+    }
+  ],
+  "note": "rows containing the source ID; flip = prediction differs from the same model's clean prediction; no texts stored",
+  "provenance": {
+    "git_sha": "f8e36d43fd6f810a9ea0458cb199b541f1f68a52-dirty",
+    "final_model_fingerprint": "7ca22e16d2ace345d9dcf7737887e85fedf400a1dfc863678c2fc2663bf102bd",
+    "fold_models_dir": "outputs\\robustness\\fold_models",
+    "smoke": false
+  }
+}

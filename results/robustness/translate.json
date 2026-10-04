@@ -1,0 +1,129 @@
+{
+  "results": [
+    {
+      "source": "test",
+      "lang": "es",
+      "data_label": "machine-translated (synthetic)",
+      "n": 60,
+      "agreement_with_english_pred": 0.8666666666666667,
+      "accuracy": 0.85,
+      "macro_f1_gold_classes": 0.8630110630110631,
+      "english_accuracy_same_rows": 0.9333333333333333,
+      "english_macro_f1_same_rows": 0.9398989898989899
+    },
+    {
+      "source": "test",
+      "lang": "fr",
+      "data_label": "machine-translated (synthetic)",
+      "n": 60,
+      "agreement_with_english_pred": 0.8333333333333334,
+      "accuracy": 0.8333333333333334,
+      "macro_f1_gold_classes": 0.8277627465127465,
+      "english_accuracy_same_rows": 0.9333333333333333,
+      "english_macro_f1_same_rows": 0.9398989898989899
+    },
+    {
+      "source": "test",
+      "lang": "de",
+      "data_label": "machine-translated (synthetic)",
+      "n": 60,
+      "agreement_with_english_pred": 0.85,
+      "accuracy": 0.8333333333333334,
+      "macro_f1_gold_classes": 0.8315120065120066,
+      "english_accuracy_same_rows": 0.9333333333333333,
+      "english_macro_f1_same_rows": 0.9398989898989899
+    },
+    {
+      "source": "test",
+      "lang": "zh",
+      "data_label": "machine-translated (synthetic)",
+      "n": 60,
+      "agreement_with_english_pred": 0.7333333333333333,
+      "accuracy": 0.7166666666666667,
+      "macro_f1_gold_classes": 0.7021238021238023,
+      "english_accuracy_same_rows": 0.9333333333333333,
+      "english_macro_f1_same_rows": 0.9398989898989899
+    },
+    {
+      "source": "oof",
+      "lang": "es",
+      "data_label": "machine-translated (synthetic)",
+      "n": 370,
+      "agreement_with_english_pred": 0.8864864864864865,
+      "accuracy": 0.8675675675675676,
+      "macro_f1_gold_classes": 0.8631971894564372,
+      "english_accuracy_same_rows": 0.9243243243243243,
+      "english_macro_f1_same_rows": 0.9253074041963246
+    },
+    {
+      "source": "oof",
+      "lang": "fr",
+      "data_label": "machine-translated (synthetic)",
+      "n": 370,
+      "agreement_with_english_pred": 0.8540540540540541,
+      "accuracy": 0.8243243243243243,
+      "macro_f1_gold_classes": 0.8230791360017434,
+      "english_accuracy_same_rows": 0.9243243243243243,
+      "english_macro_f1_same_rows": 0.9253074041963246
+    },
+    {
+      "source": "oof",
+      "lang": "de",
+      "data_label": "machine-translated (synthetic)",
+      "n": 370,
+      "agreement_with_english_pred": 0.8594594594594595,
+      "accuracy": 0.8405405405405405,
+      "macro_f1_gold_classes": 0.8387345816731675,
+      "english_accuracy_same_rows": 0.9243243243243243,
+      "english_macro_f1_same_rows": 0.9253074041963246
+    },
+    {
+      "source": "oof",
+      "lang": "zh",
+      "data_label": "machine-translated (synthetic)",
+      "n": 370,
+      "agreement_with_english_pred": 0.7891891891891892,
+      "accuracy": 0.7783783783783784,
+      "macro_f1_gold_classes": 0.7793320385988108,
+      "english_accuracy_same_rows": 0.9243243243243243,
+      "english_macro_f1_same_rows": 0.9253074041963246
+    }
+  ],
+  "data_label": "machine-translated (synthetic)",
+  "translator": "facebook/nllb-200-distilled-600M",
+  "decoding": {
+    "num_beams": 1,
+    "max_new_tokens": 128
+  },
+  "include_oof": true,
+  "timings": {
+    "download_s": 1.9728625000007014,
+    "load_s": 8.57309019999957,
+    "es": {
+      "n_rows": 430,
+      "seconds": 39.997746000000916,
+      "rows_per_s": 10.750605151564201
+    },
+    "fr": {
+      "n_rows": 430,
+      "seconds": 53.199631800000134,
+      "rows_per_s": 8.082762130799262
+    },
+    "de": {
+      "n_rows": 430,
+      "seconds": 53.35275550000006,
+      "rows_per_s": 8.059564666250777
+    },
+    "zh": {
+      "n_rows": 430,
+      "seconds": 47.5648958999991,
+      "rows_per_s": 9.040280139192138
+    }
+  },
+  "provenance": {
+    "git_sha": "f8e36d43fd6f810a9ea0458cb199b541f1f68a52-dirty",
+    "final_model_fingerprint": "7ca22e16d2ace345d9dcf7737887e85fedf400a1dfc863678c2fc2663bf102bd",
+    "fold_models_dir": "outputs\\robustness\\fold_models",
+    "smoke": false
+  }
+}

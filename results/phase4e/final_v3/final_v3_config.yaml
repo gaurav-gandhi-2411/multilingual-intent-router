@@ -1,0 +1,61 @@
+data_path: data/dataset.csv
+splits_path: splits/splits.csv
+results_dir: results/final
+figures_dir: results/figures
+outputs_dir: outputs/final
+model_dir: outputs/final_model_v3
+selection_path: results/phase4e/final_v3/selection_v3.json
+seed: 42
+train:
+  model_name: intfloat/multilingual-e5-base
+  query_prefix: 'query: '
+  lr: 3.0e-05
+  weight_decay: 0.01
+  warmup_ratio: 0.1
+  batch_size: 16
+  precision: fp16
+  max_len: 64
+  epochs: 20
+  stop_epoch: 6
+  model_seed: 42
+  attn_implementation: eager
+  label_smoothing: 0.0
+  class_weighted: false
+  id_randomize_p: 0.5
+predict_batch_size: 32
+test_eval_log: results/final/test_eval_log.jsonl
+gpu_lock_expected_s: 1800
+determinism:
+  repeat_run: true
+  sdpa_timing_run: false
+  inference_timing_repeats: 5
+bootstrap:
+  n_resamples: 10000
+  seed: 42
+calibration:
+  ece_bins: 15
+selective:
+  retention: 0.95
+  threshold: null
+baselines:
+  c_grid:
+  - 0.1
+  - 0.3
+  - 1
+  - 3
+  - 10
+  - 30
+  - 100
+  inner_folds: 5
+  e5_model: intfloat/multilingual-e5-base
+analysis:
+  oof_config_id: p4e_a1a3
+  oof_dir: results/phase4e/final_v3/oof
+  oof_predictions_per_id: 3
+  eda_rows_path: results/eda_rows.csv
+  top_confusions: 5
+  examples_per_pair: 3
+wandb:
+  project: intent-router
+  group: phase4e-final-v3
+  enabled: true

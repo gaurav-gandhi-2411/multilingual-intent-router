@@ -1,0 +1,30 @@
+# results/
+
+Committed result files. They hold numbers, ids and labels only; the dataset text is never written here.
+Paths are relative to `results/`. "Label" is the measurement label the file itself carries (or its
+`note`): measured means a recorded run, estimate means derived from measured rates, report-only means it
+did not feed any selection. Provenance for every number in the report and the README is the file named
+here (the README tables are rendered from `final/track_a.json`, `llm_baseline/track_a.json`,
+`trackb/headline.json` and `trackb_improve/confirm.json` by `scripts/render_readme_results.py`).
+
+| Path | What | Producing module | Label |
+|---|---|---|---|
+| `final/` | Shipped model v1: `track_a.json` (test macro-F1/accuracy with bootstrap CIs, per-class, confusion matrices, calibration, B0/B1 comparison, CV and OOF sections), `ood_shipped.json` (Mahalanobis threshold at 95% retention), `train_summary.json`, `determinism.json`, `slices.json`, `error_analysis.json`, `model_version.json`, prediction CSVs (ids, labels, probabilities), `test_eval_log.jsonl` (the single logged test evaluation) | `intent_router.final` (`--stage train`, `evaluate`, `analysis`; analysis helpers in `intent_router.analysis`) | Track A test block: "unbiased (single test evaluation)"; `cv` block: "post-selection (optimistic) CV estimate" |
+| `final_v1/` | Archived copy of the v1 results (same file set as `final/` except `test_eval_log.jsonl`; `track_a.json`, `ood_shipped.json`, `train_summary.json` are byte-identical to `final/` at the time of writing) | `intent_router.final` | measured |
+| `final_v3/` | Robustness variant v3 (random ID prefixes plus machine-translated and noisy training copies, see `model_version.json`): same file set as `final/` except `test_eval_log.jsonl` | `intent_router.final` driven by `intent_router.phase4e_final` | measured (test split, one logged evaluation) |
+| `trackb/` | Track B open-set experiments: `headline.json` (two held-out classes, seeds 42/43/44, 10 scoring methods), `loco.json` (leave-one-class-out, one seed per class), `shipped.json` (scorer choice and threshold), `ls_ablation.json`, `audit.json` (test-inference log assertions) | `intent_router.trackb` | measured |
+| `trackb_improve/` | Track B improvement candidates: `select.json` (DEV classes only), `confirm.json` (CONFIRM leave-one-class-out classes plus headline holdout, paired deltas vs the shipped scorer), `reproduce.json`, `c3_fit_check.json`, `final_ood.json`, `business.json` | `intent_router.trackb_improve` | `confirm.json`/`select.json`/`reproduce.json`: measured; `business.json`: estimate from measured CONFIRM rates |
+| `phase4e/` | Multi-axis model selection among v1 and three robustness variants (random ID prefixes, machine-translated and noisy copies, both): `axes.json`, `selection.json`, per-candidate `epoch.json`, `confirm_a1a3.json`, `final_v1_vs_v3.json`, `final_v3*/` (v3 selection and robustness) | `intent_router.phase4e`, `intent_router.phase4e_final` | measured (paired bootstrap) |
+| `phase6a/` | Open-set improvement round: `axes.json` / `axes_unguarded.json`, `selection.json` / `selection_unguarded.json`, `combos_choice.json`, `confirm_report.json`, per-candidate `epoch.json`, `diag/` (report-only diagnostics (oracle probe, ID-neutral scoring, threshold stability, data-scaling slope) and the larger-encoder decision) | `intent_router.phase6a`, `phase6a_select`, `phase6a_post`, `phase6a_views`; diagnostics by `intent_router.phase6a_diag` | measured; `diag/d1_oracle.json` and `diag/n2_decision.json` use held-out class labels and are ORACLE, report-only |
+| `robustness/` | Robustness of the CV-selected recipe: `noise.json`, `translate.json`, `idswap.json`, `fold_models.json`, `summary.json` | `intent_router.robustness` | measured (fold-seed s0, model seed 0, eager) |
+| `serving/` | Serving benchmarks: `latency_v1.json`, `latency_*_contended.json`, `quality_*.json`, `quantization_v1_{val,test}.json`, `docker_parity_v1.json` | `intent_router.serve_bench`, `intent_router.quantization_eval`, `scripts/docker_parity.py` | measured; latency files are marked contended (CPU shared with other processes): NOT final |
+| `llm_baseline/` | Local zero-/few-shot LLM baseline (2 models x 2 modes): `track_a.json`, `track_b.json`, `summary.json`, `llm_latency.json`, `ft_latency.json` | `intent_router.llm_baseline` | measured ("unbiased (baseline_inference on the test split)" for Track A) |
+| `llm_audit/` | Label-ambiguity audit by 3 local LLM judges: `summary.json`, `judges.json`; `items.csv`, `judgements.csv` hold ids and labels | `intent_router.llm_audit` | "LLM consensus (local open-weight models), not human ground truth" |
+| `bakeoff/` | Model/learning-rate bake-off and ablations: `summary.json`, `selection.json`, `ablations.json`, `baselines.json` (B0/B1), `timing.json`, `runs/` (one JSON per fold-run) | `intent_router.cv`, `aggregate`, `selection`, `baselines` | measured; `timing.json` also carries an extrapolation (estimate) |
+| `selection_check/` | Post-hoc check of the bake-off selection (never part of its aggregates) | `intent_router.selection_check` (via `intent_router.cv --stage selcheck`) | measured, post-hoc |
+| `hub/` | Hub checks: `roundtrip_v1.json`, `roundtrip_v3.json` (snapshot reproduces the saved test predictions), `cards_pushed.json` (model-card upload read-back) | `intent_router.hub_roundtrip`, `scripts/push_cards.py` | measured (inference reproduction, not a new evaluation) |
+| `tradeoff_v1_v3.json`, `tradeoff_v1_v3.md` | v1 vs v3 deployment tradeoff table; every number carries its source file and JSON path; deltas are v3 minus v1 | `scripts/build_tradeoff.py` | derived from the measured files above |
+
+Other files: `eda.json`, `eda_rows.csv` (`intent_router.eda`), `phase4c/` and `phase4c_data/` (robustness
+and open-set training fixes, data preparation; `intent_router.phase4c`, `phase4c_data`), `oof/` (out-of-fold
+prediction CSVs of the bake-off), `figures/` (PNG charts).

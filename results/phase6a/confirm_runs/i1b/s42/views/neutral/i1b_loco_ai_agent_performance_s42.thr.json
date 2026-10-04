@@ -1,0 +1,15 @@
+{
+  "scorer": "i1b",
+  "thr_rule": "global",
+  "mode": "neutral",
+  "per_retention": {
+    "95": {
+      "global": -139.21327821115042
+    },
+    "90": {
+      "global": -123.338057994448
+    }
+  },
+  "weights": "ref",
+  "run_id": "ref_loco_ai_agent_performance_s42"
+}

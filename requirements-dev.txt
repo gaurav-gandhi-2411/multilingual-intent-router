@@ -1,0 +1,2 @@
+# Dev/publish tools only (not needed at runtime): scripts/wandb_report.py
+wandb-workspaces==0.4.12

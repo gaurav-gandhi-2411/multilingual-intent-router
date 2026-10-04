@@ -1,0 +1,12 @@
+{
+  "name": "intfloat/multilingual-e5-base",
+  "pooling": "mean",
+  "prefix": "query: ",
+  "dtype": "torch.float16",
+  "n_params": 278043648,
+  "peak_vram_mb": 613.763671875,
+  "n_rows_truncated_at_max_len": 0,
+  "max_len": 64,
+  "snapshot_bytes": 1134354391,
+  "oracle": true
+}

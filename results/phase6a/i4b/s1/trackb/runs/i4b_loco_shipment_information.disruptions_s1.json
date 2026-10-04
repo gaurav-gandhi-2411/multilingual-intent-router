@@ -1,0 +1,206 @@
+{
+  "run_id": "i4b_loco_shipment_information.disruptions_s1",
+  "weights": "i4b",
+  "kind": "loco",
+  "holdout": [
+    "shipment_information.disruptions"
+  ],
+  "seed": 1,
+  "replicate": 1,
+  "labels": [
+    "ai_agent_performance",
+    "appointment_manager",
+    "chitchat",
+    "customer_support",
+    "document_processing",
+    "knowledge_base",
+    "orders",
+    "other",
+    "shipment_information.analytics",
+    "shipment_information.realtime_query",
+    "yard_management"
+  ],
+  "call_type": "phase6a_trackb",
+  "git_sha": "4536308e25696d84e01dd26bffcdac8d8f0dbdbc-dirty",
+  "smoke": false,
+  "audit": {
+    "holdout": [
+      "shipment_information.disruptions"
+    ],
+    "n_labels": 11,
+    "n_train": 327,
+    "n_cal": 69,
+    "n_eval_known": 69,
+    "n_eval_unknown": 35,
+    "assertions": {
+      "no_heldout_rows_in_train": true,
+      "no_heldout_rows_in_cal": true,
+      "no_heldout_rows_in_eval_known": true,
+      "eval_unknown_only_heldout": true,
+      "eval_unknown_has_every_heldout_row": true,
+      "label_space_is_remaining_classes": true,
+      "every_remaining_class_in_train": true,
+      "train_cal_disjoint": true,
+      "train_eval_known_disjoint": true,
+      "train_unknown_disjoint": true,
+      "cal_unknown_disjoint": true,
+      "no_test_rows_in_train_or_cal": true,
+      "eval_known_is_test_split_only": true,
+      "cal_is_val_split_only": true
+    },
+    "ids_sha256": {
+      "train": "9b8852a84f4f6cbe8a91881e0cb86dd485774557cc31ee773668288599234184",
+      "cal": "697108ab8fc0850afc5d90aa748f30af132cc5dfd1980904ec6dd744e655403c",
+      "eval_known": "8db8fa2bf0fc43929973673b8407b0ebc41f8bab22fe0f0b0b982feb2c5af9df",
+      "eval_unknown": "f20c935ab1a2af4435a06042984a4b5a87c7df1e503ba0bbd018429abbf5b77c"
+    },
+    "smoke": false
+  },
+  "train_spec": {
+    "key": "i4b",
+    "a1": true,
+    "kl_lambda": 1.0,
+    "head_init_seed": null,
+    "inner_frac": 0.0
+  },
+  "training": {
+    "config": {
+      "model_name": "intfloat/multilingual-e5-base",
+      "lr": 3e-05,
+      "epochs": 20,
+      "batch_size": 16,
+      "warmup_ratio": 0.1,
+      "weight_decay": 0.01,
+      "max_len": 64,
+      "precision": "fp16",
+      "model_seed": 1,
+      "class_weighted": false,
+      "label_smoothing": 0.0,
+      "layer_decay": null,
+      "entity_masking": false,
+      "hier_aux": false,
+      "hier_lambda": 0.5,
+      "max_grad_norm": 1.0,
+      "attn_implementation": "eager",
+      "stop_epoch": 14,
+      "supcon_lambda": null,
+      "supcon_temperature": 0.1,
+      "grad_accum": 1,
+      "id_randomize_p": 0.5,
+      "oe_lambda": 0.0,
+      "oe_batch_size": 16,
+      "wandb_project": "intent-router",
+      "wandb_group": "phase6a-i4b",
+      "model_short": "e5"
+    },
+    "epochs": [
+      {
+        "epoch": 1,
+        "train_loss": 2.378608022417341,
+        "eval_loss": 2.328116057575613,
+        "macro_f1": 0.09100147819660015,
+        "accuracy": 0.2028985507246377
+      },
+      {
+        "epoch": 2,
+        "train_loss": 2.2175614663532803,
+        "eval_loss": 2.033555486927862,
+        "macro_f1": 0.32768451061133985,
+        "accuracy": 0.391304347826087
+      },
+      {
+        "epoch": 3,
+        "train_loss": 1.7286972942806424,
+        "eval_loss": 1.360580499621405,
+        "macro_f1": 0.6986226957518824,
+        "accuracy": 0.7246376811594203
+      },
+      {
+        "epoch": 4,
+        "train_loss": 1.0529429117838542,
+        "eval_loss": 0.8832275003626726,
+        "macro_f1": 0.8614224292453958,
+        "accuracy": 0.855072463768116
+      },
+      {
+        "epoch": 5,
+        "train_loss": 0.6013603920028323,
+        "eval_loss": 0.570138390513434,
+        "macro_f1": 0.888065974429611,
+        "accuracy": 0.8840579710144928
+      },
+      {
+        "epoch": 6,
+        "train_loss": 0.30732818728401545,
+        "eval_loss": 0.42117092229317926,
+        "macro_f1": 0.8863332152102206,
+        "accuracy": 0.8840579710144928
+      },
+      {
+        "epoch": 7,
+        "train_loss": 0.16072846629789897,
+        "eval_loss": 0.38643429417541064,
+        "macro_f1": 0.864769662898005,
+        "accuracy": 0.8695652173913043
+      },
+      {
+        "epoch": 8,
+        "train_loss": 0.08145837006824357,
+        "eval_loss": 0.4086400011311407,
+        "macro_f1": 0.8823576304859728,
+        "accuracy": 0.8840579710144928
+      },
+      {
+        "epoch": 9,
+        "train_loss": 0.05023944732688722,
+        "eval_loss": 0.3494986105656278,
+        "macro_f1": 0.9180118752311266,
+        "accuracy": 0.9130434782608695
+      },
+      {
+        "epoch": 10,
+        "train_loss": 0.03225931809062049,
+        "eval_loss": 0.3476655673289645,
+        "macro_f1": 0.9057602379794893,
+        "accuracy": 0.8985507246376812
+      },
+      {
+        "epoch": 11,
+        "train_loss": 0.023150717307414328,
+        "eval_loss": 0.38230711653612665,
+        "macro_f1": 0.8828331650524164,
+        "accuracy": 0.8695652173913043
+      },
+      {
+        "epoch": 12,
+        "train_loss": 0.01913465080516679,
+        "eval_loss": 0.38395831550377,
+        "macro_f1": 0.9021005138652197,
+        "accuracy": 0.8985507246376812
+      },
+      {
+        "epoch": 13,
+        "train_loss": 0.015720385925046036,
+        "eval_loss": 0.3783210014951402,
+        "macro_f1": 0.916771285755243,
+        "accuracy": 0.9130434782608695
+      },
+      {
+        "epoch": 14,
+        "train_loss": 0.014552681884240536,
+        "eval_loss": 0.3767490179642387,
+        "macro_f1": 0.9178453750646264,
+        "accuracy": 0.9130434782608695
+      }
+    ],
+    "wall_clock_s": 115.62128649999795,
+    "peak_vram_mb": 5377.62060546875,
+    "gpu_exclusive": true,
+    "gpu_foreign_seen": [],
+    "nan_detected": false,
+    "fingerprint": "fa40813f31c779a6cec8db5da99ec41ce4df989a798eb1598646e823cd69b6d0",
+    "gpu_lock_waited_s": 0.4,
+    "wandb_url": "https://wandb.ai/gauravgandhi429-gaurav-gandhi/intent-router/runs/hqxcu5cl",
+    "run_total_s": 130.24964439999894
+  }
+}

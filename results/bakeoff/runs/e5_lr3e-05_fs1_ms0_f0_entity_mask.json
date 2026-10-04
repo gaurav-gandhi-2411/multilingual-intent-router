@@ -1,0 +1,238 @@
+{
+  "run_id": "e5_lr3e-05_fs1_ms0_f0_entity_mask",
+  "ablation": "entity_mask",
+  "fold_seed_idx": 1,
+  "model_seed": 0,
+  "fold": 0,
+  "n_train": 340,
+  "n_eval": 86,
+  "epochs": [
+    {
+      "epoch": 1,
+      "train_loss": 2.467286857691678,
+      "eval_loss": 2.4271914016368776,
+      "macro_f1": 0.015789473684210527,
+      "accuracy": 0.10465116279069768
+    },
+    {
+      "epoch": 2,
+      "train_loss": 2.297469832680442,
+      "eval_loss": 2.116700017175009,
+      "macro_f1": 0.3284083576766504,
+      "accuracy": 0.3953488372093023
+    },
+    {
+      "epoch": 3,
+      "train_loss": 1.7928186709230596,
+      "eval_loss": 1.4657559782959695,
+      "macro_f1": 0.7235609419819946,
+      "accuracy": 0.7093023255813954
+    },
+    {
+      "epoch": 4,
+      "train_loss": 1.075862169265747,
+      "eval_loss": 0.8661765553230463,
+      "macro_f1": 0.8045274428014366,
+      "accuracy": 0.813953488372093
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.5742535685951059,
+      "eval_loss": 0.5357998027357944,
+      "macro_f1": 0.8954568579568581,
+      "accuracy": 0.8953488372093024
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.2824036567048593,
+      "eval_loss": 0.3864814375722131,
+      "macro_f1": 0.8952086656034025,
+      "accuracy": 0.8953488372093024
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.13504489985379306,
+      "eval_loss": 0.331629708755848,
+      "macro_f1": 0.883028035775714,
+      "accuracy": 0.8837209302325582
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.06982640871270136,
+      "eval_loss": 0.3248942529046258,
+      "macro_f1": 0.9080736600860441,
+      "accuracy": 0.9069767441860465
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.037081770937551155,
+      "eval_loss": 0.27504022939260614,
+      "macro_f1": 0.8916121002034316,
+      "accuracy": 0.8953488372093024
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.02715763212604956,
+      "eval_loss": 0.31702973953513214,
+      "macro_f1": 0.8772558682001407,
+      "accuracy": 0.8837209302325582
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.02100839118727229,
+      "eval_loss": 0.30777605882910797,
+      "macro_f1": 0.8660545680669521,
+      "accuracy": 0.872093023255814
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.017639355860989202,
+      "eval_loss": 0.29527399533016735,
+      "macro_f1": 0.881467764691449,
+      "accuracy": 0.8837209302325582
+    },
+    {
+      "epoch": 13,
+      "train_loss": 0.015088095160370523,
+      "eval_loss": 0.2927618546541347,
+      "macro_f1": 0.881467764691449,
+      "accuracy": 0.8837209302325582
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.013079807162284851,
+      "eval_loss": 0.29601649385552076,
+      "macro_f1": 0.881467764691449,
+      "accuracy": 0.8837209302325582
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.01279196689244021,
+      "eval_loss": 0.2983169597248698,
+      "macro_f1": 0.8679285261522104,
+      "accuracy": 0.872093023255814
+    },
+    {
+      "epoch": 16,
+      "train_loss": 0.012302714526991953,
+      "eval_loss": 0.28956816778626554,
+      "macro_f1": 0.881467764691449,
+      "accuracy": 0.8837209302325582
+    },
+    {
+      "epoch": 17,
+      "train_loss": 0.011660187716849825,
+      "eval_loss": 0.290656408251718,
+      "macro_f1": 0.881467764691449,
+      "accuracy": 0.8837209302325582
+    },
+    {
+      "epoch": 18,
+      "train_loss": 0.010974126613952896,
+      "eval_loss": 0.29510031571221906,
+      "macro_f1": 0.8907951067393793,
+      "accuracy": 0.8953488372093024
+    },
+    {
+      "epoch": 19,
+      "train_loss": 0.010776266582648863,
+      "eval_loss": 0.29584910876529164,
+      "macro_f1": 0.8907951067393793,
+      "accuracy": 0.8953488372093024
+    },
+    {
+      "epoch": 20,
+      "train_loss": 0.010648510969159279,
+      "eval_loss": 0.2960224250374838,
+      "macro_f1": 0.881467764691449,
+      "accuracy": 0.8837209302325582
+    }
+  ],
+  "wall_clock_s": 101.16396250000253,
+  "peak_vram_mb": 5385.1435546875,
+  "wandb_url": "https://wandb.ai/gauravgandhi429-gaurav-gandhi/intent-router/runs/oai2vczu",
+  "wandb_logged": true,
+  "nan_detected": false,
+  "precision": "fp16",
+  "config": {
+    "model_name": "intfloat/multilingual-e5-base",
+    "lr": 3e-05,
+    "epochs": 20,
+    "batch_size": 16,
+    "warmup_ratio": 0.1,
+    "weight_decay": 0.01,
+    "max_len": 64,
+    "precision": "fp16",
+    "model_seed": 0,
+    "class_weighted": false,
+    "label_smoothing": 0.0,
+    "layer_decay": null,
+    "entity_masking": true,
+    "hier_aux": false,
+    "hier_lambda": 0.5,
+    "max_grad_norm": 1.0,
+    "wandb_project": "intent-router",
+    "wandb_group": "ablations",
+    "model_short": "e5"
+  },
+  "gpu_snapshot_start": {
+    "time": "2026-10-01T21:30:38+05:30",
+    "processes": [
+      {
+        "pid": 25216,
+        "process_name": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+        "used_memory_mb": null
+      }
+    ],
+    "foreign": [],
+    "memory": "251 MiB, 8192 MiB, 0 %",
+    "error": null
+  },
+  "gpu_snapshot_end": {
+    "time": "2026-10-01T21:33:08+05:30",
+    "processes": [
+      {
+        "pid": 25216,
+        "process_name": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+        "used_memory_mb": null
+      }
+    ],
+    "foreign": [],
+    "memory": "5877 MiB, 8192 MiB, 0 %",
+    "error": null
+  },
+  "gpu_exclusive": false,
+  "gpu_foreign_seen": [
+    {
+      "pid": 17988,
+      "process_name": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+      "used_memory_mb": null,
+      "epoch": 1
+    },
+    {
+      "pid": 17988,
+      "process_name": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+      "used_memory_mb": null,
+      "epoch": 2
+    },
+    {
+      "pid": 17988,
+      "process_name": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+      "used_memory_mb": null,
+      "epoch": 3
+    },
+    {
+      "pid": 17988,
+      "process_name": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+      "used_memory_mb": null,
+      "epoch": 4
+    },
+    {
+      "pid": 17988,
+      "process_name": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+      "used_memory_mb": null,
+      "epoch": 5
+    }
+  ],
+  "gpu_lock_waited_s": 0.1
+}

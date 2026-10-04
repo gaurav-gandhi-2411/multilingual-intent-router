@@ -1,0 +1,12 @@
+{
+  "B0": {
+    "fingerprint": "bbe5b7ab0e7f19fe1a19f3a69e16cfca7e0725db296b99d59849d862e00fe794",
+    "best_C": 30.0,
+    "n_train": 352
+  },
+  "B1": {
+    "fingerprint": "4daba63f0dc4f26a506e0b0652a91f719ed8c3bc86869d52ea175a8eb48cd5d5",
+    "best_C": 30.0,
+    "n_train": 352
+  }
+}

@@ -1,0 +1,5 @@
+id,gold_label,pred_label,confidence,confidence_msp_raw
+syn-0344,appointment_manager,orders,0.901792,0.908594
+syn-0398,customer_support,document_processing,0.764426,0.772909
+syn-0078,document_processing,customer_support,0.5297,0.535696
+syn-0214,customer_support,shipment_information.realtime_query,0.283226,0.288177

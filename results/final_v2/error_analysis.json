@@ -1,0 +1,449 @@
+{
+  "oof": {
+    "label": "post-selection (optimistic) CV estimate",
+    "hypothesis_errors_concentrate_in_shipment_information": {
+      "n_rows": 426,
+      "n_errors": 18,
+      "family_share_of_rows": 0.29107981220657275,
+      "family_errors": 4,
+      "family_share_of_errors": 0.2222222222222222,
+      "binomial_p_greater": 0.8145546635772141,
+      "binomial_p_two_sided": 0.6135610255451128,
+      "family_errors_within_family": 1,
+      "family_errors_cross_family": 3,
+      "share_family_errors_within_family": 0.25,
+      "errors_from_outside_into_family": 1,
+      "by_gold_class": [
+        {
+          "label": "ai_agent_performance",
+          "rows": 34,
+          "errors": 0,
+          "error_rate": 0.0,
+          "share_of_errors": 0.0
+        },
+        {
+          "label": "appointment_manager",
+          "rows": 38,
+          "errors": 1,
+          "error_rate": 0.02631578947368421,
+          "share_of_errors": 0.05555555555555555
+        },
+        {
+          "label": "chitchat",
+          "rows": 30,
+          "errors": 1,
+          "error_rate": 0.03333333333333333,
+          "share_of_errors": 0.05555555555555555
+        },
+        {
+          "label": "customer_support",
+          "rows": 34,
+          "errors": 4,
+          "error_rate": 0.11764705882352941,
+          "share_of_errors": 0.2222222222222222
+        },
+        {
+          "label": "document_processing",
+          "rows": 34,
+          "errors": 3,
+          "error_rate": 0.08823529411764706,
+          "share_of_errors": 0.16666666666666666
+        },
+        {
+          "label": "knowledge_base",
+          "rows": 34,
+          "errors": 2,
+          "error_rate": 0.058823529411764705,
+          "share_of_errors": 0.1111111111111111
+        },
+        {
+          "label": "orders",
+          "rows": 38,
+          "errors": 1,
+          "error_rate": 0.02631578947368421,
+          "share_of_errors": 0.05555555555555555
+        },
+        {
+          "label": "other",
+          "rows": 26,
+          "errors": 2,
+          "error_rate": 0.07692307692307693,
+          "share_of_errors": 0.1111111111111111
+        },
+        {
+          "label": "shipment_information.analytics",
+          "rows": 47,
+          "errors": 1,
+          "error_rate": 0.02127659574468085,
+          "share_of_errors": 0.05555555555555555
+        },
+        {
+          "label": "shipment_information.disruptions",
+          "rows": 30,
+          "errors": 1,
+          "error_rate": 0.03333333333333333,
+          "share_of_errors": 0.05555555555555555
+        },
+        {
+          "label": "shipment_information.realtime_query",
+          "rows": 47,
+          "errors": 2,
+          "error_rate": 0.0425531914893617,
+          "share_of_errors": 0.1111111111111111
+        },
+        {
+          "label": "yard_management",
+          "rows": 34,
+          "errors": 0,
+          "error_rate": 0.0,
+          "share_of_errors": 0.0
+        }
+      ]
+    },
+    "top_confusions": [
+      {
+        "gold": "customer_support",
+        "pred": "appointment_manager",
+        "count": 2,
+        "example_ids": [
+          "syn-0085",
+          "syn-0150"
+        ]
+      },
+      {
+        "gold": "document_processing",
+        "pred": "knowledge_base",
+        "count": 2,
+        "example_ids": [
+          "syn-0448",
+          "syn-0183"
+        ]
+      },
+      {
+        "gold": "shipment_information.realtime_query",
+        "pred": "yard_management",
+        "count": 2,
+        "example_ids": [
+          "syn-0022",
+          "syn-0151"
+        ]
+      },
+      {
+        "gold": "appointment_manager",
+        "pred": "yard_management",
+        "count": 1,
+        "example_ids": [
+          "syn-0415"
+        ]
+      },
+      {
+        "gold": "chitchat",
+        "pred": "orders",
+        "count": 1,
+        "example_ids": [
+          "syn-0455"
+        ]
+      }
+    ]
+  },
+  "oof_all_fold_runs": {
+    "label": "post-selection (optimistic) CV estimate; every individual fold-run prediction of comb_a3 (not probability-averaged)",
+    "n_fold_runs": 5,
+    "hypothesis_errors_concentrate_in_shipment_information": {
+      "n_rows": 426,
+      "n_errors": 18,
+      "family_share_of_rows": 0.29107981220657275,
+      "family_errors": 4,
+      "family_share_of_errors": 0.2222222222222222,
+      "binomial_p_greater": 0.8145546635772141,
+      "binomial_p_two_sided": 0.6135610255451128,
+      "family_errors_within_family": 1,
+      "family_errors_cross_family": 3,
+      "share_family_errors_within_family": 0.25,
+      "errors_from_outside_into_family": 1,
+      "by_gold_class": [
+        {
+          "label": "ai_agent_performance",
+          "rows": 34,
+          "errors": 0,
+          "error_rate": 0.0,
+          "share_of_errors": 0.0
+        },
+        {
+          "label": "appointment_manager",
+          "rows": 38,
+          "errors": 1,
+          "error_rate": 0.02631578947368421,
+          "share_of_errors": 0.05555555555555555
+        },
+        {
+          "label": "chitchat",
+          "rows": 30,
+          "errors": 1,
+          "error_rate": 0.03333333333333333,
+          "share_of_errors": 0.05555555555555555
+        },
+        {
+          "label": "customer_support",
+          "rows": 34,
+          "errors": 4,
+          "error_rate": 0.11764705882352941,
+          "share_of_errors": 0.2222222222222222
+        },
+        {
+          "label": "document_processing",
+          "rows": 34,
+          "errors": 3,
+          "error_rate": 0.08823529411764706,
+          "share_of_errors": 0.16666666666666666
+        },
+        {
+          "label": "knowledge_base",
+          "rows": 34,
+          "errors": 2,
+          "error_rate": 0.058823529411764705,
+          "share_of_errors": 0.1111111111111111
+        },
+        {
+          "label": "orders",
+          "rows": 38,
+          "errors": 1,
+          "error_rate": 0.02631578947368421,
+          "share_of_errors": 0.05555555555555555
+        },
+        {
+          "label": "other",
+          "rows": 26,
+          "errors": 2,
+          "error_rate": 0.07692307692307693,
+          "share_of_errors": 0.1111111111111111
+        },
+        {
+          "label": "shipment_information.analytics",
+          "rows": 47,
+          "errors": 1,
+          "error_rate": 0.02127659574468085,
+          "share_of_errors": 0.05555555555555555
+        },
+        {
+          "label": "shipment_information.disruptions",
+          "rows": 30,
+          "errors": 1,
+          "error_rate": 0.03333333333333333,
+          "share_of_errors": 0.05555555555555555
+        },
+        {
+          "label": "shipment_information.realtime_query",
+          "rows": 47,
+          "errors": 2,
+          "error_rate": 0.0425531914893617,
+          "share_of_errors": 0.1111111111111111
+        },
+        {
+          "label": "yard_management",
+          "rows": 34,
+          "errors": 0,
+          "error_rate": 0.0,
+          "share_of_errors": 0.0
+        }
+      ],
+      "n_unique_ids": 426,
+      "n_predictions_per_id": 1,
+      "independence_caveat": "each id contributes 9 non-independent predictions; binomial p-values treat them as independent and are optimistic. Use the cluster bootstrap (resampling ids).",
+      "cluster_bootstrap": {
+        "n_resamples": 10000,
+        "seed": 42,
+        "resampled_unit": "row id (all its fold-run predictions)",
+        "family_share_of_errors_ci95": [
+          0.05,
+          0.42857142857142855
+        ],
+        "family_share_of_rows_ci95": [
+          0.24882629107981222,
+          0.3333333333333333
+        ],
+        "share_errors_minus_share_rows_ci95": [
+          -0.24816767270288395,
+          0.13712027064346857
+        ],
+        "frac_resamples_diff_le_zero": 0.7623
+      },
+      "top_confusions_by_count": [
+        {
+          "gold": "customer_support",
+          "pred": "appointment_manager",
+          "count": 2
+        },
+        {
+          "gold": "document_processing",
+          "pred": "knowledge_base",
+          "count": 2
+        },
+        {
+          "gold": "shipment_information.realtime_query",
+          "pred": "yard_management",
+          "count": 2
+        },
+        {
+          "gold": "appointment_manager",
+          "pred": "yard_management",
+          "count": 1
+        },
+        {
+          "gold": "chitchat",
+          "pred": "orders",
+          "count": 1
+        }
+      ]
+    }
+  },
+  "test": {
+    "label": "unbiased (single test evaluation)",
+    "hypothesis_errors_concentrate_in_shipment_information": {
+      "n_rows": 74,
+      "n_errors": 4,
+      "family_share_of_rows": 0.28378378378378377,
+      "family_errors": 0,
+      "family_share_of_errors": 0.0,
+      "binomial_p_greater": 1.0,
+      "binomial_p_two_sided": 0.5829577875113184,
+      "family_errors_within_family": 0,
+      "family_errors_cross_family": 0,
+      "share_family_errors_within_family": null,
+      "errors_from_outside_into_family": 1,
+      "by_gold_class": [
+        {
+          "label": "ai_agent_performance",
+          "rows": 6,
+          "errors": 0,
+          "error_rate": 0.0,
+          "share_of_errors": 0.0
+        },
+        {
+          "label": "appointment_manager",
+          "rows": 7,
+          "errors": 1,
+          "error_rate": 0.14285714285714285,
+          "share_of_errors": 0.25
+        },
+        {
+          "label": "chitchat",
+          "rows": 5,
+          "errors": 0,
+          "error_rate": 0.0,
+          "share_of_errors": 0.0
+        },
+        {
+          "label": "customer_support",
+          "rows": 6,
+          "errors": 1,
+          "error_rate": 0.16666666666666666,
+          "share_of_errors": 0.25
+        },
+        {
+          "label": "document_processing",
+          "rows": 6,
+          "errors": 1,
+          "error_rate": 0.16666666666666666,
+          "share_of_errors": 0.25
+        },
+        {
+          "label": "knowledge_base",
+          "rows": 6,
+          "errors": 0,
+          "error_rate": 0.0,
+          "share_of_errors": 0.0
+        },
+        {
+          "label": "orders",
+          "rows": 7,
+          "errors": 1,
+          "error_rate": 0.14285714285714285,
+          "share_of_errors": 0.25
+        },
+        {
+          "label": "other",
+          "rows": 4,
+          "errors": 0,
+          "error_rate": 0.0,
+          "share_of_errors": 0.0
+        },
+        {
+          "label": "shipment_information.analytics",
+          "rows": 8,
+          "errors": 0,
+          "error_rate": 0.0,
+          "share_of_errors": 0.0
+        },
+        {
+          "label": "shipment_information.disruptions",
+          "rows": 5,
+          "errors": 0,
+          "error_rate": 0.0,
+          "share_of_errors": 0.0
+        },
+        {
+          "label": "shipment_information.realtime_query",
+          "rows": 8,
+          "errors": 0,
+          "error_rate": 0.0,
+          "share_of_errors": 0.0
+        },
+        {
+          "label": "yard_management",
+          "rows": 6,
+          "errors": 0,
+          "error_rate": 0.0,
+          "share_of_errors": 0.0
+        }
+      ]
+    },
+    "top_confusions": [
+      {
+        "gold": "appointment_manager",
+        "pred": "orders",
+        "count": 1,
+        "example_ids": [
+          "syn-0344"
+        ]
+      },
+      {
+        "gold": "customer_support",
+        "pred": "shipment_information.realtime_query",
+        "count": 1,
+        "example_ids": [
+          "syn-0214"
+        ]
+      },
+      {
+        "gold": "document_processing",
+        "pred": "customer_support",
+        "count": 1,
+        "example_ids": [
+          "syn-0131"
+        ]
+      },
+      {
+        "gold": "orders",
+        "pred": "knowledge_base",
+        "count": 1,
+        "example_ids": [
+          "syn-0199"
+        ]
+      }
+    ],
+    "n_errors": 4
+  },
+  "analysis_regeneration": {
+    "inputs": [
+      "results\\final\\test_predictions.csv",
+      "results\\final\\val_predictions.csv",
+      "results\\phase4c\\final_v2\\oof\\comb_a3.csv",
+      "results/eda_rows.csv",
+      "results\\final\\track_a.json (threshold, temperature)"
+    ],
+    "inference_run": false,
+    "test_eval_log_lines_before": 28,
+    "test_eval_log_lines_after": 28
+  }
+}

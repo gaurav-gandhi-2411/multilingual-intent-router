@@ -1,0 +1,12 @@
+{
+  "name": "BAAI/bge-m3",
+  "pooling": "cls",
+  "prefix": "",
+  "dtype": "torch.float16",
+  "n_params": 567754752,
+  "peak_vram_mb": 1162.99462890625,
+  "n_rows_truncated_at_max_len": 0,
+  "max_len": 64,
+  "snapshot_bytes": 2293331623,
+  "oracle": true
+}

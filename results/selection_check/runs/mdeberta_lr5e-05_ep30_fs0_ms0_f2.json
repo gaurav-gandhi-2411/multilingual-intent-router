@@ -1,0 +1,279 @@
+{
+  "run_id": "mdeberta_lr5e-05_ep30_fs0_ms0_f2",
+  "ablation": null,
+  "fold_seed_idx": 0,
+  "model_seed": 0,
+  "fold": 2,
+  "n_train": 341,
+  "n_eval": 85,
+  "epochs": [
+    {
+      "epoch": 1,
+      "train_loss": 2.4882704236290674,
+      "eval_loss": 2.4815298304838294,
+      "macro_f1": 0.012681159420289856,
+      "accuracy": 0.08235294117647059
+    },
+    {
+      "epoch": 2,
+      "train_loss": 2.472219012000344,
+      "eval_loss": 2.3572952158310834,
+      "macro_f1": 0.1564962814962815,
+      "accuracy": 0.21176470588235294
+    },
+    {
+      "epoch": 3,
+      "train_loss": 2.232450078834187,
+      "eval_loss": 2.062342643737793,
+      "macro_f1": 0.29662698412698413,
+      "accuracy": 0.3411764705882353
+    },
+    {
+      "epoch": 4,
+      "train_loss": 1.7977435751394792,
+      "eval_loss": 1.4765038742738612,
+      "macro_f1": 0.6072213095230998,
+      "accuracy": 0.6588235294117647
+    },
+    {
+      "epoch": 5,
+      "train_loss": 1.2636659849773755,
+      "eval_loss": 1.1965251543942619,
+      "macro_f1": 0.6760664622733588,
+      "accuracy": 0.7058823529411765
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.7722119431604039,
+      "eval_loss": 0.8105187528273639,
+      "macro_f1": 0.7961899569871705,
+      "accuracy": 0.8
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.42214483700015326,
+      "eval_loss": 0.5532179208362804,
+      "macro_f1": 0.8669810989663932,
+      "accuracy": 0.8705882352941177
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.20356689156456428,
+      "eval_loss": 0.4968118990168852,
+      "macro_f1": 0.9003350901764215,
+      "accuracy": 0.9058823529411765
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.07059920342131094,
+      "eval_loss": 0.46172419050160574,
+      "macro_f1": 0.9049272880542231,
+      "accuracy": 0.9058823529411765
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.025084738280962814,
+      "eval_loss": 0.44226429024163416,
+      "macro_f1": 0.890696512523138,
+      "accuracy": 0.8941176470588236
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.01781870691444386,
+      "eval_loss": 0.5244548755533555,
+      "macro_f1": 0.9051139492315964,
+      "accuracy": 0.9058823529411765
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.009032122155820782,
+      "eval_loss": 0.5093409082468818,
+      "macro_f1": 0.9051139492315964,
+      "accuracy": 0.9058823529411765
+    },
+    {
+      "epoch": 13,
+      "train_loss": 0.007045921911908822,
+      "eval_loss": 0.517879809702144,
+      "macro_f1": 0.9073385764562235,
+      "accuracy": 0.9176470588235294
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.005932605867697434,
+      "eval_loss": 0.5292498968103353,
+      "macro_f1": 0.9133570949747422,
+      "accuracy": 0.9176470588235294
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.004860834387893026,
+      "eval_loss": 0.5544578596073039,
+      "macro_f1": 0.9032703679762504,
+      "accuracy": 0.9058823529411765
+    },
+    {
+      "epoch": 16,
+      "train_loss": 0.00405750777149065,
+      "eval_loss": 0.5675494613016353,
+      "macro_f1": 0.9032703679762504,
+      "accuracy": 0.9058823529411765
+    },
+    {
+      "epoch": 17,
+      "train_loss": 0.003719283278438855,
+      "eval_loss": 0.5781916705562787,
+      "macro_f1": 0.9032703679762504,
+      "accuracy": 0.9058823529411765
+    },
+    {
+      "epoch": 18,
+      "train_loss": 0.0033653153381733732,
+      "eval_loss": 0.5898356300504769,
+      "macro_f1": 0.9032703679762504,
+      "accuracy": 0.9058823529411765
+    },
+    {
+      "epoch": 19,
+      "train_loss": 0.003092334859750488,
+      "eval_loss": 0.5970739198958173,
+      "macro_f1": 0.9032703679762504,
+      "accuracy": 0.9058823529411765
+    },
+    {
+      "epoch": 20,
+      "train_loss": 0.0030799400992691517,
+      "eval_loss": 0.6022252683692119,
+      "macro_f1": 0.9032703679762504,
+      "accuracy": 0.9058823529411765
+    },
+    {
+      "epoch": 21,
+      "train_loss": 0.0027438253481787715,
+      "eval_loss": 0.6016527400297277,
+      "macro_f1": 0.9032703679762504,
+      "accuracy": 0.9058823529411765
+    },
+    {
+      "epoch": 22,
+      "train_loss": 0.0026236731897700915,
+      "eval_loss": 0.5998661875724792,
+      "macro_f1": 0.9032703679762504,
+      "accuracy": 0.9058823529411765
+    },
+    {
+      "epoch": 23,
+      "train_loss": 0.0025115350462411616,
+      "eval_loss": 0.603146834934459,
+      "macro_f1": 0.9032703679762504,
+      "accuracy": 0.9058823529411765
+    },
+    {
+      "epoch": 24,
+      "train_loss": 0.0024139150786636906,
+      "eval_loss": 0.6062792171888491,
+      "macro_f1": 0.9032703679762504,
+      "accuracy": 0.9058823529411765
+    },
+    {
+      "epoch": 25,
+      "train_loss": 0.0022995434436862442,
+      "eval_loss": 0.6091634589959594,
+      "macro_f1": 0.9032703679762504,
+      "accuracy": 0.9058823529411765
+    },
+    {
+      "epoch": 26,
+      "train_loss": 0.0022204585680314763,
+      "eval_loss": 0.6075121581116143,
+      "macro_f1": 0.9032703679762504,
+      "accuracy": 0.9058823529411765
+    },
+    {
+      "epoch": 27,
+      "train_loss": 0.0021745860947042024,
+      "eval_loss": 0.6085583607501843,
+      "macro_f1": 0.9032703679762504,
+      "accuracy": 0.9058823529411765
+    },
+    {
+      "epoch": 28,
+      "train_loss": 0.002145458266816356,
+      "eval_loss": 0.6029141132007627,
+      "macro_f1": 0.9032703679762504,
+      "accuracy": 0.9058823529411765
+    },
+    {
+      "epoch": 29,
+      "train_loss": 0.002041221929671751,
+      "eval_loss": 0.6038522627423791,
+      "macro_f1": 0.9032703679762504,
+      "accuracy": 0.9058823529411765
+    },
+    {
+      "epoch": 30,
+      "train_loss": 0.002038739298851314,
+      "eval_loss": 0.6018476835945074,
+      "macro_f1": 0.9032703679762504,
+      "accuracy": 0.9058823529411765
+    }
+  ],
+  "wall_clock_s": 185.30482119999942,
+  "peak_vram_mb": 5423.54296875,
+  "wandb_url": "https://wandb.ai/gauravgandhi429-gaurav-gandhi/intent-router/runs/i0sk6msg",
+  "wandb_logged": true,
+  "nan_detected": false,
+  "precision": "fp16",
+  "config": {
+    "model_name": "microsoft/mdeberta-v3-base",
+    "lr": 5e-05,
+    "epochs": 30,
+    "batch_size": 16,
+    "warmup_ratio": 0.1,
+    "weight_decay": 0.01,
+    "max_len": 64,
+    "precision": "fp16",
+    "model_seed": 0,
+    "class_weighted": false,
+    "label_smoothing": 0.0,
+    "layer_decay": null,
+    "entity_masking": false,
+    "hier_aux": false,
+    "hier_lambda": 0.5,
+    "max_grad_norm": 1.0,
+    "attn_implementation": null,
+    "stop_epoch": null,
+    "wandb_project": "intent-router",
+    "wandb_group": "selection-check",
+    "model_short": "mdeberta"
+  },
+  "gpu_snapshot_start": {
+    "time": "2026-10-02T01:18:37+05:30",
+    "processes": [
+      {
+        "pid": 23120,
+        "process_name": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+        "used_memory_mb": null
+      }
+    ],
+    "foreign": [],
+    "memory": "251 MiB, 8192 MiB, 0 %",
+    "error": null
+  },
+  "gpu_snapshot_end": {
+    "time": "2026-10-02T01:21:52+05:30",
+    "processes": [
+      {
+        "pid": 23120,
+        "process_name": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+        "used_memory_mb": null
+      }
+    ],
+    "foreign": [],
+    "memory": "5955 MiB, 8192 MiB, 43 %",
+    "error": null
+  },
+  "gpu_exclusive": true,
+  "gpu_foreign_seen": [],
+  "gpu_lock_waited_s": 0.1
+}

@@ -1,0 +1,15 @@
+{
+  "scorer": "i1b",
+  "thr_rule": "global",
+  "mode": "raw",
+  "per_retention": {
+    "95": {
+      "global": -110.23374178600878
+    },
+    "90": {
+      "global": -99.63976677268036
+    }
+  },
+  "weights": "ref",
+  "run_id": "ref_headline_s43"
+}

@@ -1,0 +1,15 @@
+{
+  "scorer": "i1b",
+  "thr_rule": "global",
+  "mode": "raw",
+  "per_retention": {
+    "95": {
+      "global": -66.26722889995484
+    },
+    "90": {
+      "global": -56.12407927772777
+    }
+  },
+  "weights": "i3u",
+  "run_id": "i3u_loco_shipment_information.disruptions_s2"
+}

@@ -1,0 +1,267 @@
+{
+  "run_id": "mdeberta_lr5e-05_fs1_ms2_f0",
+  "ablation": null,
+  "fold_seed_idx": 1,
+  "model_seed": 2,
+  "fold": 0,
+  "n_train": 340,
+  "n_eval": 86,
+  "epochs": [
+    {
+      "epoch": 1,
+      "train_loss": 2.49216610735113,
+      "eval_loss": 2.4735823564751205,
+      "macro_f1": 0.046886446886446886,
+      "accuracy": 0.11627906976744186
+    },
+    {
+      "epoch": 2,
+      "train_loss": 2.4249180772087793,
+      "eval_loss": 2.3103111289268314,
+      "macro_f1": 0.1344554568238779,
+      "accuracy": 0.20930232558139536
+    },
+    {
+      "epoch": 3,
+      "train_loss": 2.150087394497611,
+      "eval_loss": 1.9268890203431595,
+      "macro_f1": 0.23229396636837651,
+      "accuracy": 0.3488372093023256
+    },
+    {
+      "epoch": 4,
+      "train_loss": 1.6611675294962795,
+      "eval_loss": 1.4849129166713981,
+      "macro_f1": 0.6053093898806973,
+      "accuracy": 0.6395348837209303
+    },
+    {
+      "epoch": 5,
+      "train_loss": 1.187255320223895,
+      "eval_loss": 1.2148265949515409,
+      "macro_f1": 0.695446986507358,
+      "accuracy": 0.7209302325581395
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.7982628833163868,
+      "eval_loss": 0.9027099276697913,
+      "macro_f1": 0.7657015391729014,
+      "accuracy": 0.7790697674418605
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.4407322244210677,
+      "eval_loss": 0.6358948641045149,
+      "macro_f1": 0.8227690051606459,
+      "accuracy": 0.8255813953488372
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.22516816583546725,
+      "eval_loss": 0.5929020560064981,
+      "macro_f1": 0.8350219225219225,
+      "accuracy": 0.8372093023255814
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.09758522547781467,
+      "eval_loss": 0.4420583553092424,
+      "macro_f1": 0.8802508529482215,
+      "accuracy": 0.8837209302325582
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.03839177189564163,
+      "eval_loss": 0.4413644823917123,
+      "macro_f1": 0.8979361002774316,
+      "accuracy": 0.9069767441860465
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.021069490985775537,
+      "eval_loss": 0.4601250308197598,
+      "macro_f1": 0.8803969314998726,
+      "accuracy": 0.8953488372093024
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.014575115913017229,
+      "eval_loss": 0.4194749718488649,
+      "macro_f1": 0.9083527669440983,
+      "accuracy": 0.9186046511627907
+    },
+    {
+      "epoch": 13,
+      "train_loss": 0.011323891749436205,
+      "eval_loss": 0.4435467494781627,
+      "macro_f1": 0.9083527669440983,
+      "accuracy": 0.9186046511627907
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.009567919822240417,
+      "eval_loss": 0.44919607684362767,
+      "macro_f1": 0.9083527669440983,
+      "accuracy": 0.9186046511627907
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.008384586946869438,
+      "eval_loss": 0.45234412284091463,
+      "macro_f1": 0.9083527669440983,
+      "accuracy": 0.9186046511627907
+    },
+    {
+      "epoch": 16,
+      "train_loss": 0.007785861528563229,
+      "eval_loss": 0.4501547671334688,
+      "macro_f1": 0.9083527669440983,
+      "accuracy": 0.9186046511627907
+    },
+    {
+      "epoch": 17,
+      "train_loss": 0.007271284533833916,
+      "eval_loss": 0.4441522695990496,
+      "macro_f1": 0.9083527669440983,
+      "accuracy": 0.9186046511627907
+    },
+    {
+      "epoch": 18,
+      "train_loss": 0.0066631797870451755,
+      "eval_loss": 0.45391547627920326,
+      "macro_f1": 0.9083527669440983,
+      "accuracy": 0.9186046511627907
+    },
+    {
+      "epoch": 19,
+      "train_loss": 0.006374338959259066,
+      "eval_loss": 0.46051125505635904,
+      "macro_f1": 0.9083527669440983,
+      "accuracy": 0.9186046511627907
+    },
+    {
+      "epoch": 20,
+      "train_loss": 0.0064690375742925835,
+      "eval_loss": 0.4648729954348054,
+      "macro_f1": 0.9083527669440983,
+      "accuracy": 0.9186046511627907
+    }
+  ],
+  "wall_clock_s": 142.05879659999846,
+  "peak_vram_mb": 5418.99755859375,
+  "wandb_url": "https://wandb.ai/gauravgandhi429-gaurav-gandhi/intent-router/runs/5hyd1sxf",
+  "wandb_logged": true,
+  "nan_detected": false,
+  "precision": "fp16",
+  "config": {
+    "model_name": "microsoft/mdeberta-v3-base",
+    "lr": 5e-05,
+    "epochs": 20,
+    "batch_size": 16,
+    "warmup_ratio": 0.1,
+    "weight_decay": 0.01,
+    "max_len": 64,
+    "precision": "fp16",
+    "model_seed": 2,
+    "class_weighted": false,
+    "label_smoothing": 0.0,
+    "layer_decay": null,
+    "entity_masking": false,
+    "hier_aux": false,
+    "hier_lambda": 0.5,
+    "max_grad_norm": 1.0,
+    "wandb_project": "intent-router",
+    "wandb_group": "bakeoff",
+    "model_short": "mdeberta"
+  },
+  "gpu_snapshot_start": {
+    "time": "2026-10-01T19:02:46+05:30",
+    "processes": [
+      {
+        "pid": 24320,
+        "process_name": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+        "used_memory_mb": null
+      }
+    ],
+    "foreign": [],
+    "memory": "251 MiB, 8192 MiB, 0 %",
+    "error": null
+  },
+  "gpu_snapshot_end": {
+    "time": "2026-10-01T19:05:13+05:30",
+    "processes": [
+      {
+        "pid": 24320,
+        "process_name": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+        "used_memory_mb": null
+      },
+      {
+        "pid": 3932,
+        "process_name": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+        "used_memory_mb": null
+      }
+    ],
+    "foreign": [
+      {
+        "pid": 3932,
+        "process_name": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+        "used_memory_mb": null
+      }
+    ],
+    "memory": "8008 MiB, 8192 MiB, 18 %",
+    "error": null
+  },
+  "gpu_exclusive": false,
+  "gpu_foreign_seen": [
+    {
+      "pid": 3932,
+      "process_name": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+      "used_memory_mb": null,
+      "epoch": 14
+    },
+    {
+      "pid": 3932,
+      "process_name": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+      "used_memory_mb": null,
+      "epoch": 15
+    },
+    {
+      "pid": 3932,
+      "process_name": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+      "used_memory_mb": null,
+      "epoch": 16
+    },
+    {
+      "pid": 3932,
+      "process_name": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+      "used_memory_mb": null,
+      "epoch": 17
+    },
+    {
+      "pid": 3932,
+      "process_name": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+      "used_memory_mb": null,
+      "epoch": 18
+    },
+    {
+      "pid": 3932,
+      "process_name": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+      "used_memory_mb": null,
+      "epoch": 19
+    },
+    {
+      "pid": 3932,
+      "process_name": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+      "used_memory_mb": null,
+      "epoch": 20
+    },
+    {
+      "pid": 3932,
+      "process_name": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+      "used_memory_mb": null,
+      "epoch": "end"
+    }
+  ],
+  "gpu_lock_waited_s": 0.1
+}

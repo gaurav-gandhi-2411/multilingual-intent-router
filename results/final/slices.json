@@ -1,0 +1,682 @@
+{
+  "label_oof": "post-selection (optimistic) CV estimate (OOF probability-averaged predictions, 426 train+val rows)",
+  "label_test": "unbiased (single test evaluation)",
+  "label_combined": "mixed-source: CV OOF probability-averaged predictions (train+val) + final-model predictions (test)",
+  "english_vs_non_english": "definition A: primary language en vs not en/undetermined",
+  "short": "n_chars < 30",
+  "indicative_only_rule": "n < 20",
+  "macro_f1_definition": "macro-F1 of a slice = mean of per-class F1 over the classes present in the slice's GOLD labels (label set fixed once per slice and reused in every bootstrap resample; equals sklearn f1_score(labels=gold_classes, average='macro', zero_division=0)). Predictions into classes outside the slice's gold set add no class. Reported only when the slice has >= 2 gold classes, else accuracy is the primary metric. Caveat: a fixed gold class that is absent from a bootstrap resample scores 0, so percentile CIs on small slices with rare classes are biased downward and can exclude the point estimate (e.g. lang_fr).",
+  "bootstrap": {
+    "n_resamples": 10000,
+    "seed": 42,
+    "macro_f1": "gold classes of the slice, fixed across resamples"
+  },
+  "sources": {
+    "oof": {
+      "all": {
+        "n": 426,
+        "indicative_only": false,
+        "n_gold_classes": 12,
+        "accuracy": {
+          "point": 0.9530516431924883,
+          "lo": 0.931924882629108,
+          "hi": 0.971830985915493
+        },
+        "macro_f1": {
+          "point": 0.9531853265177063,
+          "lo": 0.9316681735418675,
+          "hi": 0.9714038575912052
+        },
+        "primary_metric": "macro_f1"
+      },
+      "english": {
+        "n": 370,
+        "indicative_only": false,
+        "n_gold_classes": 12,
+        "accuracy": {
+          "point": 0.9486486486486486,
+          "lo": 0.9243243243243243,
+          "hi": 0.9702702702702702
+        },
+        "macro_f1": {
+          "point": 0.9491226616047309,
+          "lo": 0.924430693979776,
+          "hi": 0.96946605029589
+        },
+        "primary_metric": "macro_f1"
+      },
+      "non_english_defA": {
+        "n": 49,
+        "indicative_only": false,
+        "n_gold_classes": 12,
+        "accuracy": {
+          "point": 0.9795918367346939,
+          "lo": 0.9387755102040817,
+          "hi": 1.0
+        },
+        "macro_f1": {
+          "point": 0.9629629629629629,
+          "lo": 0.8214285714285715,
+          "hi": 1.0
+        },
+        "primary_metric": "macro_f1"
+      },
+      "undetermined_lang": {
+        "n": 7,
+        "indicative_only": true,
+        "n_gold_classes": 3,
+        "accuracy": {
+          "point": 1.0,
+          "lo": 1.0,
+          "hi": 1.0
+        },
+        "macro_f1": {
+          "point": 1.0,
+          "lo": 0.6666666666666666,
+          "hi": 1.0
+        },
+        "primary_metric": "macro_f1"
+      },
+      "code_mixed": {
+        "n": 1,
+        "indicative_only": true,
+        "n_gold_classes": 1,
+        "accuracy": {
+          "point": 1.0,
+          "lo": 1.0,
+          "hi": 1.0
+        },
+        "macro_f1": null,
+        "primary_metric": "accuracy"
+      },
+      "short_lt30_chars": {
+        "n": 29,
+        "indicative_only": false,
+        "n_gold_classes": 6,
+        "accuracy": {
+          "point": 1.0,
+          "lo": 1.0,
+          "hi": 1.0
+        },
+        "macro_f1": {
+          "point": 1.0,
+          "lo": 0.6666666666666666,
+          "hi": 1.0
+        },
+        "primary_metric": "macro_f1"
+      },
+      "noisy": {
+        "n": 223,
+        "indicative_only": false,
+        "n_gold_classes": 12,
+        "accuracy": {
+          "point": 0.9551569506726457,
+          "lo": 0.9282511210762332,
+          "hi": 0.9820627802690582
+        },
+        "macro_f1": {
+          "point": 0.9577095474098805,
+          "lo": 0.9277191783370172,
+          "hi": 0.9813537740900357
+        },
+        "primary_metric": "macro_f1"
+      },
+      "clean": {
+        "n": 203,
+        "indicative_only": false,
+        "n_gold_classes": 12,
+        "accuracy": {
+          "point": 0.9507389162561576,
+          "lo": 0.9211822660098522,
+          "hi": 0.9802955665024631
+        },
+        "macro_f1": {
+          "point": 0.9432660884866767,
+          "lo": 0.8889191208963776,
+          "hi": 0.9744269970402211
+        },
+        "primary_metric": "macro_f1"
+      },
+      "shipment_family": {
+        "n": 124,
+        "indicative_only": false,
+        "n_gold_classes": 3,
+        "accuracy": {
+          "point": 0.9758064516129032,
+          "lo": 0.9435483870967742,
+          "hi": 1.0
+        },
+        "macro_f1": {
+          "point": 0.9891693937977247,
+          "lo": 0.9744386048733875,
+          "hi": 1.0
+        },
+        "primary_metric": "macro_f1"
+      },
+      "non_shipment_family": {
+        "n": 302,
+        "indicative_only": false,
+        "n_gold_classes": 9,
+        "accuracy": {
+          "point": 0.9437086092715232,
+          "lo": 0.9172185430463576,
+          "hi": 0.9668874172185431
+        },
+        "macro_f1": {
+          "point": 0.948898800109681,
+          "lo": 0.9219782049460395,
+          "hi": 0.9711980316197583
+        },
+        "primary_metric": "macro_f1"
+      },
+      "lang_en": {
+        "n": 370,
+        "indicative_only": false,
+        "n_gold_classes": 12,
+        "accuracy": {
+          "point": 0.9486486486486486,
+          "lo": 0.9243243243243243,
+          "hi": 0.9702702702702702
+        },
+        "macro_f1": {
+          "point": 0.9491226616047309,
+          "lo": 0.924430693979776,
+          "hi": 0.96946605029589
+        },
+        "primary_metric": "macro_f1"
+      },
+      "lang_es": {
+        "n": 17,
+        "indicative_only": true,
+        "n_gold_classes": 10,
+        "accuracy": {
+          "point": 1.0,
+          "lo": 1.0,
+          "hi": 1.0
+        },
+        "macro_f1": {
+          "point": 1.0,
+          "lo": 0.6,
+          "hi": 1.0
+        },
+        "primary_metric": "macro_f1"
+      },
+      "lang_fr": {
+        "n": 14,
+        "indicative_only": true,
+        "n_gold_classes": 10,
+        "accuracy": {
+          "point": 0.9285714285714286,
+          "lo": 0.7857142857142857,
+          "hi": 1.0
+        },
+        "macro_f1": {
+          "point": 0.9,
+          "lo": 0.5,
+          "hi": 0.9
+        },
+        "primary_metric": "macro_f1"
+      },
+      "lang_de": {
+        "n": 10,
+        "indicative_only": true,
+        "n_gold_classes": 8,
+        "accuracy": {
+          "point": 1.0,
+          "lo": 1.0,
+          "hi": 1.0
+        },
+        "macro_f1": {
+          "point": 1.0,
+          "lo": 0.5,
+          "hi": 0.875
+        },
+        "primary_metric": "macro_f1"
+      },
+      "lang_zh": {
+        "n": 6,
+        "indicative_only": true,
+        "n_gold_classes": 5,
+        "accuracy": {
+          "point": 1.0,
+          "lo": 1.0,
+          "hi": 1.0
+        },
+        "macro_f1": {
+          "point": 1.0,
+          "lo": 0.4,
+          "hi": 1.0
+        },
+        "primary_metric": "macro_f1"
+      }
+    },
+    "test": {
+      "all": {
+        "n": 74,
+        "indicative_only": false,
+        "n_gold_classes": 12,
+        "accuracy": {
+          "point": 0.9459459459459459,
+          "lo": 0.8918918918918919,
+          "hi": 0.9864864864864865
+        },
+        "macro_f1": {
+          "point": 0.9465160656337127,
+          "lo": 0.8650649587985115,
+          "hi": 0.9892037786774629
+        },
+        "primary_metric": "macro_f1"
+      },
+      "english": {
+        "n": 60,
+        "indicative_only": false,
+        "n_gold_classes": 12,
+        "accuracy": {
+          "point": 0.9333333333333333,
+          "lo": 0.8666666666666667,
+          "hi": 0.9833333333333333
+        },
+        "macro_f1": {
+          "point": 0.9398989898989899,
+          "lo": 0.8254591997055233,
+          "hi": 0.9875222816399286
+        },
+        "primary_metric": "macro_f1"
+      },
+      "non_english_defA": {
+        "n": 13,
+        "indicative_only": true,
+        "n_gold_classes": 8,
+        "accuracy": {
+          "point": 1.0,
+          "lo": 1.0,
+          "hi": 1.0
+        },
+        "macro_f1": {
+          "point": 1.0,
+          "lo": 0.5,
+          "hi": 1.0
+        },
+        "primary_metric": "macro_f1"
+      },
+      "undetermined_lang": {
+        "n": 1,
+        "indicative_only": true,
+        "n_gold_classes": 1,
+        "accuracy": {
+          "point": 1.0,
+          "lo": 1.0,
+          "hi": 1.0
+        },
+        "macro_f1": null,
+        "primary_metric": "accuracy"
+      },
+      "code_mixed": {
+        "n": 0,
+        "indicative_only": true
+      },
+      "short_lt30_chars": {
+        "n": 3,
+        "indicative_only": true,
+        "n_gold_classes": 2,
+        "accuracy": {
+          "point": 1.0,
+          "lo": 1.0,
+          "hi": 1.0
+        },
+        "macro_f1": {
+          "point": 1.0,
+          "lo": 0.5,
+          "hi": 1.0
+        },
+        "primary_metric": "macro_f1"
+      },
+      "noisy": {
+        "n": 41,
+        "indicative_only": false,
+        "n_gold_classes": 12,
+        "accuracy": {
+          "point": 0.9512195121951219,
+          "lo": 0.8780487804878049,
+          "hi": 1.0
+        },
+        "macro_f1": {
+          "point": 0.9555555555555556,
+          "lo": 0.7333333333333334,
+          "hi": 1.0
+        },
+        "primary_metric": "macro_f1"
+      },
+      "clean": {
+        "n": 33,
+        "indicative_only": false,
+        "n_gold_classes": 11,
+        "accuracy": {
+          "point": 0.9393939393939394,
+          "lo": 0.8484848484848485,
+          "hi": 1.0
+        },
+        "macro_f1": {
+          "point": 0.8747474747474747,
+          "lo": 0.606628787878788,
+          "hi": 0.9090909090909091
+        },
+        "primary_metric": "macro_f1"
+      },
+      "shipment_family": {
+        "n": 21,
+        "indicative_only": false,
+        "n_gold_classes": 3,
+        "accuracy": {
+          "point": 1.0,
+          "lo": 1.0,
+          "hi": 1.0
+        },
+        "macro_f1": {
+          "point": 1.0,
+          "lo": 1.0,
+          "hi": 1.0
+        },
+        "primary_metric": "macro_f1"
+      },
+      "non_shipment_family": {
+        "n": 53,
+        "indicative_only": false,
+        "n_gold_classes": 9,
+        "accuracy": {
+          "point": 0.9245283018867925,
+          "lo": 0.8490566037735849,
+          "hi": 0.9811320754716981
+        },
+        "macro_f1": {
+          "point": 0.9352240352240353,
+          "lo": 0.8320105820105821,
+          "hi": 0.9887643678160919
+        },
+        "primary_metric": "macro_f1"
+      },
+      "lang_en": {
+        "n": 60,
+        "indicative_only": false,
+        "n_gold_classes": 12,
+        "accuracy": {
+          "point": 0.9333333333333333,
+          "lo": 0.8666666666666667,
+          "hi": 0.9833333333333333
+        },
+        "macro_f1": {
+          "point": 0.9398989898989899,
+          "lo": 0.8254591997055233,
+          "hi": 0.9875222816399286
+        },
+        "primary_metric": "macro_f1"
+      },
+      "lang_es": {
+        "n": 5,
+        "indicative_only": true,
+        "n_gold_classes": 4,
+        "accuracy": {
+          "point": 1.0,
+          "lo": 1.0,
+          "hi": 1.0
+        },
+        "macro_f1": {
+          "point": 1.0,
+          "lo": 0.5,
+          "hi": 1.0
+        },
+        "primary_metric": "macro_f1"
+      }
+    },
+    "combined": {
+      "all": {
+        "n": 500,
+        "indicative_only": false,
+        "n_gold_classes": 12,
+        "accuracy": {
+          "point": 0.952,
+          "lo": 0.932,
+          "hi": 0.97
+        },
+        "macro_f1": {
+          "point": 0.9520886343323701,
+          "lo": 0.9318859491689638,
+          "hi": 0.9695163548848279
+        },
+        "primary_metric": "macro_f1"
+      },
+      "english": {
+        "n": 430,
+        "indicative_only": false,
+        "n_gold_classes": 12,
+        "accuracy": {
+          "point": 0.9465116279069767,
+          "lo": 0.9232558139534883,
+          "hi": 0.9674418604651163
+        },
+        "macro_f1": {
+          "point": 0.9468881601858148,
+          "lo": 0.9234949721049545,
+          "hi": 0.9667884757559353
+        },
+        "primary_metric": "macro_f1"
+      },
+      "non_english_defA": {
+        "n": 62,
+        "indicative_only": false,
+        "n_gold_classes": 12,
+        "accuracy": {
+          "point": 0.9838709677419355,
+          "lo": 0.9516129032258065,
+          "hi": 1.0
+        },
+        "macro_f1": {
+          "point": 0.9816849816849818,
+          "lo": 0.8839869281045751,
+          "hi": 1.0
+        },
+        "primary_metric": "macro_f1"
+      },
+      "undetermined_lang": {
+        "n": 8,
+        "indicative_only": true,
+        "n_gold_classes": 3,
+        "accuracy": {
+          "point": 1.0,
+          "lo": 1.0,
+          "hi": 1.0
+        },
+        "macro_f1": {
+          "point": 1.0,
+          "lo": 0.6666666666666666,
+          "hi": 1.0
+        },
+        "primary_metric": "macro_f1"
+      },
+      "code_mixed": {
+        "n": 1,
+        "indicative_only": true,
+        "n_gold_classes": 1,
+        "accuracy": {
+          "point": 1.0,
+          "lo": 1.0,
+          "hi": 1.0
+        },
+        "macro_f1": null,
+        "primary_metric": "accuracy"
+      },
+      "short_lt30_chars": {
+        "n": 32,
+        "indicative_only": false,
+        "n_gold_classes": 6,
+        "accuracy": {
+          "point": 1.0,
+          "lo": 1.0,
+          "hi": 1.0
+        },
+        "macro_f1": {
+          "point": 1.0,
+          "lo": 0.6666666666666666,
+          "hi": 1.0
+        },
+        "primary_metric": "macro_f1"
+      },
+      "noisy": {
+        "n": 264,
+        "indicative_only": false,
+        "n_gold_classes": 12,
+        "accuracy": {
+          "point": 0.9545454545454546,
+          "lo": 0.928030303030303,
+          "hi": 0.9772727272727273
+        },
+        "macro_f1": {
+          "point": 0.9554749452278086,
+          "lo": 0.9276449321393645,
+          "hi": 0.9778307111857709
+        },
+        "primary_metric": "macro_f1"
+      },
+      "clean": {
+        "n": 236,
+        "indicative_only": false,
+        "n_gold_classes": 12,
+        "accuracy": {
+          "point": 0.9491525423728814,
+          "lo": 0.9194915254237288,
+          "hi": 0.9745762711864406
+        },
+        "macro_f1": {
+          "point": 0.946458448466427,
+          "lo": 0.9102490814396034,
+          "hi": 0.9734735357481363
+        },
+        "primary_metric": "macro_f1"
+      },
+      "shipment_family": {
+        "n": 145,
+        "indicative_only": false,
+        "n_gold_classes": 3,
+        "accuracy": {
+          "point": 0.9793103448275862,
+          "lo": 0.9517241379310345,
+          "hi": 1.0
+        },
+        "macro_f1": {
+          "point": 0.9907690565182921,
+          "lo": 0.9785329934862647,
+          "hi": 1.0
+        },
+        "primary_metric": "macro_f1"
+      },
+      "non_shipment_family": {
+        "n": 355,
+        "indicative_only": false,
+        "n_gold_classes": 9,
+        "accuracy": {
+          "point": 0.9408450704225352,
+          "lo": 0.9154929577464789,
+          "hi": 0.9633802816901409
+        },
+        "macro_f1": {
+          "point": 0.9468241262013648,
+          "lo": 0.9220284881044226,
+          "hi": 0.9674815229311762
+        },
+        "primary_metric": "macro_f1"
+      },
+      "lang_en": {
+        "n": 430,
+        "indicative_only": false,
+        "n_gold_classes": 12,
+        "accuracy": {
+          "point": 0.9465116279069767,
+          "lo": 0.9232558139534883,
+          "hi": 0.9674418604651163
+        },
+        "macro_f1": {
+          "point": 0.9468881601858148,
+          "lo": 0.9234949721049545,
+          "hi": 0.9667884757559353
+        },
+        "primary_metric": "macro_f1"
+      },
+      "lang_es": {
+        "n": 22,
+        "indicative_only": false,
+        "n_gold_classes": 11,
+        "accuracy": {
+          "point": 1.0,
+          "lo": 1.0,
+          "hi": 1.0
+        },
+        "macro_f1": {
+          "point": 1.0,
+          "lo": 0.6363636363636364,
+          "hi": 1.0
+        },
+        "primary_metric": "macro_f1"
+      },
+      "lang_fr": {
+        "n": 18,
+        "indicative_only": true,
+        "n_gold_classes": 12,
+        "accuracy": {
+          "point": 0.9444444444444444,
+          "lo": 0.8333333333333334,
+          "hi": 1.0
+        },
+        "macro_f1": {
+          "point": 0.888888888888889,
+          "lo": 0.5,
+          "hi": 0.8333333333333334
+        },
+        "primary_metric": "macro_f1"
+      },
+      "lang_de": {
+        "n": 12,
+        "indicative_only": true,
+        "n_gold_classes": 9,
+        "accuracy": {
+          "point": 1.0,
+          "lo": 1.0,
+          "hi": 1.0
+        },
+        "macro_f1": {
+          "point": 1.0,
+          "lo": 0.5555555555555556,
+          "hi": 0.8888888888888888
+        },
+        "primary_metric": "macro_f1"
+      },
+      "lang_zh": {
+        "n": 7,
+        "indicative_only": true,
+        "n_gold_classes": 5,
+        "accuracy": {
+          "point": 1.0,
+          "lo": 1.0,
+          "hi": 1.0
+        },
+        "macro_f1": {
+          "point": 1.0,
+          "lo": 0.4,
+          "hi": 1.0
+        },
+        "primary_metric": "macro_f1"
+      }
+    }
+  },
+  "analysis_regeneration": {
+    "inputs": [
+      "results\\final\\test_predictions.csv",
+      "results\\final\\val_predictions.csv",
+      "results\\oof\\e5_lr3e-05.csv",
+      "results/eda_rows.csv",
+      "results\\final\\track_a.json (threshold, temperature)"
+    ],
+    "inference_run": false,
+    "test_eval_log_lines_before": 4,
+    "test_eval_log_lines_after": 4
+  }
+}

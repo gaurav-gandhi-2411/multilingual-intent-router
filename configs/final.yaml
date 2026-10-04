@@ -1,0 +1,65 @@
+# Final 12-class model + Track A. Tool config lives in pyproject.toml.
+# Selected config from the bake-off (results/bakeoff/selection.json); every setting the
+# final run uses is read from this file.
+data_path: data/dataset.csv
+splits_path: splits/splits.csv
+results_dir: results/final
+figures_dir: results/figures
+outputs_dir: outputs/final          # features/logits npz, error_examples.md (gitignored)
+model_dir: outputs/final_model      # save_pretrained output (gitignored)
+selection_path: results/bakeoff/selection.json
+seed: 42
+
+train:
+  model_name: intfloat/multilingual-e5-base
+  query_prefix: "query: "           # asserted equal to models.QUERY_PREFIX at run time
+  lr: 3.0e-5
+  weight_decay: 0.01
+  warmup_ratio: 0.1
+  batch_size: 16
+  precision: fp16                   # autocast during training; inference (predict) is fp32
+  max_len: 64
+  epochs: 20                        # LR schedule horizon (what CV measured)
+  stop_epoch: 9                     # CV-chosen epoch: stop here, schedule NOT re-scaled
+  model_seed: 42
+  attn_implementation: eager        # bitwise-reproducible; sdpa is timed separately below
+  label_smoothing: 0.0
+  class_weighted: false
+
+predict_batch_size: 32
+test_eval_log: results/final/test_eval_log.jsonl
+gpu_lock_expected_s: 1800
+
+determinism:
+  repeat_run: true                  # second identical eager run, assert bitwise-equal outputs
+  sdpa_timing_run: true             # one sdpa run, same seed: timing + val macro-F1 only
+  inference_timing_repeats: 5
+
+bootstrap:
+  n_resamples: 10000
+  seed: 42
+
+calibration:
+  ece_bins: 15
+
+selective:
+  retention: 0.95                   # MSP threshold at this retention on val (temperature-scaled)
+  threshold: null                   # set a number to override the val-derived threshold
+
+baselines:                          # refit on the train split; C by inner grouped CV on train only
+  c_grid: [0.1, 0.3, 1, 3, 10, 30, 100]
+  inner_folds: 5
+  e5_model: intfloat/multilingual-e5-base
+
+analysis:
+  oof_config_id: e5_lr3e-05         # results/oof/<id>.csv and selection.json candidates key
+  oof_dir: results/oof
+  oof_predictions_per_id: 9         # 3 fold-seeds x 3 model seeds
+  eda_rows_path: results/eda_rows.csv
+  top_confusions: 5
+  examples_per_pair: 3
+
+wandb:
+  project: multilingual-intent-router
+  group: final
+  enabled: true

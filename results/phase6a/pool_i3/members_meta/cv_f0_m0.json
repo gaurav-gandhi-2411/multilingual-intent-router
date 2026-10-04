@@ -1,0 +1,21 @@
+{
+  "member": 0,
+  "unit": "cv_f0",
+  "n_fit": 289,
+  "n_inner": 51,
+  "f1_inner_holdout": 0.8523070339246811,
+  "f1_eval_set": 0.9538629756896011,
+  "stop_epoch": 8,
+  "fingerprint": "547e3b212c244faac75a102856e816863ca7d092aa7d2931a5b9632f853ad273",
+  "wall_clock_s": 49.35923039999034,
+  "total_s": 63.35616490000393,
+  "gpu_exclusive": true,
+  "nan_detected": false,
+  "train_spec": {
+    "key": "i3",
+    "a1": false,
+    "kl_lambda": 0.0,
+    "head_init_seed": 0,
+    "inner_frac": 0.15
+  }
+}

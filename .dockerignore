@@ -1,0 +1,27 @@
+# Keep the build context to: Dockerfile, requirements-serve.txt, src/, serve_model/
+# Confidential / large / irrelevant to serving:
+data/
+docs/
+outputs/
+wandb/
+results/
+splits/
+notebooks/
+scripts/
+configs/
+tests/
+.venv*/
+.git/
+.github/
+.pytest_cache/
+.ruff_cache/
+**/__pycache__/
+*.pyc
+*.md
+requirements.txt
+pyproject.toml
+# Default backend is onnx_fp32 (ships in the image). The int8 graphs are never baked in: the
+# whole-graph int8 hurt v1 (results/serving/quality_val_dev.json); the encoder-only int8 is
+# excluded unless adopted by the pre-registered rule (results/serving/quantization_v1_*.json).
+serve_model/onnx/model_int8.onnx
+serve_model/onnx/model_int8_encoder.onnx

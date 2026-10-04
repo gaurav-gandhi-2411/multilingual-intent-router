@@ -1,0 +1,58 @@
+# Zero-/few-shot LLM baseline (pre-registered). Local Ollama only: the code
+# reuses llm_audit's loopback guard (dataset text never leaves the machine).
+data_path: data/dataset.csv
+splits_path: splits/splits.csv
+test_predictions_path: results/final/test_predictions.csv   # final model: ids, gold, pred
+headline_scores_path: results/trackb/scores/headline_s42.csv  # set == eval fixes the Track B rows
+headline_json_path: results/trackb/headline.json
+# The shipped final model is v1 again (results/final/model_version.json); the Robustness and open-set training fixes v2 model is
+# archived in outputs/final_model_v2 (results in results/final_v2).
+final_model_dir: outputs/final_model
+test_eval_log: results/final/test_eval_log.jsonl            # baseline_inference / latency_inference
+results_dir: results/llm_baseline       # ids / labels / outputs / numbers only, NEVER dataset text
+outputs_dir: outputs/llm_baseline       # raw prompts + responses with text (gitignored)
+smoke_dir: outputs/llm_baseline_smoke   # smoke runs write ONLY here (val rows)
+figure_path: results/figures/llm_baseline.png
+n_classes: 12
+seed: 42
+
+holdout: [yard_management, document_processing]   # Track B headline holdout (as in open-set evaluation)
+n_shots: 5
+smoke_rows: 3
+smoke_ft_texts: 10
+
+ollama:
+  base_url: http://127.0.0.1:11434   # validated loopback-only at run time
+  num_ctx: 2048                      # 12 label descriptions + 5 shots + message stays well below
+  num_predict: 24                    # longest label is ~10 tokens
+  timeout_s: 300
+  keep_alive: "10m"                  # keep loaded during a (model, mode) batch; unloaded after
+
+# think=false only where the model has a thinking mode.
+models:
+  - {name: qwen3, tag: "qwen3:8b", think: false}
+  - {name: llama3, tag: "llama3.1:8b", think: null}
+modes: [zero, five]
+
+bootstrap:
+  n_resamples: 10000
+  seed: 42
+
+latency:
+  ft_warmup: 10
+  ft_batch_size: 32
+  ft_batch_repeats: 5
+  max_len: 64
+
+cost:                                # ESTIMATES: latency_s x 1000 / 3600 x $/hr
+  gpu_usd_per_hr: 0.35               # assumed T4-class on-demand
+  cpu_usd_per_hr: 0.05               # assumed price of ONE vCPU; an N-thread run costs N x this
+  llm_note: >-
+    The LLM latency is measured on the local RTX 3070 and used as a stand-in for a T4-class GPU.
+    A T4 is slower than a 3070, so the LLM $/1k figure is OPTIMISTIC (a lower bound).
+
+wandb:
+  project: intent-router
+  group: stretch-llm-baseline
+  enabled: true
+expected_duration_s: 3600

@@ -1,0 +1,51 @@
+{
+  "v1": {
+    "model_fingerprint": "7ca22e16d2ace345d9dcf7737887e85fedf400a1dfc863678c2fc2663bf102bd",
+    "macro_f1": {
+      "point": 0.9465160656337127,
+      "lo": 0.8650649587985115,
+      "hi": 0.9892037786774629
+    },
+    "accuracy": {
+      "point": 0.9459459459459459,
+      "lo": 0.8918918918918919,
+      "hi": 0.9864864864864865
+    },
+    "temperature": 1.0228290548483843,
+    "ece_test_after": 0.056326028865736906,
+    "selective_at_threshold": {
+      "threshold": 0.48950669169425964,
+      "n_accepted": 73,
+      "coverage": 0.9864864864864865,
+      "accuracy": 0.958904109589041,
+      "macro_f1_present": 0.9574786324786325,
+      "macro_f1_present_previous_definition": 0.9574786324786325,
+      "macro_f1_present_definition": "mean F1 over the classes present in the GOLD labels of the accepted rows (fixed label set); previous definition (gold OR predicted classes) kept above for reference"
+    }
+  },
+  "v2": {
+    "model_fingerprint": "db5b580843db236481ac09c98eface5186742a58f477c0b7d07617f49161a12b",
+    "macro_f1": {
+      "point": 0.9489081180257651,
+      "lo": 0.8652538807189543,
+      "hi": 0.9902564102564103
+    },
+    "accuracy": {
+      "point": 0.9459459459459459,
+      "lo": 0.8918918918918919,
+      "hi": 0.9864864864864865
+    },
+    "temperature": 1.5156735475176646,
+    "ece_test_after": 0.06903983572044889,
+    "selective_at_threshold": {
+      "threshold": 0.5831196308135986,
+      "n_accepted": 71,
+      "coverage": 0.9594594594594594,
+      "accuracy": 0.971830985915493,
+      "macro_f1_present": 0.9720279720279721,
+      "macro_f1_present_previous_definition": 0.9720279720279721,
+      "macro_f1_present_definition": "mean F1 over the classes present in the GOLD labels of the accepted rows (fixed label set); previous definition (gold OR predicted classes) kept above for reference"
+    }
+  },
+  "label": "test split, one logged evaluation each"
+}

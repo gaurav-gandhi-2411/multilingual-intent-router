@@ -1,0 +1,10 @@
+{
+  "method": "maha_ft",
+  "threshold": -128.06341286077185,
+  "retention_target": 0.95,
+  "val_retention_achieved": 0.9594594594594594,
+  "test_coverage_at_threshold": 0.9864864864864865,
+  "n_val": 74,
+  "n_test": 74,
+  "note": "12 classes known: fitted on val, applied to the saved test arrays (no new test inference)"
+}

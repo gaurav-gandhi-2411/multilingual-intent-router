@@ -1,0 +1,77 @@
+{
+  "scorer": "maha_ft",
+  "thr_rule": "i6a",
+  "mode": "raw",
+  "per_retention": {
+    "95": {
+      "global": -104.13408915437014,
+      "per_class": {
+        "ai_agent_performance": -42.329407815562966,
+        "appointment_manager": -133.10676627050412,
+        "chitchat": -32.144685086525,
+        "customer_support": -104.13408915437014,
+        "document_processing": -91.98202762922634,
+        "knowledge_base": -102.82471093617878,
+        "other": -105.72889382314914,
+        "shipment_information.analytics": -58.69763657286901,
+        "shipment_information.disruptions": -100.56813519072386,
+        "shipment_information.realtime_query": -107.04743619872292,
+        "yard_management": -100.86297323850854
+      },
+      "fallback_classes": [
+        "customer_support"
+      ],
+      "n_fallback_classes": 1,
+      "n_cal_per_predicted_class": {
+        "ai_agent_performance": 6,
+        "appointment_manager": 7,
+        "chitchat": 5,
+        "customer_support": 3,
+        "document_processing": 5,
+        "knowledge_base": 7,
+        "other": 5,
+        "shipment_information.analytics": 8,
+        "shipment_information.disruptions": 5,
+        "shipment_information.realtime_query": 10,
+        "yard_management": 6
+      },
+      "min_rows": 5
+    },
+    "90": {
+      "global": -100.56813519072386,
+      "per_class": {
+        "ai_agent_performance": -42.329407815562966,
+        "appointment_manager": -133.10676627050412,
+        "chitchat": -32.144685086525,
+        "customer_support": -100.56813519072386,
+        "document_processing": -91.98202762922634,
+        "knowledge_base": -102.82471093617878,
+        "other": -105.72889382314914,
+        "shipment_information.analytics": -58.69763657286901,
+        "shipment_information.disruptions": -100.56813519072386,
+        "shipment_information.realtime_query": -104.13408915437014,
+        "yard_management": -100.86297323850854
+      },
+      "fallback_classes": [
+        "customer_support"
+      ],
+      "n_fallback_classes": 1,
+      "n_cal_per_predicted_class": {
+        "ai_agent_performance": 6,
+        "appointment_manager": 7,
+        "chitchat": 5,
+        "customer_support": 3,
+        "document_processing": 5,
+        "knowledge_base": 7,
+        "other": 5,
+        "shipment_information.analytics": 8,
+        "shipment_information.disruptions": 5,
+        "shipment_information.realtime_query": 10,
+        "yard_management": 6
+      },
+      "min_rows": 5
+    }
+  },
+  "weights": "ref",
+  "run_id": "ref_loco_orders_s0"
+}

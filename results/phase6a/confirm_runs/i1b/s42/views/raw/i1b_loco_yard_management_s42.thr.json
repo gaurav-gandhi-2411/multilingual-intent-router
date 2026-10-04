@@ -1,0 +1,15 @@
+{
+  "scorer": "i1b",
+  "thr_rule": "global",
+  "mode": "raw",
+  "per_retention": {
+    "95": {
+      "global": -116.14361617200467
+    },
+    "90": {
+      "global": -107.84028009780066
+    }
+  },
+  "weights": "ref",
+  "run_id": "ref_loco_yard_management_s42"
+}

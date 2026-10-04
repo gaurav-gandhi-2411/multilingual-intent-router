@@ -1,0 +1,12 @@
+{
+  "name": "sentence-transformers/LaBSE",
+  "pooling": "cls_dense_tanh",
+  "prefix": "",
+  "dtype": "torch.float16",
+  "n_params": 470926848,
+  "peak_vram_mb": 984.41845703125,
+  "n_rows_truncated_at_max_len": 0,
+  "max_len": 64,
+  "snapshot_bytes": null,
+  "oracle": true
+}

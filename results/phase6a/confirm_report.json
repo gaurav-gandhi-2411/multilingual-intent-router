@@ -1,0 +1,405 @@
+{
+  "label": "measured, CONFIRM LOCO classes (seed 42) and headline holdout (seeds 42/43/44); thresholds from calibration-known rows; known side reads test rows",
+  "selected": "i1b",
+  "selected_spec": {
+    "key": "i1b",
+    "weights": "ref",
+    "scorer": "i1b",
+    "thr": "global",
+    "components": 1,
+    "formed": true
+  },
+  "ref": {
+    "raw": {
+      "confirm": {
+        "ci95": {
+          "auroc": {
+            "point": 0.8853477961432507,
+            "lo": 0.8563720730027548,
+            "hi": 0.913358258385999
+          },
+          "rej95": {
+            "point": 0.14681818181818182,
+            "lo": 0.10227272727272729,
+            "hi": 0.19318181818181818
+          },
+          "rej90": {
+            "point": 0.49090909090909085,
+            "lo": 0.4313522727272728,
+            "hi": 0.5518181818181818
+          },
+          "retention95": {
+            "point": 0.9763814616755793,
+            "lo": 0.9587344028520499,
+            "hi": 0.9911764705882353
+          }
+        },
+        "n_units": 5
+      },
+      "headline": {
+        "ci95": {
+          "auroc": {
+            "point": 0.855981182795699,
+            "lo": 0.7942859543010753,
+            "hi": 0.9107543682795699
+          },
+          "rej95": {
+            "point": 0.4291666666666667,
+            "lo": 0.33749999999999997,
+            "hi": 0.5208333333333334
+          },
+          "rej90": {
+            "point": 0.5375,
+            "lo": 0.44166666666666665,
+            "hi": 0.6333333333333333
+          },
+          "retention95": {
+            "point": 0.946236559139785,
+            "lo": 0.8924731182795699,
+            "hi": 0.989247311827957
+          }
+        },
+        "n_units": 3
+      }
+    },
+    "neutral": {
+      "confirm": {
+        "ci95": {
+          "auroc": {
+            "point": 0.8397002106627776,
+            "lo": 0.8065852677847998,
+            "hi": 0.8721699835926107
+          },
+          "rej95": {
+            "point": 0.08863636363636362,
+            "lo": 0.055454545454545444,
+            "hi": 0.12545454545454543
+          },
+          "rej90": {
+            "point": 0.1690909090909091,
+            "lo": 0.12363636363636363,
+            "hi": 0.21636363636363637
+          },
+          "retention95": {
+            "point": 0.9880570409982175,
+            "lo": 0.9759358288770054,
+            "hi": 0.9970588235294118
+          }
+        },
+        "n_units": 5
+      },
+      "headline": {
+        "ci95": {
+          "auroc": {
+            "point": 0.8288306451612902,
+            "lo": 0.7629687500000001,
+            "hi": 0.8878360215053762
+          },
+          "rej95": {
+            "point": 0.30833333333333335,
+            "lo": 0.2333333333333333,
+            "hi": 0.38749999999999996
+          },
+          "rej90": {
+            "point": 0.3875,
+            "lo": 0.30416666666666664,
+            "hi": 0.4749999999999999
+          },
+          "retention95": {
+            "point": 0.9731182795698925,
+            "lo": 0.9408602150537634,
+            "hi": 1.0
+          }
+        },
+        "n_units": 3
+      }
+    }
+  },
+  "candidate": {
+    "raw": {
+      "confirm": {
+        "ci95": {
+          "auroc": {
+            "point": 0.8903637984119268,
+            "lo": 0.8621326770377572,
+            "hi": 0.9172082016690974
+          },
+          "rej95": {
+            "point": 0.16409090909090912,
+            "lo": 0.1181818181818182,
+            "hi": 0.2127272727272727
+          },
+          "rej90": {
+            "point": 0.5159090909090909,
+            "lo": 0.4545454545454546,
+            "hi": 0.5777272727272728
+          },
+          "retention95": {
+            "point": 0.9823529411764707,
+            "lo": 0.9676470588235293,
+            "hi": 0.9941176470588236
+          }
+        },
+        "n_units": 5
+      },
+      "headline": {
+        "ci95": {
+          "auroc": {
+            "point": 0.8562500000000001,
+            "lo": 0.7945530913978495,
+            "hi": 0.9106905241935482
+          },
+          "rej95": {
+            "point": 0.3958333333333333,
+            "lo": 0.3083333333333333,
+            "hi": 0.4875
+          },
+          "rej90": {
+            "point": 0.5083333333333333,
+            "lo": 0.4124999999999999,
+            "hi": 0.6041666666666666
+          },
+          "retention95": {
+            "point": 0.9516129032258065,
+            "lo": 0.8978494623655914,
+            "hi": 0.989247311827957
+          }
+        },
+        "n_units": 3
+      }
+    },
+    "neutral": {
+      "confirm": {
+        "ci95": {
+          "auroc": {
+            "point": 0.8451385512882839,
+            "lo": 0.8129308458920759,
+            "hi": 0.8765267480959327
+          },
+          "rej95": {
+            "point": 0.09818181818181818,
+            "lo": 0.06363636363636363,
+            "hi": 0.13545454545454544
+          },
+          "rej90": {
+            "point": 0.21181818181818182,
+            "lo": 0.16363636363636364,
+            "hi": 0.26136363636363635
+          },
+          "retention95": {
+            "point": 0.9851158645276292,
+            "lo": 0.9703208556149733,
+            "hi": 0.9970588235294118
+          }
+        },
+        "n_units": 5
+      },
+      "headline": {
+        "ci95": {
+          "auroc": {
+            "point": 0.8295698924731183,
+            "lo": 0.7631031586021505,
+            "hi": 0.8889112903225808
+          },
+          "rej95": {
+            "point": 0.3458333333333334,
+            "lo": 0.26666666666666666,
+            "hi": 0.4291666666666667
+          },
+          "rej90": {
+            "point": 0.42083333333333334,
+            "lo": 0.3333333333333333,
+            "hi": 0.5125
+          },
+          "retention95": {
+            "point": 0.9731182795698925,
+            "lo": 0.9408602150537634,
+            "hi": 1.0
+          }
+        },
+        "n_units": 3
+      }
+    }
+  },
+  "paired_delta_candidate_minus_ref": {
+    "raw": {
+      "confirm": {
+        "auroc": {
+          "mean_delta": 0.004997572860962565,
+          "lo": 0.0015236539863880073,
+          "hi": 0.008820906255064206
+        },
+        "rej95": {
+          "mean_delta": 0.017485954545454544,
+          "lo": -0.014999999999999986,
+          "hi": 0.050909090909090904
+        },
+        "rej90": {
+          "mean_delta": 0.025068863636363636,
+          "lo": -0.00138636363636352,
+          "hi": 0.05363636363636359
+        },
+        "retention95": {
+          "mean_delta": 0.0059359180035651075,
+          "lo": 0.0,
+          "hi": 0.0149732620320856
+        }
+      },
+      "headline": {
+        "auroc": {
+          "mean_delta": 0.0002636021505376349,
+          "lo": -0.003427419354838701,
+          "hi": 0.0036307123655915075
+        },
+        "rej95": {
+          "mean_delta": -0.03324375,
+          "lo": -0.0625,
+          "hi": -0.008333333333333304
+        },
+        "rej90": {
+          "mean_delta": -0.02918,
+          "lo": -0.054166666666666696,
+          "hi": -0.008333333333333304
+        },
+        "retention95": {
+          "mean_delta": 0.0054306451612903175,
+          "lo": 0.0,
+          "hi": 0.016129032258064502
+        }
+      }
+    },
+    "neutral": {
+      "confirm": {
+        "auroc": {
+          "mean_delta": 0.005442054671041971,
+          "lo": 0.0011754527224111827,
+          "hi": 0.010053810160427763
+        },
+        "rej95": {
+          "mean_delta": 0.009554727272727274,
+          "lo": -0.006818181818181807,
+          "hi": 0.02545454545454548
+        },
+        "rej90": {
+          "mean_delta": 0.042592409090909084,
+          "lo": 0.01545454545454547,
+          "hi": 0.07136363636363635
+        },
+        "retention95": {
+          "mean_delta": -0.0029041176470588274,
+          "lo": -0.008823529411764786,
+          "hi": 0.0
+        }
+      },
+      "headline": {
+        "auroc": {
+          "mean_delta": 0.0007292002688172054,
+          "lo": -0.003225806451612856,
+          "hi": 0.004369959677419458
+        },
+        "rej95": {
+          "mean_delta": 0.037342499999999994,
+          "lo": 0.008333333333333304,
+          "hi": 0.0708333333333333
+        },
+        "rej90": {
+          "mean_delta": 0.03350625,
+          "lo": 0.004166666666666652,
+          "hi": 0.06666666666666671
+        },
+        "retention95": {
+          "mean_delta": 0.0,
+          "lo": 0.0,
+          "hi": 0.0
+        }
+      }
+    }
+  },
+  "adaptive_reuse_looks": {
+    "confirm": {
+      "prior_looks": 4,
+      "phases": [
+        "3",
+        "3b",
+        "4c",
+        "4e"
+      ],
+      "including_6a": 5,
+      "artifacts": [
+        {
+          "phase": "3",
+          "artifact": "results/trackb/loco.json",
+          "exists": true
+        },
+        {
+          "phase": "3b",
+          "artifact": "results/trackb_improve/confirm.json",
+          "exists": true
+        },
+        {
+          "phase": "4c",
+          "artifact": "results/phase4c/confirm_comb.json",
+          "exists": true
+        },
+        {
+          "phase": "4e",
+          "artifact": "results/phase4e/confirm_a1a3.json",
+          "exists": true
+        }
+      ]
+    },
+    "headline": {
+      "prior_looks": 4,
+      "phases": [
+        "3",
+        "3b",
+        "4c",
+        "4e"
+      ],
+      "including_6a": 5,
+      "artifacts": [
+        {
+          "phase": "3",
+          "artifact": "results/trackb/headline.json",
+          "exists": true
+        },
+        {
+          "phase": "3b",
+          "artifact": "results/trackb_improve/confirm.json",
+          "exists": true
+        },
+        {
+          "phase": "4c",
+          "artifact": "results/phase4c/confirm_comb.json",
+          "exists": true
+        },
+        {
+          "phase": "4e",
+          "artifact": "results/phase4e/confirm_a1a3.json",
+          "exists": true
+        }
+      ]
+    },
+    "note": "count of distinct earlier phases whose artifacts show a CONFIRM / headline look (adaptive reuse: selections after the first look are not independent of it)"
+  },
+  "bootstrap": {
+    "n_resamples": 10000,
+    "seed": 42,
+    "level": 0.95
+  },
+  "runs": {
+    "ref": [
+      "ref_loco_ai_agent_performance_s42",
+      "ref_loco_document_processing_s42",
+      "ref_loco_shipment_information.analytics_s42",
+      "ref_loco_shipment_information.realtime_query_s42",
+      "ref_loco_yard_management_s42",
+      "ref_headline_s42",
+      "ref_headline_s43",
+      "ref_headline_s44"
+    ]
+  },
+  "test_log": "results\\phase6a\\confirm_test_inference_log.jsonl",
+  "git_sha": "4c5c980559bc14061d513cec11781b3c81d563df-dirty",
+  "smoke": false
+}

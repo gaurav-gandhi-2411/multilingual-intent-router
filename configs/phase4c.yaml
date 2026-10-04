@@ -1,0 +1,77 @@
+# Robustness and open-set training fixes (pre-registered 2026-10-02
+# BEFORE any 4c run). Nothing here may change a pre-registered rule; it only wires the rules to
+# numbers. Training settings (model, lr, 20-epoch schedule, eager attention) come from final.yaml.
+final_config: configs/final.yaml
+trackb_improve_config: configs/trackb_improve.yaml   # dev/confirm classes, OOD settings, bootstrap
+robustness_config: configs/robustness.yaml           # neutral-swap / noise functions and seeds
+results_dir: results/phase4c        # ids + numbers only: NO dataset or synthetic text
+outputs_dir: outputs/phase4c        # fold models, per-run npz, inputs (gitignored)
+predict_batch_size: 32
+gpu_lock_expected_s: 900            # per fold / LOCO run, incl. waiting headroom
+gpu_lock_poll_s: 30
+run_even_if_guard_failed: true      # pre-registered: report ALL metrics for ALL candidates; adoption still
+                                    # needs the guard, this only controls whether folds/trackb run
+
+inputs:                             # written by phase4c_data.py; consumed read-only here
+  synthetic_oe: outputs/phase4c/synthetic_oe.csv          # syn_id,text,lang,kind,batch_seed
+  synthetic_oe_emb: outputs/phase4c/synthetic_oe_emb.npy  # frozen-e5, L2-normalised, same order
+  a3_aug: outputs/phase4c/a3_aug.csv                      # src_id,kind{mt,noise},lang,text
+  eval_mt: outputs/phase4c/eval_mt.csv                    # id,lang,text,system,labse_cos,kept
+  expected_cv_rows: 426             # train+val rows an A3 copy must exist for
+  expected_en_rows: 370             # English train+val rows in the evaluation-MT file
+
+guard:                              # same rule and numbers as Open-set scorer comparison (trackb_improve.yaml)
+  fold_seed_idx: 0
+  model_seed: 0
+  n_folds: 5
+  comparator: 0.9441                # e5 lr 3e-5, same folds / model seed (selection-robustness check)
+  tolerance: 0.010
+  threshold: 0.9341                 # asserted == comparator - tolerance at load time
+
+current:                            # the shipped Open-set scorer comparison / 4a configuration
+  deployed_epoch: 9                 # as shipped (final.yaml stop_epoch); the guard CV of `current`
+                                    # is still measured here with eager attention, like the others
+  fold_models_dir: outputs/robustness/fold_models   # robustness fold models (reused if run_meta matches)
+  oof_clean_predictions: results/robustness/oof_clean_predictions.csv
+  trackb_dir: results/trackb_improve        # Open-set scorer comparison base DEV runs: scores/loco_<cls>_s42.csv
+
+factors:
+  a1:                               # ID-prefix randomisation, training only
+    id_randomize_p: 0.5
+  a2:                               # outlier exposure with local-qwen synthetic items
+    oe_lambda: 0.5
+    oe_batch_size: 16
+    holdout_cos_drop: 0.85          # drop synthetic items with frozen-e5 cosine > this to ANY
+                                    # held-out-class row, per Track B run
+    auroc_margin: 0.0115            # pre-registered A2 rule: DEV AUROC gain > 0.0115 (Open-set scorer comparison margin)
+  a3:                               # NLLB translation + 5% char-noise copies of training rows
+    kinds: [mt, noise]
+
+scores: [maha_ft, neg_energy, fuse_maha_energy]   # candidate scores; current = maha_ft
+current_score: maha_ft
+shipped_score_auroc_tolerance: 0.0115   # C-comb: score choice among those within this of the best
+
+neutral_swaps: ["LD->REF", "PO->REF", "other->REF"]   # robustness.IDSWAPS names
+noise:
+  perturbation: char_mixed_10       # robustness.apply_noise name, same seeded perturbation as 4a
+  seed: 42
+translation:
+  langs: [es, fr, de, zh]
+  quality_cos: 0.80                 # LaBSE cosine filter; the `kept` column of eval_mt.csv
+bootstrap:                          # paired; clusters = row ids for OOF metrics; Track B rows are
+  n_resamples: 10000                # resampled within each holdout, stratified known/unknown
+  seed: 42
+  level: 0.95
+
+wandb:
+  project: intent-router
+  group_prefix: phase4c             # groups: phase4c-<candidate>
+  enabled: true
+
+final_v2:                           # final_retrain only (comb adopted)
+  archive_results: results/final_v1
+  archive_outputs: outputs/final_v1
+  model_dir: outputs/final_model_v2
+  results_dir: results/phase4c/final_v2    # derived configs, OOF + selection stand-ins for v2
+  robustness_results: results/phase4c/final_v2_robustness
+  sdpa_timing_run: false            # v1 already measured eager vs sdpa; no new timing claim

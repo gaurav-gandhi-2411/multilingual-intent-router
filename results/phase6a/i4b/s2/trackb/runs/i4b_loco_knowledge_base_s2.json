@@ -1,0 +1,206 @@
+{
+  "run_id": "i4b_loco_knowledge_base_s2",
+  "weights": "i4b",
+  "kind": "loco",
+  "holdout": [
+    "knowledge_base"
+  ],
+  "seed": 2,
+  "replicate": 2,
+  "labels": [
+    "ai_agent_performance",
+    "appointment_manager",
+    "chitchat",
+    "customer_support",
+    "document_processing",
+    "orders",
+    "other",
+    "shipment_information.analytics",
+    "shipment_information.disruptions",
+    "shipment_information.realtime_query",
+    "yard_management"
+  ],
+  "call_type": "phase6a_trackb",
+  "git_sha": "4536308e25696d84e01dd26bffcdac8d8f0dbdbc-dirty",
+  "smoke": false,
+  "audit": {
+    "holdout": [
+      "knowledge_base"
+    ],
+    "n_labels": 11,
+    "n_train": 324,
+    "n_cal": 68,
+    "n_eval_known": 68,
+    "n_eval_unknown": 40,
+    "assertions": {
+      "no_heldout_rows_in_train": true,
+      "no_heldout_rows_in_cal": true,
+      "no_heldout_rows_in_eval_known": true,
+      "eval_unknown_only_heldout": true,
+      "eval_unknown_has_every_heldout_row": true,
+      "label_space_is_remaining_classes": true,
+      "every_remaining_class_in_train": true,
+      "train_cal_disjoint": true,
+      "train_eval_known_disjoint": true,
+      "train_unknown_disjoint": true,
+      "cal_unknown_disjoint": true,
+      "no_test_rows_in_train_or_cal": true,
+      "eval_known_is_test_split_only": true,
+      "cal_is_val_split_only": true
+    },
+    "ids_sha256": {
+      "train": "af6321bc51bafa9c6ee61103ae5bdbdb07c2df2dbce53c402958de037e9a5735",
+      "cal": "8c9b5af0bcadac1b32896e78bedbdb8b68f083bb5639a55225e1b179f677d019",
+      "eval_known": "5cba401fb9f5b6daca58e375caafc03c5ab08f801e2d7da58ce031d381c0a46d",
+      "eval_unknown": "feab5c2a33abbd3f4b681251dc3dcd4c3893cfbaf5e83a44fa9d909284731be1"
+    },
+    "smoke": false
+  },
+  "train_spec": {
+    "key": "i4b",
+    "a1": true,
+    "kl_lambda": 1.0,
+    "head_init_seed": null,
+    "inner_frac": 0.0
+  },
+  "training": {
+    "config": {
+      "model_name": "intfloat/multilingual-e5-base",
+      "lr": 3e-05,
+      "epochs": 20,
+      "batch_size": 16,
+      "warmup_ratio": 0.1,
+      "weight_decay": 0.01,
+      "max_len": 64,
+      "precision": "fp16",
+      "model_seed": 2,
+      "class_weighted": false,
+      "label_smoothing": 0.0,
+      "layer_decay": null,
+      "entity_masking": false,
+      "hier_aux": false,
+      "hier_lambda": 0.5,
+      "max_grad_norm": 1.0,
+      "attn_implementation": "eager",
+      "stop_epoch": 14,
+      "supcon_lambda": null,
+      "supcon_temperature": 0.1,
+      "grad_accum": 1,
+      "id_randomize_p": 0.5,
+      "oe_lambda": 0.0,
+      "oe_batch_size": 16,
+      "wandb_project": "intent-router",
+      "wandb_group": "phase6a-i4b",
+      "model_short": "e5"
+    },
+    "epochs": [
+      {
+        "epoch": 1,
+        "train_loss": 2.4079117320832752,
+        "eval_loss": 2.3504625769222485,
+        "macro_f1": 0.1718112497524262,
+        "accuracy": 0.23529411764705882
+      },
+      {
+        "epoch": 2,
+        "train_loss": 2.2617698169889904,
+        "eval_loss": 2.083475393407485,
+        "macro_f1": 0.17084712672947966,
+        "accuracy": 0.23529411764705882
+      },
+      {
+        "epoch": 3,
+        "train_loss": 1.8052557877131872,
+        "eval_loss": 1.497625708580017,
+        "macro_f1": 0.7117497566114167,
+        "accuracy": 0.7058823529411765
+      },
+      {
+        "epoch": 4,
+        "train_loss": 1.1679331064224243,
+        "eval_loss": 0.9421852336210363,
+        "macro_f1": 0.850251516160607,
+        "accuracy": 0.8382352941176471
+      },
+      {
+        "epoch": 5,
+        "train_loss": 0.6636558714367095,
+        "eval_loss": 0.6606935473049388,
+        "macro_f1": 0.8603458211113714,
+        "accuracy": 0.8529411764705882
+      },
+      {
+        "epoch": 6,
+        "train_loss": 0.3353549887736638,
+        "eval_loss": 0.5090060374316048,
+        "macro_f1": 0.9098039215686274,
+        "accuracy": 0.9117647058823529
+      },
+      {
+        "epoch": 7,
+        "train_loss": 0.1636539882137662,
+        "eval_loss": 0.4101661163217881,
+        "macro_f1": 0.8728098550291062,
+        "accuracy": 0.8676470588235294
+      },
+      {
+        "epoch": 8,
+        "train_loss": 0.08071525785185042,
+        "eval_loss": 0.4263439599205466,
+        "macro_f1": 0.885345047109753,
+        "accuracy": 0.8823529411764706
+      },
+      {
+        "epoch": 9,
+        "train_loss": 0.04541800100178946,
+        "eval_loss": 0.4273020484868218,
+        "macro_f1": 0.8883879044306852,
+        "accuracy": 0.8823529411764706
+      },
+      {
+        "epoch": 10,
+        "train_loss": 0.030159057162347295,
+        "eval_loss": 0.45662257951848645,
+        "macro_f1": 0.8864045936238448,
+        "accuracy": 0.8823529411764706
+      },
+      {
+        "epoch": 11,
+        "train_loss": 0.022197940342483066,
+        "eval_loss": 0.3762129843235016,
+        "macro_f1": 0.9030712602905117,
+        "accuracy": 0.8970588235294118
+      },
+      {
+        "epoch": 12,
+        "train_loss": 0.017082309084279195,
+        "eval_loss": 0.39690809565431934,
+        "macro_f1": 0.8864045936238448,
+        "accuracy": 0.8823529411764706
+      },
+      {
+        "epoch": 13,
+        "train_loss": 0.015858297945842856,
+        "eval_loss": 0.4350948246086345,
+        "macro_f1": 0.8989165914299604,
+        "accuracy": 0.8970588235294118
+      },
+      {
+        "epoch": 14,
+        "train_loss": 0.013797573257415067,
+        "eval_loss": 0.4434237935963799,
+        "macro_f1": 0.8734175806368321,
+        "accuracy": 0.8676470588235294
+      }
+    ],
+    "wall_clock_s": 89.21820370000205,
+    "peak_vram_mb": 5376.43798828125,
+    "gpu_exclusive": true,
+    "gpu_foreign_seen": [],
+    "nan_detected": false,
+    "fingerprint": "2eb4ee2a99c9be6ea568bb2d69b58fad5e759d9e80fcc500001a211f753019b9",
+    "gpu_lock_waited_s": 0.3,
+    "wandb_url": "https://wandb.ai/gauravgandhi429-gaurav-gandhi/intent-router/runs/grzvlln7",
+    "run_total_s": 103.46273740001197
+  }
+}

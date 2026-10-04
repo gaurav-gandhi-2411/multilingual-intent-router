@@ -1,0 +1,375 @@
+{
+  "git_sha": "06d5d205f472afe80c4950c3356a7d7d4e2c8771-dirty",
+  "smoke": false,
+  "fold_models": null,
+  "idswap": {
+    "results": [
+      {
+        "source": "test",
+        "swap": "PO->LD",
+        "n": 4,
+        "n_flips": 0,
+        "flip_rate": 0.0,
+        "accuracy_clean": 0.75,
+        "accuracy_swapped": 0.75,
+        "flipped_ids": []
+      },
+      {
+        "source": "test",
+        "swap": "PO->REF",
+        "n": 4,
+        "n_flips": 0,
+        "flip_rate": 0.0,
+        "accuracy_clean": 0.75,
+        "accuracy_swapped": 0.75,
+        "flipped_ids": []
+      },
+      {
+        "source": "test",
+        "swap": "LD->PO",
+        "n": 6,
+        "n_flips": 0,
+        "flip_rate": 0.0,
+        "accuracy_clean": 1.0,
+        "accuracy_swapped": 1.0,
+        "flipped_ids": []
+      },
+      {
+        "source": "test",
+        "swap": "LD->REF",
+        "n": 6,
+        "n_flips": 0,
+        "flip_rate": 0.0,
+        "accuracy_clean": 1.0,
+        "accuracy_swapped": 1.0,
+        "flipped_ids": []
+      },
+      {
+        "source": "test",
+        "swap": "other->REF",
+        "n": 5,
+        "n_flips": 0,
+        "flip_rate": 0.0,
+        "accuracy_clean": 0.8,
+        "accuracy_swapped": 0.8,
+        "flipped_ids": []
+      }
+    ],
+    "note": "rows containing the source ID; flip = prediction differs from the same model's clean prediction; no texts stored",
+    "provenance": {
+      "git_sha": "06d5d205f472afe80c4950c3356a7d7d4e2c8771-dirty",
+      "final_model_fingerprint": "78df88429cbbf26b9ad8c303fb083ac379bf3a59f1c163c25a04d355ff8d252e",
+      "fold_models_dir": "outputs\\phase4e\\final_v3\\fold_models",
+      "smoke": false
+    }
+  },
+  "translate": {
+    "results": [
+      {
+        "source": "test",
+        "lang": "es",
+        "data_label": "machine-translated (synthetic)",
+        "n": 60,
+        "agreement_with_english_pred": 0.8833333333333333,
+        "accuracy": 0.8333333333333334,
+        "macro_f1_gold_classes": 0.8434408184408184,
+        "english_accuracy_same_rows": 0.95,
+        "english_macro_f1_same_rows": 0.9536065786065785
+      },
+      {
+        "source": "test",
+        "lang": "fr",
+        "data_label": "machine-translated (synthetic)",
+        "n": 60,
+        "agreement_with_english_pred": 0.8833333333333333,
+        "accuracy": 0.9,
+        "macro_f1_gold_classes": 0.8986823361823362,
+        "english_accuracy_same_rows": 0.95,
+        "english_macro_f1_same_rows": 0.9536065786065785
+      },
+      {
+        "source": "test",
+        "lang": "de",
+        "data_label": "machine-translated (synthetic)",
+        "n": 60,
+        "agreement_with_english_pred": 0.85,
+        "accuracy": 0.8166666666666667,
+        "macro_f1_gold_classes": 0.8160237910237912,
+        "english_accuracy_same_rows": 0.95,
+        "english_macro_f1_same_rows": 0.9536065786065785
+      },
+      {
+        "source": "test",
+        "lang": "zh",
+        "data_label": "machine-translated (synthetic)",
+        "n": 60,
+        "agreement_with_english_pred": 0.7833333333333333,
+        "accuracy": 0.75,
+        "macro_f1_gold_classes": 0.7457315832315832,
+        "english_accuracy_same_rows": 0.95,
+        "english_macro_f1_same_rows": 0.9536065786065785
+      }
+    ],
+    "data_label": "machine-translated (synthetic)",
+    "translator": "facebook/nllb-200-distilled-600M",
+    "decoding": {
+      "num_beams": 1,
+      "max_new_tokens": 128
+    },
+    "include_oof": false,
+    "timings": {},
+    "provenance": {
+      "git_sha": "06d5d205f472afe80c4950c3356a7d7d4e2c8771-dirty",
+      "final_model_fingerprint": "78df88429cbbf26b9ad8c303fb083ac379bf3a59f1c163c25a04d355ff8d252e",
+      "fold_models_dir": "outputs\\phase4e\\final_v3\\fold_models",
+      "smoke": false
+    }
+  },
+  "noise": {
+    "results": [
+      {
+        "source": "test",
+        "perturbation": "char_swap_5",
+        "n": 74,
+        "frac_text_changed": 0.972972972972973,
+        "accuracy_clean": 0.9594594594594594,
+        "accuracy_perturbed": 0.8918918918918919,
+        "macro_f1_clean": 0.960812879930527,
+        "macro_f1_perturbed": 0.8973988973988974,
+        "flip_rate": 0.10810810810810811,
+        "accuracy_drop": {
+          "point": 0.06756756756756754,
+          "lo": 0.0,
+          "hi": 0.1351351351351352
+        },
+        "macro_f1_drop": {
+          "point": 0.06341398253162955,
+          "lo": -0.002344965706807999,
+          "hi": 0.14813226805873866
+        }
+      },
+      {
+        "source": "test",
+        "perturbation": "char_drop_5",
+        "n": 74,
+        "frac_text_changed": 0.9864864864864865,
+        "accuracy_clean": 0.9594594594594594,
+        "accuracy_perturbed": 0.9054054054054054,
+        "macro_f1_clean": 0.960812879930527,
+        "macro_f1_perturbed": 0.8997946497946497,
+        "flip_rate": 0.08108108108108109,
+        "accuracy_drop": {
+          "point": 0.05405405405405406,
+          "lo": 0.013513513513513487,
+          "hi": 0.10810810810810811
+        },
+        "macro_f1_drop": {
+          "point": 0.06101823013587726,
+          "lo": 0.006718975468975593,
+          "hi": 0.14511680433202215
+        }
+      },
+      {
+        "source": "test",
+        "perturbation": "char_insert_5",
+        "n": 74,
+        "frac_text_changed": 0.9864864864864865,
+        "accuracy_clean": 0.9594594594594594,
+        "accuracy_perturbed": 0.9054054054054054,
+        "macro_f1_clean": 0.960812879930527,
+        "macro_f1_perturbed": 0.9077764827764826,
+        "flip_rate": 0.0945945945945946,
+        "accuracy_drop": {
+          "point": 0.05405405405405406,
+          "lo": 0.0,
+          "hi": 0.1216216216216216
+        },
+        "macro_f1_drop": {
+          "point": 0.0530363971540444,
+          "lo": -0.01034690090611142,
+          "hi": 0.1337503045808966
+        }
+      },
+      {
+        "source": "test",
+        "perturbation": "char_mixed_5",
+        "n": 74,
+        "frac_text_changed": 0.972972972972973,
+        "accuracy_clean": 0.9594594594594594,
+        "accuracy_perturbed": 0.9324324324324325,
+        "macro_f1_clean": 0.960812879930527,
+        "macro_f1_perturbed": 0.9293091168091169,
+        "flip_rate": 0.04054054054054054,
+        "accuracy_drop": {
+          "point": 0.027027027027026973,
+          "lo": 0.0,
+          "hi": 0.06756756756756754
+        },
+        "macro_f1_drop": {
+          "point": 0.03150376312141012,
+          "lo": -0.0031153388562275715,
+          "hi": 0.09484726256930207
+        }
+      },
+      {
+        "source": "test",
+        "perturbation": "char_swap_10",
+        "n": 74,
+        "frac_text_changed": 0.9864864864864865,
+        "accuracy_clean": 0.9594594594594594,
+        "accuracy_perturbed": 0.9054054054054054,
+        "macro_f1_clean": 0.960812879930527,
+        "macro_f1_perturbed": 0.9082086214439156,
+        "flip_rate": 0.08108108108108109,
+        "accuracy_drop": {
+          "point": 0.05405405405405406,
+          "lo": 0.0,
+          "hi": 0.1216216216216216
+        },
+        "macro_f1_drop": {
+          "point": 0.05260425848661143,
+          "lo": -0.009740860990861286,
+          "hi": 0.13102741480619784
+        }
+      },
+      {
+        "source": "test",
+        "perturbation": "char_drop_10",
+        "n": 74,
+        "frac_text_changed": 0.9864864864864865,
+        "accuracy_clean": 0.9594594594594594,
+        "accuracy_perturbed": 0.8513513513513513,
+        "macro_f1_clean": 0.960812879930527,
+        "macro_f1_perturbed": 0.8471516909016911,
+        "flip_rate": 0.17567567567567569,
+        "accuracy_drop": {
+          "point": 0.10810810810810811,
+          "lo": 0.027027027027026973,
+          "hi": 0.20270270270270274
+        },
+        "macro_f1_drop": {
+          "point": 0.11366118902883593,
+          "lo": 0.026535043870391385,
+          "hi": 0.23095990984777745
+        }
+      },
+      {
+        "source": "test",
+        "perturbation": "char_insert_10",
+        "n": 74,
+        "frac_text_changed": 0.9864864864864865,
+        "accuracy_clean": 0.9594594594594594,
+        "accuracy_perturbed": 0.8648648648648649,
+        "macro_f1_clean": 0.960812879930527,
+        "macro_f1_perturbed": 0.8744440866151391,
+        "flip_rate": 0.10810810810810811,
+        "accuracy_drop": {
+          "point": 0.09459459459459452,
+          "lo": 0.04054054054054046,
+          "hi": 0.16216216216216217
+        },
+        "macro_f1_drop": {
+          "point": 0.08636879331538794,
+          "lo": 0.03152148233030569,
+          "hi": 0.1691751859997827
+        }
+      },
+      {
+        "source": "test",
+        "perturbation": "char_mixed_10",
+        "n": 74,
+        "frac_text_changed": 0.9864864864864865,
+        "accuracy_clean": 0.9594594594594594,
+        "accuracy_perturbed": 0.8108108108108109,
+        "macro_f1_clean": 0.960812879930527,
+        "macro_f1_perturbed": 0.8076023635234161,
+        "flip_rate": 0.20270270270270271,
+        "accuracy_drop": {
+          "point": 0.14864864864864857,
+          "lo": 0.06756756756756754,
+          "hi": 0.2432432432432432
+        },
+        "macro_f1_drop": {
+          "point": 0.15321051640711092,
+          "lo": 0.0670632746309993,
+          "hi": 0.2721413540163541
+        }
+      },
+      {
+        "source": "test",
+        "perturbation": "lowercase",
+        "n": 74,
+        "frac_text_changed": 0.6756756756756757,
+        "accuracy_clean": 0.9594594594594594,
+        "accuracy_perturbed": 0.9594594594594594,
+        "macro_f1_clean": 0.960812879930527,
+        "macro_f1_perturbed": 0.960812879930527,
+        "flip_rate": 0.0,
+        "accuracy_drop": {
+          "point": 0.0,
+          "lo": 0.0,
+          "hi": 0.0
+        },
+        "macro_f1_drop": {
+          "point": 0.0,
+          "lo": 0.0,
+          "hi": 0.0
+        }
+      },
+      {
+        "source": "test",
+        "perturbation": "abbrev",
+        "n": 74,
+        "frac_text_changed": 0.21621621621621623,
+        "accuracy_clean": 0.9594594594594594,
+        "accuracy_perturbed": 0.9594594594594594,
+        "macro_f1_clean": 0.960812879930527,
+        "macro_f1_perturbed": 0.960812879930527,
+        "flip_rate": 0.0,
+        "accuracy_drop": {
+          "point": 0.0,
+          "lo": 0.0,
+          "hi": 0.0
+        },
+        "macro_f1_drop": {
+          "point": 0.0,
+          "lo": 0.0,
+          "hi": 0.0
+        }
+      }
+    ],
+    "bootstrap": {
+      "n_resamples": 10000,
+      "seed": 42,
+      "paired": true
+    },
+    "seed": 42,
+    "abbreviations": {
+      "what is": "whats",
+      "please": "pls",
+      "thanks": "thx",
+      "thank you": "thx",
+      "you": "u",
+      "your": "ur",
+      "hours": "hrs",
+      "tomorrow": "tmrw",
+      "shipment": "shpmt",
+      "appointment": "appt",
+      "information": "info",
+      "number": "no.",
+      "message": "msg",
+      "because": "bc",
+      "between": "btwn",
+      "delivery": "dlvry",
+      "schedule": "sched",
+      "with": "w/",
+      "without": "w/o"
+    },
+    "provenance": {
+      "git_sha": "06d5d205f472afe80c4950c3356a7d7d4e2c8771-dirty",
+      "final_model_fingerprint": "78df88429cbbf26b9ad8c303fb083ac379bf3a59f1c163c25a04d355ff8d252e",
+      "fold_models_dir": "outputs\\phase4e\\final_v3\\fold_models",
+      "smoke": false
+    }
+  }
+}

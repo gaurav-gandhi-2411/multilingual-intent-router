@@ -1,0 +1,142 @@
+{
+  "label": "headline holdout set (Phase 3), LLM baseline",
+  "smoke": false,
+  "git_sha": "39b342ad568094ee4fb13b3fb435b6d046c492d9-dirty",
+  "holdout": [
+    "yard_management",
+    "document_processing"
+  ],
+  "labels_offered": [
+    "ai_agent_performance",
+    "appointment_manager",
+    "chitchat",
+    "customer_support",
+    "knowledge_base",
+    "orders",
+    "other",
+    "shipment_information.analytics",
+    "shipment_information.disruptions",
+    "shipment_information.realtime_query",
+    "unknown"
+  ],
+  "n_known": 62,
+  "n_unknown": 80,
+  "n_test_rows_logged": 74,
+  "n_non_test_rows": 68,
+  "fewshot_ids": {
+    "zero": [],
+    "five": [
+      "syn-0102",
+      "syn-0336",
+      "syn-0054",
+      "syn-0450",
+      "syn-0075"
+    ]
+  },
+  "metrics": {
+    "qwen3|zero": {
+      "n_known": 62,
+      "n_unknown": 80,
+      "strict_rejection_recall": 0.0,
+      "retention_known": 0.9838709677419355,
+      "n_known_accepted": 61,
+      "parse_failures_known": 0,
+      "parse_failures_unknown": 0,
+      "known_accepted_macro_f1_present": 0.685958485958486,
+      "known_accepted_accuracy": 0.7213114754098361
+    },
+    "qwen3|five": {
+      "n_known": 62,
+      "n_unknown": 80,
+      "strict_rejection_recall": 0.0,
+      "retention_known": 1.0,
+      "n_known_accepted": 62,
+      "parse_failures_known": 0,
+      "parse_failures_unknown": 0,
+      "known_accepted_macro_f1_present": 0.7599067599067599,
+      "known_accepted_accuracy": 0.7741935483870968
+    },
+    "llama3|zero": {
+      "n_known": 62,
+      "n_unknown": 80,
+      "strict_rejection_recall": 0.0,
+      "retention_known": 1.0,
+      "n_known_accepted": 62,
+      "parse_failures_known": 0,
+      "parse_failures_unknown": 0,
+      "known_accepted_macro_f1_present": 0.6119014319014319,
+      "known_accepted_accuracy": 0.6774193548387096
+    },
+    "llama3|five": {
+      "n_known": 62,
+      "n_unknown": 80,
+      "strict_rejection_recall": 0.0125,
+      "retention_known": 1.0,
+      "n_known_accepted": 62,
+      "parse_failures_known": 0,
+      "parse_failures_unknown": 0,
+      "known_accepted_macro_f1_present": 0.7143288850961486,
+      "known_accepted_accuracy": 0.7580645161290323
+    }
+  },
+  "timing": {
+    "qwen3|zero": {
+      "load_s": 5.19,
+      "model_tag": "qwen3:8b",
+      "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+      "n": 142,
+      "p50_s": 0.18795,
+      "p95_s": 0.22731999999999997,
+      "mean_s": 0.1878154929577465,
+      "throughput_msg_per_s": 5.3243743860096435
+    },
+    "qwen3|five": {
+      "load_s": 0.15,
+      "model_tag": "qwen3:8b",
+      "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+      "n": 142,
+      "p50_s": 0.18280000000000002,
+      "p95_s": 0.23129499999999997,
+      "mean_s": 0.1868338028169014,
+      "throughput_msg_per_s": 5.352350511111781
+    },
+    "llama3|zero": {
+      "load_s": 6.53,
+      "model_tag": "llama3.1:8b",
+      "model_digest": "46e0c10c039e019119339687c3c1757cc81b9da49709a3b3924863ba87ca666e",
+      "n": 142,
+      "p50_s": 0.17465,
+      "p95_s": 0.2336449999999998,
+      "mean_s": 0.17809647887323943,
+      "throughput_msg_per_s": 5.6149341431491875
+    },
+    "llama3|five": {
+      "load_s": 0.13,
+      "model_tag": "llama3.1:8b",
+      "model_digest": "46e0c10c039e019119339687c3c1757cc81b9da49709a3b3924863ba87ca666e",
+      "n": 142,
+      "p50_s": 0.1762,
+      "p95_s": 0.23314999999999986,
+      "mean_s": 0.1808492957746479,
+      "throughput_msg_per_s": 5.529465822449631
+    }
+  },
+  "gpu_lock": {
+    "waited_s": 2.0,
+    "ollama_processes_whitelisted": [],
+    "snapshot_before": {
+      "time": "2026-10-02T15:16:46+05:30",
+      "processes": [],
+      "foreign": [],
+      "memory": "0 MiB, 8192 MiB, 0 %",
+      "error": null
+    },
+    "snapshot_after": {
+      "time": "2026-10-02T15:18:44+05:30",
+      "processes": [],
+      "foreign": [],
+      "memory": "0 MiB, 8192 MiB, 0 %",
+      "error": null
+    }
+  }
+}

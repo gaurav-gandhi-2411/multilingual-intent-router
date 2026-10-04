@@ -1,0 +1,15 @@
+{
+  "scorer": "maha_ft",
+  "thr_rule": "global",
+  "mode": "neutral",
+  "per_retention": {
+    "95": {
+      "global": -62.80390118505368
+    },
+    "90": {
+      "global": -59.635457620582194
+    }
+  },
+  "weights": "i3u",
+  "run_id": "i3u_loco_orders_s2"
+}

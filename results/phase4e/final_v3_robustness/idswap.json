@@ -1,0 +1,61 @@
+{
+  "results": [
+    {
+      "source": "test",
+      "swap": "PO->LD",
+      "n": 4,
+      "n_flips": 0,
+      "flip_rate": 0.0,
+      "accuracy_clean": 0.75,
+      "accuracy_swapped": 0.75,
+      "flipped_ids": []
+    },
+    {
+      "source": "test",
+      "swap": "PO->REF",
+      "n": 4,
+      "n_flips": 0,
+      "flip_rate": 0.0,
+      "accuracy_clean": 0.75,
+      "accuracy_swapped": 0.75,
+      "flipped_ids": []
+    },
+    {
+      "source": "test",
+      "swap": "LD->PO",
+      "n": 6,
+      "n_flips": 0,
+      "flip_rate": 0.0,
+      "accuracy_clean": 1.0,
+      "accuracy_swapped": 1.0,
+      "flipped_ids": []
+    },
+    {
+      "source": "test",
+      "swap": "LD->REF",
+      "n": 6,
+      "n_flips": 0,
+      "flip_rate": 0.0,
+      "accuracy_clean": 1.0,
+      "accuracy_swapped": 1.0,
+      "flipped_ids": []
+    },
+    {
+      "source": "test",
+      "swap": "other->REF",
+      "n": 5,
+      "n_flips": 0,
+      "flip_rate": 0.0,
+      "accuracy_clean": 0.8,
+      "accuracy_swapped": 0.8,
+      "flipped_ids": []
+    }
+  ],
+  "note": "rows containing the source ID; flip = prediction differs from the same model's clean prediction; no texts stored",
+  "provenance": {
+    "git_sha": "06d5d205f472afe80c4950c3356a7d7d4e2c8771-dirty",
+    "final_model_fingerprint": "78df88429cbbf26b9ad8c303fb083ac379bf3a59f1c163c25a04d355ff8d252e",
+    "fold_models_dir": "outputs\\phase4e\\final_v3\\fold_models",
+    "smoke": false
+  }
+}

@@ -1,0 +1,184 @@
+{
+  "run_id": "v1_headline_f075_s42",
+  "recipe": "v1",
+  "kind": "headline",
+  "holdout": [
+    "document_processing",
+    "yard_management"
+  ],
+  "seed": 42,
+  "train_fraction": 0.75,
+  "stop_epoch": 9,
+  "labels": [
+    "ai_agent_performance",
+    "appointment_manager",
+    "chitchat",
+    "customer_support",
+    "knowledge_base",
+    "orders",
+    "other",
+    "shipment_information.analytics",
+    "shipment_information.disruptions",
+    "shipment_information.realtime_query"
+  ],
+  "extras": {
+    "factors": []
+  },
+  "n_train": 226,
+  "n_cal": 62,
+  "audit": {
+    "holdout": [
+      "document_processing",
+      "yard_management"
+    ],
+    "n_labels": 10,
+    "n_train": 296,
+    "n_cal": 62,
+    "n_eval_known": 62,
+    "n_eval_unknown": 80,
+    "assertions": {
+      "no_heldout_rows_in_train": true,
+      "no_heldout_rows_in_cal": true,
+      "no_heldout_rows_in_eval_known": true,
+      "eval_unknown_only_heldout": true,
+      "eval_unknown_has_every_heldout_row": true,
+      "label_space_is_remaining_classes": true,
+      "every_remaining_class_in_train": true,
+      "train_cal_disjoint": true,
+      "train_eval_known_disjoint": true,
+      "train_unknown_disjoint": true,
+      "cal_unknown_disjoint": true,
+      "no_test_rows_in_train_or_cal": true,
+      "eval_known_is_test_split_only": true,
+      "cal_is_val_split_only": true
+    },
+    "ids_sha256": {
+      "train": "24cdf96a8a2272ff4da8c69454854d7555e5be59bee204078923ced48e76ddd9",
+      "cal": "ee9431124dbb03b25c2e8f0ac849bcdeabd811d67036ed9a3e6a5cd57ea4462f",
+      "eval_known": "1bcd912fd9b128b44a1fe6f62d936163f83410699293c24f9e0571b126e605c4",
+      "eval_unknown": "18aaa2dbc73bc74a92c37574259e14338bdab30c98df7234b4fd9160f17a0d01"
+    },
+    "smoke": false
+  },
+  "smoke": false,
+  "git_sha": "4536308e25696d84e01dd26bffcdac8d8f0dbdbc-dirty",
+  "call_type": "phase6a_diag",
+  "training": {
+    "config": {
+      "model_name": "intfloat/multilingual-e5-base",
+      "lr": 3e-05,
+      "epochs": 20,
+      "batch_size": 16,
+      "warmup_ratio": 0.1,
+      "weight_decay": 0.01,
+      "max_len": 64,
+      "precision": "fp16",
+      "model_seed": 42,
+      "class_weighted": false,
+      "label_smoothing": 0.0,
+      "layer_decay": null,
+      "entity_masking": false,
+      "hier_aux": false,
+      "hier_lambda": 0.5,
+      "max_grad_norm": 1.0,
+      "attn_implementation": "eager",
+      "stop_epoch": 9,
+      "supcon_lambda": null,
+      "supcon_temperature": 0.1,
+      "grad_accum": 1,
+      "id_randomize_p": 0.0,
+      "oe_lambda": 0.0,
+      "oe_batch_size": 16,
+      "wandb_project": "intent-router",
+      "wandb_group": "phase4e-v1",
+      "model_short": "e5"
+    },
+    "epochs": [
+      {
+        "epoch": 1,
+        "train_loss": 2.313514312108358,
+        "eval_loss": 2.267175489856351,
+        "macro_f1": 0.08541809068124857,
+        "accuracy": 0.1935483870967742
+      },
+      {
+        "epoch": 2,
+        "train_loss": 2.1944584767023723,
+        "eval_loss": 2.093730772695234,
+        "macro_f1": 0.08910256410256409,
+        "accuracy": 0.20967741935483872
+      },
+      {
+        "epoch": 3,
+        "train_loss": 1.8851061979929606,
+        "eval_loss": 1.785133792508033,
+        "macro_f1": 0.546423902894491,
+        "accuracy": 0.5645161290322581
+      },
+      {
+        "epoch": 4,
+        "train_loss": 1.4179094076156615,
+        "eval_loss": 1.324720013526178,
+        "macro_f1": 0.7627622377622378,
+        "accuracy": 0.7580645161290323
+      },
+      {
+        "epoch": 5,
+        "train_loss": 0.9229520003000895,
+        "eval_loss": 0.9456670053543583,
+        "macro_f1": 0.7849999999999999,
+        "accuracy": 0.7903225806451613
+      },
+      {
+        "epoch": 6,
+        "train_loss": 0.533962212006251,
+        "eval_loss": 0.7689107464205834,
+        "macro_f1": 0.7722619047619048,
+        "accuracy": 0.7741935483870968
+      },
+      {
+        "epoch": 7,
+        "train_loss": 0.30635620454947154,
+        "eval_loss": 0.5443396414479902,
+        "macro_f1": 0.8717424242424242,
+        "accuracy": 0.8709677419354839
+      },
+      {
+        "epoch": 8,
+        "train_loss": 0.15750332276026408,
+        "eval_loss": 0.42884616697988204,
+        "macro_f1": 0.9058387037798804,
+        "accuracy": 0.9032258064516129
+      },
+      {
+        "epoch": 9,
+        "train_loss": 0.08413347179690997,
+        "eval_loss": 0.3937531594307192,
+        "macro_f1": 0.9014156268568033,
+        "accuracy": 0.9032258064516129
+      }
+    ],
+    "wall_clock_s": 37.96666059999552,
+    "load_s": 7.448939399997471,
+    "peak_vram_mb": 5377.52099609375,
+    "gpu_exclusive": false,
+    "gpu_foreign_seen": [
+      {
+        "pid": 10380,
+        "process_name": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+        "used_memory_mb": null,
+        "epoch": 9
+      },
+      {
+        "pid": 10380,
+        "process_name": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+        "used_memory_mb": null,
+        "epoch": "end"
+      }
+    ],
+    "nan_detected": false,
+    "fingerprint": "304310ee3a7cffed8422c79a55c91692d5be53b957e03f7bd2286411dc3c8d1d",
+    "gpu_lock_waited_s": 0.3,
+    "run_total_s": 51.43787550000707
+  }
+}

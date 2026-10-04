@@ -1,0 +1,104 @@
+{
+  "stage": "latency",
+  "contended": true,
+  "split": "test",
+  "n_rows": 74,
+  "ids_sha256": "fba7f6464dd5f7c98d067f73dc07304c5c0ba2866f75bddaddab4c9fe4c66c29",
+  "model_fingerprint": "78df88429cbbf26b9ad8c303fb083ac379bf3a59f1c163c25a04d355ff8d252e",
+  "model_version": "v3",
+  "ood_threshold": -178.56018886545607,
+  "temperature": 1.2747115980216495,
+  "environment": {
+    "torch": "2.11.0+cpu",
+    "onnxruntime": "1.30.0",
+    "transformers": "5.18.0",
+    "numpy": "2.5.3",
+    "python": "3.12.12",
+    "cpu_model": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+    "os_cpu_count": 16,
+    "torch_default_threads": 8,
+    "platform": "Windows-11-10.0.26300-SP0"
+  },
+  "sizes_bytes": {
+    "torch_safetensors": 1112235768,
+    "onnx_fp32": 1112438669,
+    "onnx_int8": 279258677
+  },
+  "settings": {
+    "warmup": 10,
+    "repeats": 3,
+    "threads": [
+      1,
+      8
+    ],
+    "quality_batch": 16,
+    "backends": [
+      "torch",
+      "onnx_fp32",
+      "onnx_int8"
+    ]
+  },
+  "note": "measured while the CPU was shared with a training job: NOT final",
+  "latency": {
+    "torch": {
+      "threads_1": {
+        "threads": 1,
+        "n_calls": 222,
+        "p50_ms": 252.74485000045388,
+        "p95_ms": 328.5713199984457,
+        "mean_ms": 254.90778333328268,
+        "min_ms": 137.23700000264216,
+        "max_ms": 476.23939999903087
+      },
+      "threads_8": {
+        "threads": 8,
+        "n_calls": 222,
+        "p50_ms": 157.78140000111307,
+        "p95_ms": 293.09662499981636,
+        "mean_ms": 178.92884459446955,
+        "min_ms": 79.04479999706382,
+        "max_ms": 930.8602999954019
+      }
+    },
+    "onnx_fp32": {
+      "threads_1": {
+        "threads": 1,
+        "n_calls": 222,
+        "p50_ms": 138.3764499987592,
+        "p95_ms": 185.30910500048776,
+        "mean_ms": 140.6861454959178,
+        "min_ms": 62.14950000139652,
+        "max_ms": 237.6996999955736
+      },
+      "threads_8": {
+        "threads": 8,
+        "n_calls": 222,
+        "p50_ms": 73.56720000097994,
+        "p95_ms": 112.28694500059646,
+        "mean_ms": 76.90910360366074,
+        "min_ms": 38.97780000261264,
+        "max_ms": 169.39380000258097
+      }
+    },
+    "onnx_int8": {
+      "threads_1": {
+        "threads": 1,
+        "n_calls": 222,
+        "p50_ms": 88.58134999900358,
+        "p95_ms": 119.31391500365862,
+        "mean_ms": 89.25177612623015,
+        "min_ms": 39.146099996287376,
+        "max_ms": 135.5665000010049
+      },
+      "threads_8": {
+        "threads": 8,
+        "n_calls": 222,
+        "p50_ms": 51.83050000050571,
+        "p95_ms": 67.95180500193965,
+        "mean_ms": 51.65549684701349,
+        "min_ms": 25.441400001000147,
+        "max_ms": 77.07430000300519
+      }
+    }
+  }
+}

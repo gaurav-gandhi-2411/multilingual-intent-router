@@ -1,0 +1,46 @@
+{
+  "version": "v3",
+  "factors": [
+    "a1",
+    "a3"
+  ],
+  "deployed_epoch": 6,
+  "train_config": {
+    "model_name": "intfloat/multilingual-e5-base",
+    "query_prefix": "query: ",
+    "lr": 3e-05,
+    "weight_decay": 0.01,
+    "warmup_ratio": 0.1,
+    "batch_size": 16,
+    "precision": "fp16",
+    "max_len": 64,
+    "epochs": 20,
+    "stop_epoch": 6,
+    "model_seed": 42,
+    "attn_implementation": "eager",
+    "label_smoothing": 0.0,
+    "class_weighted": false,
+    "id_randomize_p": 0.5
+  },
+  "extras": {
+    "factors": [
+      "a1",
+      "a3"
+    ],
+    "a3": {
+      "n_rows": 704,
+      "n_excluded_not_train": 148
+    }
+  },
+  "model_fingerprint": "78df88429cbbf26b9ad8c303fb083ac379bf3a59f1c163c25a04d355ff8d252e",
+  "model_dir": "outputs\\final_model_v3",
+  "shipped_ood_score": "maha_ft",
+  "archived_v1": "results/final_v1",
+  "archived_v2": "results/final_v2",
+  "selection": "results/phase4e/selection.json",
+  "selection_sensitivity_flagged": true,
+  "selection_note": "selected by the pre-registered rule with v1 at its shipped epoch 9; against v1 at its own argmax epoch the margin on axis (a) is outside -0.010 (see selection.json sensitivity_v1_at_own_argmax); the decision is not robust to that choice",
+  "git_sha": "06d5d205f472afe80c4950c3356a7d7d4e2c8771-dirty",
+  "smoke": false,
+  "status": "robustness variant, not shipped (the author's decision 2026-10-03)"
+}

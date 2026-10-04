@@ -1,0 +1,768 @@
+{
+  "smoke": false,
+  "n_runs": 16,
+  "all_assertions_passed": true,
+  "all_test_logs_exactly_one": true,
+  "test_inference_log": "results\\trackb\\test_inference_log.jsonl",
+  "frozen_features_note": "frozen e5 features of all 500 rows (incl. test) are computed once by a fixed pretrained encoder; nothing is fitted on them except from train-known rows",
+  "runs": [
+    {
+      "run_id": "headline_s42",
+      "holdout": [
+        "document_processing",
+        "yard_management"
+      ],
+      "seed": 42,
+      "n_train": 296,
+      "n_cal": 62,
+      "n_eval_known": 62,
+      "n_eval_unknown": 80,
+      "assertions": {
+        "no_heldout_rows_in_train": true,
+        "no_heldout_rows_in_cal": true,
+        "no_heldout_rows_in_eval_known": true,
+        "eval_unknown_only_heldout": true,
+        "eval_unknown_has_every_heldout_row": true,
+        "label_space_is_remaining_classes": true,
+        "every_remaining_class_in_train": true,
+        "train_cal_disjoint": true,
+        "train_eval_known_disjoint": true,
+        "train_unknown_disjoint": true,
+        "cal_unknown_disjoint": true,
+        "no_test_rows_in_train_or_cal": true,
+        "eval_known_is_test_split_only": true,
+        "cal_is_val_split_only": true
+      },
+      "all_assertions_passed": true,
+      "ids_sha256": {
+        "train": "24cdf96a8a2272ff4da8c69454854d7555e5be59bee204078923ced48e76ddd9",
+        "cal": "ee9431124dbb03b25c2e8f0ac849bcdeabd811d67036ed9a3e6a5cd57ea4462f",
+        "eval_known": "1bcd912fd9b128b44a1fe6f62d936163f83410699293c24f9e0571b126e605c4",
+        "eval_unknown": "18aaa2dbc73bc74a92c37574259e14338bdab30c98df7234b4fd9160f17a0d01"
+      },
+      "fit_sources": {
+        "model_weights": "train split minus held-out classes; per-epoch curves on the calibration rows; no epoch/checkpoint selection (stop_epoch fixed by the Phase 1 CV)",
+        "temperature": "calibration rows (val split minus held-out classes): NLL, LBFGS",
+        "threshold_per_method": "calibration rows (known only), 95% retention",
+        "mahalanobis_ft": "class means + Ledoit-Wolf covariance: train minus held-out, fine-tuned penultimate features",
+        "knn_ft_bank": "train minus held-out, fine-tuned penultimate features",
+        "mahalanobis_frozen": "class means + Ledoit-Wolf covariance: train minus held-out, frozen e5 features",
+        "knn_frozen_bank": "train minus held-out, frozen e5 features",
+        "knn_k": "fixed {1, 5}, reported, not tuned",
+        "design_note": "lr / stop_epoch / model were chosen in Phase 1 by 12-class CV on train+val rows, which includes the held-out classes as KNOWN classes; no unknown-class data is used by any fitted quantity of a Track B run, but those design choices pre-date the holdouts"
+      },
+      "test_inference_log_lines": 1,
+      "test_inference_log_ok": true
+    },
+    {
+      "run_id": "headline_s43",
+      "holdout": [
+        "document_processing",
+        "yard_management"
+      ],
+      "seed": 43,
+      "n_train": 296,
+      "n_cal": 62,
+      "n_eval_known": 62,
+      "n_eval_unknown": 80,
+      "assertions": {
+        "no_heldout_rows_in_train": true,
+        "no_heldout_rows_in_cal": true,
+        "no_heldout_rows_in_eval_known": true,
+        "eval_unknown_only_heldout": true,
+        "eval_unknown_has_every_heldout_row": true,
+        "label_space_is_remaining_classes": true,
+        "every_remaining_class_in_train": true,
+        "train_cal_disjoint": true,
+        "train_eval_known_disjoint": true,
+        "train_unknown_disjoint": true,
+        "cal_unknown_disjoint": true,
+        "no_test_rows_in_train_or_cal": true,
+        "eval_known_is_test_split_only": true,
+        "cal_is_val_split_only": true
+      },
+      "all_assertions_passed": true,
+      "ids_sha256": {
+        "train": "24cdf96a8a2272ff4da8c69454854d7555e5be59bee204078923ced48e76ddd9",
+        "cal": "ee9431124dbb03b25c2e8f0ac849bcdeabd811d67036ed9a3e6a5cd57ea4462f",
+        "eval_known": "1bcd912fd9b128b44a1fe6f62d936163f83410699293c24f9e0571b126e605c4",
+        "eval_unknown": "18aaa2dbc73bc74a92c37574259e14338bdab30c98df7234b4fd9160f17a0d01"
+      },
+      "fit_sources": {
+        "model_weights": "train split minus held-out classes; per-epoch curves on the calibration rows; no epoch/checkpoint selection (stop_epoch fixed by the Phase 1 CV)",
+        "temperature": "calibration rows (val split minus held-out classes): NLL, LBFGS",
+        "threshold_per_method": "calibration rows (known only), 95% retention",
+        "mahalanobis_ft": "class means + Ledoit-Wolf covariance: train minus held-out, fine-tuned penultimate features",
+        "knn_ft_bank": "train minus held-out, fine-tuned penultimate features",
+        "mahalanobis_frozen": "class means + Ledoit-Wolf covariance: train minus held-out, frozen e5 features",
+        "knn_frozen_bank": "train minus held-out, frozen e5 features",
+        "knn_k": "fixed {1, 5}, reported, not tuned",
+        "design_note": "lr / stop_epoch / model were chosen in Phase 1 by 12-class CV on train+val rows, which includes the held-out classes as KNOWN classes; no unknown-class data is used by any fitted quantity of a Track B run, but those design choices pre-date the holdouts"
+      },
+      "test_inference_log_lines": 1,
+      "test_inference_log_ok": true
+    },
+    {
+      "run_id": "headline_s44",
+      "holdout": [
+        "document_processing",
+        "yard_management"
+      ],
+      "seed": 44,
+      "n_train": 296,
+      "n_cal": 62,
+      "n_eval_known": 62,
+      "n_eval_unknown": 80,
+      "assertions": {
+        "no_heldout_rows_in_train": true,
+        "no_heldout_rows_in_cal": true,
+        "no_heldout_rows_in_eval_known": true,
+        "eval_unknown_only_heldout": true,
+        "eval_unknown_has_every_heldout_row": true,
+        "label_space_is_remaining_classes": true,
+        "every_remaining_class_in_train": true,
+        "train_cal_disjoint": true,
+        "train_eval_known_disjoint": true,
+        "train_unknown_disjoint": true,
+        "cal_unknown_disjoint": true,
+        "no_test_rows_in_train_or_cal": true,
+        "eval_known_is_test_split_only": true,
+        "cal_is_val_split_only": true
+      },
+      "all_assertions_passed": true,
+      "ids_sha256": {
+        "train": "24cdf96a8a2272ff4da8c69454854d7555e5be59bee204078923ced48e76ddd9",
+        "cal": "ee9431124dbb03b25c2e8f0ac849bcdeabd811d67036ed9a3e6a5cd57ea4462f",
+        "eval_known": "1bcd912fd9b128b44a1fe6f62d936163f83410699293c24f9e0571b126e605c4",
+        "eval_unknown": "18aaa2dbc73bc74a92c37574259e14338bdab30c98df7234b4fd9160f17a0d01"
+      },
+      "fit_sources": {
+        "model_weights": "train split minus held-out classes; per-epoch curves on the calibration rows; no epoch/checkpoint selection (stop_epoch fixed by the Phase 1 CV)",
+        "temperature": "calibration rows (val split minus held-out classes): NLL, LBFGS",
+        "threshold_per_method": "calibration rows (known only), 95% retention",
+        "mahalanobis_ft": "class means + Ledoit-Wolf covariance: train minus held-out, fine-tuned penultimate features",
+        "knn_ft_bank": "train minus held-out, fine-tuned penultimate features",
+        "mahalanobis_frozen": "class means + Ledoit-Wolf covariance: train minus held-out, frozen e5 features",
+        "knn_frozen_bank": "train minus held-out, frozen e5 features",
+        "knn_k": "fixed {1, 5}, reported, not tuned",
+        "design_note": "lr / stop_epoch / model were chosen in Phase 1 by 12-class CV on train+val rows, which includes the held-out classes as KNOWN classes; no unknown-class data is used by any fitted quantity of a Track B run, but those design choices pre-date the holdouts"
+      },
+      "test_inference_log_lines": 1,
+      "test_inference_log_ok": true
+    },
+    {
+      "run_id": "loco_ai_agent_performance_s42",
+      "holdout": [
+        "ai_agent_performance"
+      ],
+      "seed": 42,
+      "n_train": 324,
+      "n_cal": 68,
+      "n_eval_known": 68,
+      "n_eval_unknown": 40,
+      "assertions": {
+        "no_heldout_rows_in_train": true,
+        "no_heldout_rows_in_cal": true,
+        "no_heldout_rows_in_eval_known": true,
+        "eval_unknown_only_heldout": true,
+        "eval_unknown_has_every_heldout_row": true,
+        "label_space_is_remaining_classes": true,
+        "every_remaining_class_in_train": true,
+        "train_cal_disjoint": true,
+        "train_eval_known_disjoint": true,
+        "train_unknown_disjoint": true,
+        "cal_unknown_disjoint": true,
+        "no_test_rows_in_train_or_cal": true,
+        "eval_known_is_test_split_only": true,
+        "cal_is_val_split_only": true
+      },
+      "all_assertions_passed": true,
+      "ids_sha256": {
+        "train": "9552fcc7da6b1930ec6c45cfd235a6316f71cf24db8962772160ffd7e6d16b66",
+        "cal": "8d01a11b9338f7b39de9459eae36ec5aeefec6e5f819c66a755e7e8dadfae94a",
+        "eval_known": "7ca475ea8e574c6191d1d97da3361a1ab3c8d8b928158239277d3a0aa48f463a",
+        "eval_unknown": "4e2fc20052b0f8675c2819c8e05a32e59163b89ec480e634f25e00949fd058f2"
+      },
+      "fit_sources": {
+        "model_weights": "train split minus held-out classes; per-epoch curves on the calibration rows; no epoch/checkpoint selection (stop_epoch fixed by the Phase 1 CV)",
+        "temperature": "calibration rows (val split minus held-out classes): NLL, LBFGS",
+        "threshold_per_method": "calibration rows (known only), 95% retention",
+        "mahalanobis_ft": "class means + Ledoit-Wolf covariance: train minus held-out, fine-tuned penultimate features",
+        "knn_ft_bank": "train minus held-out, fine-tuned penultimate features",
+        "mahalanobis_frozen": "class means + Ledoit-Wolf covariance: train minus held-out, frozen e5 features",
+        "knn_frozen_bank": "train minus held-out, frozen e5 features",
+        "knn_k": "fixed {1, 5}, reported, not tuned",
+        "design_note": "lr / stop_epoch / model were chosen in Phase 1 by 12-class CV on train+val rows, which includes the held-out classes as KNOWN classes; no unknown-class data is used by any fitted quantity of a Track B run, but those design choices pre-date the holdouts"
+      },
+      "test_inference_log_lines": 1,
+      "test_inference_log_ok": true
+    },
+    {
+      "run_id": "loco_appointment_manager_s42",
+      "holdout": [
+        "appointment_manager"
+      ],
+      "seed": 42,
+      "n_train": 321,
+      "n_cal": 67,
+      "n_eval_known": 67,
+      "n_eval_unknown": 45,
+      "assertions": {
+        "no_heldout_rows_in_train": true,
+        "no_heldout_rows_in_cal": true,
+        "no_heldout_rows_in_eval_known": true,
+        "eval_unknown_only_heldout": true,
+        "eval_unknown_has_every_heldout_row": true,
+        "label_space_is_remaining_classes": true,
+        "every_remaining_class_in_train": true,
+        "train_cal_disjoint": true,
+        "train_eval_known_disjoint": true,
+        "train_unknown_disjoint": true,
+        "cal_unknown_disjoint": true,
+        "no_test_rows_in_train_or_cal": true,
+        "eval_known_is_test_split_only": true,
+        "cal_is_val_split_only": true
+      },
+      "all_assertions_passed": true,
+      "ids_sha256": {
+        "train": "999d8bc256b0de3f522088def0c1ce31a85311160a8fdb54a4316a17620c29ad",
+        "cal": "c81a2960e9a767f1ab83c85a349971aeeca27a45cf044d61f8e5c9f75917d77e",
+        "eval_known": "7a1d7477e5ab6815f6a648967ad41904e9c738c46a12d971d106c45e99f68253",
+        "eval_unknown": "1a490003bd10484c87bb61f8d2c9d8516734dc7b43c7f9c140bdc52a6d6caea1"
+      },
+      "fit_sources": {
+        "model_weights": "train split minus held-out classes; per-epoch curves on the calibration rows; no epoch/checkpoint selection (stop_epoch fixed by the Phase 1 CV)",
+        "temperature": "calibration rows (val split minus held-out classes): NLL, LBFGS",
+        "threshold_per_method": "calibration rows (known only), 95% retention",
+        "mahalanobis_ft": "class means + Ledoit-Wolf covariance: train minus held-out, fine-tuned penultimate features",
+        "knn_ft_bank": "train minus held-out, fine-tuned penultimate features",
+        "mahalanobis_frozen": "class means + Ledoit-Wolf covariance: train minus held-out, frozen e5 features",
+        "knn_frozen_bank": "train minus held-out, frozen e5 features",
+        "knn_k": "fixed {1, 5}, reported, not tuned",
+        "design_note": "lr / stop_epoch / model were chosen in Phase 1 by 12-class CV on train+val rows, which includes the held-out classes as KNOWN classes; no unknown-class data is used by any fitted quantity of a Track B run, but those design choices pre-date the holdouts"
+      },
+      "test_inference_log_lines": 1,
+      "test_inference_log_ok": true
+    },
+    {
+      "run_id": "loco_customer_support_s42",
+      "holdout": [
+        "customer_support"
+      ],
+      "seed": 42,
+      "n_train": 324,
+      "n_cal": 68,
+      "n_eval_known": 68,
+      "n_eval_unknown": 40,
+      "assertions": {
+        "no_heldout_rows_in_train": true,
+        "no_heldout_rows_in_cal": true,
+        "no_heldout_rows_in_eval_known": true,
+        "eval_unknown_only_heldout": true,
+        "eval_unknown_has_every_heldout_row": true,
+        "label_space_is_remaining_classes": true,
+        "every_remaining_class_in_train": true,
+        "train_cal_disjoint": true,
+        "train_eval_known_disjoint": true,
+        "train_unknown_disjoint": true,
+        "cal_unknown_disjoint": true,
+        "no_test_rows_in_train_or_cal": true,
+        "eval_known_is_test_split_only": true,
+        "cal_is_val_split_only": true
+      },
+      "all_assertions_passed": true,
+      "ids_sha256": {
+        "train": "9621c3a01c5a9932575279782845cfe003fdc9d1b9ca8934dd1bf7ccb273d632",
+        "cal": "7ded49a03f1451d1603fff2f0c423c6612aa57ded53cac8bd00ba7b3f68b4f3f",
+        "eval_known": "a59159b01104ba3c94ef07b17315493483a591768d457ff36ae8ee910cde855c",
+        "eval_unknown": "61a793197a642b58721234dc9a2e8b340d1b0a5135ae2215b2969e333882bf9c"
+      },
+      "fit_sources": {
+        "model_weights": "train split minus held-out classes; per-epoch curves on the calibration rows; no epoch/checkpoint selection (stop_epoch fixed by the Phase 1 CV)",
+        "temperature": "calibration rows (val split minus held-out classes): NLL, LBFGS",
+        "threshold_per_method": "calibration rows (known only), 95% retention",
+        "mahalanobis_ft": "class means + Ledoit-Wolf covariance: train minus held-out, fine-tuned penultimate features",
+        "knn_ft_bank": "train minus held-out, fine-tuned penultimate features",
+        "mahalanobis_frozen": "class means + Ledoit-Wolf covariance: train minus held-out, frozen e5 features",
+        "knn_frozen_bank": "train minus held-out, frozen e5 features",
+        "knn_k": "fixed {1, 5}, reported, not tuned",
+        "design_note": "lr / stop_epoch / model were chosen in Phase 1 by 12-class CV on train+val rows, which includes the held-out classes as KNOWN classes; no unknown-class data is used by any fitted quantity of a Track B run, but those design choices pre-date the holdouts"
+      },
+      "test_inference_log_lines": 1,
+      "test_inference_log_ok": true
+    },
+    {
+      "run_id": "loco_document_processing_s42",
+      "holdout": [
+        "document_processing"
+      ],
+      "seed": 42,
+      "n_train": 324,
+      "n_cal": 68,
+      "n_eval_known": 68,
+      "n_eval_unknown": 40,
+      "assertions": {
+        "no_heldout_rows_in_train": true,
+        "no_heldout_rows_in_cal": true,
+        "no_heldout_rows_in_eval_known": true,
+        "eval_unknown_only_heldout": true,
+        "eval_unknown_has_every_heldout_row": true,
+        "label_space_is_remaining_classes": true,
+        "every_remaining_class_in_train": true,
+        "train_cal_disjoint": true,
+        "train_eval_known_disjoint": true,
+        "train_unknown_disjoint": true,
+        "cal_unknown_disjoint": true,
+        "no_test_rows_in_train_or_cal": true,
+        "eval_known_is_test_split_only": true,
+        "cal_is_val_split_only": true
+      },
+      "all_assertions_passed": true,
+      "ids_sha256": {
+        "train": "44dfeb72fd66cf78fb4ee5a6e84acfb50bd22bae90de9f1f20a2de5c42f6a415",
+        "cal": "65bd92591fcf7e7a3138cfe1048f4a044b4a215b617d5a5cdff4b5fd801c160d",
+        "eval_known": "711e3768ed0ec2c9ae4e90b3c147773c6c54ef7ede1ffc48231c3c2cda2d3c30",
+        "eval_unknown": "44ef02e3f011d62146d1f26377ca4bd7bc2590c65f13e5c465117f447228c8e7"
+      },
+      "fit_sources": {
+        "model_weights": "train split minus held-out classes; per-epoch curves on the calibration rows; no epoch/checkpoint selection (stop_epoch fixed by the Phase 1 CV)",
+        "temperature": "calibration rows (val split minus held-out classes): NLL, LBFGS",
+        "threshold_per_method": "calibration rows (known only), 95% retention",
+        "mahalanobis_ft": "class means + Ledoit-Wolf covariance: train minus held-out, fine-tuned penultimate features",
+        "knn_ft_bank": "train minus held-out, fine-tuned penultimate features",
+        "mahalanobis_frozen": "class means + Ledoit-Wolf covariance: train minus held-out, frozen e5 features",
+        "knn_frozen_bank": "train minus held-out, frozen e5 features",
+        "knn_k": "fixed {1, 5}, reported, not tuned",
+        "design_note": "lr / stop_epoch / model were chosen in Phase 1 by 12-class CV on train+val rows, which includes the held-out classes as KNOWN classes; no unknown-class data is used by any fitted quantity of a Track B run, but those design choices pre-date the holdouts"
+      },
+      "test_inference_log_lines": 1,
+      "test_inference_log_ok": true
+    },
+    {
+      "run_id": "loco_knowledge_base_s42",
+      "holdout": [
+        "knowledge_base"
+      ],
+      "seed": 42,
+      "n_train": 324,
+      "n_cal": 68,
+      "n_eval_known": 68,
+      "n_eval_unknown": 40,
+      "assertions": {
+        "no_heldout_rows_in_train": true,
+        "no_heldout_rows_in_cal": true,
+        "no_heldout_rows_in_eval_known": true,
+        "eval_unknown_only_heldout": true,
+        "eval_unknown_has_every_heldout_row": true,
+        "label_space_is_remaining_classes": true,
+        "every_remaining_class_in_train": true,
+        "train_cal_disjoint": true,
+        "train_eval_known_disjoint": true,
+        "train_unknown_disjoint": true,
+        "cal_unknown_disjoint": true,
+        "no_test_rows_in_train_or_cal": true,
+        "eval_known_is_test_split_only": true,
+        "cal_is_val_split_only": true
+      },
+      "all_assertions_passed": true,
+      "ids_sha256": {
+        "train": "af6321bc51bafa9c6ee61103ae5bdbdb07c2df2dbce53c402958de037e9a5735",
+        "cal": "8c9b5af0bcadac1b32896e78bedbdb8b68f083bb5639a55225e1b179f677d019",
+        "eval_known": "5cba401fb9f5b6daca58e375caafc03c5ab08f801e2d7da58ce031d381c0a46d",
+        "eval_unknown": "feab5c2a33abbd3f4b681251dc3dcd4c3893cfbaf5e83a44fa9d909284731be1"
+      },
+      "fit_sources": {
+        "model_weights": "train split minus held-out classes; per-epoch curves on the calibration rows; no epoch/checkpoint selection (stop_epoch fixed by the Phase 1 CV)",
+        "temperature": "calibration rows (val split minus held-out classes): NLL, LBFGS",
+        "threshold_per_method": "calibration rows (known only), 95% retention",
+        "mahalanobis_ft": "class means + Ledoit-Wolf covariance: train minus held-out, fine-tuned penultimate features",
+        "knn_ft_bank": "train minus held-out, fine-tuned penultimate features",
+        "mahalanobis_frozen": "class means + Ledoit-Wolf covariance: train minus held-out, frozen e5 features",
+        "knn_frozen_bank": "train minus held-out, frozen e5 features",
+        "knn_k": "fixed {1, 5}, reported, not tuned",
+        "design_note": "lr / stop_epoch / model were chosen in Phase 1 by 12-class CV on train+val rows, which includes the held-out classes as KNOWN classes; no unknown-class data is used by any fitted quantity of a Track B run, but those design choices pre-date the holdouts"
+      },
+      "test_inference_log_lines": 1,
+      "test_inference_log_ok": true
+    },
+    {
+      "run_id": "loco_orders_s42",
+      "holdout": [
+        "orders"
+      ],
+      "seed": 42,
+      "n_train": 321,
+      "n_cal": 67,
+      "n_eval_known": 67,
+      "n_eval_unknown": 45,
+      "assertions": {
+        "no_heldout_rows_in_train": true,
+        "no_heldout_rows_in_cal": true,
+        "no_heldout_rows_in_eval_known": true,
+        "eval_unknown_only_heldout": true,
+        "eval_unknown_has_every_heldout_row": true,
+        "label_space_is_remaining_classes": true,
+        "every_remaining_class_in_train": true,
+        "train_cal_disjoint": true,
+        "train_eval_known_disjoint": true,
+        "train_unknown_disjoint": true,
+        "cal_unknown_disjoint": true,
+        "no_test_rows_in_train_or_cal": true,
+        "eval_known_is_test_split_only": true,
+        "cal_is_val_split_only": true
+      },
+      "all_assertions_passed": true,
+      "ids_sha256": {
+        "train": "8c4f0af29d4bbec4b78d686d0f3c4af479764da0f572c7821b152f5e0bfeeeb4",
+        "cal": "f6e4aeb0eec6ebb81474148473542ae2815bdac9deceae2b0e10bfeda54d7909",
+        "eval_known": "faf1fadc256415062fbc9a2dbc423fa3f7b171f831906ca644b439accde670a9",
+        "eval_unknown": "50f19ea61ae761a1ab1a5563003f3ba0deaf43ff1cffccb261447b0f684d7243"
+      },
+      "fit_sources": {
+        "model_weights": "train split minus held-out classes; per-epoch curves on the calibration rows; no epoch/checkpoint selection (stop_epoch fixed by the Phase 1 CV)",
+        "temperature": "calibration rows (val split minus held-out classes): NLL, LBFGS",
+        "threshold_per_method": "calibration rows (known only), 95% retention",
+        "mahalanobis_ft": "class means + Ledoit-Wolf covariance: train minus held-out, fine-tuned penultimate features",
+        "knn_ft_bank": "train minus held-out, fine-tuned penultimate features",
+        "mahalanobis_frozen": "class means + Ledoit-Wolf covariance: train minus held-out, frozen e5 features",
+        "knn_frozen_bank": "train minus held-out, frozen e5 features",
+        "knn_k": "fixed {1, 5}, reported, not tuned",
+        "design_note": "lr / stop_epoch / model were chosen in Phase 1 by 12-class CV on train+val rows, which includes the held-out classes as KNOWN classes; no unknown-class data is used by any fitted quantity of a Track B run, but those design choices pre-date the holdouts"
+      },
+      "test_inference_log_lines": 1,
+      "test_inference_log_ok": true
+    },
+    {
+      "run_id": "loco_shipment_information.analytics_s42",
+      "holdout": [
+        "shipment_information.analytics"
+      ],
+      "seed": 42,
+      "n_train": 313,
+      "n_cal": 66,
+      "n_eval_known": 66,
+      "n_eval_unknown": 55,
+      "assertions": {
+        "no_heldout_rows_in_train": true,
+        "no_heldout_rows_in_cal": true,
+        "no_heldout_rows_in_eval_known": true,
+        "eval_unknown_only_heldout": true,
+        "eval_unknown_has_every_heldout_row": true,
+        "label_space_is_remaining_classes": true,
+        "every_remaining_class_in_train": true,
+        "train_cal_disjoint": true,
+        "train_eval_known_disjoint": true,
+        "train_unknown_disjoint": true,
+        "cal_unknown_disjoint": true,
+        "no_test_rows_in_train_or_cal": true,
+        "eval_known_is_test_split_only": true,
+        "cal_is_val_split_only": true
+      },
+      "all_assertions_passed": true,
+      "ids_sha256": {
+        "train": "855a0e6228ccbb5a9c2f3eae38d74121978ecfb0fe537c3e3f7077739a0f0799",
+        "cal": "e94009a96b2079e4526d5f800837c862cdfe5fc2dd8a3457ecd97741d8ad5a76",
+        "eval_known": "e96bc78ff6186c0b5656a0c5ee1f755b991b478d1862ae44e1c9a202fddb4745",
+        "eval_unknown": "9e890ae9b23ff2a4060234eb51d542cc1e8f0193a415301c31cd427fe5affa00"
+      },
+      "fit_sources": {
+        "model_weights": "train split minus held-out classes; per-epoch curves on the calibration rows; no epoch/checkpoint selection (stop_epoch fixed by the Phase 1 CV)",
+        "temperature": "calibration rows (val split minus held-out classes): NLL, LBFGS",
+        "threshold_per_method": "calibration rows (known only), 95% retention",
+        "mahalanobis_ft": "class means + Ledoit-Wolf covariance: train minus held-out, fine-tuned penultimate features",
+        "knn_ft_bank": "train minus held-out, fine-tuned penultimate features",
+        "mahalanobis_frozen": "class means + Ledoit-Wolf covariance: train minus held-out, frozen e5 features",
+        "knn_frozen_bank": "train minus held-out, frozen e5 features",
+        "knn_k": "fixed {1, 5}, reported, not tuned",
+        "design_note": "lr / stop_epoch / model were chosen in Phase 1 by 12-class CV on train+val rows, which includes the held-out classes as KNOWN classes; no unknown-class data is used by any fitted quantity of a Track B run, but those design choices pre-date the holdouts"
+      },
+      "test_inference_log_lines": 1,
+      "test_inference_log_ok": true
+    },
+    {
+      "run_id": "loco_shipment_information.disruptions_s42",
+      "holdout": [
+        "shipment_information.disruptions"
+      ],
+      "seed": 42,
+      "n_train": 327,
+      "n_cal": 69,
+      "n_eval_known": 69,
+      "n_eval_unknown": 35,
+      "assertions": {
+        "no_heldout_rows_in_train": true,
+        "no_heldout_rows_in_cal": true,
+        "no_heldout_rows_in_eval_known": true,
+        "eval_unknown_only_heldout": true,
+        "eval_unknown_has_every_heldout_row": true,
+        "label_space_is_remaining_classes": true,
+        "every_remaining_class_in_train": true,
+        "train_cal_disjoint": true,
+        "train_eval_known_disjoint": true,
+        "train_unknown_disjoint": true,
+        "cal_unknown_disjoint": true,
+        "no_test_rows_in_train_or_cal": true,
+        "eval_known_is_test_split_only": true,
+        "cal_is_val_split_only": true
+      },
+      "all_assertions_passed": true,
+      "ids_sha256": {
+        "train": "9b8852a84f4f6cbe8a91881e0cb86dd485774557cc31ee773668288599234184",
+        "cal": "697108ab8fc0850afc5d90aa748f30af132cc5dfd1980904ec6dd744e655403c",
+        "eval_known": "8db8fa2bf0fc43929973673b8407b0ebc41f8bab22fe0f0b0b982feb2c5af9df",
+        "eval_unknown": "f20c935ab1a2af4435a06042984a4b5a87c7df1e503ba0bbd018429abbf5b77c"
+      },
+      "fit_sources": {
+        "model_weights": "train split minus held-out classes; per-epoch curves on the calibration rows; no epoch/checkpoint selection (stop_epoch fixed by the Phase 1 CV)",
+        "temperature": "calibration rows (val split minus held-out classes): NLL, LBFGS",
+        "threshold_per_method": "calibration rows (known only), 95% retention",
+        "mahalanobis_ft": "class means + Ledoit-Wolf covariance: train minus held-out, fine-tuned penultimate features",
+        "knn_ft_bank": "train minus held-out, fine-tuned penultimate features",
+        "mahalanobis_frozen": "class means + Ledoit-Wolf covariance: train minus held-out, frozen e5 features",
+        "knn_frozen_bank": "train minus held-out, frozen e5 features",
+        "knn_k": "fixed {1, 5}, reported, not tuned",
+        "design_note": "lr / stop_epoch / model were chosen in Phase 1 by 12-class CV on train+val rows, which includes the held-out classes as KNOWN classes; no unknown-class data is used by any fitted quantity of a Track B run, but those design choices pre-date the holdouts"
+      },
+      "test_inference_log_lines": 1,
+      "test_inference_log_ok": true
+    },
+    {
+      "run_id": "loco_shipment_information.realtime_query_s42",
+      "holdout": [
+        "shipment_information.realtime_query"
+      ],
+      "seed": 42,
+      "n_train": 313,
+      "n_cal": 66,
+      "n_eval_known": 66,
+      "n_eval_unknown": 55,
+      "assertions": {
+        "no_heldout_rows_in_train": true,
+        "no_heldout_rows_in_cal": true,
+        "no_heldout_rows_in_eval_known": true,
+        "eval_unknown_only_heldout": true,
+        "eval_unknown_has_every_heldout_row": true,
+        "label_space_is_remaining_classes": true,
+        "every_remaining_class_in_train": true,
+        "train_cal_disjoint": true,
+        "train_eval_known_disjoint": true,
+        "train_unknown_disjoint": true,
+        "cal_unknown_disjoint": true,
+        "no_test_rows_in_train_or_cal": true,
+        "eval_known_is_test_split_only": true,
+        "cal_is_val_split_only": true
+      },
+      "all_assertions_passed": true,
+      "ids_sha256": {
+        "train": "3d42039742e1a5d450cd07233cca7d6a198eb4adc3ebcffc9cc91160c0b721ed",
+        "cal": "603d4d2e0ae93b9f109e23b0c94cf16908e87bbce8f4113ae3e9d15dc951914d",
+        "eval_known": "8ebfd2a81302c3077542642f4a3f22a6404cac11b92fad44f63201c0bf9c7046",
+        "eval_unknown": "b2168d7d44efa890e57530165efc73d556679e7014b0c5374b47f1c289752b0f"
+      },
+      "fit_sources": {
+        "model_weights": "train split minus held-out classes; per-epoch curves on the calibration rows; no epoch/checkpoint selection (stop_epoch fixed by the Phase 1 CV)",
+        "temperature": "calibration rows (val split minus held-out classes): NLL, LBFGS",
+        "threshold_per_method": "calibration rows (known only), 95% retention",
+        "mahalanobis_ft": "class means + Ledoit-Wolf covariance: train minus held-out, fine-tuned penultimate features",
+        "knn_ft_bank": "train minus held-out, fine-tuned penultimate features",
+        "mahalanobis_frozen": "class means + Ledoit-Wolf covariance: train minus held-out, frozen e5 features",
+        "knn_frozen_bank": "train minus held-out, frozen e5 features",
+        "knn_k": "fixed {1, 5}, reported, not tuned",
+        "design_note": "lr / stop_epoch / model were chosen in Phase 1 by 12-class CV on train+val rows, which includes the held-out classes as KNOWN classes; no unknown-class data is used by any fitted quantity of a Track B run, but those design choices pre-date the holdouts"
+      },
+      "test_inference_log_lines": 1,
+      "test_inference_log_ok": true
+    },
+    {
+      "run_id": "loco_yard_management_s42",
+      "holdout": [
+        "yard_management"
+      ],
+      "seed": 42,
+      "n_train": 324,
+      "n_cal": 68,
+      "n_eval_known": 68,
+      "n_eval_unknown": 40,
+      "assertions": {
+        "no_heldout_rows_in_train": true,
+        "no_heldout_rows_in_cal": true,
+        "no_heldout_rows_in_eval_known": true,
+        "eval_unknown_only_heldout": true,
+        "eval_unknown_has_every_heldout_row": true,
+        "label_space_is_remaining_classes": true,
+        "every_remaining_class_in_train": true,
+        "train_cal_disjoint": true,
+        "train_eval_known_disjoint": true,
+        "train_unknown_disjoint": true,
+        "cal_unknown_disjoint": true,
+        "no_test_rows_in_train_or_cal": true,
+        "eval_known_is_test_split_only": true,
+        "cal_is_val_split_only": true
+      },
+      "all_assertions_passed": true,
+      "ids_sha256": {
+        "train": "f3c3fe579690b0d34cc362a56f69acbafec1e72cebd474541f0c5d7bb0032be1",
+        "cal": "e9f225032d207af98950486bfdf925eebed6e2d6ac6a796d8ac6cc9ee92910ed",
+        "eval_known": "81075d672251ba65697de345ba3da59ccc2411bdb4a3a7cf2a10ee99543ab0e6",
+        "eval_unknown": "c952064050d80b38a7ebc964bfa87d4fc0c48362859a309b35650ac1142a2c3e"
+      },
+      "fit_sources": {
+        "model_weights": "train split minus held-out classes; per-epoch curves on the calibration rows; no epoch/checkpoint selection (stop_epoch fixed by the Phase 1 CV)",
+        "temperature": "calibration rows (val split minus held-out classes): NLL, LBFGS",
+        "threshold_per_method": "calibration rows (known only), 95% retention",
+        "mahalanobis_ft": "class means + Ledoit-Wolf covariance: train minus held-out, fine-tuned penultimate features",
+        "knn_ft_bank": "train minus held-out, fine-tuned penultimate features",
+        "mahalanobis_frozen": "class means + Ledoit-Wolf covariance: train minus held-out, frozen e5 features",
+        "knn_frozen_bank": "train minus held-out, frozen e5 features",
+        "knn_k": "fixed {1, 5}, reported, not tuned",
+        "design_note": "lr / stop_epoch / model were chosen in Phase 1 by 12-class CV on train+val rows, which includes the held-out classes as KNOWN classes; no unknown-class data is used by any fitted quantity of a Track B run, but those design choices pre-date the holdouts"
+      },
+      "test_inference_log_lines": 1,
+      "test_inference_log_ok": true
+    },
+    {
+      "run_id": "ls0p1_s42",
+      "holdout": [
+        "document_processing",
+        "yard_management"
+      ],
+      "seed": 42,
+      "n_train": 296,
+      "n_cal": 62,
+      "n_eval_known": 62,
+      "n_eval_unknown": 80,
+      "assertions": {
+        "no_heldout_rows_in_train": true,
+        "no_heldout_rows_in_cal": true,
+        "no_heldout_rows_in_eval_known": true,
+        "eval_unknown_only_heldout": true,
+        "eval_unknown_has_every_heldout_row": true,
+        "label_space_is_remaining_classes": true,
+        "every_remaining_class_in_train": true,
+        "train_cal_disjoint": true,
+        "train_eval_known_disjoint": true,
+        "train_unknown_disjoint": true,
+        "cal_unknown_disjoint": true,
+        "no_test_rows_in_train_or_cal": true,
+        "eval_known_is_test_split_only": true,
+        "cal_is_val_split_only": true
+      },
+      "all_assertions_passed": true,
+      "ids_sha256": {
+        "train": "24cdf96a8a2272ff4da8c69454854d7555e5be59bee204078923ced48e76ddd9",
+        "cal": "ee9431124dbb03b25c2e8f0ac849bcdeabd811d67036ed9a3e6a5cd57ea4462f",
+        "eval_known": "1bcd912fd9b128b44a1fe6f62d936163f83410699293c24f9e0571b126e605c4",
+        "eval_unknown": "18aaa2dbc73bc74a92c37574259e14338bdab30c98df7234b4fd9160f17a0d01"
+      },
+      "fit_sources": {
+        "model_weights": "train split minus held-out classes; per-epoch curves on the calibration rows; no epoch/checkpoint selection (stop_epoch fixed by the Phase 1 CV)",
+        "temperature": "calibration rows (val split minus held-out classes): NLL, LBFGS",
+        "threshold_per_method": "calibration rows (known only), 95% retention",
+        "mahalanobis_ft": "class means + Ledoit-Wolf covariance: train minus held-out, fine-tuned penultimate features",
+        "knn_ft_bank": "train minus held-out, fine-tuned penultimate features",
+        "mahalanobis_frozen": "class means + Ledoit-Wolf covariance: train minus held-out, frozen e5 features",
+        "knn_frozen_bank": "train minus held-out, frozen e5 features",
+        "knn_k": "fixed {1, 5}, reported, not tuned",
+        "design_note": "lr / stop_epoch / model were chosen in Phase 1 by 12-class CV on train+val rows, which includes the held-out classes as KNOWN classes; no unknown-class data is used by any fitted quantity of a Track B run, but those design choices pre-date the holdouts"
+      },
+      "test_inference_log_lines": 1,
+      "test_inference_log_ok": true
+    },
+    {
+      "run_id": "ls0p1_s43",
+      "holdout": [
+        "document_processing",
+        "yard_management"
+      ],
+      "seed": 43,
+      "n_train": 296,
+      "n_cal": 62,
+      "n_eval_known": 62,
+      "n_eval_unknown": 80,
+      "assertions": {
+        "no_heldout_rows_in_train": true,
+        "no_heldout_rows_in_cal": true,
+        "no_heldout_rows_in_eval_known": true,
+        "eval_unknown_only_heldout": true,
+        "eval_unknown_has_every_heldout_row": true,
+        "label_space_is_remaining_classes": true,
+        "every_remaining_class_in_train": true,
+        "train_cal_disjoint": true,
+        "train_eval_known_disjoint": true,
+        "train_unknown_disjoint": true,
+        "cal_unknown_disjoint": true,
+        "no_test_rows_in_train_or_cal": true,
+        "eval_known_is_test_split_only": true,
+        "cal_is_val_split_only": true
+      },
+      "all_assertions_passed": true,
+      "ids_sha256": {
+        "train": "24cdf96a8a2272ff4da8c69454854d7555e5be59bee204078923ced48e76ddd9",
+        "cal": "ee9431124dbb03b25c2e8f0ac849bcdeabd811d67036ed9a3e6a5cd57ea4462f",
+        "eval_known": "1bcd912fd9b128b44a1fe6f62d936163f83410699293c24f9e0571b126e605c4",
+        "eval_unknown": "18aaa2dbc73bc74a92c37574259e14338bdab30c98df7234b4fd9160f17a0d01"
+      },
+      "fit_sources": {
+        "model_weights": "train split minus held-out classes; per-epoch curves on the calibration rows; no epoch/checkpoint selection (stop_epoch fixed by the Phase 1 CV)",
+        "temperature": "calibration rows (val split minus held-out classes): NLL, LBFGS",
+        "threshold_per_method": "calibration rows (known only), 95% retention",
+        "mahalanobis_ft": "class means + Ledoit-Wolf covariance: train minus held-out, fine-tuned penultimate features",
+        "knn_ft_bank": "train minus held-out, fine-tuned penultimate features",
+        "mahalanobis_frozen": "class means + Ledoit-Wolf covariance: train minus held-out, frozen e5 features",
+        "knn_frozen_bank": "train minus held-out, frozen e5 features",
+        "knn_k": "fixed {1, 5}, reported, not tuned",
+        "design_note": "lr / stop_epoch / model were chosen in Phase 1 by 12-class CV on train+val rows, which includes the held-out classes as KNOWN classes; no unknown-class data is used by any fitted quantity of a Track B run, but those design choices pre-date the holdouts"
+      },
+      "test_inference_log_lines": 1,
+      "test_inference_log_ok": true
+    },
+    {
+      "run_id": "ls0p1_s44",
+      "holdout": [
+        "document_processing",
+        "yard_management"
+      ],
+      "seed": 44,
+      "n_train": 296,
+      "n_cal": 62,
+      "n_eval_known": 62,
+      "n_eval_unknown": 80,
+      "assertions": {
+        "no_heldout_rows_in_train": true,
+        "no_heldout_rows_in_cal": true,
+        "no_heldout_rows_in_eval_known": true,
+        "eval_unknown_only_heldout": true,
+        "eval_unknown_has_every_heldout_row": true,
+        "label_space_is_remaining_classes": true,
+        "every_remaining_class_in_train": true,
+        "train_cal_disjoint": true,
+        "train_eval_known_disjoint": true,
+        "train_unknown_disjoint": true,
+        "cal_unknown_disjoint": true,
+        "no_test_rows_in_train_or_cal": true,
+        "eval_known_is_test_split_only": true,
+        "cal_is_val_split_only": true
+      },
+      "all_assertions_passed": true,
+      "ids_sha256": {
+        "train": "24cdf96a8a2272ff4da8c69454854d7555e5be59bee204078923ced48e76ddd9",
+        "cal": "ee9431124dbb03b25c2e8f0ac849bcdeabd811d67036ed9a3e6a5cd57ea4462f",
+        "eval_known": "1bcd912fd9b128b44a1fe6f62d936163f83410699293c24f9e0571b126e605c4",
+        "eval_unknown": "18aaa2dbc73bc74a92c37574259e14338bdab30c98df7234b4fd9160f17a0d01"
+      },
+      "fit_sources": {
+        "model_weights": "train split minus held-out classes; per-epoch curves on the calibration rows; no epoch/checkpoint selection (stop_epoch fixed by the Phase 1 CV)",
+        "temperature": "calibration rows (val split minus held-out classes): NLL, LBFGS",
+        "threshold_per_method": "calibration rows (known only), 95% retention",
+        "mahalanobis_ft": "class means + Ledoit-Wolf covariance: train minus held-out, fine-tuned penultimate features",
+        "knn_ft_bank": "train minus held-out, fine-tuned penultimate features",
+        "mahalanobis_frozen": "class means + Ledoit-Wolf covariance: train minus held-out, frozen e5 features",
+        "knn_frozen_bank": "train minus held-out, frozen e5 features",
+        "knn_k": "fixed {1, 5}, reported, not tuned",
+        "design_note": "lr / stop_epoch / model were chosen in Phase 1 by 12-class CV on train+val rows, which includes the held-out classes as KNOWN classes; no unknown-class data is used by any fitted quantity of a Track B run, but those design choices pre-date the holdouts"
+      },
+      "test_inference_log_lines": 1,
+      "test_inference_log_ok": true
+    }
+  ]
+}

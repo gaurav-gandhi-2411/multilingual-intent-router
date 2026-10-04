@@ -1,0 +1,97 @@
+{
+  "stage": "latency",
+  "source": "colab",
+  "split": "val",
+  "n_rows": 74,
+  "ids_sha256": "7facc966ddfff4a97c492195810573e1908462b41897cf16dc495098f07f6165",
+  "model_fingerprint": "84089f3510de398aa856cd5a7abe3125c3eda8ee40edfc690d4af4edab027804",
+  "model_version": "v1",
+  "environment": {
+    "torch": "2.11.0+cu128",
+    "onnxruntime": "1.30.0",
+    "transformers": "5.18.0",
+    "numpy": "2.5.3",
+    "python": "3.13.15",
+    "cpu_model": "Intel(R) Xeon(R) CPU @ 2.00GHz",
+    "os_cpu_count": 8,
+    "torch_default_threads": 8,
+    "platform": "Linux-6.6.122+-x86_64-with-glibc2.39",
+    "runtime": {
+      "colab": true,
+      "colab_release_tag": "release-colab-external-images_20261001-060042_RC00",
+      "colab_gpu_env": "1",
+      "accelerator": "Tesla T4",
+      "label": "Colab, Tesla T4 (accelerator unused: CPU benchmark)"
+    },
+    "runtime_type": "Colab, Tesla T4 (accelerator unused: CPU benchmark)"
+  },
+  "sizes_bytes": {
+    "torch_safetensors": 1112235768,
+    "onnx_fp32": 1112438669,
+    "onnx_int8": null,
+    "onnx_int8_encoder": null
+  },
+  "settings": {
+    "warmup": 10,
+    "repeats": 3,
+    "threads": [
+      1,
+      8
+    ],
+    "backends": [
+      "torch",
+      "onnx_fp32"
+    ]
+  },
+  "note": "freshly trained v1 on the stated runtime; PyTorch fp32 and ONNX fp32 on CPU, batch 1, val texts only; the accelerator (if any) is unused; shared cloud vCPUs, not an idle-machine run",
+  "latency": {
+    "torch": {
+      "threads_1": {
+        "threads": 1,
+        "n_calls": 222,
+        "p50_ms": 134.70916200003558,
+        "p95_ms": 200.94519379996993,
+        "mean_ms": 141.84953174775202,
+        "min_ms": 109.75760099995568,
+        "max_ms": 236.99526999996579
+      },
+      "threads_8": {
+        "threads": 8,
+        "n_calls": 222,
+        "p50_ms": 201.9971970000256,
+        "p95_ms": 375.5068461499832,
+        "mean_ms": 231.9796303468481,
+        "min_ms": 149.85870600003182,
+        "max_ms": 1006.0960250000335
+      }
+    },
+    "onnx_fp32": {
+      "threads_1": {
+        "threads": 1,
+        "n_calls": 222,
+        "p50_ms": 70.6768430000011,
+        "p95_ms": 92.91907115000411,
+        "mean_ms": 72.73560764864308,
+        "min_ms": 43.62708399980875,
+        "max_ms": 152.40923699980158
+      },
+      "threads_8": {
+        "threads": 8,
+        "n_calls": 222,
+        "p50_ms": 111.43890800008194,
+        "p95_ms": 159.05861110012438,
+        "mean_ms": 114.20470095495025,
+        "min_ms": 53.97657299999992,
+        "max_ms": 188.0649770000673
+      }
+    }
+  },
+  "onnx_export_check": {
+    "backend": "onnx_fp32",
+    "n_texts": 5,
+    "max_abs_diff_logits": 4.351139068603516e-06,
+    "max_abs_diff_features": 4.291534423828125e-06,
+    "max_abs_diff_probs": 4.43101228375653e-07,
+    "argmax_equal": true
+  }
+}

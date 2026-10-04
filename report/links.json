@@ -1,0 +1,9 @@
+{
+  "wandb": "https://wandb.ai/gauravgandhi429-gaurav-gandhi/multilingual-intent-router/reports/Submission-summary--VmlldzoxODA1MTA3Mw==",
+  "wandb_run": "https://wandb.ai/gauravgandhi429-gaurav-gandhi/multilingual-intent-router/runs/final-v1-train",
+  "wandb_project": "https://wandb.ai/gauravgandhi429-gaurav-gandhi/multilingual-intent-router",
+  "hf": "https://huggingface.co/gauravgandhi2411/multilingual-intent-router",
+  "repo": "https://github.com/gaurav-gandhi-2411/multilingual-intent-router",
+  "colab": "https://colab.research.google.com/github/gaurav-gandhi-2411/multilingual-intent-router/blob/v1.0-submission/notebooks/intent_router_colab.ipynb",
+  "report": "report.pdf"
+}

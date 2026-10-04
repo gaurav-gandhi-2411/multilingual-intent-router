@@ -1,0 +1,173 @@
+{
+  "run": "run1",
+  "description": "Colab run 1 (workaround: manual torchvision uninstall); not the canonical run",
+  "source": {
+    "source_zip": "results_colab.zip",
+    "source_zip_sha256": null,
+    "source_zip_sha256_note": "the zip was not available (only its extracted results_colab/ tree); sha256 of the tree is given instead",
+    "tree_sha256_of_sorted_relpath_sha256_lines": "3959e167b3ed9f7e860e08b1156d91347d4dd3c1f82bb92124685d70a140d8c7",
+    "n_files": 32
+  },
+  "verdict_recomputed": "REPRODUCTION: PASS",
+  "verdict_as_printed_in_run_log": null,
+  "verdict_as_printed_note": "no notebook output log is inside the zip tree, so the printed verdict could not be read; the recomputed verdict executes the notebook's own comparison cell code (scripts/build_colab_notebook.py COMPARE) on these files",
+  "verdict_difference_flag": null,
+  "bug_found_in_comparison": false,
+  "table_recomputed": [
+    {
+      "metric": "Track A test macro_f1",
+      "fresh": 0.9472,
+      "committed": 0.9465,
+      "delta": 0.0007,
+      "tolerance": "+-0.03",
+      "result": "PASS"
+    },
+    {
+      "metric": "Track A test accuracy",
+      "fresh": 0.9459,
+      "committed": 0.9459,
+      "delta": 0.0,
+      "tolerance": "+-0.03",
+      "result": "PASS"
+    },
+    {
+      "metric": "Track B maha_ft AUROC (mean of 3 seeds)",
+      "fresh": 0.869,
+      "committed": 0.8705,
+      "delta": -0.0015,
+      "tolerance": "+-0.03",
+      "result": "PASS"
+    },
+    {
+      "metric": "Track B maha_ft rejection@95 (mean of 3 seeds)",
+      "fresh": 0.2958,
+      "committed": 0.3417,
+      "delta": -0.0458,
+      "tolerance": "+-0.1",
+      "result": "PASS"
+    },
+    {
+      "metric": "Track B msp AUROC (mean of 3 seeds)",
+      "fresh": 0.841,
+      "committed": 0.8412,
+      "delta": -0.0002,
+      "tolerance": "+-0.03",
+      "result": "PASS"
+    },
+    {
+      "metric": "Track B msp rejection@95 (mean of 3 seeds)",
+      "fresh": 0.2958,
+      "committed": 0.1958,
+      "delta": 0.1,
+      "tolerance": "+-0.1",
+      "result": "PASS"
+    }
+  ],
+  "table_as_printed": null,
+  "fresh_fingerprint": "84089f3510de398aa856cd5a7abe3125c3eda8ee40edfc690d4af4edab027804",
+  "fresh_fingerprint_sources": {
+    "final/track_a.json": "84089f3510de398aa856cd5a7abe3125c3eda8ee40edfc690d4af4edab027804",
+    "final/determinism.json fingerprint_run1/run2": [
+      "84089f3510de398aa856cd5a7abe3125c3eda8ee40edfc690d4af4edab027804",
+      "84089f3510de398aa856cd5a7abe3125c3eda8ee40edfc690d4af4edab027804"
+    ],
+    "determinism_bitwise_identical": true
+  },
+  "committed_fingerprint": "7ca22e16d2ace345d9dcf7737887e85fedf400a1dfc863678c2fc2663bf102bd",
+  "fingerprint_equal_to_committed": false,
+  "fingerprint_note": "a different T4 fingerprint is expected (not bitwise-equal to the RTX 3070); the comparison is tolerance-based",
+  "runtime": {
+    "accelerator": "Tesla T4",
+    "torch": "2.11.0+cu128",
+    "cuda_from_torch_build_tag": "12.8 (+cu128)",
+    "transformers": "5.18.0",
+    "numpy": "2.5.3",
+    "python": "3.13.15",
+    "onnxruntime": "1.30.0",
+    "colab_release_tag": "release-colab-external-images_20261001-060042_RC00",
+    "cpu_model": "Intel(R) Xeon(R) CPU @ 2.00GHz",
+    "os_cpu_count": 8,
+    "platform": "Linux-6.6.122+-x86_64-with-glibc2.39",
+    "gpu_memory_total_mib": 15360
+  },
+  "trackb_per_seed_msp_vs_maha_ft": {
+    "msp": {
+      "s42": {
+        "n_cal_known": 62,
+        "kept_cal": 59,
+        "threshold": 0.655650914,
+        "n_unknown": 80,
+        "n_unknown_rejected": 22,
+        "strict_rejection_recall": 0.275,
+        "n_known_eval": 62,
+        "n_known_kept": 61,
+        "retention_known": 0.9838709677419355,
+        "matches_run_headline_json": true
+      },
+      "s43": {
+        "n_cal_known": 62,
+        "kept_cal": 59,
+        "threshold": 0.83805126,
+        "n_unknown": 80,
+        "n_unknown_rejected": 33,
+        "strict_rejection_recall": 0.4125,
+        "n_known_eval": 62,
+        "n_known_kept": 57,
+        "retention_known": 0.9193548387096774,
+        "matches_run_headline_json": true
+      },
+      "s44": {
+        "n_cal_known": 62,
+        "kept_cal": 59,
+        "threshold": 0.541596293,
+        "n_unknown": 80,
+        "n_unknown_rejected": 16,
+        "strict_rejection_recall": 0.2,
+        "n_known_eval": 62,
+        "n_known_kept": 60,
+        "retention_known": 0.967741935483871,
+        "matches_run_headline_json": true
+      }
+    },
+    "maha_ft": {
+      "s42": {
+        "n_cal_known": 62,
+        "kept_cal": 59,
+        "threshold": -119.762684,
+        "n_unknown": 80,
+        "n_unknown_rejected": 26,
+        "strict_rejection_recall": 0.325,
+        "n_known_eval": 62,
+        "n_known_kept": 60,
+        "retention_known": 0.967741935483871,
+        "matches_run_headline_json": true
+      },
+      "s43": {
+        "n_cal_known": 62,
+        "kept_cal": 59,
+        "threshold": -116.860283,
+        "n_unknown": 80,
+        "n_unknown_rejected": 33,
+        "strict_rejection_recall": 0.4125,
+        "n_known_eval": 62,
+        "n_known_kept": 60,
+        "retention_known": 0.967741935483871,
+        "matches_run_headline_json": true
+      },
+      "s44": {
+        "n_cal_known": 62,
+        "kept_cal": 59,
+        "threshold": -128.031191,
+        "n_unknown": 80,
+        "n_unknown_rejected": 12,
+        "strict_rejection_recall": 0.15,
+        "n_known_eval": 62,
+        "n_known_kept": 61,
+        "retention_known": 0.9838709677419355,
+        "matches_run_headline_json": true
+      }
+    }
+  },
+  "trackb_msp_equals_maha_ft_note": "the 3-seed means coincide (71 of 240 unknown rows rejected by each) but per-seed counts differ (msp 22/33/16, maha_ft 26/33/12): arithmetic coincidence, not a key or copy bug",
+  "trackb_test_inference_log": "3 evaluation calls (headline s42/s43/s44)"
+}

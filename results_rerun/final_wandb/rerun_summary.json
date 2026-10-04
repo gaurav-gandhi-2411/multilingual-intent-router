@@ -1,0 +1,82 @@
+{
+  "fingerprint_expected": "7ca22e16d2ace345d9dcf7737887e85fedf400a1dfc863678c2fc2663bf102bd",
+  "fingerprint_got": "7ca22e16d2ace345d9dcf7737887e85fedf400a1dfc863678c2fc2663bf102bd",
+  "fingerprint_match": true,
+  "fingerprint_in_memory": "7ca22e16d2ace345d9dcf7737887e85fedf400a1dfc863678c2fc2663bf102bd",
+  "fingerprint_asserted": true,
+  "epochs_run": 9,
+  "wall_clock_s": 55.43073760002153,
+  "peak_vram_mb": 5378.158203125,
+  "gpu_exclusive": true,
+  "gpu_lock_waited_s": 1.2,
+  "final_val_macro_f1": 0.8888059516735988,
+  "final_val_accuracy": 0.8918918918918919,
+  "nan_detected": false,
+  "wandb_url": "https://wandb.ai/gauravgandhi429-gaurav-gandhi/multilingual-intent-router/runs/final-v1-train",
+  "epoch_history": [
+    {
+      "epoch": 1,
+      "train_loss": 2.490118395198475,
+      "eval_loss": 2.4438071379790434,
+      "macro_f1": 0.09908267400527464,
+      "accuracy": 0.12162162162162163
+    },
+    {
+      "epoch": 2,
+      "train_loss": 2.325458960099654,
+      "eval_loss": 2.152899200851853,
+      "macro_f1": 0.22650162337662336,
+      "accuracy": 0.32432432432432434
+    },
+    {
+      "epoch": 3,
+      "train_loss": 1.808918449011716,
+      "eval_loss": 1.5575572993304279,
+      "macro_f1": 0.6852785558667911,
+      "accuracy": 0.7027027027027027
+    },
+    {
+      "epoch": 4,
+      "train_loss": 1.1468280418352648,
+      "eval_loss": 1.0552065952404126,
+      "macro_f1": 0.7575783134993661,
+      "accuracy": 0.7702702702702703
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.6195644004778429,
+      "eval_loss": 0.7714326961620434,
+      "macro_f1": 0.8217359151569679,
+      "accuracy": 0.8243243243243243
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.31691699610515073,
+      "eval_loss": 0.5925131520709476,
+      "macro_f1": 0.8283142783142782,
+      "accuracy": 0.8243243243243243
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.1386632374064489,
+      "eval_loss": 0.4878693690171113,
+      "macro_f1": 0.8491145428645429,
+      "accuracy": 0.8513513513513513
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.06684391319074413,
+      "eval_loss": 0.4254630352999713,
+      "macro_f1": 0.8511063011063013,
+      "accuracy": 0.8513513513513513
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.038952844979410824,
+      "eval_loss": 0.432230756089494,
+      "macro_f1": 0.8888059516735988,
+      "accuracy": 0.8918918918918919
+    }
+  ],
+  "train_stage_total_s": 77.81301160002477
+}

@@ -1,0 +1,206 @@
+{
+  "run_id": "i4b_loco_appointment_manager_s2",
+  "weights": "i4b",
+  "kind": "loco",
+  "holdout": [
+    "appointment_manager"
+  ],
+  "seed": 2,
+  "replicate": 2,
+  "labels": [
+    "ai_agent_performance",
+    "chitchat",
+    "customer_support",
+    "document_processing",
+    "knowledge_base",
+    "orders",
+    "other",
+    "shipment_information.analytics",
+    "shipment_information.disruptions",
+    "shipment_information.realtime_query",
+    "yard_management"
+  ],
+  "call_type": "phase6a_trackb",
+  "git_sha": "4536308e25696d84e01dd26bffcdac8d8f0dbdbc-dirty",
+  "smoke": false,
+  "audit": {
+    "holdout": [
+      "appointment_manager"
+    ],
+    "n_labels": 11,
+    "n_train": 321,
+    "n_cal": 67,
+    "n_eval_known": 67,
+    "n_eval_unknown": 45,
+    "assertions": {
+      "no_heldout_rows_in_train": true,
+      "no_heldout_rows_in_cal": true,
+      "no_heldout_rows_in_eval_known": true,
+      "eval_unknown_only_heldout": true,
+      "eval_unknown_has_every_heldout_row": true,
+      "label_space_is_remaining_classes": true,
+      "every_remaining_class_in_train": true,
+      "train_cal_disjoint": true,
+      "train_eval_known_disjoint": true,
+      "train_unknown_disjoint": true,
+      "cal_unknown_disjoint": true,
+      "no_test_rows_in_train_or_cal": true,
+      "eval_known_is_test_split_only": true,
+      "cal_is_val_split_only": true
+    },
+    "ids_sha256": {
+      "train": "999d8bc256b0de3f522088def0c1ce31a85311160a8fdb54a4316a17620c29ad",
+      "cal": "c81a2960e9a767f1ab83c85a349971aeeca27a45cf044d61f8e5c9f75917d77e",
+      "eval_known": "7a1d7477e5ab6815f6a648967ad41904e9c738c46a12d971d106c45e99f68253",
+      "eval_unknown": "1a490003bd10484c87bb61f8d2c9d8516734dc7b43c7f9c140bdc52a6d6caea1"
+    },
+    "smoke": false
+  },
+  "train_spec": {
+    "key": "i4b",
+    "a1": true,
+    "kl_lambda": 1.0,
+    "head_init_seed": null,
+    "inner_frac": 0.0
+  },
+  "training": {
+    "config": {
+      "model_name": "intfloat/multilingual-e5-base",
+      "lr": 3e-05,
+      "epochs": 20,
+      "batch_size": 16,
+      "warmup_ratio": 0.1,
+      "weight_decay": 0.01,
+      "max_len": 64,
+      "precision": "fp16",
+      "model_seed": 2,
+      "class_weighted": false,
+      "label_smoothing": 0.0,
+      "layer_decay": null,
+      "entity_masking": false,
+      "hier_aux": false,
+      "hier_lambda": 0.5,
+      "max_grad_norm": 1.0,
+      "attn_implementation": "eager",
+      "stop_epoch": 14,
+      "supcon_lambda": null,
+      "supcon_temperature": 0.1,
+      "grad_accum": 1,
+      "id_randomize_p": 0.5,
+      "oe_lambda": 0.0,
+      "oe_batch_size": 16,
+      "wandb_project": "intent-router",
+      "wandb_group": "phase6a-i4b",
+      "model_short": "e5"
+    },
+    "epochs": [
+      {
+        "epoch": 1,
+        "train_loss": 2.397786776224772,
+        "eval_loss": 2.3457566802181415,
+        "macro_f1": 0.1836849806864799,
+        "accuracy": 0.2835820895522388
+      },
+      {
+        "epoch": 2,
+        "train_loss": 2.235241799127488,
+        "eval_loss": 2.087353478616743,
+        "macro_f1": 0.19908927550436983,
+        "accuracy": 0.26865671641791045
+      },
+      {
+        "epoch": 3,
+        "train_loss": 1.802303013347444,
+        "eval_loss": 1.4689683771845121,
+        "macro_f1": 0.6505328005328006,
+        "accuracy": 0.6417910447761194
+      },
+      {
+        "epoch": 4,
+        "train_loss": 1.1046853746686662,
+        "eval_loss": 0.9640720655669027,
+        "macro_f1": 0.7967969048182951,
+        "accuracy": 0.7910447761194029
+      },
+      {
+        "epoch": 5,
+        "train_loss": 0.6068113233361926,
+        "eval_loss": 0.6222750259869134,
+        "macro_f1": 0.8435931426362047,
+        "accuracy": 0.835820895522388
+      },
+      {
+        "epoch": 6,
+        "train_loss": 0.301582056142035,
+        "eval_loss": 0.5147434904504178,
+        "macro_f1": 0.8393011029374666,
+        "accuracy": 0.835820895522388
+      },
+      {
+        "epoch": 7,
+        "train_loss": 0.15567921350399652,
+        "eval_loss": 0.5215957685193019,
+        "macro_f1": 0.7971402335038698,
+        "accuracy": 0.7910447761194029
+      },
+      {
+        "epoch": 8,
+        "train_loss": 0.08318240709957622,
+        "eval_loss": 0.5114326983023045,
+        "macro_f1": 0.7875261992909052,
+        "accuracy": 0.7910447761194029
+      },
+      {
+        "epoch": 9,
+        "train_loss": 0.04302583625983624,
+        "eval_loss": 0.5462155540042849,
+        "macro_f1": 0.7785810149446513,
+        "accuracy": 0.7761194029850746
+      },
+      {
+        "epoch": 10,
+        "train_loss": 0.029261680053813115,
+        "eval_loss": 0.4385036108320329,
+        "macro_f1": 0.8447534921219131,
+        "accuracy": 0.835820895522388
+      },
+      {
+        "epoch": 11,
+        "train_loss": 0.02166788120354925,
+        "eval_loss": 0.5349663931932023,
+        "macro_f1": 0.8148833622517834,
+        "accuracy": 0.8059701492537313
+      },
+      {
+        "epoch": 12,
+        "train_loss": 0.01809787510761193,
+        "eval_loss": 0.48766476741588827,
+        "macro_f1": 0.8447534921219131,
+        "accuracy": 0.835820895522388
+      },
+      {
+        "epoch": 13,
+        "train_loss": 0.015967596854482378,
+        "eval_loss": 0.5086918134353499,
+        "macro_f1": 0.8447534921219131,
+        "accuracy": 0.835820895522388
+      },
+      {
+        "epoch": 14,
+        "train_loss": 0.01390436775095406,
+        "eval_loss": 0.5325260061159063,
+        "macro_f1": 0.8148833622517834,
+        "accuracy": 0.8059701492537313
+      }
+    ],
+    "wall_clock_s": 84.72182279999834,
+    "peak_vram_mb": 5377.81982421875,
+    "gpu_exclusive": true,
+    "gpu_foreign_seen": [],
+    "nan_detected": false,
+    "fingerprint": "cc9a6d1e06e869356debecf33474c2d70ae5c730763756a18fa0c64299d8478e",
+    "gpu_lock_waited_s": 0.2,
+    "wandb_url": "https://wandb.ai/gauravgandhi429-gaurav-gandhi/intent-router/runs/oau60n27",
+    "run_total_s": 97.43278410000494
+  }
+}

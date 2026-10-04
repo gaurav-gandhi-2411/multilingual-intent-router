@@ -1,0 +1,3 @@
+# sha256 of lowercased alphanumeric-only forbidden terms, as <length>:<hash>.
+# Used by tests/test_model_card.py; the terms themselves are never stored.
+9:06c3de2b3acda0c30f9493cbdbaa1d447d21dbcbebea4010ed807f1aecf9f643

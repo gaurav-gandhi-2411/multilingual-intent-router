@@ -1,0 +1,39 @@
+final_config: results\phase4c\final_v2\final_v2_config.yaml
+results_dir: results\phase4c\final_v2_robustness
+figures_dir: results\phase4c\final_v2_robustness\figures
+outputs_dir: outputs\phase4c\a3
+seed: 42
+predict_batch_size: 32
+gpu_lock_expected_s: 2400
+fold_models:
+  fold_seed_idx: 0
+  n_folds: 5
+  model_seed: 0
+  attn_implementation: eager
+  expected_run_s_per_fold: 600
+translation:
+  model: facebook/nllb-200-distilled-600M
+  src_lang: eng_Latn
+  targets:
+    es: spa_Latn
+    fr: fra_Latn
+    de: deu_Latn
+    zh: zho_Hans
+  batch_size: 16
+  max_new_tokens: 128
+  num_beams: 1
+  fp16: true
+  include_oof: true
+  spot_check_per_lang: 3
+noise:
+  rates:
+  - 0.05
+  - 0.1
+  seed: 42
+  bootstrap:
+    n_resamples: 10000
+    seed: 42
+wandb:
+  project: intent-router
+  group: stretch-robustness
+  enabled: true

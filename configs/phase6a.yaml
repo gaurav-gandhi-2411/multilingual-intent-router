@@ -1,0 +1,145 @@
+# Open-set improvement round (pre-registered 2026-10-03 BEFORE any 6a
+# run). Nothing here may change a pre-registered rule; it only wires the rules to numbers. Training
+# settings (model, lr, 20-epoch schedule, eager attention) come from final.yaml.
+final_config: configs/final.yaml
+trackb_improve_config: configs/trackb_improve.yaml   # dev/confirm classes, headline holdout, safe labels
+robustness_config: configs/robustness.yaml           # final_retrain only (test-row robustness)
+results_dir: results/phase6a        # ids + numbers only: NO dataset or synthetic text
+outputs_dir: outputs/phase6a        # soup members (deleted after use), per-run npz arrays, OOF parts
+predict_batch_size: 32
+gpu_lock_expected_s: 900            # per fold-run / LOCO run, incl. waiting headroom
+gpu_lock_poll_s: 30
+
+model_seeds: [0, 1, 2]              # curves, fold models, LOCO runs; for soups = replicates 0..2
+ref:
+  preregistered_epoch: 8            # pre-registered: ref stops at its OWN CV argmax (8); recorded, not forced
+
+inputs:                             # written by phase4c_data.py; consumed read-only (same files as 4e)
+  synthetic_oe: outputs/phase4c/synthetic_oe.csv
+  synthetic_oe_emb: outputs/phase4c/synthetic_oe_emb.npy
+  a3_aug: outputs/phase4c/a3_aug.csv
+  eval_mt: outputs/phase4c/eval_mt.csv
+  expected_cv_rows: 426
+  expected_en_rows: 370
+
+guard:                              # phase4c.make_env asserts threshold == comparator - tolerance and
+  fold_seed_idx: 0                  # Env reads fold_seed_idx / n_folds. The Track A guard itself is
+  model_seed: 0                     # NOT a 6a rule; model_seed here is overridden per seed.
+  n_folds: 5
+  comparator: 0.9441
+  tolerance: 0.010
+  threshold: 0.9341
+
+factors:                            # identical to phase4c / phase4e.yaml (A1 is part of I4)
+  a1:
+    id_randomize_p: 0.5
+  a2:
+    oe_lambda: 0.5
+    oe_batch_size: 16
+    holdout_cos_drop: 0.85
+    auroc_margin: 0.0115
+  a3:
+    kinds: [mt, noise]
+
+reuse_4e:                           # ref curves = 4e v1 curves ONLY if config-identical (checked)
+  config: configs/phase4e.yaml
+  results_dir: results/phase4e
+  key: v1
+  seed_keys: [0, 1, 2]
+
+i4:                                 # A1 + lambda * symmetric KL with the prefix-swapped twin
+  lambdas: {i4a: 0.5, i4b: 1.0}
+
+soup:
+  pool_size: 7                      # members per fold / holdout, shared head init, member seeds 0..6
+  members_per_soup: 5               # replicate r = members rotated by 2 * r (mod pool)
+  rotate_shift: 2
+  head_init_seed: 0
+  inner_holdout_frac: 0.15          # members train on the other 85% of the fold-train rows
+  inner_seed: 42
+  greedy_accepts_ties: true         # add a member iff soup F1 does not drop (>=)
+
+trackb:
+  retention: 0.95                   # known-calibration retention (ceil rule), strict rejection
+  retention_secondary: 0.90         # confirm_report only (reported, never selects)
+  per_class_min_rows: 5             # I6a: fewer calibration rows per predicted class -> global
+  crossfit_folds: 5                 # I6b
+  crossfit_seed: 42
+
+neutral_swaps: ["LD->REF", "PO->REF", "other->REF"]
+noise:
+  perturbation: char_mixed_10
+  seed: 42
+translation:
+  langs: [es, fr, de, zh]
+  quality_cos: 0.80                 # the `kept` column of eval_mt.csv
+
+calibration:
+  ece_bins: 15
+
+# Eligibility thresholds (pre-registered "Axes"), candidate vs ref; axis (b) must hold in raw AND neutral mode.
+thresholds:
+  a_max_drop: 0.010                 # CV macro-F1 delta >= -0.010
+  b_max_auroc_drop: 0.010           # dAUROC >= -0.010
+  b_max_rej95_drop: 0.03            # dRejection@95 >= -0.03
+  c_max_flip_increase: 0.02         # candidate flip rate <= ref + 0.02
+  d_max_agreement_drop: 0.010       # translation agreement delta >= -0.010
+  e_max_ece_increase: 0.02          # candidate ECE <= ref + 0.02
+
+bootstrap:
+  n_resamples: 10000
+  seed: 42
+  level: 0.95
+
+# Candidates (complete list; nothing else is selectable). `weights` = the weight set whose CV outputs
+# and arrays the candidate uses; scorer / thr = the open-set scoring variant (ood_variants.py).
+# Combos are resolved by stage `combos` into results/phase6a/combos_choice.json (pre-listed pick rules).
+candidates:
+  - {key: i1a, weights: ref, scorer: i1a, thr: global, components: 1}
+  - {key: i1b, weights: ref, scorer: i1b, thr: global, components: 1}
+  - {key: i6a, weights: ref, scorer: maha_ft, thr: i6a, components: 1}
+  - {key: i6b, weights: ref, scorer: maha_ft, thr: i6b, components: 1}
+  - {key: i3u, weights: i3u, scorer: maha_ft, thr: global, components: 1}
+  - {key: i3g, weights: i3g, scorer: maha_ft, thr: global, components: 1}
+  - {key: i4a, weights: i4a, scorer: maha_ft, thr: global, components: 1}
+  - {key: i4b, weights: i4b, scorer: maha_ft, thr: global, components: 1}
+  - {key: i3i4, weights: i3i4, scorer: maha_ft, thr: global, components: 2, combo: true}
+  - {key: i3i1, weights: i3x, scorer: i1x, thr: global, components: 2, combo: true}
+  - {key: i3i4i1, weights: i3i4, scorer: i1x, thr: global, components: 3, combo: true}
+  - {key: i3i4i1i6, weights: i3i4, scorer: i1x, thr: i6x, components: 4, combo: true}
+
+# Post-selection stages. Wiring only: no rule is changed here.
+confirm_report:
+  results_subdir: confirm_runs      # score tables / run jsons, under results/phase6a/
+  outputs_subdir: confirm           # per-run npz, under outputs/phase6a/
+  test_log: confirm_test_inference_log.jsonl   # under results/phase6a/; call_type phase6a_confirm
+  # CONFIRM + headline were already used in earlier phases (adaptive reuse): the count is tallied by
+  # code from these artifacts (existing file => that phase's look happened).
+  looks:
+    confirm:
+      - {phase: "3", path: results/trackb/loco.json}          # LOCO over all 10 classes incl. CONFIRM
+      - {phase: "3b", path: results/trackb_improve/confirm.json}
+      - {phase: "4c", path: results/phase4c/confirm_comb.json}
+      - {phase: "4e", path: results/phase4e/confirm_a1a3.json}
+    headline:
+      - {phase: "3", path: results/trackb/headline.json}
+      - {phase: "3b", path: results/trackb_improve/confirm.json}
+      - {phase: "4c", path: results/phase4c/confirm_comb.json}
+      - {phase: "4e", path: results/phase4e/confirm_a1a3.json}
+
+final_v4:                           # stage final_retrain (only when selection != ref)
+  version: v4
+  archive_results: results/final_v1_pre6a
+  archive_outputs: outputs/final_v1_pre6a
+  v2_results: results/final_v2      # quoted for the record only
+  model_dir: outputs/final_model_v4
+  results_dir: results/phase6a/final_v4        # derived config + CV stand-ins (ids and numbers only)
+  robustness_results: results/phase6a/final_v4_robustness
+  side_by_side: results/phase6a/final_pre6a_vs_v4.json
+  sdpa_timing_run: false
+  oof_predictions_per_id: 3         # 3 model seeds / replicates x fold-seed s0
+
+wandb:
+  project: intent-router
+  group_prefix: phase6a             # groups: phase6a-<weights key>
+  enabled: true

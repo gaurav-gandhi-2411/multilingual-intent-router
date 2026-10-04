@@ -1,0 +1,37 @@
+{
+  "version": "v1",
+  "repo_id": "gauravgandhi2411/multilingual-intent-router",
+  "revision": "main",
+  "revision_sha": "f728d026be929868028308ba3daa9e8d08877659",
+  "n": 74,
+  "n_labels": 12,
+  "label_agreement": 1.0,
+  "n_label_mismatch": 0,
+  "max_abs_prob_diff": 1.8561970646091552e-06,
+  "mean_abs_prob_diff": 2.7234280189147312e-08,
+  "max_abs_confidence_diff": 1.8561970646091552e-06,
+  "max_abs_prob_diff_temperature_scaled": 1.8062463672530171e-06,
+  "test_coverage_at_threshold": 0.9864864864864865,
+  "temperature": 1.0228290548483843,
+  "ood_threshold": -128.06341286077185,
+  "model_fingerprint": "7ca22e16d2ace345d9dcf7737887e85fedf400a1dfc863678c2fc2663bf102bd",
+  "probabilities": "plain softmax, T = 1 (the saved prob_* convention); predict.py applies the temperature on top, checked via max_abs_prob_diff_temperature_scaled",
+  "tolerances": {
+    "max_abs_prob_diff": 1e-05,
+    "label_agreement": 1.0
+  },
+  "passes": true,
+  "reference": "results/final/test_predictions.csv",
+  "log_timestamp": "2026-10-03T02:10:17+05:30",
+  "files_checked": [
+    ".gitattributes",
+    "README.md",
+    "config.json",
+    "model.safetensors",
+    "ood_bank.safetensors",
+    "predict.py",
+    "tokenizer.json",
+    "tokenizer_config.json"
+  ],
+  "kind": "inference reproduction check on the test split (not a new evaluation)"
+}

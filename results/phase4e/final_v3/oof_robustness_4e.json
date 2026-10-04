@@ -1,0 +1,613 @@
+{
+  "note": "from results/phase4e/<cand>/s*/folds.json (4e definitions); the fold models were deleted after OOF extraction, so rb.stage_* cannot re-run on OOF rows",
+  "v1": {
+    "0": {
+      "oof_accuracy": 0.9295774647887324,
+      "oof_macro_f1": 0.930903371693427,
+      "swap": {
+        "pooled": {
+          "n": 84,
+          "n_flips": 23,
+          "flip_rate": 0.27380952380952384,
+          "accuracy_swapped": 0.7023809523809523,
+          "accuracy_clean": 0.9404761904761905
+        },
+        "per_swap": {
+          "LD->REF": {
+            "n": 38,
+            "n_flips": 9,
+            "flip_rate": 0.23684210526315788,
+            "accuracy_swapped": 0.7368421052631579,
+            "accuracy_clean": 0.9736842105263158
+          },
+          "PO->REF": {
+            "n": 19,
+            "n_flips": 7,
+            "flip_rate": 0.3684210526315789,
+            "accuracy_swapped": 0.5789473684210527,
+            "accuracy_clean": 0.8947368421052632
+          },
+          "other->REF": {
+            "n": 27,
+            "n_flips": 7,
+            "flip_rate": 0.25925925925925924,
+            "accuracy_swapped": 0.7407407407407407,
+            "accuracy_clean": 0.9259259259259259
+          }
+        }
+      },
+      "noise": {
+        "n": 426,
+        "accuracy_clean": 0.9295774647887324,
+        "accuracy_noisy": 0.7816901408450704,
+        "drop": 0.147887323943662,
+        "flip_rate": 0.20422535211267606
+      },
+      "translation": {
+        "es": {
+          "filtered": {
+            "n": 355,
+            "agreement": 0.895774647887324,
+            "accuracy": 0.8816901408450705
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.8945945945945946,
+            "accuracy": 0.8810810810810811
+          }
+        },
+        "fr": {
+          "filtered": {
+            "n": 356,
+            "agreement": 0.8707865168539326,
+            "accuracy": 0.8595505617977528
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.8702702702702703,
+            "accuracy": 0.8594594594594595
+          }
+        },
+        "de": {
+          "filtered": {
+            "n": 357,
+            "agreement": 0.8795518207282913,
+            "accuracy": 0.8823529411764706
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.8810810810810811,
+            "accuracy": 0.8837837837837837
+          }
+        },
+        "zh": {
+          "filtered": {
+            "n": 278,
+            "agreement": 0.8201438848920863,
+            "accuracy": 0.7877697841726619
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.8162162162162162,
+            "accuracy": 0.7837837837837838
+          }
+        },
+        "mean_filtered": {
+          "agreement": 0.8665642175904085,
+          "accuracy": 0.852840856997989
+        },
+        "mean_unfiltered": {
+          "agreement": 0.8655405405405405,
+          "accuracy": 0.852027027027027
+        }
+      }
+    },
+    "1": {
+      "oof_accuracy": 0.9436619718309859,
+      "oof_macro_f1": 0.9445766013585409,
+      "swap": {
+        "pooled": {
+          "n": 84,
+          "n_flips": 20,
+          "flip_rate": 0.23809523809523808,
+          "accuracy_swapped": 0.7619047619047619,
+          "accuracy_clean": 0.9404761904761905
+        },
+        "per_swap": {
+          "LD->REF": {
+            "n": 38,
+            "n_flips": 6,
+            "flip_rate": 0.15789473684210525,
+            "accuracy_swapped": 0.8421052631578947,
+            "accuracy_clean": 1.0
+          },
+          "PO->REF": {
+            "n": 19,
+            "n_flips": 7,
+            "flip_rate": 0.3684210526315789,
+            "accuracy_swapped": 0.6842105263157895,
+            "accuracy_clean": 0.8421052631578947
+          },
+          "other->REF": {
+            "n": 27,
+            "n_flips": 7,
+            "flip_rate": 0.25925925925925924,
+            "accuracy_swapped": 0.7037037037037037,
+            "accuracy_clean": 0.9259259259259259
+          }
+        }
+      },
+      "noise": {
+        "n": 426,
+        "accuracy_clean": 0.9436619718309859,
+        "accuracy_noisy": 0.7652582159624414,
+        "drop": 0.1784037558685445,
+        "flip_rate": 0.22535211267605634
+      },
+      "translation": {
+        "es": {
+          "filtered": {
+            "n": 355,
+            "agreement": 0.9070422535211268,
+            "accuracy": 0.8732394366197183
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.9027027027027027,
+            "accuracy": 0.8702702702702703
+          }
+        },
+        "fr": {
+          "filtered": {
+            "n": 356,
+            "agreement": 0.898876404494382,
+            "accuracy": 0.8595505617977528
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.8972972972972973,
+            "accuracy": 0.8594594594594595
+          }
+        },
+        "de": {
+          "filtered": {
+            "n": 357,
+            "agreement": 0.865546218487395,
+            "accuracy": 0.8403361344537815
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.8648648648648649,
+            "accuracy": 0.8405405405405405
+          }
+        },
+        "zh": {
+          "filtered": {
+            "n": 278,
+            "agreement": 0.7410071942446043,
+            "accuracy": 0.7446043165467626
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.7594594594594595,
+            "accuracy": 0.7567567567567568
+          }
+        },
+        "mean_filtered": {
+          "agreement": 0.853118017686877,
+          "accuracy": 0.8294326123545037
+        },
+        "mean_unfiltered": {
+          "agreement": 0.856081081081081,
+          "accuracy": 0.8317567567567568
+        }
+      }
+    },
+    "2": {
+      "oof_accuracy": 0.9295774647887324,
+      "oof_macro_f1": 0.928637985842502,
+      "swap": {
+        "pooled": {
+          "n": 84,
+          "n_flips": 17,
+          "flip_rate": 0.20238095238095238,
+          "accuracy_swapped": 0.75,
+          "accuracy_clean": 0.8809523809523809
+        },
+        "per_swap": {
+          "LD->REF": {
+            "n": 38,
+            "n_flips": 3,
+            "flip_rate": 0.07894736842105263,
+            "accuracy_swapped": 0.9210526315789473,
+            "accuracy_clean": 0.9473684210526315
+          },
+          "PO->REF": {
+            "n": 19,
+            "n_flips": 7,
+            "flip_rate": 0.3684210526315789,
+            "accuracy_swapped": 0.47368421052631576,
+            "accuracy_clean": 0.7368421052631579
+          },
+          "other->REF": {
+            "n": 27,
+            "n_flips": 7,
+            "flip_rate": 0.25925925925925924,
+            "accuracy_swapped": 0.7037037037037037,
+            "accuracy_clean": 0.8888888888888888
+          }
+        }
+      },
+      "noise": {
+        "n": 426,
+        "accuracy_clean": 0.9295774647887324,
+        "accuracy_noisy": 0.7723004694835681,
+        "drop": 0.15727699530516426,
+        "flip_rate": 0.20657276995305165
+      },
+      "translation": {
+        "es": {
+          "filtered": {
+            "n": 355,
+            "agreement": 0.8901408450704226,
+            "accuracy": 0.8704225352112676
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.8837837837837837,
+            "accuracy": 0.8648648648648649
+          }
+        },
+        "fr": {
+          "filtered": {
+            "n": 356,
+            "agreement": 0.8820224719101124,
+            "accuracy": 0.8567415730337079
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.8837837837837837,
+            "accuracy": 0.8567567567567568
+          }
+        },
+        "de": {
+          "filtered": {
+            "n": 357,
+            "agreement": 0.834733893557423,
+            "accuracy": 0.8235294117647058
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.8324324324324325,
+            "accuracy": 0.8243243243243243
+          }
+        },
+        "zh": {
+          "filtered": {
+            "n": 278,
+            "agreement": 0.7553956834532374,
+            "accuracy": 0.7482014388489209
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.7594594594594595,
+            "accuracy": 0.7405405405405405
+          }
+        },
+        "mean_filtered": {
+          "agreement": 0.840573223497799,
+          "accuracy": 0.8247237397146505
+        },
+        "mean_unfiltered": {
+          "agreement": 0.8398648648648649,
+          "accuracy": 0.8216216216216217
+        }
+      }
+    }
+  },
+  "a1a3": {
+    "0": {
+      "oof_accuracy": 0.9389671361502347,
+      "oof_macro_f1": 0.9381046628429189,
+      "swap": {
+        "pooled": {
+          "n": 84,
+          "n_flips": 5,
+          "flip_rate": 0.05952380952380952,
+          "accuracy_swapped": 0.8809523809523809,
+          "accuracy_clean": 0.9047619047619048
+        },
+        "per_swap": {
+          "LD->REF": {
+            "n": 38,
+            "n_flips": 0,
+            "flip_rate": 0.0,
+            "accuracy_swapped": 1.0,
+            "accuracy_clean": 1.0
+          },
+          "PO->REF": {
+            "n": 19,
+            "n_flips": 2,
+            "flip_rate": 0.10526315789473684,
+            "accuracy_swapped": 0.7894736842105263,
+            "accuracy_clean": 0.7894736842105263
+          },
+          "other->REF": {
+            "n": 27,
+            "n_flips": 3,
+            "flip_rate": 0.1111111111111111,
+            "accuracy_swapped": 0.7777777777777778,
+            "accuracy_clean": 0.8518518518518519
+          }
+        }
+      },
+      "noise": {
+        "n": 426,
+        "accuracy_clean": 0.9389671361502347,
+        "accuracy_noisy": 0.8309859154929577,
+        "drop": 0.107981220657277,
+        "flip_rate": 0.13849765258215962
+      },
+      "translation": {
+        "es": {
+          "filtered": {
+            "n": 355,
+            "agreement": 0.9211267605633803,
+            "accuracy": 0.8760563380281691
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.9216216216216216,
+            "accuracy": 0.8783783783783784
+          }
+        },
+        "fr": {
+          "filtered": {
+            "n": 356,
+            "agreement": 0.9241573033707865,
+            "accuracy": 0.8876404494382022
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.927027027027027,
+            "accuracy": 0.8864864864864865
+          }
+        },
+        "de": {
+          "filtered": {
+            "n": 357,
+            "agreement": 0.8991596638655462,
+            "accuracy": 0.8823529411764706
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.8972972972972973,
+            "accuracy": 0.8837837837837837
+          }
+        },
+        "zh": {
+          "filtered": {
+            "n": 278,
+            "agreement": 0.8453237410071942,
+            "accuracy": 0.8129496402877698
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.8405405405405405,
+            "accuracy": 0.8081081081081081
+          }
+        },
+        "mean_filtered": {
+          "agreement": 0.8974418672017268,
+          "accuracy": 0.8647498422326529
+        },
+        "mean_unfiltered": {
+          "agreement": 0.8966216216216216,
+          "accuracy": 0.8641891891891892
+        }
+      }
+    },
+    "1": {
+      "oof_accuracy": 0.9366197183098591,
+      "oof_macro_f1": 0.9360958274668824,
+      "swap": {
+        "pooled": {
+          "n": 84,
+          "n_flips": 5,
+          "flip_rate": 0.05952380952380952,
+          "accuracy_swapped": 0.8333333333333334,
+          "accuracy_clean": 0.8928571428571429
+        },
+        "per_swap": {
+          "LD->REF": {
+            "n": 38,
+            "n_flips": 1,
+            "flip_rate": 0.02631578947368421,
+            "accuracy_swapped": 0.9473684210526315,
+            "accuracy_clean": 0.9736842105263158
+          },
+          "PO->REF": {
+            "n": 19,
+            "n_flips": 2,
+            "flip_rate": 0.10526315789473684,
+            "accuracy_swapped": 0.7368421052631579,
+            "accuracy_clean": 0.8421052631578947
+          },
+          "other->REF": {
+            "n": 27,
+            "n_flips": 2,
+            "flip_rate": 0.07407407407407407,
+            "accuracy_swapped": 0.7407407407407407,
+            "accuracy_clean": 0.8148148148148148
+          }
+        }
+      },
+      "noise": {
+        "n": 426,
+        "accuracy_clean": 0.9366197183098591,
+        "accuracy_noisy": 0.852112676056338,
+        "drop": 0.08450704225352113,
+        "flip_rate": 0.11971830985915492
+      },
+      "translation": {
+        "es": {
+          "filtered": {
+            "n": 355,
+            "agreement": 0.9295774647887324,
+            "accuracy": 0.8873239436619719
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.9243243243243243,
+            "accuracy": 0.8837837837837837
+          }
+        },
+        "fr": {
+          "filtered": {
+            "n": 356,
+            "agreement": 0.9325842696629213,
+            "accuracy": 0.8764044943820225
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.9297297297297298,
+            "accuracy": 0.8783783783783784
+          }
+        },
+        "de": {
+          "filtered": {
+            "n": 357,
+            "agreement": 0.8907563025210085,
+            "accuracy": 0.8543417366946778
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.8837837837837837,
+            "accuracy": 0.8486486486486486
+          }
+        },
+        "zh": {
+          "filtered": {
+            "n": 278,
+            "agreement": 0.8489208633093526,
+            "accuracy": 0.8093525179856115
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.8378378378378378,
+            "accuracy": 0.8027027027027027
+          }
+        },
+        "mean_filtered": {
+          "agreement": 0.9004597250705036,
+          "accuracy": 0.8568556731810709
+        },
+        "mean_unfiltered": {
+          "agreement": 0.893918918918919,
+          "accuracy": 0.8533783783783784
+        }
+      }
+    },
+    "2": {
+      "oof_accuracy": 0.931924882629108,
+      "oof_macro_f1": 0.9311867926850832,
+      "swap": {
+        "pooled": {
+          "n": 84,
+          "n_flips": 3,
+          "flip_rate": 0.03571428571428571,
+          "accuracy_swapped": 0.8333333333333334,
+          "accuracy_clean": 0.8690476190476191
+        },
+        "per_swap": {
+          "LD->REF": {
+            "n": 38,
+            "n_flips": 0,
+            "flip_rate": 0.0,
+            "accuracy_swapped": 0.9736842105263158,
+            "accuracy_clean": 0.9736842105263158
+          },
+          "PO->REF": {
+            "n": 19,
+            "n_flips": 0,
+            "flip_rate": 0.0,
+            "accuracy_swapped": 0.6842105263157895,
+            "accuracy_clean": 0.6842105263157895
+          },
+          "other->REF": {
+            "n": 27,
+            "n_flips": 3,
+            "flip_rate": 0.1111111111111111,
+            "accuracy_swapped": 0.7407407407407407,
+            "accuracy_clean": 0.8518518518518519
+          }
+        }
+      },
+      "noise": {
+        "n": 426,
+        "accuracy_clean": 0.931924882629108,
+        "accuracy_noisy": 0.8403755868544601,
+        "drop": 0.09154929577464788,
+        "flip_rate": 0.12206572769953052
+      },
+      "translation": {
+        "es": {
+          "filtered": {
+            "n": 355,
+            "agreement": 0.9211267605633803,
+            "accuracy": 0.8788732394366198
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.918918918918919,
+            "accuracy": 0.8783783783783784
+          }
+        },
+        "fr": {
+          "filtered": {
+            "n": 356,
+            "agreement": 0.9241573033707865,
+            "accuracy": 0.8764044943820225
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.927027027027027,
+            "accuracy": 0.8756756756756757
+          }
+        },
+        "de": {
+          "filtered": {
+            "n": 357,
+            "agreement": 0.9103641456582633,
+            "accuracy": 0.865546218487395
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.9081081081081082,
+            "accuracy": 0.8621621621621621
+          }
+        },
+        "zh": {
+          "filtered": {
+            "n": 278,
+            "agreement": 0.8489208633093526,
+            "accuracy": 0.8057553956834532
+          },
+          "unfiltered": {
+            "n": 370,
+            "agreement": 0.8621621621621621,
+            "accuracy": 0.827027027027027
+          }
+        },
+        "mean_filtered": {
+          "agreement": 0.9011422682254456,
+          "accuracy": 0.8566448369973726
+        },
+        "mean_unfiltered": {
+          "agreement": 0.904054054054054,
+          "accuracy": 0.8608108108108108
+        }
+      }
+    }
+  }
+}

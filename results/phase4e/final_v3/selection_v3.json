@@ -1,0 +1,13 @@
+{
+  "candidates": {
+    "p4e_a1a3": {
+      "chosen_epoch": 6,
+      "n_runs": 15,
+      "macro_f1_mean": 0.9338332559789014,
+      "macro_f1_std": 0.03183226993701699,
+      "accuracy_mean": 0.9358413132694939,
+      "accuracy_std": 0.02908334070224972,
+      "note": "Phase 4e config a1a3: 5 folds x model seeds [0, 1, 2], fold-seed s0 (15 fold-runs); v1 used 9 fold-runs per id"
+    }
+  }
+}

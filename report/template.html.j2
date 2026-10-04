@@ -1,0 +1,492 @@
+{#- Report template. No numeric literals: every number is n('key') from report/data.py. Main sections are numbered 1-7 and appendix sections lettered A-K by CSS counters; text that cites a section takes it from `sec` (report/data.py section_numbers). -#}
+{% macro M() %}<span class="tag">measured</span>{% endmacro %}
+{% macro E() %}<span class="tag e">estimate</span>{% endmacro %}
+{% macro O() %}<span class="tag o">optimistic</span>{% endmacro %}
+{% macro P() %}<span class="tag p">placeholder</span>{% endmacro %}
+{% set ns = namespace(i=0) %}
+{% macro L() %}{% set ns.i = ns.i + 1 %}({{ 'abcdefgh'[ns.i - 1] }}){% endmacro %}
+{% macro c(k) %}{% if k %}{{ n(k) }}{% else %}n/a{% endif %}{% endmacro %}
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>intent-router report{% if not publish %} (draft){% endif %}</title>
+<style>{{ css }}</style>
+</head>
+<body>
+<header class="title">
+<h1>Multilingual intent router: a fine-tuned classifier with open-set abstention</h1>
+<div class="sub">{% if not publish %}DRAFT for private review. {% endif %}Data: a synthetic logistics intent dataset ({{ n('eda.n') }} rows,
+{{ n('eda.k') }} classes) provided for an assessment; not redistributed, no message text appears in this document.
+Every number is rendered by code from <code>results/*.json</code> (key-to-file map: <code>report/provenance.json</code> in the public repository). Labels: {{ M() }} = measured (seed, split and interval stated) &middot; {{ E() }} = estimate (assumption stated) &middot;
+{{ O() }} = post-selection, optimistic.</div>
+<p class="links"><b>Links.</b> Model (Hugging Face): {{ lk('hf') }} &middot; W&amp;B report: {{ lk('wandb') }} &middot; GitHub: {{ lk('repo') }} &middot; Colab notebook: {{ lk('colab') }}</p>
+{% if appendix_pointer %}
+<p class="links">{{ appendix_pointer }}</p>
+{% endif %}
+</header>
+<main>
+
+<div class="box exec">
+<p><b>Summary.</b> <b>Method:</b> open-set behaviour is evaluated class-held-out (whole intents are removed from training), splits are stratified and duplicate-grouped, decision rules were fixed before the results, reported numbers are rendered from saved results and recomputed by a separate check, training is bitwise reproducible within a GPU type, and a Colab T4 reproduction passes ({% if repro_colab %}{{ t('rc.verdict') }}{% else %}run at publish time{% endif %}).
+<b>Results:</b> a fine-tuned multilingual-e5-base classifier routes {{ n('eda.k') }} intents with test macro-F1 {{ n('a.f1') }} ({{ M() }} one test evaluation, n = {{ n('a.n') }}; floors B0 {{ n('a.B0.f1') }}, B1 {{ n('a.B1.f1') }}) and out-of-fold macro-F1 {{ n('oof.f1') }} ({{ O() }}).
+On the headline holdout at {{ n(R95) }} known-class retention ({{ M() }}), the shipped Mahalanobis scorer rejects {{ n('tb.headline.strict_recall_95') }} of unknown-intent rows (strict) at {{ n('tb.headline.retention_95') }} retention and AUROC {{ n('tb.headline.auroc') }}, against {{ n('tb.m.msp.strict_rejection_recall') }} at {{ n('tb.m.msp.retention_known') }} and AUROC {{ n('tb.m.msp.auroc') }} for the MSP baseline.
+<b>Limit and next step:</b> open-set rejection is the measured limit; an oracle probe reaches AUROC {{ n(p6a.d1.rows[0].unseen) }} against {{ n(p6a.d1.maha) }} unsupervised, so the classes are separable and the missing piece is a negative training signal (an upper bound, not achievable rejection; Appendix {{ sec.diag }}), and the next step is verified hard negatives and more labels.
+v1 ships although the selection rule, fixed before the candidates were run, picked v3, because v3 changed headline strict rejection by {{ n('trd.head.rej95') }} (paired CI; Appendix {{ sec.history }}).</p>
+</div>
+
+<table class="head">
+<tr><th>Headline ({{ M() }}; {{ n('a.boot.level') }} intervals)</th><th class="num">MSP baseline</th><th class="num">Shipped scorer (v1)</th></tr>
+<tr class="ship"><td>Track A: test macro-F1 (primary; n = {{ n('a.n') }}, one evaluation)</td><td class="num">&mdash;</td><td class="num">{{ n('a.f1') }}</td></tr>
+<tr><td>Track A: test accuracy</td><td class="num">&mdash;</td><td class="num">{{ n('a.acc') }}</td></tr>
+<tr><td>Track B: AUROC (headline holdout)</td><td class="num">{{ n('tb.m.msp.auroc') }}</td><td class="num">{{ n('tb.headline.auroc') }}</td></tr>
+<tr class="ship"><td>Track B: strict rejection of unknown intents at the {{ n(R95) }} retention point</td><td class="num">{{ n('tb.m.msp.strict_rejection_recall') }}</td><td class="num">{{ n('tb.headline.strict_recall_95') }}</td></tr>
+<tr><td>Track B: known retention at the same point</td><td class="num">{{ n('tb.m.msp.retention_known') }}</td><td class="num">{{ n('tb.headline.retention_95') }}</td></tr>
+</table>
+<div class="cap">Track A: {{ n('a.boot.level') }} percentile bootstrap ({{ n('a.boot.n') }} resamples, seed {{ n('a.boot.seed') }}), model seed {{ n('a.model_seed') }}. Track B: {{ n('tb.n_seeds') }}-seed means; MSP as mean &plusmn; std over seeds, the shipped Mahalanobis scorer with a {{ n('a.boot.level') }} interval (rows resampled within the holdout, {{ n('tb.boot.n') }} resamples).</div>
+
+<h2>Approach and Model Selection</h2>
+<p><b>Approach.</b> Two parts for a {{ n('eda.k') }}-way, multilingual, open-set task. A closed-set classifier: multilingual-e5-base fine-tuned end to end (learning rate {{ n('a.lr') }}, batch {{ n('a.batch') }}, stopped at epoch {{ n('a.epoch') }}, seed {{ n('a.model_seed') }}) with temperature scaling; floors are B0 (character TF-IDF + LR) and B1 (frozen e5 + LR). And a post-hoc Mahalanobis open-set score on its penultimate features, thresholded on known-class validation rows only so that {{ n('srv.ret_target') }} of known rows are kept; messages below it go to an unknown path instead of a handler.</p>
+<table class="bk">
+<tr><th>Candidate (all <code>AutoModelForSequenceClassification</code>)</th><th class="num">CV macro-F1 (mean &plusmn; std)</th><th class="num">params (M)</th><th class="num">s / run</th></tr>
+{% for r in bakeoff[2:] %}
+<tr{% if r.epoch and loop.first %} class="ship"{% endif %}><td>{{ r.name }}</td><td class="num">{{ n(r.f1) }} &plusmn; {{ n(r.f1s) }}</td><td class="num">{{ c(r.params) }}</td><td class="num">{{ n(r.wall) }}</td></tr>
+{% endfor %}
+</table>
+<div class="cap">{{ M() }} {{ O() }} CV on train+val only, {{ n('bk.e5_lr3e-05.n') }} fold-runs for the best learning rate per model; test untouched. Full table: Appendix {{ sec.ablations }}.</div>
+<p><b>Why e5-base.</b> The selection rules were fixed before the candidates were run: highest mean CV macro-F1, and a smaller or faster model within one std wins instead. e5-base has the highest CV macro-F1 ({{ n('bk.e5_lr3e-05.f1') }} &plusmn; {{ n('bk.e5_lr3e-05.f1s') }}); the others fall below its mean minus one std ({{ n('bk.win_threshold') }}) and no rival is smaller or faster, so the second rule does not trigger (best rival {{ n('bk.r2_gap') }} behind). Cost of the choice: the fp32 weights are {{ n('q.size.torch') }} MB{% if srv_colab %} and the shipped ONNX fp32 backend serves a batch-1 message on one CPU thread at p50 {{ n('srv.onnx_fp32.t1.p50') }} ms (measured on Colab){% else %}; CPU latency is measured in the Colab canonical run and filled at publish time{% endif %}.</p>
+<p><b>Encoder versus LLM.</b> Local 8B instruction models ({{ llm_models }}, zero-shot and {{ n('llm.n_shots') }}-shot) on the same {{ n('a.n') }} test rows reach macro-F1 {{ n('llm.f1_min') }} to {{ n('llm.f1_max') }} against {{ n('a.f1') }} and almost never abstain (strict rejection at most {{ n('llm.rej_max') }} against {{ n('llm.ft_rej') }} at {{ n('llm.ft_ret') }} retention for the shipped scorer); {{ M() }} on the same local GPU they take p50 {{ n('llm.p50_min') }} to {{ n('llm.p50_max') }} ms per message against {{ n('ft.gpu1.p50_ms') }} ms for the encoder (at least {{ n('ratio.lat_gpu') }}&times;) and cost {{ n('llm.usd_min') }} to {{ n('llm.usd_max') }} per 1k messages against {{ n('ft.gpu1.usd') }} (at least {{ n('ratio.usd') }}&times;; {{ E() }} optimistic lower bound at {{ n('llm.gpu_hr') }} per hour). This GPU basis is the only like-for-like one: the encoder's CPU latency was measured on shared Colab vCPUs and no LLM was timed on CPU, so no CPU-versus-GPU ratio is formed (Appendix {{ sec.llm }}).</p>
+
+<h2>Data Characteristics and Handling</h2>
+<ul class="tight">
+<li><b>Class imbalance.</b> Ratio {{ n('eda.imb') }} (largest class {{ n('eda.cc_max') }} rows, smallest {{ n('eda.cc_min') }}): macro-F1 and stratified, duplicate-grouped splits; class-weighted cross-entropy was ablated, not adopted (CV delta {{ n('abl.class_weight.delta') }}, p = {{ n('abl.class_weight.p') }}).</li>
+<li><b>Multilingual.</b> Language ID ({{ M() }}) finds {{ n('eda.nonen') }} non-English by primary language, not the stated ~{{ n('eda.claim') }}; Spanish, French, German and Chinese slices are small ({{ n('eda.lang.es') }}, {{ n('eda.lang.fr') }}, {{ n('eda.lang.de') }}, {{ n('eda.lang.zh') }} rows), so each carries n and an interval.</li>
+<li><b>Sibling classes.</b> The three <code>shipment_information.*</code> classes overlap lexically (nearest-neighbour accuracy {{ n('eda.sib_1nn') }}); a hierarchical auxiliary loss gave no gain over the CV noise band (delta {{ n('abl.hier_aux.delta') }}, p = {{ n('abl.hier_aux.p') }}); plain cross-entropy kept.</li>
+<li><b>Noise.</b> {{ n('eda.short') }} rows are very short (emoji, one-liners) and kept; {{ n('eda.noisy') }} of rows are noisy ({{ n('eda.lower') }} all-lower-case, {{ n('eda.slang') }} slang); robustness is measured in Appendix {{ sec.robust }}.</li>
+<li><b>Catch-all classes.</b> <code>chitchat</code> ({{ n('eda.cc.chitchat') }} rows) and <code>other</code> ({{ n('eda.cc.other') }} rows) are the smallest classes (test F1 {{ n('a.pc.chitchat.f1') }}, n = {{ n('a.pc.chitchat.support') }}; {{ n('a.pc.other.f1') }}, n = {{ n('a.pc.other.support') }}: small n, indicative).</li>
+<li><b>Small data.</b> {{ n('eda.n') }} rows in total and a {{ n('a.n') }}-row test split, so one error moves a class F1 a lot; weight decay {{ n('a.wd') }} and the stopping epoch were chosen on CV, never on test, and headline numbers carry an interval.</li>
+<li><b>ID-prefix shortcut.</b> PO-style IDs occur in {{ n('eda.sc.po.n') }} rows, {{ n('eda.sc.po.share') }} labelled <code>{{ t('eda.sc.po.top') }}</code>; LD-style IDs in {{ n('eda.sc.ld.n') }} rows, {{ n('eda.sc.ld.share') }} <code>{{ t('eda.sc.ld.top') }}</code>. Swapping the LD prefix for the neutral REF prefix flips {{ n('swap.LD->REF.rate') }} of LD rows (Appendix {{ sec.robust }}).</li>
+</ul>
+
+<h2>Closed-Set Classification (Track A)</h2>
+<p><b>Why macro-F1.</b> Each intent routes to a different handler, so the {{ n('eda.k') }} classes count equally; accuracy ({{ n('a.acc') }}) is the sanity number and hides per-class differences at {{ n('a.sup_min') }} to {{ n('a.sup_max') }} test rows per class (lowest-scoring class <code>{{ t('a.worst.label') }}</code>, F1 {{ n('a.worst.f1') }}, support {{ n('a.worst.support') }}).</p>
+<div class="grid-fig">
+<div>
+<table class="pc1">
+<tr><th>Class (test, single evaluation)</th><th class="num">P</th><th class="num">R</th><th class="num">F1</th><th class="num">n</th></tr>
+{% for r in perclass %}
+<tr><td>{{ r.label }}</td><td class="num">{{ n(r.precision) }}</td><td class="num">{{ n(r.recall) }}</td><td class="num">{{ n(r.f1) }}</td><td class="num">{{ n(r.support) }}</td></tr>
+{% endfor %}
+</table>
+</div>
+<figure><img src="{{ figs.confusion }}" alt="confusion matrix, test"><div class="cap">{{ M() }} confusion counts, test, n = {{ n('a.n') }}.</div></figure>
+</div>
+<p><b>Paired comparison on the same test rows.</b> Fine-tuned minus B0: {{ n('a.B0.delta') }} (McNemar exact p = {{ n('a.B0.mc_p') }}); minus B1: {{ n('a.B1.delta') }} (McNemar exact p = {{ n('a.B1.mc_p') }}, so the gap to B1 sits inside its interval at n = {{ n('a.n') }}). Out-of-fold scores, calibration and slices: Appendix {{ sec.ablations }}.</p>
+
+<h2>Open-Set Abstention (Track B)</h2>
+<p>Whole classes are held out ({{ t('tb.holdout') }}, headline) and removed from training and calibration; the evaluation set is {{ n('tb.n_known') }} known test rows plus {{ n('tb.n_unknown') }} unknown rows, over {{ n('tb.n_seeds') }} model seeds. <b>Threshold rule:</b> the score threshold is set on known-only validation rows so that {{ n(R95) }} of them are kept; for the shipped Mahalanobis scorer it is {{ n('srv.thr') }} ({{ n('srv.retention') }} achieved on validation). Strict mode counts only <code>unknown</code> as a rejection.</p>
+<table class="tbm">
+<tr><th>Headline holdout ({{ M() }}; {{ n('tb.n_seeds') }}-seed mean &plusmn; std)</th><th class="num">AUROC</th><th class="num">rejection @ {{ n(R95) }}</th><th class="num">retention @ {{ n(R95) }}</th><th class="num">rejection @ {{ n(R90) }}</th><th class="num">retention @ {{ n(R90) }}</th></tr>
+<tr><td>MSP baseline</td><td class="num">{{ n('tb.m.msp.auroc') }}</td><td class="num">{{ n('tb.m.msp.strict_rejection_recall') }}</td><td class="num">{{ n('tb.m.msp.retention_known') }}</td><td class="num">{{ n('tb.op90.msp.rej') }}</td><td class="num">{{ n('tb.op90.msp.ret') }}</td></tr>
+<tr class="ship"><td>Shipped: Mahalanobis on fine-tuned features (v1)</td><td class="num">{{ n('tb.m.maha_ft.auroc') }}</td><td class="num">{{ n('tb.m.maha_ft.strict_rejection_recall') }}</td><td class="num">{{ n('tb.m.maha_ft.retention_known') }}</td><td class="num">{{ n('tb.op90.maha_ft.rej') }}</td><td class="num">{{ n('tb.op90.maha_ft.ret') }}</td></tr>
+</table>
+<div class="cap">Rejection = strict rejection recall of unknown rows; retention = share of known rows kept. The {{ n(R90) }} columns are recomputed from the saved score tables with the same threshold rule (the {{ n(R95) }} columns are the stored values, which the recomputation reproduces). Shipped v1 with {{ n('a.boot.level') }} intervals: rejection {{ n('tb.headline.strict_recall_95') }} at retention {{ n('tb.headline.retention_95') }}; at the {{ n(R90) }} point {{ n('tb.headline.strict_recall_90') }} at {{ n('tb.headline.retention_90') }}. The full scorer table is in Appendix {{ sec.trackb_full }}.</div>
+<p><b>Root cause, in one line.</b> The oracle probe (D1) trained on the held-out-class labels reaches AUROC {{ n(p6a.d1.rows[0].unseen) }} on the unseen-known pool against {{ n(p6a.d1.maha) }} for the unsupervised scorer: the classes are separable and the missing piece is a negative training signal (an upper bound, not achievable rejection). Next step: verified hard negatives; details in Appendix {{ sec.diag }}.</p>
+
+<h2>Error Analysis</h2>
+<p><b>Top out-of-fold confusions</b> ({{ n('err.oof45.n_runs') }} fold-runs; {{ M() }} {{ O() }}): {% for r in top_conf[:3] %}{{ t(r.gold) }} &rarr; {{ t(r.pred) }} ({{ n(r.n) }}){% if not loop.last %}; {% endif %}{% endfor %}. Hypotheses (next step: targeted test): document_processing and knowledge_base share document vocabulary (lexical overlap); customer_support catches complaints that mention scheduling or yard events (missing context).</p>
+<p><b>Hypothesis: errors concentrate in shipment_information.* (rejected).</b> The family is {{ n('err.oof45.fam_share_rows') }} of rows but {{ n('err.oof45.fam_share_err') }} of errors (cluster-bootstrap interval of the difference [{{ n('err.oof45.rows_ci_lo') }}, {{ n('err.oof45.rows_ci_hi') }}]); realtime_query and disruptions are confused {{ n('err.rtdi.rt_to_di') }} and {{ n('err.rtdi.di_to_rt') }} times, {{ n('err.rtdi.share') }} of all errors (test: {{ n('err.test_rtdi') }} of {{ n('a.n_errors') }}). Tables and the ID-swap counterfactual: Appendix {{ sec.ablations }} and {{ sec.robust }}.</p>
+
+<h2>Deployment and Monitoring</h2>
+<p><b>Serving.</b> <code>predict(text)</code> returns label, confidence, OOD score, abstained flag and top three; below the Mahalanobis threshold the router sends the message to the unknown path instead of a handler. Default backend: ONNX fp32 on CPU, one thread, batch-1{% if srv_colab %}: p50 {{ n('srv.onnx_fp32.t1.p50') }} ms and p95 {{ n('srv.onnx_fp32.t1.p95') }} ms ({{ M() }} Colab shared vCPUs, environment in Appendix {{ sec.latency }}; PyTorch fp32 p50 {{ n('srv.torch.t1.p50') }} ms, p95 {{ n('srv.torch.t1.p95') }} ms){% else %}; CPU latency is measured in the Colab canonical run and filled at publish time{% endif %}. int8 quantization did not meet the pre-set rule (macro-F1 delta at least {{ n('q.margin') }} on both splits; validation {{ n('q.d_val') }}), so fp32 ships.</p>
+<p><b>Monitoring and drift.</b> Abstention rate (test reference: {{ n('srv.cov') }} coverage), confidence and energy distributions, language mix against the measured {{ n('eda.nonen') }} non-English, kNN distance to train (PSI or MMD against a reference window), per-intent volume and handler failure rate; weekly sampled label audits by humans, because consensus labelling by LLM judges did not meet its calibration gate (judge accuracy {{ n('aud2.llama3') }} to {{ n('aud2.gemma3') }} against {{ n('aud2.gate') }}).</p>
+<p><b>13th-class playbook.</b> Cluster the abstained traffic, label the cluster, add the class at once through the kNN bank (no retraining), then retrain fully, shadow-evaluate against v1 and promote; retrain on a sustained rise in abstention, a kNN-distance PSI alert, a handler failure spike or a new labelled cluster of meaningful size.</p>
+<section class="gaps" id="gaps">
+<p><b>Known Limitations, Mitigations and Next Steps</b></p>
+<table class="gaps">
+<tr><th>Limitation, with its measured number</th><th>Evidence</th><th>Mitigation in production today</th><th>Next step</th></tr>
+<tr>
+<td><b>Open-set rejection.</b> {{ M() }} Headline holdout: the shipped Mahalanobis scorer rejects {{ n('gap.open.head_rej') }} of unseen-intent rows (strict) at {{ n('gap.open.head_ret') }} known retention ({{ n(R95) }} calibration target). CONFIRM classes ({{ n('tb.confirm_n') }}, mean): strict rejection {{ n('gap.open.confirm_rej') }}.</td>
+<td>{{ M() }} The oracle probe (D1): a probe trained on the held-out-class labels reaches AUROC {{ n(p6a.d1.rows[0].unseen) }} on the unseen-known pool, against {{ n(p6a.d1.maha) }} unsupervised. The oracle is an upper bound on separability, not achievable rejection; the gap points at a missing negative training signal.</td>
+<td>Choose the operating point by cost, using the business table in Appendix {{ sec.trackb_full }} ({{ E() }} per {{ n('biz.per') }} messages at {{ n(P5) }} novel traffic: at the {{ n(R90) }} point {{ n('biz.r1.unknowns_misrouted_strict') }} unknowns misrouted and {{ n('biz.r1.known_wrongly_abstained') }} known wrongly abstained; at the {{ n(R95) }} point {{ n('biz.r4.unknowns_misrouted_strict') }} and {{ n('biz.r4.known_wrongly_abstained') }}). Abstentions go to a clarifying question or a human handoff, never to a handler. Per-handler confidence gates for high-risk tools. Shadow mode records abstained and low-margin traffic.</td>
+<td>Verified hard negatives as a 13th-class head. More labels: {{ M() }} the learning curve (D4): the AUROC slope is {{ n(p6a.d4.auroc_slope) }} per doubling of the training data.</td>
+</tr>
+<tr>
+<td><b>Fine-tune versus frozen B1.</b> {{ M() }} Test, paired: macro-F1 {{ n('a.B1.delta') }}, McNemar exact p = {{ n('a.B1.mc_p') }} ({{ n('a.B1.mc_a') }} against {{ n('a.B1.mc_b') }} discordant). Cross-validation: mean difference {{ n('gap.b1.cv_diff') }}, Nadeau-Bengio p = {{ n('bk.nb_p_B1') }} ({{ n('bk.nb_J') }} fold-runs; a context test against the floor, not part of the selection rule, which tested the top two models).</td>
+<td>{{ M() }} At {{ n('a.n') }} test rows the paired interval is {{ n('gap.b1.delta_w') }} wide and {% if gap.delta_ci_has_zero %}includes{% else %}excludes{% endif %} zero (test macro-F1 interval width {{ n('gap.f1_w') }}).</td>
+<td>Ship the fine-tune: it has the better CV macro-F1 ({{ n('cv.f1_mean') }} against {{ n('bk.B1.f1') }} for B1; {{ O() }} post-selection). Track B (report-only): B1 with MSP scores DEV AUROC {{ n('p3b.b1_b1_msp') }} against {{ n('p3b.base_maha_ft') }} for the shipped Mahalanobis, and CONFIRM {{ n('p3b.b1_confirm') }} against {{ n('p3b.cur_confirm') }} (headline holdout, shipped: {{ n('tb.m.maha_ft.auroc') }}). Keep B1 as a training-free fallback: same inference cost (same frozen e5 encoder) and a logistic-regression head to retrain, in seconds (e.g. for a new intent).</td>
+<td>A larger labelled test set to resolve the observed accuracy difference (McNemar). <b>ESTIMATE (observed discordance):</b> {% if gap.ss_ok %}the McNemar sample-size approximation {{ gap.ss_formula }}, with &psi; = (b + c) / n<sub>test</sub> = {{ n('gap.ss.psi') }} and &delta; = (b &minus; c) / n<sub>test</sub> = {{ n('gap.ss.delta') }} from the observed discordant counts (b = {{ n('a.B1.mc_a') }}, c = {{ n('a.B1.mc_b') }}), {{ n('gap.ss.alpha') }} two-sided and {{ n('gap.ss.power') }} power, gives about {{ n('gap.ss.n') }} rows ({{ n('gap.ss.mult') }}&times; the current {{ n('a.n') }}). It assumes the observed discordance rate ({{ n('gap.ss.psi') }} of rows) holds, which is itself uncertain.{% else %}several times the current {{ n('a.n') }} rows (the observed discordance gives a zero or undefined McNemar sample-size term, so no number is formed).{% endif %}</td>
+</tr>
+<tr>
+<td><b>ID-prefix shortcut.</b> {{ M() }} {{ O() }} Swapping the LD prefix for the neutral REF prefix flips {{ n('swap.LD->REF.rate') }} of {{ n('swap.LD->REF.n') }} LD-prefixed out-of-fold predictions ({{ n('swap.LD->REF.flips') }} flips).</td>
+<td>{{ M() }} EDA shortcut audit: {{ n('eda.sc.ld.share') }} of the {{ n('eda.sc.ld.n') }} LD-prefixed rows carry <code>{{ t('eda.sc.ld.top') }}</code> (strong, not deterministic); {{ n('eda.sc.po.share') }} of {{ n('eda.sc.po.n') }} PO-prefixed rows carry <code>{{ t('eda.sc.po.top') }}</code> (flagged as a shortcut risk: {{ t('eda.sc.po.risk') }}).</td>
+<td>Normalise IDs before routing, or use the v3 variant in which IDs vary (not shipped: it moved headline strict rejection by {{ n('trd.head.rej95') }}). Monitor the flip rate on production traffic.</td>
+<td>A consistency-loss variant that keeps Track A. Measured trade-off: neutral-swap flip rate {{ n('p6a.ax.i4a.c') }} and {{ n('p6a.ax.i4b.c') }} (two loss weights) against CV macro-F1 {{ n('p6a.ax.i4a.a_ci') }} and {{ n('p6a.ax.i4b.a_ci') }}, so it needs a variant that recovers that loss.</td>
+</tr>
+<tr>
+<td><b>Small synthetic data.</b> {{ M() }} {{ n('eda.n') }} rows from one synthetic source; the test split has {{ n('a.n') }} rows ({{ n('a.sup_min') }} to {{ n('a.sup_max') }} per class).</td>
+<td>{{ M() }} Test macro-F1 interval width {{ n('gap.f1_w') }} ({{ n('a.f1') }}): one error moves a class F1 a lot at this n.</td>
+<td>The numbers are provisional. Re-baseline on a labelled sample of real traffic before trusting any threshold.</td>
+<td>Active learning from production traffic: label abstained and low-margin messages first, and grow the test set with them.</td>
+</tr>
+</table>
+</section>
+
+<h2>Next Steps</h2>
+<ul class="tight">
+<li><b>Verified hard negatives (first step).</b> Held-out intents are separable (oracle AUROC {{ n(p6a.d1.rows[0].unseen) }}) but the unsupervised score reaches {{ n(p6a.d1.maha) }}: generate out-of-scope messages that reuse keywords of the {{ n('eda.k') }} intents, keep those all three judges unanimously label as fitting none, and compare a K-plus-one class head against outlier exposure on the same Track B holdouts.</li>
+<li><b>More labelled data.</b> The measured learning curve (D4): the AUROC slope is {{ n(p6a.d4.auroc_slope) }} per doubling of the training data, but the rejection slope ({{ n(p6a.d4.rej_slope) }}) has an interval reaching zero, so label abstained and low-margin traffic first.</li>
+<li><b>An ID-consistency variant with its measured trade-off.</b> The consistency loss changed the neutral-swap flip rate by {{ n('p6a.ax.i4a.c') }} and {{ n('p6a.ax.i4b.c') }} against CV macro-F1 {{ n('p6a.ax.i4a.a_ci') }} and {{ n('p6a.ax.i4b.a_ci') }} (two loss weights); it needs a variant that recovers the F1 loss and must be guarded on Track B too.</li>
+</ul>
+
+</main>
+
+{% if not main_only %}
+<section class="app">
+<p class="small"><b>Appendix contents.</b> {% for k, ttl in sec_titles %}{{ k }}&nbsp;{{ ttl }}{% if not loop.last %} &middot; {% endif %}{% endfor %}</p>
+<p class="small"><b>Candidate codes used in this appendix (each defined once).</b> A1 = random ID prefixes in training text; A2 = outlier exposure with generic synthetic out-of-scope text; A3 = machine-translated and noisy copies of training rows. I1 = alternative open-set scorers: i1a = relative Mahalanobis (class distance minus a class-agnostic background distance), i1b = L2-normalised Mahalanobis on the same weights. I4 = an ID-consistency loss (a symmetric KL between a row and its prefix-swapped twin), i4a and i4b being two loss weights. I6 = alternative thresholding: i6a = calibration rows grouped by predicted class, i6b = cross-fitted Gaussian. N1 = verified hard negatives as training signal; N2 = a fine-tuned e5-large. D1 = the oracle probe, D2 = ID-neutral Track B scoring, D3 = threshold stability, D4 = the data-scaling slope.</p>
+
+<h2>Debrief Answers</h2>
+<div class="box qa">
+<p><b>Debrief answers.</b> One short paragraph for each question we expect in the walk-through.</p>
+<p><b class="q">Why this metric, and what does accuracy hide?</b> Every intent routes to a different handler, so each of the {{ n('eda.k') }} classes must count equally: macro-F1 is the primary metric, accuracy the sanity number. On this mildly imbalanced data (largest class {{ n('eda.cc_max') }} rows, smallest {{ n('eda.cc_min') }}, ratio {{ n('eda.imb') }}) the two are close on test ({{ n('a.f1') }} vs {{ n('a.acc') }}), so accuracy hides little in aggregate but does hide per-class differences at {{ n('a.sup_min') }} to {{ n('a.sup_max') }} test rows per class. The lowest-scoring test class is <code>{{ t('a.worst.label') }}</code> (F1 {{ n('a.worst.f1') }}, support {{ n('a.worst.support') }}), noise-dominated at that n, hence the CV and CIs below.</p>
+<p><b class="q">With {{ n('eda.n') }} rows, how do we trust the test number?</b> Not alone: its interval is wide ({{ n('a.f1') }}), so three estimates are reported with their roles. The single test split is the unbiased one; the {{ n('cv.n_runs') }}-run CV ({{ n('cv.f1_mean') }} &plusmn; {{ n('cv.f1_std') }}) and the out-of-fold score ({{ n('oof.f1') }}) are {{ O() }}, as the model and epoch were selected on them. Against baselines the fine-tune clearly beats B0 (paired macro-F1 difference {{ n('a.B0.delta') }}) but not provably B1 on test ({{ n('a.B1.delta') }}, the interval includes zero; exact McNemar p = {{ n('a.B1.mc_p') }}); in CV it beats B1 (Nadeau-Bengio p = {{ n('bk.nb_p_B1') }}).</p>
+<p><b class="q">The model confuses realtime_query and disruptions: what now?</b> In the {{ n('err.oof45.n_runs') }} out-of-fold fold-runs these two siblings are confused {{ n('err.rtdi.rt_to_di') }} times (realtime as disruptions) and {{ n('err.rtdi.di_to_rt') }} times (the reverse), {{ n('err.rtdi.share') }} of all errors; on the test split {{ n('err.test_rtdi') }} of {{ n('a.n_errors') }} errors. The hypothesis that errors concentrate in the shipment family is rejected: the family is {{ n('err.oof45.fam_share_rows') }} of rows but {{ n('err.oof45.fam_share_err') }} of errors; real confusion sits in document_processing vs knowledge_base and customer_support (see section {{ sec.errors }}). Lexical overlap in the family is real (nearest-neighbour accuracy {{ n('eda.sib_1nn') }}), but a hierarchical auxiliary loss gave no gain over the CV noise band (delta {{ n('abl.hier_aux.delta') }}, p = {{ n('abl.hier_aux.p') }}); plain cross-entropy kept. Next: temporal-cue labelling rules and more disruption examples, not more modelling.</p>
+<p><b class="q">A brand-new intent appears next quarter. What happens, and how do we add a 13th class?</b> The router abstains on {{ n('tb.headline.strict_recall_95') }} of unseen-intent messages at {{ n('tb.headline.retention_95') }} known retention, so about {{ n('tb.not_rej') }} of novel intents (headline holdout) are still routed to a known label (most often <code>{{ t('tb.land0.label') }}</code>). Per {{ n('biz.per') }} messages at {{ n(P5) }} novel-intent traffic and the {{ n(R95) }} operating point ({{ E() }} using the CONFIRM-mean strict rejection {{ n('biz.rej95') }}, not the headline rate above): {{ n('biz.r4.unknowns_caught_strict') }} caught, {{ n('biz.r4.unknowns_misrouted_strict') }} misrouted, {{ n('biz.r4.known_wrongly_abstained') }} known messages wrongly abstained. The extension path (cluster abstained traffic, label, kNN bank, retrain, shadow, promote) is in section {{ sec.production }}.</p>
+<p><b class="q">Why is softmax accuracy zero on a class it never saw, and how did we measure open-set behaviour?</b> It can only emit one of its trained labels, so accuracy on a held-out class is zero by construction. We therefore hold out whole classes (headline: {{ t('tb.holdout') }}; plus {{ n('tb.loco_n') }} leave-one-class-out runs), set the threshold on known-only validation data at fixed retention, and report rejection recall, retention and AUROC. MSP reaches AUROC {{ n('tb.m.msp.auroc') }} on the headline holdout; the shipped Mahalanobis scorer {{ n('tb.m.maha_ft.auroc') }}.</p>
+<p><b class="q">Does the metric hold on the non-English slice?</b> The stated share of about {{ n('eda.claim') }} non-English is not what the data show: language ID finds {{ n('eda.nonen') }}. On the {{ n('sl.oof.non_english_defA.n') }} non-English out-of-fold rows macro-F1 is {{ n('sl.oof.non_english_defA.f1') }} (wide interval); the test split has {{ n('sl.test.non_english_defA.n') }} rows, indicative. Under machine translation of English rows accuracy drops from {{ n('tr.oof.es.english_accuracy_same_rows') }} to {{ n('tr.oof.zh.accuracy') }} for Chinese, the worst language ({{ M() }}, MT evaluation data, see Appendix {{ sec.robust }}).</p>
+<p><b class="q">How do we monitor and catch data and label drift?</b> Abstention rate (test reference: {{ n('sel.n_accepted') }} of {{ n('a.n') }} rows accepted), confidence and energy distributions, language mix, kNN distance to train; label audits by multi-model consensus did not meet our own calibration gate (judge accuracy {{ n('aud2.llama3') }} to {{ n('aud2.gemma3') }} against {{ n('aud2.gate') }}), so humans label the sample. Detail in section {{ sec.production }} and Appendix {{ sec.more }}.</p>
+</div>
+
+<h2>Open-Set Evaluation in Full: Scorers, Leave-One-Class-Out and Business Framing</h2>
+<p>Holdout design: {{ t('tb.holdout') }} are removed from training and calibration; the evaluation set is {{ n('tb.n_known') }} known test rows plus {{ n('tb.n_unknown') }} unknown rows (all rows of the held-out classes, since the model never saw them). {{ n('tb.n_seeds') }} model seeds ({{ t('tb.seeds') }}); closed-set macro-F1 on the known side {{ n('tb.closed_f1') }}. Threshold: {{ n(R95) }} retention on known-only validation rows. Strict mode counts only <code>unknown</code> as a rejection.</p>
+<table class="split">
+<thead><tr><th>Score (higher = known)</th><th class="num">AUROC</th><th class="num">strict rejection</th><th class="num">lenient rejection</th><th class="num">retention</th><th class="num">LOCO AUROC</th><th class="num">LOCO rejection</th></tr></thead>
+{% for r in tb_methods %}
+<tr{% if r.shipped %} class="ship"{% endif %}><td>{{ r.name }}</td><td class="num">{{ n(r.auroc) }}</td><td class="num">{{ n(r.rej) }}</td><td class="num">{{ n(r.len) }}</td><td class="num">{{ n(r.ret) }}</td><td class="num">{{ n(r.loco_auroc) }}</td><td class="num">{{ n(r.loco_rej) }}</td></tr>
+{% endfor %}
+</table>
+<div class="cap">{{ M() }} headline columns: mean &plusmn; std (sample) over {{ n('tb.n_seeds') }} model seeds; LOCO columns: mean over {{ n('tb.loco_n') }} runs, one seed each. Shipped score chosen by best mean LOCO AUROC (a design choice made across holdout experiments; kNN with one neighbour is a near tie). Lenient mode (other and chitchat count as safe) equals strict: {{ t('tb.lenient_equals_strict') }}.</div>
+<div class="grid2">
+<figure><img src="{{ figs.tb_methods }}" alt="Track B scores"><div class="cap">Headline holdout, mean &plusmn; std over seeds.</div></figure>
+<figure><img src="{{ figs.loco }}" alt="LOCO AUROC"><div class="cap">{{ M() }} Per-class AUROC, leave-one-class-out, one seed each.</div></figure>
+</div>
+<p><b>Shipped v1, with intervals.</b> Headline: AUROC {{ n('tb.headline.auroc') }}, strict rejection {{ n('tb.headline.strict_recall_95') }} at retention {{ n('tb.headline.retention_95') }}; at the {{ n(R90) }} operating point rejection {{ n('tb.headline.strict_recall_90') }} at retention {{ n('tb.headline.retention_90') }} ({{ M() }} rows resampled within the holdout, stratified by known/unknown, {{ n('tb.boot.n') }} resamples). CONFIRM classes ({{ n('tb.confirm_n') }} classes, not used for selection): AUROC {{ n('tb.confirm.auroc') }}, rejection {{ n('tb.confirm.strict_recall_95') }}. DEV classes ({{ n('tb.dev_n') }}, used for selection): AUROC {{ n('tb.dev_auroc') }}, rejection {{ n('tb.dev_rej') }}.</p>
+<p><b>Reading.</b> Fine-tuned features beat frozen ones by a wide margin for distance scores; MSP, energy and Mahalanobis are close. Un-rejected unknowns mostly land on <code>{{ t('tb.land0.label') }}</code> ({{ n('tb.land0.share') }}), <code>{{ t('tb.land1.label') }}</code> ({{ n('tb.land1.share') }}) and <code>{{ t('tb.land2.label') }}</code> ({{ n('tb.land2.share') }}); {{ n('tb.nr_safe') }} of {{ n('tb.nr_total') }} reach a catch-all class. Label smoothing changed headline AUROC by {{ n('tb.ls.auroc') }}.</p>
+<table>
+<tr><th colspan="5">{{ E() }} Business framing per {{ n('biz.per') }} messages. Assumptions: novel-intent prevalence as listed; rates are the measured CONFIRM-mean strict rejection ({{ n('biz.rej95') }} at the high and {{ n('biz.rej90') }} at the low operating point) and retention.</th></tr>
+<tr><th>Calibration retention</th><th class="num">novel prevalence</th><th class="num">known wrongly abstained</th><th class="num">novel caught</th><th class="num">novel misrouted</th></tr>
+{% for r in biz_rows %}
+<tr><td>{{ n(r.calibration_retention_target) }}</td><td class="num">{{ n(r.prevalence) }}</td><td class="num">{{ n(r.known_wrongly_abstained) }}</td><td class="num">{{ n(r.unknowns_caught_strict) }}</td><td class="num">{{ n(r.unknowns_misrouted_strict) }}</td></tr>
+{% endfor %}
+</table>
+<div class="cap">Basis: the per-message rates here use the CONFIRM-mean rejection rate, while the share of unknowns routed to a known label in the text ({{ n('tb.not_rej') }}) is one minus the headline-holdout rate. Formulas: wrongly abstained = {{ t('biz.formula_wrong') }}; caught = {{ t('biz.formula_caught') }}; misrouted = {{ t('biz.formula_missed') }}.</div>
+
+<h2>Diagnostics (Oracle Probe, ID-Neutral Scoring, Threshold Stability, Learning Curve)</h2>
+<p><b>Measured gap.</b> {{ M() }} On the headline holdout ({{ t('tb.holdout') }}) the shipped scorer has AUROC {{ n('tb.headline.auroc') }} but rejects {{ n('tb.headline.strict_recall_95') }} of unknown-intent rows at {{ n('tb.headline.retention_95') }} known retention (calibration target {{ n(R95) }}); on the {{ n('tb.confirm_n') }} CONFIRM classes rejection is {{ n('tb.confirm.strict_recall_95') }}. {{ n('tb.not_rej') }} of unknowns are therefore routed to a known label, and {{ n('tb.nr_safe') }} of the {{ n('tb.nr_total') }} un-rejected unknown rows land in a catch-all class. At the {{ n(R95) }} operating point and {{ n(P5) }} novel-intent traffic per {{ n('biz.per') }} messages that is {{ n('biz.r4.unknowns_misrouted_strict') }} misrouted, computed with the CONFIRM-mean strict rejection {{ n('biz.rej95') }} rather than the headline-holdout rate quoted above ({{ E() }}).</p>
+<p><b>Root cause: facts from the Open-set improvement round diagnostics</b> (report-only, never selection inputs; tables below).</p>
+<ul>
+<li><b>D1, ORACLE separability.</b> Held-out intents are linearly separable in the fine-tuned feature space (oracle AUROC {{ n(p6a.d1.rows[0].unseen) }} on the unseen-known pool), yet unsupervised scoring reaches {{ n(p6a.d1.maha) }}; the gap, {{ n(p6a.d1.headroom) }}, is a missing negative training signal, which verified hard-negative OOS data (next step) supplies. The probe is trained on the held-out-class labels (headline holdout; pool = {{ n(p6a.d1.n_pos) }} unknown and {{ n(p6a.d1.n_neg) }} known rows the encoder never trained on), so the oracle AUROC is an upper bound on separability, not achievable rejection. Pools: the oracle figure drops the known training rows (the v1 encoder trained on them, which inflates the all-rows figure; that figure is in the D1 table below, marked as inflated); the unsupervised figure is v1's seed-mean Mahalanobis AUROC on the Track B evaluation rows, which the encoder also never trained on.</li>
+<li><b>D2, ID-neutral Track B</b> (IDs rewritten at scoring time; headline). v1 strict rejection {{ n(p6a.d2.rows[0].raw_rej) }} raw, {{ n(p6a.d2.rows[0].neu_rej) }} neutral. v3 minus v1 in rejection: {{ n(p6a.d2.raw_rej_delta) }} raw, {{ n(p6a.d2.neu_rej_delta) }} neutral; ranking reversal: {{ t(p6a.d2.reversal) }}. v1's Track B lead over v3 therefore holds in direction under ID-neutral scoring, so the ranking is not an ID-shortcut artifact; the neutral lead is smaller and its interval reaches zero, so part of the raw gap is ID text and the neutral lead is a direction, not a significant gap. The v1 decision stands.</li>
+<li><b>D3, threshold stability</b> ({{ n(p6a.d3.n_boot) }} resamples of the known calibration rows, {{ n(p6a.d3.n_seeds) }} seeds pooled). Retention sd {{ n(p6a.d3.ret_sd) }} ({{ n(p6a.d3.level) }} range {{ n(p6a.d3.ret_lo) }} to {{ n(p6a.d3.ret_hi) }}); unknown rejection sd {{ n(p6a.d3.rej_sd) }} ({{ n(p6a.d3.level) }} range {{ n(p6a.d3.rej_lo) }} to {{ n(p6a.d3.rej_hi) }}). On the evaluation rows the cross-fitted threshold gives retention {{ n(p6a.d3.cf_ret) }} and rejection {{ n(p6a.d3.cf_rej) }} (validation threshold: table below): it collapses known retention, so thresholds must be calibrated on the shipped model's own held-out data.</li>
+<li><b>D4, learning curve</b> ({{ n(p6a.d4.rows[0].n) }} to {{ n(p6a.d4.rows[-1].n) }} training rows, {{ n(p6a.d4.f_lo) }} to {{ n(p6a.d4.f_hi) }} of the data; rows below). {{ M() }} Slope per doubling of the training data (CI over {{ n(p6a.d3.n_seeds) }} seeds, coarse): AUROC {{ n(p6a.d4.auroc_slope) }}, strict rejection {{ n(p6a.d4.rej_slope) }}. <b>ESTIMATE beyond {{ n(p6a.d4.rows[-1].n) }} rows</b>, assuming AUROC stays log-linear in rows (fit {{ n(p6a.d4.intercept) }} at {{ n(p6a.d4.rows[-1].n) }} rows plus the slope per doubling; interval from the slope CI only): {% for e in p6a.d4.est %}{{ n(e.n) }} rows ({{ n(e.mult) }}&times;) {{ n(e.auroc) }}{% if not loop.last %}; {% endif %}{% endfor %}. The line would hit the AUROC ceiling after {{ n(p6a.d4.sat) }} doublings, so the real curve must bend before then; the seed CI is coarse and no data beyond {{ n(p6a.d4.rows[-1].n) }} rows exists.</li>
+</ul>
+<div class="grid2">
+<div>
+<table>
+<tr><th>D1 ORACLE probe features</th><th class="num">AUROC, unseen known only (headline)</th><th class="num">AUROC, all rows (inflated for fine-tuned)</th></tr>
+{% for r in p6a.d1.rows %}<tr{% if loop.first %} class="ship"{% endif %}><td>{{ r.name }}</td><td class="num">{{ n(r.unseen) }}</td><td class="num">{{ n(r.key) }}</td></tr>{% endfor %}
+<tr><td>unsupervised Mahalanobis, v1 (seed mean)</td><td class="num">{{ n(p6a.d1.maha) }}</td><td class="num"></td></tr>
+</table>
+<div class="cap">{{ M() }} ORACLE: the probe is trained on the held-out-class labels, so it is an upper bound on separability, not achievable rejection. Headline holdout, mean of folds [percentile CI over near-duplicate groups]; the headline column drops the known training rows the v1 encoder saw; the all-rows column includes them, so for the fine-tuned features it is inflated.</div>
+</div>
+<div>
+<table>
+<tr><th>D2, headline</th><th class="num">AUROC raw</th><th class="num">AUROC neutral</th><th class="num">strict rej. raw</th><th class="num">strict rej. neutral</th></tr>
+{% for r in p6a.d2.rows %}<tr><td>{{ r.name }}</td><td class="num">{{ n(r.raw_auroc) }}</td><td class="num">{{ n(r.neu_auroc) }}</td><td class="num">{{ n(r.raw_rej) }}</td><td class="num">{{ n(r.neu_rej) }}</td></tr>{% endfor %}
+<tr><td>v3 minus v1</td><td class="num">{{ n(p6a.d2.raw_auroc_delta) }}</td><td class="num">{{ n(p6a.d2.neu_auroc_delta) }}</td><td class="num">{{ n(p6a.d2.raw_rej_delta) }}</td><td class="num">{{ n(p6a.d2.neu_rej_delta) }}</td></tr>
+</table>
+<div class="cap">{{ M() }} Seed mean, bootstrap CI; v3 minus v1 is paired. Ranking reversal between modes: {{ t(p6a.d2.reversal) }}. ID-bearing rows: {{ n(p6a.d2.ids_known_eval_n_rows_with_id) }} of {{ n(p6a.d2.ids_known_eval_n_rows) }} known evaluation, {{ n(p6a.d2.ids_unknown_n_rows_with_id) }} of {{ n(p6a.d2.ids_unknown_n_rows) }} unknown.</div>
+</div>
+</div>
+<div class="grid2">
+<div>
+<table>
+<tr><th>D3, v1 headline</th><th class="num">known retention</th><th class="num">unknown rejection</th></tr>
+<tr><td>bootstrap mean</td><td class="num">{{ n(p6a.d3.ret_mean) }}</td><td class="num">{{ n(p6a.d3.rej_mean) }}</td></tr>
+<tr><td>bootstrap sd</td><td class="num">{{ n(p6a.d3.ret_sd) }}</td><td class="num">{{ n(p6a.d3.rej_sd) }}</td></tr>
+<tr><td>{{ n(p6a.d3.level) }} range, low</td><td class="num">{{ n(p6a.d3.ret_lo) }}</td><td class="num">{{ n(p6a.d3.rej_lo) }}</td></tr>
+<tr><td>{{ n(p6a.d3.level) }} range, high</td><td class="num">{{ n(p6a.d3.ret_hi) }}</td><td class="num">{{ n(p6a.d3.rej_hi) }}</td></tr>
+<tr><td>validation threshold (seed mean)</td><td class="num">{{ n(p6a.d3.cal_ret) }}</td><td class="num">{{ n(p6a.d3.cal_rej) }}</td></tr>
+<tr><td>cross-fitted threshold (seed mean)</td><td class="num">{{ n(p6a.d3.cf_ret) }}</td><td class="num">{{ n(p6a.d3.cf_rej) }}</td></tr>
+</table>
+<div class="cap">{{ M() }} {{ n(p6a.d3.n_boot) }} resamples of the known calibration rows, {{ n(p6a.d3.n_seeds) }} seeds pooled; the last two rows are on the held-out evaluation rows (mean thresholds {{ n(p6a.d3.cal_thr) }} and {{ n(p6a.d3.cf_thr) }}).</div>
+</div>
+<div>
+<table>
+<tr><th>D4, training fraction</th><th class="num">training rows</th><th class="num">AUROC</th><th class="num">strict rejection</th></tr>
+{% for r in p6a.d4.rows %}<tr><td>{{ n(r.frac) }}</td><td class="num">{{ n(r.n) }}</td><td class="num">{{ n(r.auroc) }}</td><td class="num">{{ n(r.rej) }}</td></tr>{% endfor %}
+<tr><td>slope per doubling</td><td class="num"></td><td class="num">{{ n(p6a.d4.auroc_slope) }}</td><td class="num">{{ n(p6a.d4.rej_slope) }}</td></tr>
+</table>
+<div class="cap">{{ M() }} v1 recipe, headline holdout, seed mean; slope is least squares against the base-two logarithm of the fraction, CI by bootstrap over {{ n(p6a.d3.n_seeds) }} seeds.</div>
+</div>
+</div>
+<p><b>What was tried.</b> {{ M() }} On DEV AUROC (current scorer {{ n('p3b.base_maha_ft') }}): rank fusion of Mahalanobis and energy {{ n('p3b.base_fuse_maha_energy') }}, multi-layer Mahalanobis {{ n('p3b.base_maha_ml') }}, CE + SupCon {{ n('p3b.c2_l0.1_maha_ft') }} and {{ n('p3b.c2_l0.5_maha_ft') }}, none cleared the margin {{ n('p3b.margin') }} (ship: {{ t('p3b.ship') }}). Outlier exposure (A2) changed DEV AUROC by {{ n('hist.a2.auroc') }} and DEV rejection by {{ n('hist.a2.rej') }}; label smoothing changed headline AUROC by {{ n('tb.ls.auroc') }}; v2 and v3 moved headline rejection by {{ n('hist.v2.head.rej95') }} and {{ n('trd.head.rej95') }}.</p>
+<p><b>What would break it.</b> (i) D1 is an upper bound: verified hard-negative data on classes never trained on (N1) is the test of whether the headroom of {{ n(p6a.d1.headroom) }} is reachable. (ii) D2 rules out the ID shortcut as the cause of the v1-versus-v3 ranking, not of closed-set accuracy riding on ID text (Appendix {{ sec.robust }}). (iii) Rejection differences below the D3 spread (sd {{ n(p6a.d3.rej_sd) }}) are noise unless both arms share the threshold rows, as in the paired bootstrap of the open-set improvement round. (iv) If the D4 rejection slope CI ({{ n(p6a.d4.rej_slope) }}) keeps reaching zero, more data of the same kind is not the lever for rejection.</p>
+
+<h2>Selection History and the v1/v3 Decision</h2>
+<p>{{ n('log.eval.distinct_final_fps') }} final models were trained and each was test-evaluated once ({{ M() }} single recorded evaluation, {{ n('hist.v1.f1') }} for v1, {{ n('hist.v2.f1') }} for v2, {{ n('hist.v3.f1') }} for v3: differences far inside the intervals). v2 (adds machine-translated and noisy copies of train rows, factor A3) was adopted under a rule that guarded Track A only, then reverted: on the scored Track B headline its strict rejection fell by {{ n('hist.v2.head.rej95') }} (paired), neutral-swap flips rose from {{ n('hist.v2.flip_cur') }} to {{ n('hist.v2.flip_cand') }}, and calibration temperature moved from {{ n('hist.v1.T') }} to {{ n('hist.v2.T') }}. Multi-axis selection then selected on several axes with several seeds; the selection rule, fixed before the candidates were run, picked v3 (A1+A3, epoch {{ n('hist.v3.epoch') }}). <b>Decision: v1 ships, overriding the rule's pick.</b> Reasons, in order: (a) the scored Track B headline regressed for v3 (table below); (b) v3's eligibility depended on v1 being read at its shipped epoch {{ n('hist.sens.v1_e') }}, a local dip (own best epoch {{ n('hist.sens.v1_argmax') }}; CV F1 {{ n('hist.sens.v1_f1_e') }} vs {{ n('hist.sens.v1_f1_arg') }}), and against the best epoch the outcome flips (same outcome: {{ t('hist.sens.same') }}); (c) the DEV axis was not predictive of the headline regression. Test macro-F1 played no part.</p>
+<table class="split">
+<tr><th>v3 minus v1 (v1 is shipped)</th><th class="num">v1</th><th class="num">v3</th><th class="num">delta [{{ n('a.boot.level') }} CI]</th></tr>
+{% for r in tradeoff_rows %}
+<tr><td>{{ r.name }}</td><td class="num">{{ n(r.v1) }}</td><td class="num">{{ n(r.v3) }}</td><td class="num">{{ n(r.d) }}</td></tr>
+{% endfor %}
+</table>
+<div class="cap">{{ M() }} Source: <code>results/tradeoff_v1_v3.json</code> (built from results JSON only). Guidance recorded there: {{ t('trd.guidance1') }}; {{ t('trd.guidance2') }}. Lessons: guard every scored axis at the operating point; take the reference at its own best epoch.</div>
+<figure><img class="cap-h" src="{{ figs.v1_v3 }}" alt="v3 minus v1"><div class="cap">{{ M() }} v3 minus v1 with paired-bootstrap intervals (Track B holdouts, CV, robustness).</div></figure>
+<p><b>Open-set improvement round.</b> The selection rule fixed before the runs picked <code>{{ t('p6a.sel.unguarded.chosen') }}</code>, a collapsed operating point (reference retention {{ n('p6a.ax.ref.ret_raw') }}). A retention check was added after the first selection picked a candidate that kept {{ n('p6a.sel.i6b.ret_raw') }} of known messages ({{ n('p6a.sel.i6b.ret_neu') }} under ID-neutral scoring); it then picked <code>{{ t('p6a.sel.chosen') }}</code>, the only eligible candidate. The pre-ship check <b>held back</b> <code>{{ t('p6a.sel.chosen') }}</code> (headline strict rejection {{ n('p6a.ship.raw.headline.rej') }}, paired CI entirely below zero), so v1 ships. I4 (ID-consistency loss) changed the neutral-swap flip rate by {{ n('p6a.ax.i4a.c') }} and {{ n('p6a.ax.i4b.c') }} against CV macro-F1 {{ n('p6a.ax.i4a.a_ci') }} and {{ n('p6a.ax.i4b.a_ci') }}, and the seed soups (I3) were ineligible on CV macro-F1 ({{ n('p6a.ax.i3u.a') }} uniform, {{ n('p6a.ax.i3g.a') }} greedy).</p>
+<table class="wrap">
+<tr><th>Candidate</th><th class="num">(a) CV F1</th><th class="num">(b) raw AUROC</th><th class="num">(b) raw rej.</th><th class="num">(b) neutral AUROC</th><th class="num">(b) neutral rej.</th><th class="num">retention raw</th><th class="num">retention neutral</th><th class="num">(c) flip</th><th class="num">(d) agree</th><th class="num">(e) ECE</th><th class="num">eligible</th><th class="num">unmet axes</th><th class="num">improved axes</th></tr>
+<tr><td>ref (v1 recipe)</td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num">{{ n('p6a.ax.ref.ret_raw') }}</td><td class="num">{{ n('p6a.ax.ref.ret_neu') }}</td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td></tr>
+{% for r in p6a.ax.rows %}<tr{% if r.name == p6a.sel.chosen_name %} class="ship"{% endif %}><td>{{ r.name }}</td><td class="num">{{ n(r.a) }}</td><td class="num">{{ n(r.b_raw_auroc) }}</td><td class="num">{{ n(r.b_raw_rej) }}</td><td class="num">{{ n(r.b_neu_auroc) }}</td><td class="num">{{ n(r.b_neu_rej) }}</td><td class="num">{{ n(r.ret_raw) }}</td><td class="num">{{ n(r.ret_neu) }}</td><td class="num">{{ n(r.c) }}</td><td class="num">{{ n(r.d) }}</td><td class="num">{{ n(r.e) }}</td><td class="num">{{ t(r.elig) }}</td><td class="num">{{ t(r.inel) }}</td><td class="num">{{ t(r.imp) }}</td></tr>{% endfor %}
+</table>
+<div class="cap">{{ M() }} Candidate minus reference, point estimates on DEV (CV for (a)); the paired-bootstrap CIs are in <code>results/phase6a/axes.json</code>. Retention columns are the candidate's own value (guard: no more than {{ n('p6a.ax.guard_margin') }} below the reference in both modes; added after the first selection picked a candidate that kept {{ n('p6a.sel.i6b.ret_raw') }} (raw) and {{ n('p6a.sel.i6b.ret_neu') }} (neutral) of known DEV rows); flip rate and ECE: negative is better. Not formed: {% for r in p6a.ax.not_formed %}{{ r.name }} ({{ t(r.reason) }}){% if not loop.last %}; {% endif %}{% endfor %}. Selected under the guard: {{ t('p6a.sel.chosen') }}; under the rule fixed before the runs: {{ t('p6a.sel.unguarded.chosen') }}.</div>
+<div class="grid2">
+<div>
+<table>
+<tr><th>Pre-ship check, {{ t('p6a.sel.chosen') }} minus ref</th><th class="num">AUROC</th><th class="num">strict rejection</th><th class="num">retention</th></tr>
+<tr><td>raw, headline</td><td class="num">{{ n(p6a.sel.cells.raw_headline_auroc) }}</td><td class="num">{{ n(p6a.sel.cells.raw_headline_rej) }}</td><td class="num">{{ n(p6a.sel.cells.raw_headline_ret) }}</td></tr>
+<tr><td>raw, CONFIRM</td><td class="num">{{ n(p6a.sel.cells.raw_confirm_auroc) }}</td><td class="num">{{ n(p6a.sel.cells.raw_confirm_rej) }}</td><td class="num">{{ n(p6a.sel.cells.raw_confirm_ret) }}</td></tr>
+<tr><td>neutral, headline</td><td class="num">{{ n(p6a.sel.cells.neu_headline_auroc) }}</td><td class="num">{{ n(p6a.sel.cells.neu_headline_rej) }}</td><td class="num">{{ n(p6a.sel.cells.neu_headline_ret) }}</td></tr>
+<tr><td>neutral, CONFIRM</td><td class="num">{{ n(p6a.sel.cells.neu_confirm_auroc) }}</td><td class="num">{{ n(p6a.sel.cells.neu_confirm_rej) }}</td><td class="num">{{ n(p6a.sel.cells.neu_confirm_ret) }}</td></tr>
+</table>
+</div>
+<div class="cap">{{ M() }} Paired bootstrap deltas with CI. Rule (retention check added after the first selection): the candidate ships only if no paired CI for AUROC, strict rejection or retention lies entirely below zero on the headline holdout and on CONFIRM; one does (raw headline rejection), so it is held back and v1 with its scorer ships. The reference of the open-set improvement round is the v1 recipe at epoch {{ n('p6a.ref.epoch') }}, a different artifact from the shipped v1 at epoch {{ n('hist.sens.v1_e') }}: headline strict rejection {{ n('p6a.ref.rej') }} against {{ n('p6a.d2.v1.raw.strict_rej95') }} (overlapping CIs: a lead, not a finding). CONFIRM and headline looks including the open-set improvement round: {{ n('p6a.looks.confirm') }} and {{ n('p6a.looks.headline') }}.</div>
+</div>
+
+<h2>Robustness</h2>
+<div class="grid2">
+<div>
+<table>
+<tr><th>Language (MT rows)</th><th class="num">n</th><th class="num">agreement with English pred.</th><th class="num">acc.</th><th class="num">English acc. (same rows)</th></tr>
+{% for r in translate %}<tr><td>{{ r.name }}</td><td class="num">{{ n(r.oof.n) }}</td><td class="num">{{ n(r.oof.agreement_with_english_pred) }}</td><td class="num">{{ n(r.oof.accuracy) }}</td><td class="num">{{ n(r.oof.english_accuracy_same_rows) }}</td></tr>{% endfor %}
+</table>
+<div class="cap">{{ M() }} {{ O() }} English out-of-fold rows translated by {{ t('tr.translator') }} and labelled {{ t('tr.label') }}; greedy decoding (beams: {{ n('tr.beams') }}). Synthetic MT data: an upper bound on language sensitivity (greedy decoding sometimes truncates the second clause), not native non-English performance. Test-split numbers are in the appendix tables of the results files.</div>
+</div>
+<div>
+<table>
+<tr><th>Character noise and rewriting (OOF)</th><th class="num">accuracy</th><th class="num">drop [CI]</th></tr>
+{% for r in noise %}<tr><td>{{ r.name }}</td><td class="num">{{ n(r.acc) }}</td><td class="num">{{ n(r.drop) }}</td></tr>{% endfor %}
+</table>
+<div class="cap">{{ M() }} {{ O() }} {{ n('nz.oof_n') }} out-of-fold rows, clean accuracy {{ n('nz.oof_clean_acc') }}, seeded perturbations (seed {{ n('nz.seed') }}), paired bootstrap ({{ n('nz.boot_n') }} resamples). Slices by language and noise level are in Appendix {{ sec.ablations }}.</div>
+</div>
+</div>
+<table class="swap">
+<tr><th>ID swap (OOF rows)</th><th class="num">n</th><th class="num">flip rate</th><th class="num">acc. clean &rarr; swapped</th></tr>
+{% for r in swaps %}<tr><td>{{ r.swap }}</td><td class="num">{{ n(r.n) }}</td><td class="num">{{ n(r.rate) }}</td><td class="num">{{ n(r.ac) }} &rarr; {{ n(r.as) }}</td></tr>{% endfor %}
+</table>
+<div class="cap">{{ M() }} {{ O() }} Counterfactual: swap the ID prefix, keep the digits; flip = prediction differs from the same model's clean prediction. PO and LD prefixes act as label cues; the neutral REF prefix still flips {{ n('swap.LD->REF.rate') }} of LD rows.</div>
+
+<h2>LLM Baseline</h2>
+<p>{{ M() }} Four local 8B configurations ({{ llm_models }}; zero-shot and {{ n('llm.n_shots') }}-shot) on the {{ n('a.n') }} test rows reach macro-F1 {{ n('llm.f1_min') }} to {{ n('llm.f1_max') }} against {{ n('llm.ft_f1') }} for the fine-tuned v1; on the headline holdout their strict rejection is at most {{ n('llm.rej_max') }} against {{ n('llm.ft_rej') }} for the shipped scorer. {{ E() }} At {{ n('llm.usd_min') }} to {{ n('llm.usd_max') }} per 1k messages (optimistic lower bound) they cost at least {{ n('ratio.usd') }}&times; the encoder's {{ n('ft.gpu1.usd') }} (same GPU basis); the full table is below.</p>
+<p><b>Why an encoder fine-tune and not an LLM.</b> We measured the alternative: local 8B instruction models ({{ llm_models }}, zero-shot and with {{ n('llm.n_shots') }} few-shot examples) on the same {{ n('a.n') }} test rows (all numbers {{ M() }}; costs {{ E() }}). <i>Quality:</i> LLM macro-F1 is {{ n('llm.f1_min') }} to {{ n('llm.f1_max') }} against {{ n('a.f1') }}; the best LLM configuration ({{ llm_best.name }}) minus v1 is {{ n(llm_best.delta) }} (paired bootstrap). <i>Abstention:</i> the LLMs almost never answer unknown (at most {{ n('llm.rej_max') }} strict rejection on the headline holdout, {{ n(llm_best.ret) }} retention for the best) against {{ n('llm.ft_rej') }} at {{ n('llm.ft_ret') }} retention for the shipped scorer. <i>Latency:</i> p50 {{ n('llm.p50_min') }} to {{ n('llm.p50_max') }} ms per message on the local GPU against {{ n('ft.gpu1.p50_ms') }} ms for the encoder on the same GPU (at least {{ n('ratio.lat_gpu') }}&times;). <i>Cost:</i> {{ n('llm.usd_min') }} to {{ n('llm.usd_max') }} per 1k messages on a T4-class stand-in at {{ n('llm.gpu_hr') }} per hour (optimistic, a lower bound) against {{ n('ft.gpu1.usd') }} for the encoder on the same basis (at least {{ n('ratio.usd') }}&times;, the GPU latency ratio, as the hourly price is shared). {% if srv_colab %}No CPU-versus-GPU ratio is formed: the encoder's CPU latency (ONNX fp32, one thread, p50 {{ n('srv.onnx_fp32.t1.p50') }} ms) was measured on shared Colab vCPUs, whereas the LLM latencies above were measured on the local {{ t('llm.gpu_name') }}, and no LLM was timed on CPU, so the GPU comparison above is the only like-for-like one.{% else %}CPU latency of the encoder is not compared here: it is measured in the Colab canonical run and filled at publish time.{% endif %} <i>Where the LLM has the advantage (outside these measurements):</i> it needs no labelled training data and takes a new intent through the prompt, while the encoder needs labels and a retrain (or the kNN-bank shortcut in section {{ sec.production }}). Scope: local open-weight models only, no frontier API.</p>
+<table>
+<tr><th>Local 8B model, quantized</th><th class="num">test macro-F1 [CI]</th><th class="num">test acc.</th><th class="num">vs v1</th><th class="num">strict rejection</th><th class="num">retention</th><th class="num">unknown answers</th><th class="num">p50 s</th><th class="num">p95 s</th><th class="num">$ / 1k</th></tr>
+{% for r in llm_rows %}
+<tr><td>{{ r.name }}</td><td class="num">{{ n(r.f1) }}</td><td class="num">{{ n(r.acc) }}</td><td class="num">{{ n(r.delta) }}</td><td class="num">{{ n(r.rej) }}</td><td class="num">{{ n(r.ret) }}</td><td class="num">{{ n(r.unk) }}</td><td class="num">{{ n(r.p50) }}</td><td class="num">{{ n(r.p95) }}</td><td class="num">{{ n(r.usd) }}</td></tr>
+{% endfor %}
+<tr class="ship"><td>fine-tuned v1 (this report)</td><td class="num">{{ n('llm.ft_f1') }}</td><td class="num">{{ n('llm.ft_acc') }}</td><td class="num"></td><td class="num">{{ n('llm.ft_rej') }}</td><td class="num">{{ n('llm.ft_ret') }}</td><td class="num"></td><td class="num">{{ n('ft.gpu1.p50') }}</td><td class="num">{{ n('ft.gpu1.p95') }}</td><td class="num">{{ n('ft.gpu1.usd') }}</td></tr>
+</table>
+<div class="cap">{{ M() }} Track A on the {{ n('a.n') }} test rows, {{ n('llm.boot_n') }}-resample bootstrap; Track B on the headline holdout ({{ n('llm.n_known') }} known, {{ n('llm.n_unknown') }} unknown), {{ n('llm.n_shots') }} few-shot examples drawn from train. Latency is sequential on the local GPU. {{ E() }} cost per 1k messages = p50 latency x price per hour: LLM rows {{ t('llm.qwen3_zero.basis') }}; the fine-tuned row uses its GPU batch-1 latency ({{ t('ft.gpu1.basis') }}). LLM GPU rows are optimistic (a T4 is slower than the local GPU), so those costs are lower bounds.</div>
+
+<h2>Latency, Quantization and Cost</h2>
+<p><b>Serving path.</b> <code>predict(text)</code> returns label, confidence, OOD score, abstained flag and top three; below the Mahalanobis threshold ({{ n('srv.thr') }}, set at {{ n('srv.ret_target') }} known retention on validation, {{ n('srv.retention') }} achieved) the router sends the message to the unknown path instead of a handler. Default backend: ONNX fp32 on CPU (FastAPI endpoint, Docker image). {{ M() }} ONNX fp32 matches PyTorch: prediction agreement {{ n('q.fp32.agree') }}, max probability difference {{ n('q.fp32.dprob') }}; the Docker image ({{ n('dk.size') }} GB, ready in {{ n('dk.ready') }} s) reproduced {{ n('dk.n') }} probe strings with equal labels: {{ t('dk.labels_eq') }}, max OOD-score difference {{ n('dk.dood') }}. Hub round trip on test: label agreement {{ n('hub.agree') }}, max probability difference {{ n('hub.dprob') }} (tolerance {{ n('hub.tol') }}). A repeat training run was bitwise identical: {{ t('srv.det') }}.</p>
+<p><b>int8 quantization: rejected.</b> Encoder-only dynamic int8 shrinks the model to {{ n('q.size.int8enc') }} MB from {{ n('q.size.onnx32') }} MB (fp32) and does not meet the pre-registered rule (macro-F1 delta at least {{ n('q.margin') }} on both splits): validation {{ n('q.d_val') }} (pass: {{ t('q.pass_val') }}), which is the deciding criterion; the test delta {{ n('q.d_test') }} (n = {{ n('q.n_rows') }}) is noise, not the criterion; abstention agreement with PyTorch {{ n('q.int8.abst_agree') }}, max probability difference {{ n('q.int8.dprob') }}. Decision: {{ t('q.decision') }}.</p>
+<table>
+<tr><th>Backend</th><th class="num">test macro-F1</th><th class="num">val macro-F1</th><th class="num">size (MB)</th></tr>
+<tr><td>PyTorch fp32</td><td class="num">{{ n('q.torch.f1') }}</td><td class="num">{{ n('qv.torch.f1') }}</td><td class="num">{{ n('q.size.torch') }}</td></tr>
+<tr><td>ONNX fp32 (shipped)</td><td class="num">{{ n('q.fp32.f1') }}</td><td class="num"></td><td class="num">{{ n('q.size.onnx32') }}</td></tr>
+<tr><td>ONNX int8, encoder (rejected)</td><td class="num">{{ n('q.int8.f1') }}</td><td class="num">{{ n('qv.int8.f1') }}</td><td class="num">{{ n('q.size.int8enc') }}</td></tr>
+</table>
+<div class="cap">{{ M() }} Inference-only; {{ n('q.n_variants') }} int8 variants were tried, selected on validation.</div>
+{% if srv_colab %}
+<table>
+<tr><th>CPU batch-1 latency, ms (measured on Colab; environment stated)</th><th class="num">one thread p50</th><th class="num">p95</th>{% if srv_multi %}<th class="num">{{ n('srv.threads_n') }} threads p50</th><th class="num">p95</th>{% endif %}</tr>
+{% for r in srv_rows %}<tr><td>{{ r.name }}</td><td class="num">{{ n(r.t1.p50) }}</td><td class="num">{{ n(r.t1.p95) }}</td>{% if srv_multi %}<td class="num">{{ n(r.tn.p50) }}</td><td class="num">{{ n(r.tn.p95) }}</td>{% endif %}</tr>{% endfor %}
+</table>
+<p><b>CPU recommendation: ONNX fp32 at one thread for batch-1 serving.</b> {{ M() }} At one thread it has p50 {{ n('srv.onnx_fp32.t1.p50') }} ms and p95 {{ n('srv.onnx_fp32.t1.p95') }} ms against p50 {{ n('srv.torch.t1.p50') }} ms and p95 {{ n('srv.torch.t1.p95') }} ms for PyTorch fp32{% if srv_multi %}; with {{ n('srv.threads_n') }} threads ONNX fp32 has p50 {{ n('srv.onnx_fp32.tn.p50') }} ms and p95 {{ n('srv.onnx_fp32.tn.p95') }} ms{% if srv_onnx_t1_best %}, slower than one thread{% else %}, at least as fast as one thread in this run, so the thread count is not settled by it{% endif %} (PyTorch fp32: p50 {{ n('srv.torch.tn.p50') }} ms, p95 {{ n('srv.torch.tn.p95') }} ms{% if srv_torch_t1_best %}, also slower{% endif %}){% endif %}. Cause not isolated; for throughput, run more single-thread replicas (concurrent load is a measurement still to take). {{ E() }} <b>CPU cost per 1k messages:</b> {{ n('srv.onnx_fp32.usd1k_p50') }} for ONNX fp32 ({{ n('srv.torch.usd1k_p50') }} for PyTorch fp32), assuming sequential batch-1 calls on one vCPU at {{ n('srv.cpu_usd_hr') }} per hour: p50 seconds per call &times; 1k calls &divide; seconds per hour &times; hourly price (p50 is the typical call; the mean, {{ n('srv.onnx_fp32.t1.mean') }} ms, would give {{ n('srv.onnx_fp32.usd1k_mean') }}); no batching, concurrency or idle time is priced.</p>
+<div class="box"><p><b>Latency run: measured on Colab.</b> CPU {{ t('srv.cpu_model') }}, {{ n('srv.cpu_cores') }} vCPUs, runtime {{ t('srv.runtime') }}; torch {{ t('srv.torch_ver') }}, onnxruntime {{ t('srv.ort_ver') }}. Split {{ t('srv.split') }}, n = {{ n('srv.n_rows') }}, {{ n('srv.repeats') }} repeats after {{ n('srv.warmup') }} warm-up calls, batch-1. Shared cloud vCPUs, not an idle-machine run.</p></div>
+{% else %}
+<div class="box"><p><b>CPU batch-1 latency (ONNX fp32 and PyTorch fp32): measured in the Colab canonical run (environment stated); filled at publish time.</b></p></div>
+{% endif %}
+
+<h2>Reproduction and Determinism</h2>
+<div class="box repro">
+<p><b>Deliverables.</b> (a) <code>report.pdf</code> (this file). (b) Hugging Face model with label mapping and model card: {{ lk('hf') }}. (c) W&amp;B report: {{ lk('wandb') }}. (d) GitHub repository: {{ lk('repo') }}; Colab notebook: {{ lk('colab') }}.</p>
+<p><b>Reproduce.</b> (a) <i>Colab:</i> Runtime &gt; Run all, then upload your own copy of the dataset at the upload cell; {{ E() }} on a T4 about {{ n('nb.tot_lo') }} to {{ n('nb.tot_hi') }} min (training ~{{ n('nb.train_min') }}, Track B ~{{ n('nb.tb_lo') }} to {{ n('nb.tb_hi') }}; other cells not timed); ends with a <code>REPRODUCTION: PASS/FAIL</code> line against the committed results (outputs in <code>results_colab/</code>). (b) <i>Locally</i> (README; <code>PYTHONPATH=src</code>; seed {{ n('det.seed') }}): <code>{{ t(repro_cmds[0]) }}</code>; <code>{{ t(repro_cmds[1]) }}</code>; <code>{{ t(repro_cmds[2]) }}</code>; <code>{{ t(repro_cmds[3]) }}</code>.</p>
+{% if repro_colab %}
+<p><b>Colab reproduction</b> ({{ M() }}; T4 runtime, notebook run top to bottom, comparison recomputed from the saved outputs). <b>{{ t('rc.verdict') }}</b>: {{ n('rc.n_pass') }} of {{ n('rc.n_rows') }} metrics within tolerance, fresh against committed.</p>
+<table class="split">
+<tr><th>Metric</th><th class="num">fresh</th><th class="num">committed</th><th class="num">delta</th><th class="num">tolerance</th><th class="num">result</th></tr>
+{% for r in repro_rows %}<tr><td>{{ t(r.metric) }}</td><td class="num">{{ n(r.fresh) }}</td><td class="num">{{ n(r.committed) }}</td><td class="num">{{ n(r.delta) }}</td><td class="num">{{ n(r.tol) }}</td><td class="num">{{ n(r.result) }}</td></tr>{% endfor %}
+</table>
+{% if repro_edge %}<p><b>Edge case, disclosed.</b> The {{ t('rc.row' ~ repro_edge_row ~ '.metric') }} delta ({{ n('rc.row' ~ repro_edge_row ~ '.delta') }}) sits exactly at its tolerance ({{ n('rc.row' ~ repro_edge_row ~ '.tol') }}): {{ n('rc.edge.fresh_n') }} of {{ n('rc.edge.unk_n') }} unknown rows rejected fresh against {{ n('rc.edge.committed_n') }} of {{ n('rc.edge.unk_n') }} committed, with a threshold set from {{ n('rc.edge.cal_n') }} known calibration rows per seed{% if repro_edge_coincidence %}; the fresh MSP count equals the Mahalanobis one ({{ n('rc.edge.maha_n') }} of {{ n('rc.edge.unk_n') }}) by arithmetic coincidence, their per-seed counts differ{% endif %}. Not a code bug; per-seed counts are in <code>results/colab/reproduction_run2.json</code>.</p>
+{% endif %}
+{% endif %}
+<p><b>Determinism</b> ({{ M() }}). Two independent trainings of the final model (seed {{ n('det.seed') }}): identical state-dict hash ({{ n('det.state') }}; {{ t('det.fp') }}&hellip;) and epoch history ({{ n('det.epochs') }}); validation and test logits and float32 probabilities bitwise equal ({{ n('det.bitwise') }}; max abs difference {{ n('det.test_logit_diff') }} on test logits, {{ n('det.test_prob_diff') }} on test probabilities). A later live W&amp;B re-run of the train stage ({{ n('rr.epochs') }} epochs) reproduced fingerprint {{ t('rr.fp') }}&hellip; (match: {{ n('rr.match') }}), i.e. byte-identical weights. {% if repro_runs_identical %}The first and second Colab runs, on separate fresh runtimes, produced the identical fingerprint {{ t('rc.fp1') }}&hellip; and identical metrics (all {{ n('rc.n_rows') }} fresh values equal; the run files are <code>results/colab/reproduction_run1.json</code> and <code>results/colab/reproduction_run2.json</code>), so training is bitwise deterministic within a GPU type; it differs only across GPU types ({{ t('rc.accel') }} against {{ t('llm.gpu_name') }}, fingerprints {{ t('rc.fp2') }}&hellip; against {{ t('rc.fp_committed') }}&hellip;), with all metrics within tolerance. {% endif %}{% if not srv_colab %}CPU latency: measured in the Colab canonical run, filled at publish time.{% endif %}</p>
+</div>
+
+<h2>Ablations and Bake-Off Detail</h2>
+<p><b>Approach, in detail.</b> The task is single-label, {{ n('eda.k') }}-way intent routing on {{ n('eda.n') }} rows with a multilingual tail, plus an open-set requirement, so the system has two parts. First, a closed-set classifier: multilingual-e5-base fine-tuned end to end with the standard classification head (dense + tanh + linear) on the first token (learning rate {{ n('a.lr') }}, batch {{ n('a.batch') }}, max length {{ n('a.maxlen') }}, stopped at epoch {{ n('a.epoch') }} of a {{ n('a.epochs_sched') }}-epoch schedule, seed {{ n('a.model_seed') }}), with temperature scaling fitted on validation rows. Second, a post-hoc open-set score on its penultimate features (Mahalanobis distance to the class means) whose threshold is set on known-class validation rows only, so that {{ n('srv.ret_target') }} of known rows are kept; messages below it go to an unknown path instead of a handler. Floors: B0 (character TF-IDF + LR) and B1 (frozen multilingual-e5-base embeddings + LR). Candidates (all <code>AutoModelForSequenceClassification</code>): multilingual-e5-base, xlm-roberta-base, mdeberta-v3-base (learning rate swept per model, then {{ n('bk.e5_lr3e-05.n') }} fold-runs for the best). Rule fixed before any result: highest mean CV macro-F1; a smaller or faster model within one std wins; top two compared with the Nadeau-Bengio corrected t-test.</p>
+<table>
+<tr><th>Candidate</th><th class="num">LR</th><th class="num">CV macro-F1 (mean &plusmn; std)</th><th class="num">CV acc.</th><th class="num">epoch</th><th class="num">runs</th><th class="num">params (M)</th><th class="num">s / run</th></tr>
+{% for r in bakeoff %}
+<tr{% if r.epoch and loop.index == 3 %} class="ship"{% endif %}><td>{{ r.name }}</td><td class="num">{{ c(r.lr) if r.lr else '' }}</td>
+<td class="num">{{ n(r.f1) }} &plusmn; {{ n(r.f1s) }}</td><td class="num">{{ n(r.acc) }}</td><td class="num">{{ c(r.epoch) }}</td>
+<td class="num">{{ n(r.n) }}</td><td class="num">{{ c(r.params) }}</td><td class="num">{{ n(r.wall) }}</td></tr>
+{% endfor %}
+</table>
+<div class="cap">{{ M() }} {{ O() }} CV on train+val only; test untouched. The first rule picks e5 (the others fall below its mean minus one std, {{ n('bk.win_threshold') }}); the second rule does not trigger (best rival is {{ n('bk.r2_gap') }} behind, inside one std: {{ t('bk.r2_within') }}). Top-two Nadeau-Bengio test (J = {{ n('bk.nb_J') }}): t = {{ n('bk.nb_t') }}, p = {{ n('bk.nb_p') }}, so the pre-registered rule, not the p-value, decided.</div>
+<p><b>Why e5-base.</b> It has the highest CV macro-F1 ({{ n('bk.e5_lr3e-05.f1') }} &plusmn; {{ n('bk.e5_lr3e-05.f1s') }}) against {{ n('bk.xlmr_lr5e-05.f1') }} for xlm-roberta-base and {{ n('bk.mdeberta_lr5e-05.f1') }} for mdeberta-v3-base, and no rival is smaller or faster (parameters and seconds per run: table above). Cost of that choice: the fp32 weights are {{ n('q.size.torch') }} MB, and on CPU at batch-1 the shipped ONNX fp32 backend has {% if srv_colab %}p50 {{ n('srv.onnx_fp32.t1.p50') }} ms on one thread{% if srv_multi %} and {{ n('srv.onnx_fp32.tn.p50') }} ms with {{ n('srv.threads_n') }} threads{% endif %} (measured on Colab; environment stated in Appendix {{ sec.latency }}){% else %}a latency that is measured in the Colab canonical run and filled at publish time{% endif %}. int8 quantization did not meet the pre-registered rule, so fp32 ships (Appendix {{ sec.latency }}); the larger multilingual-e5-large ({{ n('p3b.c3.params') }} M parameters) needed {{ n('p3b.c3.mem') }} MB against a {{ n('p3b.c3.vram') }} GB card and was not trained. The {{ n('abl.n') }} recipe ablations (class weights, label smoothing, layer-wise LR decay, entity masking, hierarchical loss) show no gain over the CV noise band ({{ n('abl.noise_band') }}) or in a paired test (tables below). A post-hoc selection check gave the two rivals wider learning-rate and epoch ranges ({{ n('sc.n_configs') }} configs): the best reached {{ n('sc.best.f1') }} ({{ t('sc.best.name') }}) against e5's {{ n('sc.comparator') }} on the same folds.</p>
+<div class="grid2">
+<div>
+<table>
+<tr><th>Config</th><th class="num">CV macro-F1</th><th class="num">epoch</th><th class="num">runs</th><th class="num">VRAM (MB)</th></tr>
+{% for r in bk_all %}<tr><td>{{ r.cid }}</td><td class="num">{{ n(r.f1) }} &plusmn; {{ n(r.f1s) }}</td><td class="num">{{ n(r.epoch) }}</td><td class="num">{{ n(r.n) }}</td><td class="num">{{ n(r.vram) }}</td></tr>{% endfor %}
+</table>
+<div class="cap">{{ M() }} {{ O() }} Configs with few runs were learning-rate sweep points (one fold seed, one model seed); only the best rate per model got the full confirm stage.</div>
+</div>
+<div>
+<table>
+<tr><th>Ablation vs e5 baseline</th><th class="num">delta CV F1</th><th class="num">p</th><th class="num">epoch</th><th class="num">adopted</th></tr>
+{% for a in ablations %}<tr><td>{{ a.name }}</td><td class="num">{{ n(a.delta) }}</td><td class="num">{{ n(a.p) }}</td><td class="num">{{ n(a.epoch) }}</td><td class="num">{{ t(a.adopt) }}</td></tr>{% endfor %}
+</table>
+<div class="cap">{{ M() }} {{ O() }} Each had to beat the CV noise band ({{ n('abl.noise_band') }}) and pass a paired Nadeau-Bengio test at the pre-registered level; {{ n('abl.n_runs') }} baseline runs.</div>
+</div>
+</div>
+<h3>Track B Improvement Rounds: Scorer Comparison, Robustness Variants and Selection Axes</h3>
+<table>
+<tr><th>Candidate scorer</th><th class="num">DEV AUROC</th></tr>
+{% for r in p3b_rows %}<tr><td>{{ r.name }}</td><td class="num">{{ n(r.key) }}</td></tr>{% endfor %}
+</table>
+<div class="cap">{{ M() }} Selection on DEV only. Best eligible candidate minus the current method {{ n('p3b.win_minus') }} against a required margin of {{ n('p3b.margin') }}; ship: {{ t('p3b.ship') }}. C2 passed the Track A guard ({{ n('p3b.c2.0.1.f1') }}, {{ n('p3b.c2.0.5.f1') }} vs {{ n('p3b.guard') }}) but lowered DEV AUROC. C4 (evidence only): CONFIRM {{ n('p3b.c4_confirm') }} vs {{ n('p3b.cur_confirm') }}; B1 fairness variant on CONFIRM {{ n('p3b.b1_confirm') }}. C3: {{ n('p3b.c3.params') }} M parameters, static fp32 weights, grads and Adam state {{ n('p3b.c3.static') }} MB before activations; aborted: {{ t('p3b.c3.aborted') }}.</div>
+<p><b>Robustness and open-set training variants.</b> A1 (ID-prefix randomisation) cut neutral-swap flips (reduction {{ n('hist.a1.flip') }}) but did not meet the Track A guard ({{ n('hist.guard.a1') }} vs {{ n('hist.guard.thr') }}); A2 (outlier exposure) did not meet the guard ({{ n('hist.guard.a2') }}) and lowered DEV AUROC ({{ n('hist.a2.auroc') }}) and rejection ({{ n('hist.a2.rej') }}); A3 passed ({{ n('hist.guard.a3') }}) with zh agreement gain {{ n('hist.v2.zh') }} and mean-language gain {{ n('hist.v2.agree') }}, and was adopted as v2. Multi-axis selection axes are candidate minus v1 as improvement (positive is better; CI of the improvement); rejection is strict rejection at the high retention operating point.</p>
+<table class="wrap">
+<tr><th>Candidate</th><th class="num">epoch</th><th class="num">(a) CV F1</th><th class="num">(b) DEV AUROC</th><th class="num">(b) DEV rejection</th><th class="num">(c) flip rate</th><th class="num">(d) transl. agreement</th><th class="num">(e) ECE</th><th class="num">eligible</th><th class="num">improved axes</th></tr>
+{% for r in axes_rows %}<tr{% if r.name.endswith('(v3)') %} class="ship"{% endif %}><td>{{ r.name }}</td><td class="num">{{ n(r.estar) }}</td><td class="num">{{ n(r.a) }}</td><td class="num">{{ n(r.bA) }}</td><td class="num">{{ n(r.bR) }}</td><td class="num">{{ n(r.c) }}</td><td class="num">{{ n(r.d) }}</td><td class="num">{{ n(r.e) }}</td><td class="num">{{ t(r.elig) }}</td><td class="num">{{ n(r.nimp) }}</td></tr>{% endfor %}
+</table>
+<div class="cap">{{ M() }} v1 reference at epoch {{ n('hist.sens.v1_e') }}: CV F1 {{ n('ax.v1.f1') }}, DEV AUROC {{ n('ax.v1.auroc') }}, rejection {{ n('ax.v1.rej95') }}, flip rate {{ n('ax.v1.flip') }}, agreement {{ n('ax.v1.agree') }}, ECE {{ n('ax.v1.ece') }}. Seeds averaged inside each paired-bootstrap resample; no multiplicity correction across candidates and axes, which is why eligibility, not only improvement, gates selection.</div>
+<h3>A2 Track A detail: calibration, per-class out-of-fold scores, slices and error analysis</h3>
+<div class="grid-cal">
+<div>
+<p><b>Paired comparison on the same test rows.</b> Fine-tuned minus B0: {{ n('a.B0.delta') }} (McNemar exact: {{ n('a.B0.mc_a') }} vs {{ n('a.B0.mc_b') }} discordant, p = {{ n('a.B0.mc_p') }}); minus B1: {{ n('a.B1.delta') }} ({{ n('a.B1.mc_a') }} vs {{ n('a.B1.mc_b') }}, p = {{ n('a.B1.mc_p') }}). Parent-level accuracy {{ n('a.parent_acc') }}. <b>Calibration.</b> Temperature {{ n('cal.T') }}; test ECE {{ n('cal.test.ece_before') }} before and {{ n('cal.test.ece_after') }} after scaling (no gain on test; validation, in-sample: {{ n('cal.val.ece_before') }} to {{ n('cal.val.ece_after') }}). Selective prediction at the shipped threshold: coverage {{ n('sel.coverage') }}, accuracy on accepted {{ n('sel.acc') }}, AURC {{ n('sel.aurc') }}.</p>
+</div>
+<figure><img src="{{ figs.reliability }}" alt="reliability diagram"><div class="cap">{{ M() }} reliability, test, before and after temperature scaling.</div></figure>
+</div>
+<table class="pc">
+<tr><th rowspan="2">Class</th><th colspan="4" class="num">test, single evaluation</th><th colspan="4" class="num">out-of-fold {{ O() }}</th></tr>
+<tr><th class="num">P</th><th class="num">R</th><th class="num">F1</th><th class="num">n</th><th class="num">P</th><th class="num">R</th><th class="num">F1</th><th class="num">n</th></tr>
+{% for r in perclass %}
+<tr><td>{{ r.label }}</td><td class="num">{{ n(r.precision) }}</td><td class="num">{{ n(r.recall) }}</td><td class="num">{{ n(r.f1) }}</td><td class="num">{{ n(r.support) }}</td><td class="num">{{ n(r.oof.precision) }}</td><td class="num">{{ n(r.oof.recall) }}</td><td class="num">{{ n(r.oof.f1) }}</td><td class="num">{{ n(r.oof.support) }}</td></tr>
+{% endfor %}
+</table>
+<div class="cap">{{ M() }} Out-of-fold: {{ n('oof.n') }} train+val rows, probabilities averaged over {{ n('err.oof45.per_id') }} predictions per row, then scored once with the test definition (computed from the saved OOF predictions; macro-F1 equals the stored {{ n('oof.f1') }}). Post-selection, so optimistic.</div>
+<table class="split">
+<thead><tr><th rowspan="2">Slice ({{ t('sl.short_def') }}; indicative if {{ t('sl.indic_rule') }})</th><th colspan="3" class="num">out-of-fold {{ O() }}</th><th colspan="3" class="num">test, single evaluation</th></tr>
+<tr><th class="num">n</th><th class="num">macro-F1 [CI]</th><th class="num">acc. [CI]</th><th class="num">n</th><th class="num">macro-F1 [CI]</th><th class="num">acc. [CI]</th></tr></thead>
+{% for r in slices %}
+<tr{% if (r.oof and r.oof.flag) or (r.test and r.test.flag) %} class="warn"{% endif %}><td>{{ r.name }}</td>
+{% for src in [r.oof, r.test] %}
+{% if src %}<td class="num">{{ n(src.n) }}{% if src.flag %}*{% endif %}</td><td class="num">{{ c(src.f1) }}{% if src.f1 and src.f1_no_ci %}&dagger;{% endif %}</td><td class="num">{{ c(src.acc) }}</td>{% else %}<td class="num">n/a</td><td></td><td></td>{% endif %}
+{% endfor %}
+</tr>
+{% endfor %}
+</table>
+<div class="cap">{{ M() }} * = indicative only (small n); shaded rows contain such a slice. Slice macro-F1 uses the slice's gold classes, fixed across resamples, so intervals are biased low when a resample drops a class; &dagger; = the point lies outside its own interval for that reason, so the interval is not shown. Single-row slices report accuracy only.</div>
+<p><b>Error analysis detail.</b> <b>Hypothesis: errors concentrate in shipment_information.* (rejected).</b> {{ M() }} {{ O() }} Out-of-fold, {{ n('err.oof45.n_runs') }} fold-runs ({{ n('err.oof45.rows') }} predictions): the family is {{ n('err.oof45.fam_share_rows') }} of rows and {{ n('err.oof45.fam_share_err') }} of errors; the cluster-bootstrap interval of (error share minus row share) is [{{ n('err.oof45.rows_ci_lo') }}, {{ n('err.oof45.rows_ci_hi') }}] ({{ n('err.oof45.boot_n') }} resamples over row ids), so the family is under-represented in errors. Of its {{ n('err.oof45.fam_errors') }} family errors {{ n('err.oof45.within') }} stay inside the family ({{ n('err.oof45.within_share') }}). On test: {{ n('err.test.errors') }} errors, {{ n('err.test.fam_errors') }} in the family.</p>
+<table>
+<tr><th>Gold &rarr; predicted ({{ n('err.oof45.n_runs') }} fold-runs)</th><th class="num">count</th></tr>
+{% for r in top_conf %}<tr><td>{{ t(r.gold) }} &rarr; {{ t(r.pred) }}</td><td class="num">{{ n(r.n) }}</td></tr>{% endfor %}
+</table>
+<div class="cap">{{ M() }} {{ O() }} Hypotheses (next step: targeted test): document_processing vs knowledge_base share document vocabulary (lexical overlap); customer_support catches complaints that mention scheduling or yard events (missing context). Test split:
+{% for r in test_conf %}{{ t(r.gold) }} &rarr; {{ t(r.pred) }}{% if not loop.last %}; {% endif %}{% endfor %}.</div>
+
+<h2>Test-Split Exposure</h2>
+<div class="box warn"><p><b>Test-split exposure.</b> Each final closed-set model (v1, v2, v3) was test-evaluated exactly once, and so were the baselines B0 and B1; every other call that read the test split is inference-only (robustness, LLM baseline, quantization, latency, determinism, Hub round trip) and computes no Track A metric, with the counts taken from the test-evaluation record files below. The leave-one-class-out and Track B selection models (never the final model) read known-class test rows as the known side of the open-set evaluation (Open-set improvement round added more such reads, counted below, and no classifier test evaluation), so the v1-versus-v3 decision, which used the Track B headline and CONFIRM holdouts, was not fully test-free (the selection rules were fixed before the candidates were run). The Track A test macro-F1 of the final models played no part in any selection. Reproduction runs (the notebook, locally and on Colab) re-evaluate the bit-identical v1 weights into results_colab/, recorded separately from results/; they feed no selection and no reported Track A number.</p></div>
+<div class="grid2">
+<div>
+<table>
+<tr><th>Inference-only call type in the test-evaluation record</th><th class="num">lines</th></tr>
+{% for r in infer_rows %}<tr><td>{{ r.label }}</td><td class="num">{{ n(r.key) }}</td></tr>{% endfor %}
+</table>
+</div>
+<div>
+<table>
+<tr><th>Track B / selection records (LOCO and DEV models, known-class test rows)</th><th class="num">lines</th></tr>
+{% for r in other_logs %}<tr><td class="mono">{{ r.folder }}</td><td class="num">{{ n(r.key) }}</td></tr>{% endfor %}
+{% for r in p6a.logs.rows %}<tr><td class="mono">{{ r.folder }}</td><td class="num">{{ n(r.key) }}</td></tr>{% endfor %}
+</table>
+</div>
+</div>
+<table>
+<tr><th>Final and baseline models: <code>evaluation</code> lines</th><th>fingerprint</th><th>date</th><th>git sha</th></tr>
+{% for r in eval_rows %}<tr><td>{{ t(r.name) }}</td><td class="mono nw">{{ t(r.fp) }}</td><td class="nw">{{ t(r.ts) }}</td><td class="mono nw">{{ t(r.sha) }}</td></tr>{% endfor %}
+</table>
+<div class="cap">{{ M() }} Counted by code from the record files. <code>results/final/test_eval_log.jsonl</code> holds {{ n('log.total') }} lines: {{ n('log.eval.final_models') }} <code>evaluation</code> lines for {{ n('log.eval.distinct_final_fps') }} distinct final fingerprints, {{ n('log.eval.baselines') }} for the B0 and B1 baselines and {{ n('log.infer_total') }} inference-only lines. The Track B records hold {{ n('log.other.total') }} lines across {{ n('log.other.n_files') }} files. Open-set improvement round added {{ n('p6a.log.total') }} Track B test-row reads across {{ n('p6a.log.n_files') }} further record files (rows above, by call type; unknown-side held-out-class rows included) and made no new classifier test evaluation.</div>
+
+<h2>Further Detail</h2>
+<h3>Headline summary, full</h3>
+<table>
+<tr><th>Headline</th><th class="num">Value</th><th>What it is</th></tr>
+<tr class="ship"><td>Track A: test macro-F1 (primary)</td><td class="num">{{ n('a.f1') }}</td>
+<td>{{ M() }} one recorded test evaluation, n = {{ n('a.n') }}, model seed {{ n('a.model_seed') }}, {{ n('a.boot.level') }} percentile bootstrap ({{ n('a.boot.n') }} resamples, seed {{ n('a.boot.seed') }}). Shipped model: v1.</td></tr>
+<tr><td>Track A: test accuracy</td><td class="num">{{ n('a.acc') }}</td><td>{{ M() }} same evaluation</td></tr>
+<tr><td>Track A: cross-validated macro-F1</td><td class="num">{{ n('cv.f1_mean') }} &plusmn; {{ n('cv.f1_std') }}</td>
+<td>{{ M() }} {{ O() }} {{ n('cv.n_runs') }} fold-runs ({{ n('cv.n_fold_seeds') }} fold seeds &times; {{ n('cv.n_model_seeds') }} model seeds &times; {{ n('cv.n_folds') }} folds); epoch and model were chosen on these folds</td></tr>
+<tr><td>Track A: out-of-fold macro-F1</td><td class="num">{{ n('oof.f1') }}</td><td>{{ M() }} {{ O() }} {{ n('oof.n') }} train+val rows, probabilities averaged over {{ n('err.oof45.per_id') }} predictions per row</td></tr>
+<tr><td>Floors on the same test split (B0, B1)</td><td class="num">{{ n('a.B0.f1') }}<br>{{ n('a.B1.f1') }}</td><td>{{ M() }} B0 above (char TF-IDF + LR), B1 below (frozen e5 + LR); same test split</td></tr>
+<tr class="ship"><td>Track B: strict rejection recall at the {{ n(R95) }} retention operating point</td><td class="num">{{ n('tb.headline.strict_recall_95') }}</td>
+<td>{{ M() }} headline holdout ({{ n('tb.holdout') }}), {{ n('tb.n_seeds') }} model seeds, rows resampled within the holdout, {{ n('tb.boot.n') }} resamples. Measured limit: see section {{ sec.trackb }}.</td></tr>
+<tr><td>Track B: known-class retention / AUROC</td><td class="num">{{ n('tb.headline.retention_95') }}<br>{{ n('tb.headline.auroc') }}</td><td>{{ M() }} same runs (retention above, AUROC below)</td></tr>
+</table>
+<h3>Data quirks, full list</h3>
+<ul>
+<li><b>Fewer non-English rows than stated.</b> Language ID ({{ M() }} lingua, offline) finds {{ n('eda.nonen') }} non-English by primary language (code-mixed {{ n('eda.mixed') }}), not the stated ~{{ n('eda.claim') }}; {{ n('eda.undet') }} rows are undetermined and never counted. Spanish {{ n('eda.lang.es') }}, French {{ n('eda.lang.fr') }}, German {{ n('eda.lang.de') }}, Chinese {{ n('eda.lang.zh') }} rows: small slices, so each carries n and an interval.</li>
+<li><b>Short and noisy text.</b> {{ n('eda.short') }} rows are very short (emoji, one-liners): kept. {{ n('eda.noisy') }} of rows are noisy ({{ n('eda.lower') }} all-lower-case, {{ n('eda.slang') }} slang). Token p99 is {{ n('eda.p99_tok') }}; max length {{ n('eda.maxlen') }}.</li>
+<li><b>Near-duplicates.</b> {{ n('eda.dup_pairs') }} pairs above character-TF-IDF cosine {{ n('eda.dup_thr') }}, same label, are grouped so they never straddle splits or folds; cross-label pairs above {{ n('eda.dup_cross_thr') }}: {{ n('eda.dup_cross') }}.</li>
+<li><b>Class imbalance.</b> Ratio {{ n('eda.imb') }}: macro-F1 and stratified, duplicate-grouped splits; class-weighted cross-entropy was ablated, not adopted (CV delta {{ n('abl.class_weight.delta') }}, p = {{ n('abl.class_weight.p') }}).</li>
+<li><b>Catch-all classes.</b> <code>chitchat</code> ({{ n('eda.cc.chitchat') }} rows) and <code>other</code> ({{ n('eda.cc.other') }} rows) are the smallest classes (test F1 {{ n('a.pc.chitchat.f1') }}, n = {{ n('a.pc.chitchat.support') }}; {{ n('a.pc.other.f1') }}, n = {{ n('a.pc.other.support') }}: small n, indicative). In Track B lenient mode they count as safe landings, but {{ n('tb.nr_safe') }} of {{ n('tb.nr_total') }} un-rejected unknowns land there, so lenient equals strict.</li>
+<li><b>Small data.</b> Weight decay {{ n('a.wd') }} and the stopping epoch ({{ n('a.epoch') }}) were chosen on CV, never on test; headline numbers carry a CV or bootstrap interval.</li>
+<li><b>ID-prefix shortcut.</b> PO-style IDs occur in {{ n('eda.sc.po.n') }} rows, {{ n('eda.sc.po.share') }} labelled <code>{{ t('eda.sc.po.top') }}</code> (flagged: {{ t('eda.sc.po.risk') }}); LD-style IDs in {{ n('eda.sc.ld.n') }} rows, {{ n('eda.sc.ld.share') }} <code>{{ t('eda.sc.ld.top') }}</code>. A masked-entity ablation reduced CV F1 ({{ n('abl.entity_mask.delta') }}); the counterfactual damage is in Appendix {{ sec.robust }}.</li>
+<li><b>Sibling overlap and label ambiguity.</b> The three shipment classes overlap lexically (nearest-neighbour accuracy {{ n('eda.sib_1nn') }}). An LLM label-ambiguity audit ({{ M() }}, {{ n('aud2.n') }} items, Fleiss kappa {{ n('aud2.kappa') }}) did not meet its pre-registered calibration gate (judge accuracy {{ n('aud2.qwen3') }} / {{ n('aud2.llama3') }} / {{ n('aud2.gemma3') }} vs {{ n('aud2.gate') }}), so its labels are not used and nothing is relabelled. Of {{ n('aud2.err_n') }} model errors the judges' consensus sided with gold in {{ n('aud2.err_gold') }}, the model in {{ n('aud2.err_model') }}, a third label in {{ n('aud2.err_other') }}, none in {{ n('aud2.err_none') }}.</li>
+</ul>
+<h3>Evaluation protocol</h3>
+<p><b>Why macro-F1, CV and CIs.</b> Classes are equal-weight for routing, and the test split is {{ n('a.n') }} rows (about {{ n('a.sup_min') }} to {{ n('a.sup_max') }} per class), so one error moves a class F1 a lot; we pair the split with CV and intervals. <b>Splits.</b> Stratified and grouped by near-duplicate group: train {{ n('a.n_train') }}, validation {{ n('a.n') }}, test {{ n('a.n') }}; CV runs on the remaining {{ n('oof.n') }} rows. <b>Leakage controls.</b> Temperature and the abstention threshold are fitted on validation only; Track B thresholds use known-class calibration rows only; the audit of the {{ n('aud.n_runs') }} Track B runs found all assertions passing: {{ t('aud.ok') }} (zero held-out-class rows in any training set).</p>
+<h3>What to monitor and how drift is caught</h3>
+<ul>
+<li><b>Input and output drift:</b> abstention rate (test reference: {{ n('srv.cov') }} coverage), confidence and negative-energy distributions, language mix against the measured {{ n('eda.nonen') }} non-English, kNN distance to train compared with a reference window (PSI or MMD), per-intent volume, downstream handler failure rate.</li>
+<li><b>Label drift:</b> weekly sampled audits labelled by consensus of different model families, blind, with agreement measured and the result labelled consensus, not ground truth. Our pilot ({{ n('aud2.n') }} items) had Fleiss kappa {{ n('aud2.kappa') }} but did not meet calibration (reliable: {{ t('aud2.reliable') }}), so humans label any sample that triggers a retrain.</li>
+<li><b>13th-class playbook:</b> cluster the abstained traffic, name and label the cluster, add the class immediately through the kNN bank (no retraining), then retrain fully, shadow-evaluate against v1, and promote. Retraining triggers: sustained rise in abstention rate, kNN-distance PSI above its alert level, a handler failure spike, or a new labelled cluster of meaningful size.</li>
+</ul>
+<h3>Other limitations</h3>
+<p>v2 and v3 lowered strict rejection on the scored Track B holdout and are not shipped; the LLM label audit did not meet its calibration gate and is not used. Small data: a {{ n('a.n') }}-row test split, language slices as small as {{ n('eda.lang.zh') }} rows (Chinese), MT-evaluated translation rows. <b>ID-prefix shortcut:</b> the neutral prefix <code>REF</code> still flips {{ n('swap.LD->REF.rate') }} of the {{ n('swap.LD->REF.n') }} LD-prefixed OOF rows ({{ n('swap.LD->REF.flips') }} flips; {{ n('ax.v1.flip') }} pooled over the neutral swaps in the multi-axis selection axes), so part of the closed-set accuracy rides on ID text. {% if srv_colab %}CPU latency was measured on Colab shared vCPUs (environment stated), not on an idle machine of our own.{% else %}CPU latency is measured in the Colab canonical run and filled at publish time.{% endif %}</p>
+<div class="box gap3">
+<p><b>{{ gap.box_title }}.</b> The core pipeline (EDA, a stratified split, an e5 fine-tune, macro-F1, an MSP abstention threshold set on held-out data, W&amp;B tracking, the Hub push) produces the Track A result: test macro-F1 {{ n('a.f1') }}.</p>
+<p>The additional effort bought evidence rather than score: confidence intervals, pre-registered selection rules, and the Track B diagnosis (D1 to D4) with its fix plan.</p>
+<p>That evidence changes what can be claimed: the gap to B1 ({{ n('a.B1.delta') }}) sits inside its interval at n = {{ n('a.n') }} rows and {{ n('tb.not_rej') }} of unseen intents are still routed to a known label, neither of which a point estimate alone shows.</p>
+</div>
+<h3>Next steps, detail</h3>
+<p>{% if not srv_colab %}{{ L() }} Run the Colab latency cell (notebook section 8b) and add its JSON to the results. {% endif %}{{ L() }} <b>N1, verified hard-negative out-of-scope data (the first step).</b> D1 is the evidence: held-out intents are separable (oracle AUROC {{ n(p6a.d1.rows[0].unseen) }}) but the unsupervised score reaches {{ n(p6a.d1.maha) }}, a missing negative training signal. Generate out-of-scope messages that reuse keywords of the {{ n('eda.k') }} intents, keep those all three judges unanimously label as fitting none, then compare a K-plus-one class head against outlier exposure with a uniform target on the same Track B holdouts. Generic synthetic outlier exposure (A2) did not meet the Track A guard ({{ n('hist.guard.a2') }} vs {{ n('hist.guard.thr') }}) and lowered DEV AUROC ({{ n('hist.a2.auroc') }}); the judges did not meet calibration (reliable: {{ t('aud2.reliable') }}) and need a gate first. Published outlier-exposure results are outside these measurements. {{ L() }} <b>More labelled data</b> (D4): the measured AUROC slope is {{ n(p6a.d4.auroc_slope) }} per doubling, but the rejection slope ({{ n(p6a.d4.rej_slope) }}) has an interval reaching zero. {{ L() }} <b>I4, ID-consistency loss, with its measured trade-off:</b> neutral-swap flip rate {{ n('p6a.ax.i4a.c') }} and {{ n('p6a.ax.i4b.c') }} (two loss weights; negative is fewer flips) against CV macro-F1 {{ n('p6a.ax.i4a.a_ci') }} and {{ n('p6a.ax.i4b.a_ci') }}, ineligible on the F1 axis; it needs a variant that recovers that loss. v3 cut neutral-swap flips by {{ n('ax.a1a3.c') }} but moved headline rejection by {{ n('trd.head.rej95') }}, so any such attempt must be guarded on Track B too. {{ L() }} <b>N2, e5-large fine-tune: not worth it under D1 (cut).</b> On the all-rows pool, the pre-registered rule's metric (frozen encoders trained on none of these rows), frozen e5-large oracle AUROC is {{ n(p6a.n2.large) }} against {{ n(p6a.n2.base) }} for e5-base, a gap of {{ n(p6a.n2.diff) }}, short of the {{ n(p6a.n2.margin) }} the rule needs (run N2: {{ t(p6a.n2.run) }}). {{ L() }} <b>Closed in the open-set improvement round.</b> I1: i1a changed raw DEV rejection by {{ n('p6a.ax.i1a.b_raw_rej') }} (ineligible); i1b was selected, then held back by the pre-ship check (headline strict rejection {{ n('p6a.ship.raw.headline.rej') }}). I6: i6a retains {{ n('p6a.ax.i6a.ret_raw') }} and i6b {{ n('p6a.ax.i6b.ret_raw') }} of known DEV rows (collapsed).</p>
+
+{% if include_text %}
+<h2>PRIVATE: example texts (not for distribution)</h2>
+<div class="box bad"><p>This appendix reads the confidential dataset. Review only; never publish this file.</p></div>
+<table>
+<tr><th>id</th><th>kind</th><th>gold</th><th>predicted</th><th>text</th></tr>
+{% for e in examples %}<tr><td>{{ e.id }}</td><td>{{ e.kind }}</td><td>{{ e.gold }}</td><td>{{ e.pred }}</td><td>{{ e.text }}</td></tr>{% endfor %}
+</table>
+{% endif %}
+</section>
+{% endif %}
+</body>
+</html>

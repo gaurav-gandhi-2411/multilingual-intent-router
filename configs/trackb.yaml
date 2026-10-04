@@ -1,0 +1,39 @@
+# Track B (open-set) experiments. Tool config lives in pyproject.toml.
+# The model/training settings are NOT repeated here: every Track B model is trained with the
+# `train` block of final_config (model, lr, 20-epoch schedule, stop_epoch, batch, max_len,
+# prefix, eager attention). Only the seed and (for the ablation) label_smoothing are overridden.
+final_config: configs/final.yaml
+results_dir: results/trackb          # json + scores/<run_id>.csv (ids and numbers only, no text)
+figures_dir: results/figures
+outputs_dir: outputs/trackb          # per-run npz, W&B figures (gitignored)
+frozen_cache: outputs/trackb/frozen_e5.npz
+test_inference_log: results/trackb/test_inference_log.jsonl
+gpu_lock_expected_s: 600
+gpu_lock_poll_s: 30
+
+headline:
+  holdout: [yard_management, document_processing]
+  seeds: [42, 43, 44]
+loco:
+  seed: 42
+  excluded_classes: [other, chitchat]   # LOCO runs over the remaining 10 in-domain classes
+ls:
+  label_smoothing: 0.1                  # compared with the label_smoothing 0 headline runs
+  seeds: [42, 43, 44]
+
+ood:
+  retention: 0.95                       # threshold: known-only calibration rows, 95% kept
+  knn_k: [1, 5]                         # reported, never tuned
+  safe_labels: [other, chitchat]        # lenient mode
+  selection_rule: best mean LOCO AUROC (strict mode)
+
+final_artifacts:                        # written by final.py; shipped stage reads, never re-infers
+  features_logits: outputs/final/features_logits.npz
+  test_predictions: results/final/test_predictions.csv
+
+wandb:
+  project: intent-router
+  group_headline: trackB-headline
+  group_loco: trackB-loco
+  group_ls: trackB-ls
+  enabled: true

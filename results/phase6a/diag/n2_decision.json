@@ -1,0 +1,20 @@
+{
+  "oracle": true,
+  "rule": "frozen e5-large headline oracle AUROC >= frozen e5-base + 0.02",
+  "margin": 0.02,
+  "metric": "headline holdout, pool = all rows, PRIMARY = mean of fold AUROCs",
+  "values": {
+    "e5_base_mean_of_folds": 0.9699404761904761,
+    "e5_large_mean_of_folds": 0.9744047619047619,
+    "diff_mean_of_folds": 0.0044642857142858094,
+    "e5_base_pooled_oof": 0.9711607142857143,
+    "e5_large_pooled_oof": 0.974047619047619,
+    "diff_pooled_oof": 0.002886904761904785
+  },
+  "run_n2": false,
+  "run_n2_pooled_variant": false,
+  "primary_and_pooled_agree": true,
+  "label": "ORACLE: uses the held-out class labels (known-vs-unknown supervision). Report-only; never a selection input; never read by the training/selection module.",
+  "smoke": false,
+  "git_sha": "4536308e25696d84e01dd26bffcdac8d8f0dbdbc-dirty"
+}

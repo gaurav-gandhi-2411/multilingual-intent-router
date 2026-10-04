@@ -1,0 +1,1023 @@
+{
+  "n_rows": 500,
+  "class_counts": {
+    "shipment_information.realtime_query": 55,
+    "shipment_information.analytics": 55,
+    "appointment_manager": 45,
+    "orders": 45,
+    "yard_management": 40,
+    "customer_support": 40,
+    "ai_agent_performance": 40,
+    "document_processing": 40,
+    "knowledge_base": 40,
+    "chitchat": 35,
+    "shipment_information.disruptions": 35,
+    "other": 30
+  },
+  "imbalance_ratio_max_over_min": 1.8333333333333333,
+  "n_classes": 12,
+  "length": {
+    "chars": {
+      "p50": 72.0,
+      "p95": 107.04999999999995,
+      "p99": 123.03999999999996,
+      "min": 1.0,
+      "max": 139.0
+    },
+    "n_texts_under_15_chars": 6,
+    "tokens_by_tokenizer": {
+      "intfloat/multilingual-e5-base": {
+        "p50": 22.0,
+        "p95": 31.0,
+        "p99": 36.00999999999999,
+        "min": 7.0,
+        "max": 39.0,
+        "prefix": "query: "
+      },
+      "FacebookAI/xlm-roberta-base": {
+        "p50": 19.0,
+        "p95": 28.0,
+        "p99": 33.00999999999999,
+        "min": 4.0,
+        "max": 36.0,
+        "prefix": ""
+      },
+      "microsoft/mdeberta-v3-base": {
+        "p50": 21.0,
+        "p95": 31.049999999999955,
+        "p99": 36.0,
+        "min": 4.0,
+        "max": 41.0,
+        "prefix": ""
+      }
+    },
+    "max_len_decision": {
+      "rule": "64 if max p99 across tokenizers <= 64 else ceil(max_p99/16)*16",
+      "max_p99_across_tokenizers": 36.00999999999999,
+      "tokenizers_used": [
+        "intfloat/multilingual-e5-base",
+        "FacebookAI/xlm-roberta-base",
+        "microsoft/mdeberta-v3-base"
+      ],
+      "max_len": 64
+    }
+  },
+  "language": {
+    "method": {
+      "library": "lingua-language-detector (offline, preloaded models)",
+      "candidate_languages": [
+        "ENGLISH",
+        "SPANISH",
+        "FRENCH",
+        "GERMAN",
+        "CHINESE",
+        "ARABIC",
+        "PORTUGUESE",
+        "ITALIAN",
+        "DUTCH",
+        "JAPANESE",
+        "HINDI"
+      ],
+      "primary_language": "top confidence value; 'undetermined' if letters < 6 or top confidence < 0.4",
+      "segments": "detect_multiple_languages_of; a segment counts if word_count >= 3 (or script is ZH/JA/AR, where word_count is unreliable); non-English segments must also re-score standalone as the same language with confidence >= 0.9 (the segmenter otherwise invents it/fr/es spans in plain English)",
+      "text_cleaning": "IDs (XX-123), URLs, emails, emoji and digits removed before detection",
+      "any_non_en_def_B": "primary non-English OR any counted non-English segment",
+      "code_mixed": "counted English segment AND counted non-English segment in same text",
+      "undetermined": "reported separately, never counted as non-English"
+    },
+    "guards": {
+      "lang_min_letters": 6,
+      "lang_min_confidence": 0.4,
+      "segment_min_words": 3,
+      "segment_min_confidence": 0.9
+    },
+    "primary_language_counts": {
+      "en": 430,
+      "es": 22,
+      "fr": 18,
+      "de": 12,
+      "undetermined": 8,
+      "zh": 7,
+      "ar": 1,
+      "it": 1,
+      "nl": 1
+    },
+    "undetermined_n": 8,
+    "pct_non_english_primary_definition_A": 12.4,
+    "pct_any_non_english_segment_definition_B": 12.4,
+    "pct_code_mixed": 0.2,
+    "pct_non_english_A_among_determined": 12.601626016260163,
+    "pdf_claim_pct_non_english": 25,
+    "n_rows": 500,
+    "language_x_label": {
+      "ar": {
+        "ai_agent_performance": 0,
+        "appointment_manager": 0,
+        "chitchat": 0,
+        "customer_support": 0,
+        "document_processing": 0,
+        "knowledge_base": 0,
+        "orders": 0,
+        "other": 1,
+        "shipment_information.analytics": 0,
+        "shipment_information.disruptions": 0,
+        "shipment_information.realtime_query": 0,
+        "yard_management": 0
+      },
+      "de": {
+        "ai_agent_performance": 0,
+        "appointment_manager": 1,
+        "chitchat": 1,
+        "customer_support": 1,
+        "document_processing": 1,
+        "knowledge_base": 1,
+        "orders": 0,
+        "other": 1,
+        "shipment_information.analytics": 2,
+        "shipment_information.disruptions": 2,
+        "shipment_information.realtime_query": 2,
+        "yard_management": 0
+      },
+      "en": {
+        "ai_agent_performance": 35,
+        "appointment_manager": 39,
+        "chitchat": 29,
+        "customer_support": 36,
+        "document_processing": 34,
+        "knowledge_base": 36,
+        "orders": 39,
+        "other": 25,
+        "shipment_information.analytics": 49,
+        "shipment_information.disruptions": 30,
+        "shipment_information.realtime_query": 43,
+        "yard_management": 35
+      },
+      "es": {
+        "ai_agent_performance": 3,
+        "appointment_manager": 2,
+        "chitchat": 1,
+        "customer_support": 1,
+        "document_processing": 3,
+        "knowledge_base": 2,
+        "orders": 1,
+        "other": 0,
+        "shipment_information.analytics": 2,
+        "shipment_information.disruptions": 1,
+        "shipment_information.realtime_query": 4,
+        "yard_management": 2
+      },
+      "fr": {
+        "ai_agent_performance": 2,
+        "appointment_manager": 2,
+        "chitchat": 1,
+        "customer_support": 1,
+        "document_processing": 2,
+        "knowledge_base": 1,
+        "orders": 2,
+        "other": 1,
+        "shipment_information.analytics": 1,
+        "shipment_information.disruptions": 2,
+        "shipment_information.realtime_query": 2,
+        "yard_management": 1
+      },
+      "it": {
+        "ai_agent_performance": 0,
+        "appointment_manager": 0,
+        "chitchat": 0,
+        "customer_support": 0,
+        "document_processing": 0,
+        "knowledge_base": 0,
+        "orders": 1,
+        "other": 0,
+        "shipment_information.analytics": 0,
+        "shipment_information.disruptions": 0,
+        "shipment_information.realtime_query": 0,
+        "yard_management": 0
+      },
+      "nl": {
+        "ai_agent_performance": 0,
+        "appointment_manager": 0,
+        "chitchat": 0,
+        "customer_support": 0,
+        "document_processing": 0,
+        "knowledge_base": 0,
+        "orders": 0,
+        "other": 0,
+        "shipment_information.analytics": 1,
+        "shipment_information.disruptions": 0,
+        "shipment_information.realtime_query": 0,
+        "yard_management": 0
+      },
+      "undetermined": {
+        "ai_agent_performance": 0,
+        "appointment_manager": 0,
+        "chitchat": 3,
+        "customer_support": 0,
+        "document_processing": 0,
+        "knowledge_base": 0,
+        "orders": 0,
+        "other": 1,
+        "shipment_information.analytics": 0,
+        "shipment_information.disruptions": 0,
+        "shipment_information.realtime_query": 4,
+        "yard_management": 0
+      },
+      "zh": {
+        "ai_agent_performance": 0,
+        "appointment_manager": 1,
+        "chitchat": 0,
+        "customer_support": 1,
+        "document_processing": 0,
+        "knowledge_base": 0,
+        "orders": 2,
+        "other": 1,
+        "shipment_information.analytics": 0,
+        "shipment_information.disruptions": 0,
+        "shipment_information.realtime_query": 0,
+        "yard_management": 2
+      }
+    }
+  },
+  "noise": {
+    "wordlist": "21745 whole-word alphabetic tokens from bert-base-uncased vocab (+ inflection-suffix stripping); approximation, OOV overstates typos",
+    "pct_all_lowercase_among_rows_with_letters": 33.66733466933868,
+    "pct_slang_rows_strict": 6.800000000000001,
+    "pct_slang_rows_incl_thanks_ok_eta": 9.8,
+    "strict_slang_list": [
+      "pls",
+      "plz",
+      "whats",
+      "aight",
+      "hrs",
+      "thx",
+      "nvm",
+      "u",
+      "ur",
+      "tmrw",
+      "tmr",
+      "asap",
+      "btw",
+      "idk",
+      "lol",
+      "gonna",
+      "wanna",
+      "gotta",
+      "rn",
+      "ya",
+      "cuz",
+      "tho",
+      "dunno",
+      "lemme",
+      "gimme",
+      "kinda",
+      "omg",
+      "fyi"
+    ],
+    "excluded_from_strict": [
+      "eta",
+      "hr",
+      "k",
+      "nope",
+      "ok",
+      "okay",
+      "thanks",
+      "yep"
+    ],
+    "pct_emoji_rows": 0.8,
+    "n_english_rows": 430,
+    "pct_english_rows_with_oov_token": 34.651162790697676,
+    "mean_oov_rate_english_rows": 0.03572790894196323,
+    "top_oov_tokens": {
+      "inbound": 11,
+      "flagged": 8,
+      "ltl": 6,
+      "lol": 5,
+      "bol": 5,
+      "bols": 4,
+      "outbound": 4,
+      "truckload": 4,
+      "consignee": 3,
+      "spotter": 3,
+      "avg": 3,
+      "haha": 3,
+      "hrs": 2,
+      "heatmap": 2,
+      "escalate": 2,
+      "customize": 2,
+      "wildfire": 2,
+      "outage": 2,
+      "handwritten": 2,
+      "slowdown": 2,
+      "configure": 2,
+      "cant": 2,
+      "upload": 2,
+      "havent": 2,
+      "clutter": 2,
+      "spam": 2,
+      "plz": 2,
+      "backlog": 2,
+      "dont": 2,
+      "rescheduled": 2,
+      "pls": 2,
+      "timezone": 2,
+      "intermodal": 2,
+      "uploading": 2,
+      "aight": 1,
+      "clarification": 1,
+      "fulfilment": 1,
+      "flatbed": 1,
+      "unloading": 1,
+      "delete": 1
+    },
+    "pct_is_noisy": 52.800000000000004,
+    "is_noisy_definition": "all-lowercase OR strict slang hit OR >=1 OOV token (English rows only) OR emoji",
+    "pct_is_noisy_excluding_lowercase": 33.6
+  },
+  "shortcut_audit": {
+    "LD-\\d+": {
+      "n_rows": 44,
+      "label_distribution": {
+        "shipment_information.realtime_query": 32,
+        "ai_agent_performance": 3,
+        "shipment_information.disruptions": 3,
+        "document_processing": 3,
+        "customer_support": 2,
+        "orders": 1
+      },
+      "top_label": "shipment_information.realtime_query",
+      "max_label_share": 0.7272727272727273,
+      "share_of_top_label_rows_with_pattern": 0.5818181818181818,
+      "shortcut_risk": false,
+      "example_ids": [
+        "syn-0019",
+        "syn-0026",
+        "syn-0035",
+        "syn-0040",
+        "syn-0045"
+      ]
+    },
+    "PO-\\d+": {
+      "n_rows": 23,
+      "label_distribution": {
+        "orders": 19,
+        "document_processing": 2,
+        "customer_support": 1,
+        "appointment_manager": 1
+      },
+      "top_label": "orders",
+      "max_label_share": 0.8260869565217391,
+      "share_of_top_label_rows_with_pattern": 0.4222222222222222,
+      "shortcut_risk": true,
+      "example_ids": [
+        "syn-0018",
+        "syn-0020",
+        "syn-0028",
+        "syn-0032",
+        "syn-0064"
+      ]
+    },
+    "other_ID [A-Z]{2,4}-\\d+": {
+      "n_rows": 32,
+      "label_distribution": {
+        "yard_management": 12,
+        "appointment_manager": 8,
+        "document_processing": 8,
+        "customer_support": 4
+      },
+      "top_label": "yard_management",
+      "max_label_share": 0.375,
+      "share_of_top_label_rows_with_pattern": 0.3,
+      "shortcut_risk": false,
+      "example_ids": [
+        "syn-0023",
+        "syn-0048",
+        "syn-0050",
+        "syn-0061",
+        "syn-0069"
+      ]
+    },
+    "number": {
+      "n_rows": 155,
+      "label_distribution": {
+        "shipment_information.realtime_query": 35,
+        "orders": 24,
+        "yard_management": 19,
+        "document_processing": 18,
+        "appointment_manager": 16,
+        "customer_support": 12,
+        "ai_agent_performance": 11,
+        "shipment_information.disruptions": 9,
+        "shipment_information.analytics": 9,
+        "other": 2
+      },
+      "top_label": "shipment_information.realtime_query",
+      "max_label_share": 0.22580645161290322,
+      "share_of_top_label_rows_with_pattern": 0.6363636363636364,
+      "shortcut_risk": false,
+      "example_ids": [
+        "syn-0001",
+        "syn-0012",
+        "syn-0018",
+        "syn-0019",
+        "syn-0020"
+      ]
+    },
+    "email": {
+      "n_rows": 0,
+      "label_distribution": {},
+      "top_label": null,
+      "max_label_share": 0.0,
+      "share_of_top_label_rows_with_pattern": 0.0,
+      "shortcut_risk": false,
+      "example_ids": []
+    },
+    "url": {
+      "n_rows": 0,
+      "label_distribution": {},
+      "top_label": null,
+      "max_label_share": 0.0,
+      "share_of_top_label_rows_with_pattern": 0.0,
+      "shortcut_risk": false,
+      "example_ids": []
+    },
+    "percent": {
+      "n_rows": 2,
+      "label_distribution": {
+        "document_processing": 2
+      },
+      "top_label": "document_processing",
+      "max_label_share": 1.0,
+      "share_of_top_label_rows_with_pattern": 0.05,
+      "shortcut_risk": false,
+      "example_ids": [
+        "syn-0032",
+        "syn-0408"
+      ]
+    },
+    "time": {
+      "n_rows": 4,
+      "label_distribution": {
+        "appointment_manager": 3,
+        "shipment_information.realtime_query": 1
+      },
+      "top_label": "appointment_manager",
+      "max_label_share": 0.75,
+      "share_of_top_label_rows_with_pattern": 0.06666666666666667,
+      "shortcut_risk": false,
+      "example_ids": [
+        "syn-0123",
+        "syn-0180",
+        "syn-0392",
+        "syn-0419"
+      ]
+    },
+    "date": {
+      "n_rows": 1,
+      "label_distribution": {
+        "customer_support": 1
+      },
+      "top_label": "customer_support",
+      "max_label_share": 1.0,
+      "share_of_top_label_rows_with_pattern": 0.025,
+      "shortcut_risk": false,
+      "example_ids": [
+        "syn-0301"
+      ]
+    }
+  },
+  "sibling_overlap": {
+    "labels": [
+      "shipment_information.analytics",
+      "shipment_information.disruptions",
+      "shipment_information.realtime_query"
+    ],
+    "n_rows": 145,
+    "chi2_top15": {
+      "shipment_information.analytics": [
+        {
+          "ngram": "year",
+          "chi2": 18.0,
+          "rate_in_class": 0.20000000000000004,
+          "rate_in_rest": 0.0
+        },
+        {
+          "ngram": "of",
+          "chi2": 17.72222222222222,
+          "rate_in_class": 0.4000000000000001,
+          "rate_in_rest": 0.07777777777777778
+        },
+        {
+          "ngram": "by",
+          "chi2": 15.76010101010101,
+          "rate_in_class": 0.27272727272727276,
+          "rate_in_rest": 0.03333333333333333
+        },
+        {
+          "ngram": "shipments",
+          "chi2": 12.068088290310513,
+          "rate_in_class": 0.3454545454545455,
+          "rate_in_rest": 0.08888888888888889
+        },
+        {
+          "ngram": "time",
+          "chi2": 12.034188034188038,
+          "rate_in_class": 0.20000000000000004,
+          "rate_in_rest": 0.022222222222222223
+        },
+        {
+          "ngram": "the past",
+          "chi2": 11.454545454545457,
+          "rate_in_class": 0.1272727272727273,
+          "rate_in_rest": 0.0
+        },
+        {
+          "ngram": "vs",
+          "chi2": 11.454545454545457,
+          "rate_in_class": 0.1272727272727273,
+          "rate_in_rest": 0.0
+        },
+        {
+          "ngram": "month",
+          "chi2": 11.454545454545457,
+          "rate_in_class": 0.1272727272727273,
+          "rate_in_rest": 0.0
+        },
+        {
+          "ngram": "per",
+          "chi2": 11.454545454545457,
+          "rate_in_class": 0.1272727272727273,
+          "rate_in_rest": 0.0
+        },
+        {
+          "ngram": "how many",
+          "chi2": 11.454545454545457,
+          "rate_in_class": 0.1272727272727273,
+          "rate_in_rest": 0.0
+        },
+        {
+          "ngram": "for the",
+          "chi2": 11.454545454545457,
+          "rate_in_class": 0.1272727272727273,
+          "rate_in_rest": 0.0
+        },
+        {
+          "ngram": "volume",
+          "chi2": 11.454545454545457,
+          "rate_in_class": 0.1272727272727273,
+          "rate_in_rest": 0.0
+        },
+        {
+          "ngram": "many",
+          "chi2": 11.454545454545457,
+          "rate_in_class": 0.1272727272727273,
+          "rate_in_rest": 0.0
+        },
+        {
+          "ngram": "for",
+          "chi2": 10.521885521885523,
+          "rate_in_class": 0.3636363636363637,
+          "rate_in_rest": 0.11111111111111112
+        },
+        {
+          "ngram": "how",
+          "chi2": 9.821428571428575,
+          "rate_in_class": 0.20000000000000004,
+          "rate_in_rest": 0.03333333333333333
+        }
+      ],
+      "shipment_information.disruptions": [
+        {
+          "ngram": "there",
+          "chi2": 34.57142857142857,
+          "rate_in_class": 0.31428571428571433,
+          "rate_in_rest": 0.0
+        },
+        {
+          "ngram": "at the",
+          "chi2": 21.999999999999996,
+          "rate_in_class": 0.2,
+          "rate_in_rest": 0.0
+        },
+        {
+          "ngram": "port",
+          "chi2": 18.857142857142858,
+          "rate_in_class": 0.17142857142857143,
+          "rate_in_rest": 0.0
+        },
+        {
+          "ngram": "are",
+          "chi2": 15.798017771701984,
+          "rate_in_class": 0.3428571428571429,
+          "rate_in_rest": 0.06363636363636364
+        },
+        {
+          "ngram": "do we",
+          "chi2": 15.714285714285715,
+          "rate_in_class": 0.14285714285714285,
+          "rate_in_rest": 0.0
+        },
+        {
+          "ngram": "we",
+          "chi2": 14.43556443556443,
+          "rate_in_class": 0.2571428571428572,
+          "rate_in_rest": 0.03636363636363636
+        },
+        {
+          "ngram": "causing",
+          "chi2": 12.57142857142857,
+          "rate_in_class": 0.11428571428571428,
+          "rate_in_rest": 0.0
+        },
+        {
+          "ngram": "disruption",
+          "chi2": 12.57142857142857,
+          "rate_in_class": 0.11428571428571428,
+          "rate_in_rest": 0.0
+        },
+        {
+          "ngram": "is there",
+          "chi2": 12.57142857142857,
+          "rate_in_class": 0.11428571428571428,
+          "rate_in_rest": 0.0
+        },
+        {
+          "ngram": "loads are",
+          "chi2": 12.57142857142857,
+          "rate_in_class": 0.11428571428571428,
+          "rate_in_rest": 0.0
+        },
+        {
+          "ngram": "do",
+          "chi2": 11.481601731601732,
+          "rate_in_class": 0.14285714285714285,
+          "rate_in_rest": 0.00909090909090909
+        },
+        {
+          "ngram": "we have",
+          "chi2": 11.481601731601732,
+          "rate_in_class": 0.14285714285714285,
+          "rate_in_rest": 0.00909090909090909
+        },
+        {
+          "ngram": "active",
+          "chi2": 11.481601731601732,
+          "rate_in_class": 0.14285714285714285,
+          "rate_in_rest": 0.00909090909090909
+        },
+        {
+          "ngram": "closure",
+          "chi2": 9.428571428571429,
+          "rate_in_class": 0.08571428571428572,
+          "rate_in_rest": 0.0
+        },
+        {
+          "ngram": "are there",
+          "chi2": 9.428571428571429,
+          "rate_in_class": 0.08571428571428572,
+          "rate_in_rest": 0.0
+        }
+      ],
+      "shipment_information.realtime_query": [
+        {
+          "ngram": "ld",
+          "chi2": 42.546753246753255,
+          "rate_in_class": 0.5818181818181819,
+          "rate_in_rest": 0.03333333333333333
+        },
+        {
+          "ngram": "currently",
+          "chi2": 8.999081726354452,
+          "rate_in_class": 0.16363636363636366,
+          "rate_in_rest": 0.022222222222222223
+        },
+        {
+          "ngram": "all",
+          "chi2": 8.349116161616163,
+          "rate_in_class": 0.1272727272727273,
+          "rate_in_rest": 0.011111111111111112
+        },
+        {
+          "ngram": "eta",
+          "chi2": 8.349116161616163,
+          "rate_in_class": 0.1272727272727273,
+          "rate_in_rest": 0.011111111111111112
+        },
+        {
+          "ngram": "out",
+          "chi2": 8.181818181818183,
+          "rate_in_class": 0.09090909090909091,
+          "rate_in_rest": 0.0
+        },
+        {
+          "ngram": "this morning",
+          "chi2": 6.545454545454547,
+          "rate_in_class": 0.07272727272727272,
+          "rate_in_rest": 0.0
+        },
+        {
+          "ngram": "morning",
+          "chi2": 6.545454545454547,
+          "rate_in_class": 0.07272727272727272,
+          "rate_in_rest": 0.0
+        },
+        {
+          "ngram": "status",
+          "chi2": 6.545454545454547,
+          "rate_in_class": 0.07272727272727272,
+          "rate_in_rest": 0.0
+        },
+        {
+          "ngram": "for ld",
+          "chi2": 6.545454545454547,
+          "rate_in_class": 0.07272727272727272,
+          "rate_in_rest": 0.0
+        },
+        {
+          "ngram": "in transit",
+          "chi2": 6.545454545454547,
+          "rate_in_class": 0.07272727272727272,
+          "rate_in_rest": 0.0
+        },
+        {
+          "ngram": "it",
+          "chi2": 6.545454545454547,
+          "rate_in_class": 0.07272727272727272,
+          "rate_in_rest": 0.0
+        },
+        {
+          "ngram": "yet",
+          "chi2": 6.545454545454547,
+          "rate_in_class": 0.07272727272727272,
+          "rate_in_rest": 0.0
+        },
+        {
+          "ngram": "pull up",
+          "chi2": 6.545454545454547,
+          "rate_in_class": 0.07272727272727272,
+          "rate_in_rest": 0.0
+        },
+        {
+          "ngram": "to",
+          "chi2": 5.135832004253058,
+          "rate_in_class": 0.21818181818181823,
+          "rate_in_rest": 0.07777777777777778
+        },
+        {
+          "ngram": "current",
+          "chi2": 4.90909090909091,
+          "rate_in_class": 0.05454545454545454,
+          "rate_in_rest": 0.0
+        }
+      ]
+    },
+    "lr_top15": {
+      "shipment_information.analytics": [
+        {
+          "ngram": "of",
+          "weight": 0.4930120237458779
+        },
+        {
+          "ngram": "tiempo",
+          "weight": 0.47256481332675665
+        },
+        {
+          "ngram": "how",
+          "weight": 0.45460287157417006
+        },
+        {
+          "ngram": "year",
+          "weight": 0.44965892166893795
+        },
+        {
+          "ngram": "average",
+          "weight": 0.4409080440647766
+        },
+        {
+          "ngram": "for",
+          "weight": 0.43965670458319933
+        },
+        {
+          "ngram": "per",
+          "weight": 0.42233494880381334
+        },
+        {
+          "ngram": "transit",
+          "weight": 0.41473455202366444
+        },
+        {
+          "ngram": "shipments",
+          "weight": 0.4118102796394465
+        },
+        {
+          "ngram": "time",
+          "weight": 0.4069045278177202
+        },
+        {
+          "ngram": "over",
+          "weight": 0.40598723786245944
+        },
+        {
+          "ngram": "by",
+          "weight": 0.37704088748195697
+        },
+        {
+          "ngram": "total",
+          "weight": 0.3639383802977261
+        },
+        {
+          "ngram": "many",
+          "weight": 0.36381647357909536
+        },
+        {
+          "ngram": "how many",
+          "weight": 0.36381647357909536
+        }
+      ],
+      "shipment_information.disruptions": [
+        {
+          "ngram": "there",
+          "weight": 0.6377265063625331
+        },
+        {
+          "ngram": "disruption",
+          "weight": 0.5663604317431659
+        },
+        {
+          "ngram": "are",
+          "weight": 0.5427079831172117
+        },
+        {
+          "ngram": "at the",
+          "weight": 0.5254559649924668
+        },
+        {
+          "ngram": "is",
+          "weight": 0.41551362008656445
+        },
+        {
+          "ngram": "any",
+          "weight": 0.3999621287765522
+        },
+        {
+          "ngram": "in",
+          "weight": 0.3936058390580235
+        },
+        {
+          "ngram": "we",
+          "weight": 0.39022685435780896
+        },
+        {
+          "ngram": "laredo",
+          "weight": 0.3890685047830901
+        },
+        {
+          "ngram": "es aktuelle",
+          "weight": 0.3548896155330075
+        },
+        {
+          "ngram": "aktuelle",
+          "weight": 0.3548896155330075
+        },
+        {
+          "ngram": "at",
+          "weight": 0.35012186650424254
+        },
+        {
+          "ngram": "sendungen",
+          "weight": 0.34973441036272496
+        },
+        {
+          "ngram": "in the",
+          "weight": 0.3273456526500754
+        },
+        {
+          "ngram": "loads are",
+          "weight": 0.32014448416148816
+        }
+      ],
+      "shipment_information.realtime_query": [
+        {
+          "ngram": "ld",
+          "weight": 1.8930268904632601
+        },
+        {
+          "ngram": "to",
+          "weight": 0.5148382604950688
+        },
+        {
+          "ngram": "currently",
+          "weight": 0.4738686405857238
+        },
+        {
+          "ngram": "eta",
+          "weight": 0.39262845545839525
+        },
+        {
+          "ngram": "loads",
+          "weight": 0.356605083979349
+        },
+        {
+          "ngram": "load",
+          "weight": 0.35318754119136064
+        },
+        {
+          "ngram": "out",
+          "weight": 0.33115933673684644
+        },
+        {
+          "ngram": "where",
+          "weight": 0.3292786197956653
+        },
+        {
+          "ngram": "loads that",
+          "weight": 0.3220167070112315
+        },
+        {
+          "ngram": "me",
+          "weight": 0.3212870500659863
+        },
+        {
+          "ngram": "still",
+          "weight": 0.31724540703827286
+        },
+        {
+          "ngram": "location",
+          "weight": 0.3133021660012373
+        },
+        {
+          "ngram": "yet",
+          "weight": 0.30957721655122306
+        },
+        {
+          "ngram": "all",
+          "weight": 0.30108380521323286
+        },
+        {
+          "ngram": "facility",
+          "weight": 0.28870252182827744
+        }
+      ]
+    },
+    "overall_1nn_accuracy": 0.594,
+    "per_label_1nn_accuracy": {
+      "ai_agent_performance": 0.825,
+      "appointment_manager": 0.6222222222222222,
+      "chitchat": 0.8,
+      "customer_support": 0.35,
+      "document_processing": 0.525,
+      "knowledge_base": 0.575,
+      "orders": 0.4666666666666667,
+      "other": 0.26666666666666666,
+      "shipment_information.analytics": 0.6909090909090909,
+      "shipment_information.disruptions": 0.6857142857142857,
+      "shipment_information.realtime_query": 0.5636363636363636,
+      "yard_management": 0.7
+    },
+    "sibling_1nn_confusion": {
+      "shipment_information.analytics": {
+        "shipment_information.analytics": 38,
+        "shipment_information.disruptions": 3,
+        "shipment_information.realtime_query": 2,
+        "<other_label>": 12
+      },
+      "shipment_information.disruptions": {
+        "shipment_information.analytics": 4,
+        "shipment_information.disruptions": 24,
+        "shipment_information.realtime_query": 4,
+        "<other_label>": 3
+      },
+      "shipment_information.realtime_query": {
+        "shipment_information.analytics": 3,
+        "shipment_information.disruptions": 5,
+        "shipment_information.realtime_query": 31,
+        "<other_label>": 16
+      }
+    }
+  },
+  "near_duplicates": {
+    "threshold": 0.8,
+    "n_pairs": 2,
+    "pairs": [
+      {
+        "id_a": "syn-0252",
+        "id_b": "syn-0496",
+        "label_a": "shipment_information.analytics",
+        "label_b": "shipment_information.analytics",
+        "cosine": 0.8553999968313358
+      },
+      {
+        "id_a": "syn-0287",
+        "id_b": "syn-0479",
+        "label_a": "shipment_information.analytics",
+        "label_b": "shipment_information.analytics",
+        "cosine": 0.949602245607253
+      }
+    ],
+    "n_groups": 498,
+    "n_groups_with_more_than_one_row": 2,
+    "largest_group_size": 2,
+    "cross_label_threshold": 0.7,
+    "n_cross_label_pairs_above_cross_label_threshold": 0,
+    "cross_label_pairs": []
+  }
+}

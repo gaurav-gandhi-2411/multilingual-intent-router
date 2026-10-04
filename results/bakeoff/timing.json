@@ -1,0 +1,150 @@
+{
+  "timings": {
+    "intfloat/multilingual-e5-base": {
+      "model_load_s": 9.895508399999017,
+      "train_epoch_s": 4.9790037000002485,
+      "eval_s": 0.28490789999887056,
+      "total_wall_s": 35.63179570000102,
+      "total_wall_excl_lock_wait_s": 35.53179570000102,
+      "peak_vram_mb": 5382.61376953125,
+      "precision": "fp16",
+      "wandb_url": "https://wandb.ai/gauravgandhi429-gaurav-gandhi/intent-router/runs/bzdwm6bc",
+      "wandb_logged": true,
+      "gpu_snapshot_start": {
+        "time": "2026-10-01T13:50:42+05:30",
+        "processes": [],
+        "foreign": [],
+        "memory": "0 MiB, 8192 MiB, 0 %",
+        "error": null
+      },
+      "gpu_snapshot_end": {
+        "time": "2026-10-01T13:51:04+05:30",
+        "processes": [
+          {
+            "pid": 12728,
+            "process_name": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+            "used_memory_mb": null
+          }
+        ],
+        "foreign": [],
+        "memory": "5875 MiB, 8192 MiB, 17 %",
+        "error": null
+      },
+      "gpu_exclusive": true,
+      "gpu_foreign_seen": [],
+      "gpu_lock_waited_s": 0.1
+    },
+    "FacebookAI/xlm-roberta-base": {
+      "model_load_s": 6.24765650000154,
+      "train_epoch_s": 4.545384600000034,
+      "eval_s": 0.3062636999984534,
+      "total_wall_s": 18.08571420000044,
+      "total_wall_excl_lock_wait_s": 17.88571420000044,
+      "peak_vram_mb": 5381.25927734375,
+      "precision": "fp16",
+      "wandb_url": "https://wandb.ai/gauravgandhi429-gaurav-gandhi/intent-router/runs/p3hz7xpf",
+      "wandb_logged": true,
+      "gpu_snapshot_start": {
+        "time": "2026-10-01T13:51:09+05:30",
+        "processes": [
+          {
+            "pid": 12728,
+            "process_name": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+            "used_memory_mb": null
+          }
+        ],
+        "foreign": [],
+        "memory": "3235 MiB, 8192 MiB, 0 %",
+        "error": null
+      },
+      "gpu_snapshot_end": {
+        "time": "2026-10-01T13:51:23+05:30",
+        "processes": [
+          {
+            "pid": 12728,
+            "process_name": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+            "used_memory_mb": null
+          }
+        ],
+        "foreign": [],
+        "memory": "5853 MiB, 8192 MiB, 73 %",
+        "error": null
+      },
+      "gpu_exclusive": true,
+      "gpu_foreign_seen": [],
+      "gpu_lock_waited_s": 0.2
+    },
+    "microsoft/mdeberta-v3-base": {
+      "model_load_s": 4.116333800000575,
+      "train_epoch_s": 9.14479349999965,
+      "eval_s": 0.5235006000002613,
+      "total_wall_s": 19.43784719999894,
+      "total_wall_excl_lock_wait_s": 19.237847199998942,
+      "peak_vram_mb": 5397.2470703125,
+      "precision": "fp16",
+      "wandb_url": "https://wandb.ai/gauravgandhi429-gaurav-gandhi/intent-router/runs/ajv14liy",
+      "wandb_logged": true,
+      "gpu_snapshot_start": {
+        "time": "2026-10-01T13:51:27+05:30",
+        "processes": [
+          {
+            "pid": 12728,
+            "process_name": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+            "used_memory_mb": null
+          }
+        ],
+        "foreign": [],
+        "memory": "3259 MiB, 8192 MiB, 0 %",
+        "error": null
+      },
+      "gpu_snapshot_end": {
+        "time": "2026-10-01T13:51:43+05:30",
+        "processes": [
+          {
+            "pid": 12728,
+            "process_name": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+            "used_memory_mb": null
+          }
+        ],
+        "foreign": [],
+        "memory": "7079 MiB, 8192 MiB, 76 %",
+        "error": null
+      },
+      "gpu_exclusive": true,
+      "gpu_foreign_seen": [],
+      "gpu_lock_waited_s": 0.2
+    }
+  },
+  "extrapolation": {
+    "label": "estimate, extrapolated from 1-epoch probe",
+    "assumptions": "20 epochs/run; per-run = load + epochs*(train_epoch + eval)",
+    "per_model": {
+      "intfloat/multilingual-e5-base": {
+        "per_run_s": 115.1737403999814,
+        "sweep_runs": 15,
+        "confirm_runs": 40,
+        "sweep_h": 0.4798905849999225,
+        "confirm_h": 1.27970822666646
+      },
+      "FacebookAI/xlm-roberta-base": {
+        "per_run_s": 103.28062249997129,
+        "sweep_runs": 15,
+        "confirm_runs": 40,
+        "sweep_h": 0.4303359270832137,
+        "confirm_h": 1.147562472221903
+      },
+      "microsoft/mdeberta-v3-base": {
+        "per_run_s": 197.4822157999988,
+        "sweep_runs": 15,
+        "confirm_runs": 40,
+        "sweep_h": 0.8228425658333284,
+        "confirm_h": 2.194246842222209
+      }
+    },
+    "per_stage_h": {
+      "sweep": 1.7330690779164646,
+      "confirm": 4.621517541110572
+    },
+    "total_h": 6.354586619027037
+  }
+}

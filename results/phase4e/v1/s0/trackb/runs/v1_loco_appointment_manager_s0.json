@@ -1,0 +1,193 @@
+{
+  "run_id": "v1_loco_appointment_manager_s0",
+  "candidate": "v1",
+  "recipe": [],
+  "kind": "loco",
+  "holdout": [
+    "appointment_manager"
+  ],
+  "seed": 0,
+  "labels": [
+    "ai_agent_performance",
+    "chitchat",
+    "customer_support",
+    "document_processing",
+    "knowledge_base",
+    "orders",
+    "other",
+    "shipment_information.analytics",
+    "shipment_information.disruptions",
+    "shipment_information.realtime_query",
+    "yard_management"
+  ],
+  "call_type": "phase4e_trackb",
+  "git_sha": "8a04aa97116bc4b37d63f0ab7c86d47bd95b8b84-dirty",
+  "smoke": false,
+  "extras": {
+    "factors": []
+  },
+  "audit": {
+    "holdout": [
+      "appointment_manager"
+    ],
+    "n_labels": 11,
+    "n_train": 321,
+    "n_cal": 67,
+    "n_eval_known": 67,
+    "n_eval_unknown": 45,
+    "assertions": {
+      "no_heldout_rows_in_train": true,
+      "no_heldout_rows_in_cal": true,
+      "no_heldout_rows_in_eval_known": true,
+      "eval_unknown_only_heldout": true,
+      "eval_unknown_has_every_heldout_row": true,
+      "label_space_is_remaining_classes": true,
+      "every_remaining_class_in_train": true,
+      "train_cal_disjoint": true,
+      "train_eval_known_disjoint": true,
+      "train_unknown_disjoint": true,
+      "cal_unknown_disjoint": true,
+      "no_test_rows_in_train_or_cal": true,
+      "eval_known_is_test_split_only": true,
+      "cal_is_val_split_only": true
+    },
+    "ids_sha256": {
+      "train": "999d8bc256b0de3f522088def0c1ce31a85311160a8fdb54a4316a17620c29ad",
+      "cal": "c81a2960e9a767f1ab83c85a349971aeeca27a45cf044d61f8e5c9f75917d77e",
+      "eval_known": "7a1d7477e5ab6815f6a648967ad41904e9c738c46a12d971d106c45e99f68253",
+      "eval_unknown": "1a490003bd10484c87bb61f8d2c9d8516734dc7b43c7f9c140bdc52a6d6caea1"
+    },
+    "smoke": false,
+    "temperature": 0.8798572568814318,
+    "ledoit_wolf_shrinkage": {
+      "fine_tuned": 0.2599862941163477,
+      "multi_layer": [
+        0.17056289940133146,
+        0.20331571001540133,
+        0.21701975801809492,
+        0.24757442992383333,
+        0.3138908284336883
+      ]
+    },
+    "multi_layer_cal_mu": [
+      -36.923954749588944,
+      -37.38921657185654,
+      -42.60018022700932,
+      -45.19105093448092,
+      -51.92954115370901
+    ],
+    "multi_layer_cal_sd": [
+      7.620207849897425,
+      9.159645745958583,
+      12.969326974693933,
+      17.84389997672658,
+      26.42250981847468
+    ]
+  },
+  "training": {
+    "config": {
+      "model_name": "intfloat/multilingual-e5-base",
+      "lr": 3e-05,
+      "epochs": 20,
+      "batch_size": 16,
+      "warmup_ratio": 0.1,
+      "weight_decay": 0.01,
+      "max_len": 64,
+      "precision": "fp16",
+      "model_seed": 0,
+      "class_weighted": false,
+      "label_smoothing": 0.0,
+      "layer_decay": null,
+      "entity_masking": false,
+      "hier_aux": false,
+      "hier_lambda": 0.5,
+      "max_grad_norm": 1.0,
+      "attn_implementation": "eager",
+      "stop_epoch": 9,
+      "supcon_lambda": null,
+      "supcon_temperature": 0.1,
+      "grad_accum": 1,
+      "id_randomize_p": 0.0,
+      "oe_lambda": 0.0,
+      "oe_batch_size": 16,
+      "wandb_project": "intent-router",
+      "wandb_group": "phase4e-v1",
+      "model_short": "e5"
+    },
+    "epochs": [
+      {
+        "epoch": 1,
+        "train_loss": 2.3900804065522694,
+        "eval_loss": 2.3293408066479127,
+        "macro_f1": 0.04705439488048184,
+        "accuracy": 0.13432835820895522
+      },
+      {
+        "epoch": 2,
+        "train_loss": 2.225351555006845,
+        "eval_loss": 2.045121584365617,
+        "macro_f1": 0.3075691984782894,
+        "accuracy": 0.3880597014925373
+      },
+      {
+        "epoch": 3,
+        "train_loss": 1.7598397845313662,
+        "eval_loss": 1.3948408383042066,
+        "macro_f1": 0.6843563551073433,
+        "accuracy": 0.6865671641791045
+      },
+      {
+        "epoch": 4,
+        "train_loss": 1.026441318648202,
+        "eval_loss": 0.8921915666380925,
+        "macro_f1": 0.8261602034329307,
+        "accuracy": 0.8208955223880597
+      },
+      {
+        "epoch": 5,
+        "train_loss": 0.5037830833877835,
+        "eval_loss": 0.5632815320989979,
+        "macro_f1": 0.8391800119072846,
+        "accuracy": 0.835820895522388
+      },
+      {
+        "epoch": 6,
+        "train_loss": 0.245056329028947,
+        "eval_loss": 0.3229703289359363,
+        "macro_f1": 0.9359680723317086,
+        "accuracy": 0.9402985074626866
+      },
+      {
+        "epoch": 7,
+        "train_loss": 0.11973413150934946,
+        "eval_loss": 0.24965195313318453,
+        "macro_f1": 0.9556050010595466,
+        "accuracy": 0.9552238805970149
+      },
+      {
+        "epoch": 8,
+        "train_loss": 0.060929001530721075,
+        "eval_loss": 0.23737431851340762,
+        "macro_f1": 0.9358621176802995,
+        "accuracy": 0.9402985074626866
+      },
+      {
+        "epoch": 9,
+        "train_loss": 0.032856818732051624,
+        "eval_loss": 0.20348624184505262,
+        "macro_f1": 0.9696969696969698,
+        "accuracy": 0.9701492537313433
+      }
+    ],
+    "wall_clock_s": 37.54487389999849,
+    "load_s": 15.789829800000007,
+    "peak_vram_mb": 5378.10009765625,
+    "gpu_exclusive": true,
+    "gpu_foreign_seen": [],
+    "nan_detected": false,
+    "fingerprint": "70a5cde89b2e91a8addfa9dc1d96b9256bb0412261c621f11f34cdfa94e08d49",
+    "gpu_lock_waited_s": 0.6,
+    "wandb_url": "https://wandb.ai/gauravgandhi429-gaurav-gandhi/intent-router/runs/7i99ocxh",
+    "run_total_s": 164.92535990000033
+  }
+}

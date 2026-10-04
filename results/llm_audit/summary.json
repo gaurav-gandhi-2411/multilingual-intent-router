@@ -1,0 +1,104 @@
+{
+  "label_note": "LLM consensus (local open-weight models), not human ground truth",
+  "judges": [
+    "gemma3",
+    "llama3",
+    "qwen3"
+  ],
+  "audit_reliable": false,
+  "unreliable_reasons": [
+    "gemma3 calibration accuracy 0.80 < 0.9",
+    "llama3 calibration accuracy 0.70 < 0.9",
+    "qwen3 calibration accuracy 0.70 < 0.9"
+  ],
+  "calibration_gate": 0.9,
+  "per_judge": {
+    "gemma3": {
+      "calibration_accuracy": 0.8,
+      "calibration_n": 10,
+      "valid_output_rate": 1.0,
+      "n_items": 50
+    },
+    "llama3": {
+      "calibration_accuracy": 0.7,
+      "calibration_n": 10,
+      "valid_output_rate": 1.0,
+      "n_items": 50
+    },
+    "qwen3": {
+      "calibration_accuracy": 0.7,
+      "calibration_n": 10,
+      "valid_output_rate": 1.0,
+      "n_items": 50
+    }
+  },
+  "fleiss_kappa": {
+    "value": 0.6850000000000002,
+    "n_items_all_valid": 50,
+    "categories": 13
+  },
+  "pairwise_cohen_kappa": {
+    "gemma3|llama3": {
+      "kappa": 0.6865203761755485,
+      "n": 50
+    },
+    "gemma3|qwen3": {
+      "kappa": 0.7322623828647925,
+      "n": 50
+    },
+    "llama3|qwen3": {
+      "kappa": 0.6417375727720556,
+      "n": 50
+    }
+  },
+  "consensus_vs_model": {
+    "error": {
+      "n": 20,
+      "agrees_with_model": 4,
+      "agrees_with_gold": 9,
+      "ambiguous": 0,
+      "other_label": 4,
+      "no_consensus": 3
+    },
+    "control": {
+      "n": 20,
+      "agrees_with_model": 12,
+      "agrees_with_gold": 12,
+      "ambiguous": 0,
+      "other_label": 7,
+      "no_consensus": 1
+    }
+  },
+  "timing": {
+    "qwen3": {
+      "seconds": 321.7,
+      "n": 50
+    },
+    "llama3": {
+      "seconds": 284.3,
+      "n": 50
+    },
+    "gemma3": {
+      "seconds": 333.1,
+      "n": 50
+    }
+  },
+  "gpu_lock": {
+    "waited_s": 1.9,
+    "ollama_processes_whitelisted": [],
+    "snapshot_before": {
+      "time": "2026-10-02T10:55:03+05:30",
+      "processes": [],
+      "foreign": [],
+      "memory": "0 MiB, 8192 MiB, 0 %",
+      "error": null
+    },
+    "snapshot_after": {
+      "time": "2026-10-02T11:10:42+05:30",
+      "processes": [],
+      "foreign": [],
+      "memory": "0 MiB, 8192 MiB, 0 %",
+      "error": null
+    }
+  }
+}

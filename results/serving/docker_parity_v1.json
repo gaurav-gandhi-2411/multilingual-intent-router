@@ -1,0 +1,1009 @@
+{
+  "image": "intent-router:v1",
+  "image_id": "sha256:99049608477dc67d5fa0c944b26170cacee496f9ed2c466eef3de6aea3ee1af7",
+  "image_size_bytes": 2103593017,
+  "container_id": "7872ad8b6a3b817452d1024b17e55b83a469f1b7625cf24ddd65ac82eeaebe4e",
+  "backend": "onnx_fp32",
+  "container_start_to_ready_s": 19.196287999999186,
+  "health": {
+    "status": "ok",
+    "ready": true,
+    "model_version": "v1",
+    "model_fingerprint": "7ca22e16d2ace345d9dcf7737887e85fedf400a1dfc863678c2fc2663bf102bd",
+    "backend": "onnx_fp32"
+  },
+  "in_process_model_fingerprint": "7ca22e16d2ace345d9dcf7737887e85fedf400a1dfc863678c2fc2663bf102bd",
+  "summary": {
+    "n": 20,
+    "all_labels_equal": true,
+    "all_abstained_equal": true,
+    "all_top3_labels_equal": true,
+    "max_abs_diff_confidence": 0.0,
+    "max_abs_diff_ood_score": 4.263256414560601e-14,
+    "max_abs_diff_top3_prob": 0.0,
+    "prob_tolerance": 0.0001,
+    "prob_within_tolerance": true
+  },
+  "strings": [
+    {
+      "text": "Where is container MSKU1234567 right now?",
+      "remote": {
+        "label": "shipment_information.realtime_query",
+        "confidence": 0.8441440169220609,
+        "ood_score": -107.10520880986651,
+        "abstained": false,
+        "top3": [
+          {
+            "label": "shipment_information.realtime_query",
+            "prob": 0.8441440169220609
+          },
+          {
+            "label": "orders",
+            "prob": 0.06139488699839921
+          },
+          {
+            "label": "document_processing",
+            "prob": 0.028931051315152282
+          }
+        ]
+      },
+      "local": {
+        "label": "shipment_information.realtime_query",
+        "confidence": 0.8441440169220609,
+        "ood_score": -107.10520880986653,
+        "abstained": false,
+        "top3": [
+          {
+            "label": "shipment_information.realtime_query",
+            "prob": 0.8441440169220609
+          },
+          {
+            "label": "orders",
+            "prob": 0.06139488699839921
+          },
+          {
+            "label": "document_processing",
+            "prob": 0.028931051315152282
+          }
+        ]
+      },
+      "label_equal": true,
+      "abstained_equal": true,
+      "top3_labels_equal": true,
+      "abs_diff_confidence": 0.0,
+      "abs_diff_ood_score": 1.4210854715202004e-14,
+      "max_abs_diff_top3_prob": 0.0
+    },
+    {
+      "text": "Please book a dock slot for the 14:00 truck at gate 3 tomorrow.",
+      "remote": {
+        "label": "appointment_manager",
+        "confidence": 0.494198497663644,
+        "ood_score": -110.12545675102415,
+        "abstained": false,
+        "top3": [
+          {
+            "label": "appointment_manager",
+            "prob": 0.494198497663644
+          },
+          {
+            "label": "yard_management",
+            "prob": 0.41878858462777574
+          },
+          {
+            "label": "customer_support",
+            "prob": 0.014828089683762655
+          }
+        ]
+      },
+      "local": {
+        "label": "appointment_manager",
+        "confidence": 0.494198497663644,
+        "ood_score": -110.12545675102416,
+        "abstained": false,
+        "top3": [
+          {
+            "label": "appointment_manager",
+            "prob": 0.494198497663644
+          },
+          {
+            "label": "yard_management",
+            "prob": 0.41878858462777574
+          },
+          {
+            "label": "customer_support",
+            "prob": 0.014828089683762655
+          }
+        ]
+      },
+      "label_equal": true,
+      "abstained_equal": true,
+      "top3_labels_equal": true,
+      "abs_diff_confidence": 0.0,
+      "abs_diff_ood_score": 1.4210854715202004e-14,
+      "max_abs_diff_top3_prob": 0.0
+    },
+    {
+      "text": "I want to cancel purchase order 88231 and get a refund.",
+      "remote": {
+        "label": "orders",
+        "confidence": 0.90127618628894,
+        "ood_score": -85.77118586836556,
+        "abstained": false,
+        "top3": [
+          {
+            "label": "orders",
+            "prob": 0.90127618628894
+          },
+          {
+            "label": "customer_support",
+            "prob": 0.04306916296190385
+          },
+          {
+            "label": "appointment_manager",
+            "prob": 0.014894409273678733
+          }
+        ]
+      },
+      "local": {
+        "label": "orders",
+        "confidence": 0.90127618628894,
+        "ood_score": -85.77118586836552,
+        "abstained": false,
+        "top3": [
+          {
+            "label": "orders",
+            "prob": 0.90127618628894
+          },
+          {
+            "label": "customer_support",
+            "prob": 0.04306916296190385
+          },
+          {
+            "label": "appointment_manager",
+            "prob": 0.014894409273678733
+          }
+        ]
+      },
+      "label_equal": true,
+      "abstained_equal": true,
+      "top3_labels_equal": true,
+      "abs_diff_confidence": 0.0,
+      "abs_diff_ood_score": 4.263256414560601e-14,
+      "max_abs_diff_top3_prob": 0.0
+    },
+    {
+      "text": "How long will the port strike delay my pallets from Rotterdam?",
+      "remote": {
+        "label": "shipment_information.disruptions",
+        "confidence": 0.7862793781516734,
+        "ood_score": -94.7371158885687,
+        "abstained": false,
+        "top3": [
+          {
+            "label": "shipment_information.disruptions",
+            "prob": 0.7862793781516734
+          },
+          {
+            "label": "shipment_information.realtime_query",
+            "prob": 0.11243982740110885
+          },
+          {
+            "label": "shipment_information.analytics",
+            "prob": 0.031513724802663075
+          }
+        ]
+      },
+      "local": {
+        "label": "shipment_information.disruptions",
+        "confidence": 0.7862793781516734,
+        "ood_score": -94.7371158885687,
+        "abstained": false,
+        "top3": [
+          {
+            "label": "shipment_information.disruptions",
+            "prob": 0.7862793781516734
+          },
+          {
+            "label": "shipment_information.realtime_query",
+            "prob": 0.11243982740110885
+          },
+          {
+            "label": "shipment_information.analytics",
+            "prob": 0.031513724802663075
+          }
+        ]
+      },
+      "label_equal": true,
+      "abstained_equal": true,
+      "top3_labels_equal": true,
+      "abs_diff_confidence": 0.0,
+      "abs_diff_ood_score": 0.0,
+      "max_abs_diff_top3_prob": 0.0
+    },
+    {
+      "text": "Show me last month's average dwell time per yard zone.",
+      "remote": {
+        "label": "yard_management",
+        "confidence": 0.8139215500316943,
+        "ood_score": -84.399338196673,
+        "abstained": false,
+        "top3": [
+          {
+            "label": "yard_management",
+            "prob": 0.8139215500316943
+          },
+          {
+            "label": "shipment_information.analytics",
+            "prob": 0.10586066092723316
+          },
+          {
+            "label": "ai_agent_performance",
+            "prob": 0.02284514175046784
+          }
+        ]
+      },
+      "local": {
+        "label": "yard_management",
+        "confidence": 0.8139215500316943,
+        "ood_score": -84.39933819667301,
+        "abstained": false,
+        "top3": [
+          {
+            "label": "yard_management",
+            "prob": 0.8139215500316943
+          },
+          {
+            "label": "shipment_information.analytics",
+            "prob": 0.10586066092723316
+          },
+          {
+            "label": "ai_agent_performance",
+            "prob": 0.02284514175046784
+          }
+        ]
+      },
+      "label_equal": true,
+      "abstained_equal": true,
+      "top3_labels_equal": true,
+      "abs_diff_confidence": 0.0,
+      "abs_diff_ood_score": 1.4210854715202004e-14,
+      "max_abs_diff_top3_prob": 0.0
+    },
+    {
+      "text": "Hola, necesito saber en que estado esta mi envio a Valencia.",
+      "remote": {
+        "label": "shipment_information.realtime_query",
+        "confidence": 0.8762198260866433,
+        "ood_score": -87.23214290519529,
+        "abstained": false,
+        "top3": [
+          {
+            "label": "shipment_information.realtime_query",
+            "prob": 0.8762198260866433
+          },
+          {
+            "label": "orders",
+            "prob": 0.06853109343820472
+          },
+          {
+            "label": "chitchat",
+            "prob": 0.010453237594927627
+          }
+        ]
+      },
+      "local": {
+        "label": "shipment_information.realtime_query",
+        "confidence": 0.8762198260866433,
+        "ood_score": -87.2321429051953,
+        "abstained": false,
+        "top3": [
+          {
+            "label": "shipment_information.realtime_query",
+            "prob": 0.8762198260866433
+          },
+          {
+            "label": "orders",
+            "prob": 0.06853109343820472
+          },
+          {
+            "label": "chitchat",
+            "prob": 0.010453237594927627
+          }
+        ]
+      },
+      "label_equal": true,
+      "abstained_equal": true,
+      "top3_labels_equal": true,
+      "abs_diff_confidence": 0.0,
+      "abs_diff_ood_score": 1.4210854715202004e-14,
+      "max_abs_diff_top3_prob": 0.0
+    },
+    {
+      "text": "Quiero reprogramar la cita de descarga para el jueves por la manana.",
+      "remote": {
+        "label": "appointment_manager",
+        "confidence": 0.9703721575047911,
+        "ood_score": -61.138419464845846,
+        "abstained": false,
+        "top3": [
+          {
+            "label": "appointment_manager",
+            "prob": 0.9703721575047911
+          },
+          {
+            "label": "customer_support",
+            "prob": 0.006657936171863002
+          },
+          {
+            "label": "orders",
+            "prob": 0.004738961325588113
+          }
+        ]
+      },
+      "local": {
+        "label": "appointment_manager",
+        "confidence": 0.9703721575047911,
+        "ood_score": -61.138419464845875,
+        "abstained": false,
+        "top3": [
+          {
+            "label": "appointment_manager",
+            "prob": 0.9703721575047911
+          },
+          {
+            "label": "customer_support",
+            "prob": 0.006657936171863002
+          },
+          {
+            "label": "orders",
+            "prob": 0.004738961325588113
+          }
+        ]
+      },
+      "label_equal": true,
+      "abstained_equal": true,
+      "top3_labels_equal": true,
+      "abs_diff_confidence": 0.0,
+      "abs_diff_ood_score": 2.842170943040401e-14,
+      "max_abs_diff_top3_prob": 0.0
+    },
+    {
+      "text": "Cual es la politica de devoluciones para mercancia danada?",
+      "remote": {
+        "label": "knowledge_base",
+        "confidence": 0.3781219105658769,
+        "ood_score": -127.6176804037518,
+        "abstained": false,
+        "top3": [
+          {
+            "label": "knowledge_base",
+            "prob": 0.3781219105658769
+          },
+          {
+            "label": "shipment_information.analytics",
+            "prob": 0.1975496939184868
+          },
+          {
+            "label": "appointment_manager",
+            "prob": 0.10206408346101506
+          }
+        ]
+      },
+      "local": {
+        "label": "knowledge_base",
+        "confidence": 0.3781219105658769,
+        "ood_score": -127.61768040375179,
+        "abstained": false,
+        "top3": [
+          {
+            "label": "knowledge_base",
+            "prob": 0.3781219105658769
+          },
+          {
+            "label": "shipment_information.analytics",
+            "prob": 0.1975496939184868
+          },
+          {
+            "label": "appointment_manager",
+            "prob": 0.10206408346101506
+          }
+        ]
+      },
+      "label_equal": true,
+      "abstained_equal": true,
+      "top3_labels_equal": true,
+      "abs_diff_confidence": 0.0,
+      "abs_diff_ood_score": 1.4210854715202004e-14,
+      "max_abs_diff_top3_prob": 0.0
+    },
+    {
+      "text": "El camion lleva tres horas esperando en la puerta, que pasa?",
+      "remote": {
+        "label": "yard_management",
+        "confidence": 0.6248007503240841,
+        "ood_score": -121.83604867595443,
+        "abstained": false,
+        "top3": [
+          {
+            "label": "yard_management",
+            "prob": 0.6248007503240841
+          },
+          {
+            "label": "shipment_information.disruptions",
+            "prob": 0.16125648406499185
+          },
+          {
+            "label": "shipment_information.realtime_query",
+            "prob": 0.052557770519498864
+          }
+        ]
+      },
+      "local": {
+        "label": "yard_management",
+        "confidence": 0.6248007503240841,
+        "ood_score": -121.83604867595443,
+        "abstained": false,
+        "top3": [
+          {
+            "label": "yard_management",
+            "prob": 0.6248007503240841
+          },
+          {
+            "label": "shipment_information.disruptions",
+            "prob": 0.16125648406499185
+          },
+          {
+            "label": "shipment_information.realtime_query",
+            "prob": 0.052557770519498864
+          }
+        ]
+      },
+      "label_equal": true,
+      "abstained_equal": true,
+      "top3_labels_equal": true,
+      "abs_diff_confidence": 0.0,
+      "abs_diff_ood_score": 0.0,
+      "max_abs_diff_top3_prob": 0.0
+    },
+    {
+      "text": "Buenos dias, que tal el dia de hoy?",
+      "remote": {
+        "label": "chitchat",
+        "confidence": 0.8079806726933009,
+        "ood_score": -108.95801089003974,
+        "abstained": false,
+        "top3": [
+          {
+            "label": "chitchat",
+            "prob": 0.8079806726933009
+          },
+          {
+            "label": "other",
+            "prob": 0.11446205462302335
+          },
+          {
+            "label": "shipment_information.realtime_query",
+            "prob": 0.019070313755795987
+          }
+        ]
+      },
+      "local": {
+        "label": "chitchat",
+        "confidence": 0.8079806726933009,
+        "ood_score": -108.95801089003974,
+        "abstained": false,
+        "top3": [
+          {
+            "label": "chitchat",
+            "prob": 0.8079806726933009
+          },
+          {
+            "label": "other",
+            "prob": 0.11446205462302335
+          },
+          {
+            "label": "shipment_information.realtime_query",
+            "prob": 0.019070313755795987
+          }
+        ]
+      },
+      "label_equal": true,
+      "abstained_equal": true,
+      "top3_labels_equal": true,
+      "abs_diff_confidence": 0.0,
+      "abs_diff_ood_score": 0.0,
+      "max_abs_diff_top3_prob": 0.0
+    },
+    {
+      "text": "Bonjour, ou en est ma livraison prevue pour Lyon ce vendredi ?",
+      "remote": {
+        "label": "shipment_information.realtime_query",
+        "confidence": 0.6963401998774456,
+        "ood_score": -106.50416478405866,
+        "abstained": false,
+        "top3": [
+          {
+            "label": "shipment_information.realtime_query",
+            "prob": 0.6963401998774456
+          },
+          {
+            "label": "orders",
+            "prob": 0.14612261920692962
+          },
+          {
+            "label": "chitchat",
+            "prob": 0.04933930480215188
+          }
+        ]
+      },
+      "local": {
+        "label": "shipment_information.realtime_query",
+        "confidence": 0.6963401998774456,
+        "ood_score": -106.50416478405867,
+        "abstained": false,
+        "top3": [
+          {
+            "label": "shipment_information.realtime_query",
+            "prob": 0.6963401998774456
+          },
+          {
+            "label": "orders",
+            "prob": 0.14612261920692962
+          },
+          {
+            "label": "chitchat",
+            "prob": 0.04933930480215188
+          }
+        ]
+      },
+      "label_equal": true,
+      "abstained_equal": true,
+      "top3_labels_equal": true,
+      "abs_diff_confidence": 0.0,
+      "abs_diff_ood_score": 1.4210854715202004e-14,
+      "max_abs_diff_top3_prob": 0.0
+    },
+    {
+      "text": "Pouvez-vous annuler la commande 5521 et rembourser l'acompte ?",
+      "remote": {
+        "label": "orders",
+        "confidence": 0.8190060598876043,
+        "ood_score": -96.78069353563113,
+        "abstained": false,
+        "top3": [
+          {
+            "label": "orders",
+            "prob": 0.8190060598876043
+          },
+          {
+            "label": "appointment_manager",
+            "prob": 0.13194719350163037
+          },
+          {
+            "label": "shipment_information.analytics",
+            "prob": 0.011112728902709696
+          }
+        ]
+      },
+      "local": {
+        "label": "orders",
+        "confidence": 0.8190060598876043,
+        "ood_score": -96.7806935356311,
+        "abstained": false,
+        "top3": [
+          {
+            "label": "orders",
+            "prob": 0.8190060598876043
+          },
+          {
+            "label": "appointment_manager",
+            "prob": 0.13194719350163037
+          },
+          {
+            "label": "shipment_information.analytics",
+            "prob": 0.011112728902709696
+          }
+        ]
+      },
+      "label_equal": true,
+      "abstained_equal": true,
+      "top3_labels_equal": true,
+      "abs_diff_confidence": 0.0,
+      "abs_diff_ood_score": 2.842170943040401e-14,
+      "max_abs_diff_top3_prob": 0.0
+    },
+    {
+      "text": "Un retard est-il prevu a cause de la greve des camionneurs ?",
+      "remote": {
+        "label": "shipment_information.disruptions",
+        "confidence": 0.9521954009930623,
+        "ood_score": -70.17433195244425,
+        "abstained": false,
+        "top3": [
+          {
+            "label": "shipment_information.disruptions",
+            "prob": 0.9521954009930623
+          },
+          {
+            "label": "yard_management",
+            "prob": 0.011387595641436401
+          },
+          {
+            "label": "shipment_information.analytics",
+            "prob": 0.008013443470529916
+          }
+        ]
+      },
+      "local": {
+        "label": "shipment_information.disruptions",
+        "confidence": 0.9521954009930623,
+        "ood_score": -70.17433195244425,
+        "abstained": false,
+        "top3": [
+          {
+            "label": "shipment_information.disruptions",
+            "prob": 0.9521954009930623
+          },
+          {
+            "label": "yard_management",
+            "prob": 0.011387595641436401
+          },
+          {
+            "label": "shipment_information.analytics",
+            "prob": 0.008013443470529916
+          }
+        ]
+      },
+      "label_equal": true,
+      "abstained_equal": true,
+      "top3_labels_equal": true,
+      "abs_diff_confidence": 0.0,
+      "abs_diff_ood_score": 0.0,
+      "max_abs_diff_top3_prob": 0.0
+    },
+    {
+      "text": "Je voudrais parler a un conseiller du service client, s'il vous plait.",
+      "remote": {
+        "label": "customer_support",
+        "confidence": 0.3449670873527421,
+        "ood_score": -144.36109090174173,
+        "abstained": true,
+        "top3": [
+          {
+            "label": "customer_support",
+            "prob": 0.3449670873527421
+          },
+          {
+            "label": "chitchat",
+            "prob": 0.2731427316065552
+          },
+          {
+            "label": "ai_agent_performance",
+            "prob": 0.11493771797271106
+          }
+        ]
+      },
+      "local": {
+        "label": "customer_support",
+        "confidence": 0.3449670873527421,
+        "ood_score": -144.36109090174173,
+        "abstained": true,
+        "top3": [
+          {
+            "label": "customer_support",
+            "prob": 0.3449670873527421
+          },
+          {
+            "label": "chitchat",
+            "prob": 0.2731427316065552
+          },
+          {
+            "label": "ai_agent_performance",
+            "prob": 0.11493771797271106
+          }
+        ]
+      },
+      "label_equal": true,
+      "abstained_equal": true,
+      "top3_labels_equal": true,
+      "abs_diff_confidence": 0.0,
+      "abs_diff_ood_score": 0.0,
+      "max_abs_diff_top3_prob": 0.0
+    },
+    {
+      "text": "Wo ist meine Sendung aus Hamburg gerade?",
+      "remote": {
+        "label": "shipment_information.realtime_query",
+        "confidence": 0.8767012428680442,
+        "ood_score": -101.31819515221149,
+        "abstained": false,
+        "top3": [
+          {
+            "label": "shipment_information.realtime_query",
+            "prob": 0.8767012428680442
+          },
+          {
+            "label": "orders",
+            "prob": 0.05387988574656418
+          },
+          {
+            "label": "other",
+            "prob": 0.014074062337560266
+          }
+        ]
+      },
+      "local": {
+        "label": "shipment_information.realtime_query",
+        "confidence": 0.8767012428680442,
+        "ood_score": -101.31819515221152,
+        "abstained": false,
+        "top3": [
+          {
+            "label": "shipment_information.realtime_query",
+            "prob": 0.8767012428680442
+          },
+          {
+            "label": "orders",
+            "prob": 0.05387988574656418
+          },
+          {
+            "label": "other",
+            "prob": 0.014074062337560266
+          }
+        ]
+      },
+      "label_equal": true,
+      "abstained_equal": true,
+      "top3_labels_equal": true,
+      "abs_diff_confidence": 0.0,
+      "abs_diff_ood_score": 2.842170943040401e-14,
+      "max_abs_diff_top3_prob": 0.0
+    },
+    {
+      "text": "Bitte buchen Sie einen Entladetermin fuer Montag um neun Uhr.",
+      "remote": {
+        "label": "appointment_manager",
+        "confidence": 0.8865572549550016,
+        "ood_score": -97.68357556122285,
+        "abstained": false,
+        "top3": [
+          {
+            "label": "appointment_manager",
+            "prob": 0.8865572549550016
+          },
+          {
+            "label": "chitchat",
+            "prob": 0.03680331987841758
+          },
+          {
+            "label": "customer_support",
+            "prob": 0.0285434970161249
+          }
+        ]
+      },
+      "local": {
+        "label": "appointment_manager",
+        "confidence": 0.8865572549550016,
+        "ood_score": -97.68357556122288,
+        "abstained": false,
+        "top3": [
+          {
+            "label": "appointment_manager",
+            "prob": 0.8865572549550016
+          },
+          {
+            "label": "chitchat",
+            "prob": 0.03680331987841758
+          },
+          {
+            "label": "customer_support",
+            "prob": 0.0285434970161249
+          }
+        ]
+      },
+      "label_equal": true,
+      "abstained_equal": true,
+      "top3_labels_equal": true,
+      "abs_diff_confidence": 0.0,
+      "abs_diff_ood_score": 2.842170943040401e-14,
+      "max_abs_diff_top3_prob": 0.0
+    },
+    {
+      "text": "Wie viele Anhaenger stehen aktuell auf dem Hof?",
+      "remote": {
+        "label": "yard_management",
+        "confidence": 0.6616065464241091,
+        "ood_score": -131.96608177378783,
+        "abstained": true,
+        "top3": [
+          {
+            "label": "yard_management",
+            "prob": 0.6616065464241091
+          },
+          {
+            "label": "ai_agent_performance",
+            "prob": 0.07648878064458602
+          },
+          {
+            "label": "shipment_information.realtime_query",
+            "prob": 0.043679286456227005
+          }
+        ]
+      },
+      "local": {
+        "label": "yard_management",
+        "confidence": 0.6616065464241091,
+        "ood_score": -131.96608177378783,
+        "abstained": true,
+        "top3": [
+          {
+            "label": "yard_management",
+            "prob": 0.6616065464241091
+          },
+          {
+            "label": "ai_agent_performance",
+            "prob": 0.07648878064458602
+          },
+          {
+            "label": "shipment_information.realtime_query",
+            "prob": 0.043679286456227005
+          }
+        ]
+      },
+      "label_equal": true,
+      "abstained_equal": true,
+      "top3_labels_equal": true,
+      "abs_diff_confidence": 0.0,
+      "abs_diff_ood_score": 0.0,
+      "max_abs_diff_top3_prob": 0.0
+    },
+    {
+      "text": "Kannst du die Rechnung als PDF auslesen und die Positionen extrahieren?",
+      "remote": {
+        "label": "document_processing",
+        "confidence": 0.791943279763486,
+        "ood_score": -98.07868342893214,
+        "abstained": false,
+        "top3": [
+          {
+            "label": "document_processing",
+            "prob": 0.791943279763486
+          },
+          {
+            "label": "knowledge_base",
+            "prob": 0.14790300136056875
+          },
+          {
+            "label": "orders",
+            "prob": 0.013995145041485519
+          }
+        ]
+      },
+      "local": {
+        "label": "document_processing",
+        "confidence": 0.791943279763486,
+        "ood_score": -98.07868342893217,
+        "abstained": false,
+        "top3": [
+          {
+            "label": "document_processing",
+            "prob": 0.791943279763486
+          },
+          {
+            "label": "knowledge_base",
+            "prob": 0.14790300136056875
+          },
+          {
+            "label": "orders",
+            "prob": 0.013995145041485519
+          }
+        ]
+      },
+      "label_equal": true,
+      "abstained_equal": true,
+      "top3_labels_equal": true,
+      "abs_diff_confidence": 0.0,
+      "abs_diff_ood_score": 2.842170943040401e-14,
+      "max_abs_diff_top3_prob": 0.0
+    },
+    {
+      "text": "我的货物现在到哪里了？",
+      "remote": {
+        "label": "orders",
+        "confidence": 0.7088090911248853,
+        "ood_score": -105.7690518718794,
+        "abstained": false,
+        "top3": [
+          {
+            "label": "orders",
+            "prob": 0.7088090911248853
+          },
+          {
+            "label": "shipment_information.realtime_query",
+            "prob": 0.1924274747480358
+          },
+          {
+            "label": "knowledge_base",
+            "prob": 0.014904416362241666
+          }
+        ]
+      },
+      "local": {
+        "label": "orders",
+        "confidence": 0.7088090911248853,
+        "ood_score": -105.76905187187937,
+        "abstained": false,
+        "top3": [
+          {
+            "label": "orders",
+            "prob": 0.7088090911248853
+          },
+          {
+            "label": "shipment_information.realtime_query",
+            "prob": 0.1924274747480358
+          },
+          {
+            "label": "knowledge_base",
+            "prob": 0.014904416362241666
+          }
+        ]
+      },
+      "label_equal": true,
+      "abstained_equal": true,
+      "top3_labels_equal": true,
+      "abs_diff_confidence": 0.0,
+      "abs_diff_ood_score": 2.842170943040401e-14,
+      "max_abs_diff_top3_prob": 0.0
+    },
+    {
+      "text": "请帮我预约明天上午的卸货时间。",
+      "remote": {
+        "label": "appointment_manager",
+        "confidence": 0.5710280293454476,
+        "ood_score": -119.43368754266132,
+        "abstained": false,
+        "top3": [
+          {
+            "label": "appointment_manager",
+            "prob": 0.5710280293454476
+          },
+          {
+            "label": "orders",
+            "prob": 0.2384328989537337
+          },
+          {
+            "label": "shipment_information.realtime_query",
+            "prob": 0.06782549341648524
+          }
+        ]
+      },
+      "local": {
+        "label": "appointment_manager",
+        "confidence": 0.5710280293454476,
+        "ood_score": -119.43368754266133,
+        "abstained": false,
+        "top3": [
+          {
+            "label": "appointment_manager",
+            "prob": 0.5710280293454476
+          },
+          {
+            "label": "orders",
+            "prob": 0.2384328989537337
+          },
+          {
+            "label": "shipment_information.realtime_query",
+            "prob": 0.06782549341648524
+          }
+        ]
+      },
+      "label_equal": true,
+      "abstained_equal": true,
+      "top3_labels_equal": true,
+      "abs_diff_confidence": 0.0,
+      "abs_diff_ood_score": 1.4210854715202004e-14,
+      "max_abs_diff_top3_prob": 0.0
+    }
+  ]
+}

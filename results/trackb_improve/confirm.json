@@ -1,0 +1,939 @@
+{
+  "label": "measured, CONFIRM LOCO classes (5, seed 42) and headline holdout (seeds [42, 43, 44]); thresholds from calibration-known rows",
+  "confirm_classes": [
+    "ai_agent_performance",
+    "document_processing",
+    "shipment_information.analytics",
+    "shipment_information.realtime_query",
+    "yard_management"
+  ],
+  "select_summary": {
+    "winner": "base/fuse_maha_energy",
+    "ship": false,
+    "shipped": "base/maha_ft",
+    "winner_dev_mean": 0.8904657820839779,
+    "current_dev_mean": 0.8935194112254463,
+    "winner_minus_current": -0.00305362914146845,
+    "margin_std_ddof1_over_sqrt_n": 0.011487596228003097
+  },
+  "shipped": "base/maha_ft",
+  "winner_note": "winner = DEV-best eligible; it is SHIPPED only if select.ship is true",
+  "entries": {
+    "base/maha_ft": {
+      "candidate": "base",
+      "method": "maha_ft",
+      "confirm": {
+        "per_unit": {
+          "ai_agent_performance": {
+            "auroc": 0.8838235294117647,
+            "aupr": 0.712049926311764,
+            "fpr_at_95tpr": 0.825,
+            "op95": {
+              "strict_rejection_recall": 0.125,
+              "lenient_rejection_recall": 0.125,
+              "retention_known": 0.9558823529411765,
+              "cal_retention_achieved": 0.9558823529411765
+            },
+            "op90": {
+              "strict_rejection_recall": 0.225,
+              "lenient_rejection_recall": 0.225,
+              "retention_known": 0.9411764705882353,
+              "cal_retention_achieved": 0.9117647058823529
+            }
+          },
+          "document_processing": {
+            "auroc": 0.8110294117647059,
+            "aupr": 0.7470206038991802,
+            "fpr_at_95tpr": 0.5,
+            "op95": {
+              "strict_rejection_recall": 0.275,
+              "lenient_rejection_recall": 0.275,
+              "retention_known": 0.9852941176470589,
+              "cal_retention_achieved": 0.9558823529411765
+            },
+            "op90": {
+              "strict_rejection_recall": 0.4,
+              "lenient_rejection_recall": 0.4,
+              "retention_known": 0.9558823529411765,
+              "cal_retention_achieved": 0.9117647058823529
+            }
+          },
+          "shipment_information.analytics": {
+            "auroc": 0.9038567493112948,
+            "aupr": 0.8712801765878478,
+            "fpr_at_95tpr": 0.5454545454545454,
+            "op95": {
+              "strict_rejection_recall": 0.21818181818181817,
+              "lenient_rejection_recall": 0.21818181818181817,
+              "retention_known": 0.9848484848484849,
+              "cal_retention_achieved": 0.9545454545454546
+            },
+            "op90": {
+              "strict_rejection_recall": 0.6181818181818182,
+              "lenient_rejection_recall": 0.6181818181818182,
+              "retention_known": 0.9242424242424242,
+              "cal_retention_achieved": 0.9090909090909091
+            }
+          },
+          "shipment_information.realtime_query": {
+            "auroc": 0.8942148760330578,
+            "aupr": 0.8299677186577724,
+            "fpr_at_95tpr": 0.7818181818181819,
+            "op95": {
+              "strict_rejection_recall": 0.21818181818181817,
+              "lenient_rejection_recall": 0.21818181818181817,
+              "retention_known": 0.9545454545454546,
+              "cal_retention_achieved": 0.9545454545454546
+            },
+            "op90": {
+              "strict_rejection_recall": 0.6,
+              "lenient_rejection_recall": 0.6,
+              "retention_known": 0.8939393939393939,
+              "cal_retention_achieved": 0.9090909090909091
+            }
+          },
+          "yard_management": {
+            "auroc": 0.9025735294117647,
+            "aupr": 0.8035170562154219,
+            "fpr_at_95tpr": 0.6,
+            "op95": {
+              "strict_rejection_recall": 0.3,
+              "lenient_rejection_recall": 0.3,
+              "retention_known": 0.9705882352941176,
+              "cal_retention_achieved": 0.9558823529411765
+            },
+            "op90": {
+              "strict_rejection_recall": 0.475,
+              "lenient_rejection_recall": 0.475,
+              "retention_known": 0.9411764705882353,
+              "cal_retention_achieved": 0.9117647058823529
+            }
+          }
+        },
+        "mean": {
+          "auroc": 0.8790996191865176,
+          "aupr": 0.7927670963343972,
+          "fpr_at_95tpr": 0.6504545454545455,
+          "op95": {
+            "strict_rejection_recall": 0.22727272727272724,
+            "lenient_rejection_recall": 0.22727272727272724,
+            "retention_known": 0.9702317290552586,
+            "cal_retention_achieved": 0.9553475935828877
+          },
+          "op90": {
+            "strict_rejection_recall": 0.4636363636363637,
+            "lenient_rejection_recall": 0.4636363636363637,
+            "retention_known": 0.931283422459893,
+            "cal_retention_achieved": 0.9106951871657755
+          }
+        },
+        "ci95": {
+          "auroc": {
+            "point": 0.8790996191865176,
+            "lo": 0.8495092975206613,
+            "hi": 0.9076966911764704
+          },
+          "fpr_at_95tpr": {
+            "point": 0.6504545454545455,
+            "lo": 0.4704545454545455,
+            "hi": 0.7672840909090908
+          },
+          "retention_95": {
+            "point": 0.9702317290552586,
+            "lo": 0.9496434937611408,
+            "hi": 0.9880570409982175
+          },
+          "strict_recall_95": {
+            "point": 0.22727272727272724,
+            "lo": 0.17409090909090913,
+            "hi": 0.2831818181818182
+          },
+          "lenient_recall_95": {
+            "point": 0.22727272727272724,
+            "lo": 0.17409090909090913,
+            "hi": 0.2831818181818182
+          },
+          "retention_90": {
+            "point": 0.931283422459893,
+            "lo": 0.9016042780748664,
+            "hi": 0.9580213903743315
+          },
+          "strict_recall_90": {
+            "point": 0.4636363636363637,
+            "lo": 0.40226136363636367,
+            "hi": 0.5268181818181817
+          },
+          "lenient_recall_90": {
+            "point": 0.4636363636363637,
+            "lo": 0.40226136363636367,
+            "hi": 0.5268181818181817
+          }
+        },
+        "curve_mean": {
+          "target": [
+            0.8,
+            0.81,
+            0.82,
+            0.83,
+            0.84,
+            0.85,
+            0.86,
+            0.87,
+            0.88,
+            0.89,
+            0.9,
+            0.91,
+            0.92,
+            0.93,
+            0.94,
+            0.95,
+            0.96,
+            0.97,
+            0.98,
+            0.99
+          ],
+          "retention_known": [
+            0.8662210338680927,
+            0.8721033868092691,
+            0.8721033868092691,
+            0.880926916221034,
+            0.8899286987522282,
+            0.8899286987522282,
+            0.8958110516934047,
+            0.913547237076649,
+            0.913547237076649,
+            0.9253119429590019,
+            0.931283422459893,
+            0.931283422459893,
+            0.9371657754010695,
+            0.9462566844919786,
+            0.9614081996434937,
+            0.9702317290552586,
+            0.9941176470588236,
+            0.9941176470588236,
+            1.0,
+            1.0
+          ],
+          "strict_rejection_recall": [
+            0.7118181818181817,
+            0.7068181818181818,
+            0.6995454545454546,
+            0.6945454545454546,
+            0.6618181818181817,
+            0.6472727272727272,
+            0.6422727272727273,
+            0.6018181818181818,
+            0.5909090909090908,
+            0.5259090909090909,
+            0.4636363636363637,
+            0.44545454545454544,
+            0.4204545454545454,
+            0.3572727272727273,
+            0.2772727272727272,
+            0.22727272727272724,
+            0.07181818181818182,
+            0.06090909090909091,
+            0.030909090909090907,
+            0.0
+          ]
+        },
+        "bootstrap": "estimate: row bootstrap within each holdout, stratified by known/unknown; 10000 resamples, seed 42"
+      },
+      "headline": {
+        "per_unit": {
+          "s42": {
+            "auroc": 0.8612903225806452,
+            "aupr": 0.8729562324713948,
+            "fpr_at_95tpr": 0.625,
+            "op95": {
+              "strict_rejection_recall": 0.375,
+              "lenient_rejection_recall": 0.375,
+              "retention_known": 0.967741935483871,
+              "cal_retention_achieved": 0.9516129032258065
+            },
+            "op90": {
+              "strict_rejection_recall": 0.475,
+              "lenient_rejection_recall": 0.475,
+              "retention_known": 0.9193548387096774,
+              "cal_retention_achieved": 0.9032258064516129
+            }
+          },
+          "s43": {
+            "auroc": 0.8780241935483871,
+            "aupr": 0.9015483611656865,
+            "fpr_at_95tpr": 0.5,
+            "op95": {
+              "strict_rejection_recall": 0.425,
+              "lenient_rejection_recall": 0.425,
+              "retention_known": 0.967741935483871,
+              "cal_retention_achieved": 0.9516129032258065
+            },
+            "op90": {
+              "strict_rejection_recall": 0.475,
+              "lenient_rejection_recall": 0.475,
+              "retention_known": 0.967741935483871,
+              "cal_retention_achieved": 0.9032258064516129
+            }
+          },
+          "s44": {
+            "auroc": 0.8721774193548387,
+            "aupr": 0.8923649960388893,
+            "fpr_at_95tpr": 0.55,
+            "op95": {
+              "strict_rejection_recall": 0.225,
+              "lenient_rejection_recall": 0.225,
+              "retention_known": 0.967741935483871,
+              "cal_retention_achieved": 0.9516129032258065
+            },
+            "op90": {
+              "strict_rejection_recall": 0.4125,
+              "lenient_rejection_recall": 0.4125,
+              "retention_known": 0.9516129032258065,
+              "cal_retention_achieved": 0.9032258064516129
+            }
+          }
+        },
+        "mean": {
+          "auroc": 0.870497311827957,
+          "aupr": 0.8889565298919901,
+          "fpr_at_95tpr": 0.5583333333333333,
+          "op95": {
+            "strict_rejection_recall": 0.34166666666666673,
+            "lenient_rejection_recall": 0.34166666666666673,
+            "retention_known": 0.967741935483871,
+            "cal_retention_achieved": 0.9516129032258065
+          },
+          "op90": {
+            "strict_rejection_recall": 0.4541666666666666,
+            "lenient_rejection_recall": 0.4541666666666666,
+            "retention_known": 0.946236559139785,
+            "cal_retention_achieved": 0.9032258064516129
+          }
+        },
+        "ci95": {
+          "auroc": {
+            "point": 0.870497311827957,
+            "lo": 0.8111559139784946,
+            "hi": 0.9228511424731183
+          },
+          "fpr_at_95tpr": {
+            "point": 0.5583333333333333,
+            "lo": 0.2916666666666667,
+            "hi": 0.7875
+          },
+          "retention_95": {
+            "point": 0.967741935483871,
+            "lo": 0.9247311827956989,
+            "hi": 1.0
+          },
+          "strict_recall_95": {
+            "point": 0.34166666666666673,
+            "lo": 0.2625,
+            "hi": 0.425
+          },
+          "lenient_recall_95": {
+            "point": 0.34166666666666673,
+            "lo": 0.2625,
+            "hi": 0.425
+          },
+          "retention_90": {
+            "point": 0.946236559139785,
+            "lo": 0.8924731182795699,
+            "hi": 0.989247311827957
+          },
+          "strict_recall_90": {
+            "point": 0.4541666666666666,
+            "lo": 0.3625,
+            "hi": 0.5458333333333334
+          },
+          "lenient_recall_90": {
+            "point": 0.4541666666666666,
+            "lo": 0.3625,
+            "hi": 0.5458333333333334
+          }
+        },
+        "curve_mean": {
+          "target": [
+            0.8,
+            0.81,
+            0.82,
+            0.83,
+            0.84,
+            0.85,
+            0.86,
+            0.87,
+            0.88,
+            0.89,
+            0.9,
+            0.91,
+            0.92,
+            0.93,
+            0.94,
+            0.95,
+            0.96,
+            0.97,
+            0.98,
+            0.99
+          ],
+          "retention_known": [
+            0.8817204301075269,
+            0.9086021505376344,
+            0.9086021505376344,
+            0.9193548387096774,
+            0.9247311827956989,
+            0.9247311827956989,
+            0.9247311827956989,
+            0.9247311827956989,
+            0.935483870967742,
+            0.946236559139785,
+            0.946236559139785,
+            0.946236559139785,
+            0.9516129032258065,
+            0.9516129032258065,
+            0.967741935483871,
+            0.967741935483871,
+            0.9731182795698925,
+            0.9838709677419355,
+            0.9838709677419355,
+            0.989247311827957
+          ],
+          "strict_rejection_recall": [
+            0.6416666666666667,
+            0.6166666666666667,
+            0.6166666666666667,
+            0.6,
+            0.5875,
+            0.5875,
+            0.5583333333333333,
+            0.5583333333333333,
+            0.4916666666666667,
+            0.4541666666666666,
+            0.4541666666666666,
+            0.4458333333333333,
+            0.4166666666666667,
+            0.4166666666666667,
+            0.34166666666666673,
+            0.34166666666666673,
+            0.3166666666666667,
+            0.19999999999999998,
+            0.19999999999999998,
+            0.13749999999999998
+          ]
+        },
+        "bootstrap": "estimate: row bootstrap within each holdout, stratified by known/unknown; 10000 resamples, seed 42"
+      }
+    },
+    "base/fuse_maha_energy": {
+      "candidate": "base",
+      "method": "fuse_maha_energy",
+      "confirm": {
+        "per_unit": {
+          "ai_agent_performance": {
+            "auroc": 0.8924632352941176,
+            "aupr": 0.7179351221584569,
+            "fpr_at_95tpr": 0.875,
+            "op95": {
+              "strict_rejection_recall": 0.125,
+              "lenient_rejection_recall": 0.125,
+              "retention_known": 0.9558823529411765,
+              "cal_retention_achieved": 0.9558823529411765
+            },
+            "op90": {
+              "strict_rejection_recall": 0.275,
+              "lenient_rejection_recall": 0.275,
+              "retention_known": 0.9264705882352942,
+              "cal_retention_achieved": 0.9264705882352942
+            }
+          },
+          "document_processing": {
+            "auroc": 0.8095588235294118,
+            "aupr": 0.7148883345596478,
+            "fpr_at_95tpr": 0.575,
+            "op95": {
+              "strict_rejection_recall": 0.275,
+              "lenient_rejection_recall": 0.275,
+              "retention_known": 0.9852941176470589,
+              "cal_retention_achieved": 0.9558823529411765
+            },
+            "op90": {
+              "strict_rejection_recall": 0.375,
+              "lenient_rejection_recall": 0.375,
+              "retention_known": 0.9558823529411765,
+              "cal_retention_achieved": 0.9117647058823529
+            }
+          },
+          "shipment_information.analytics": {
+            "auroc": 0.8987603305785123,
+            "aupr": 0.8640604190351221,
+            "fpr_at_95tpr": 0.6181818181818182,
+            "op95": {
+              "strict_rejection_recall": 0.2909090909090909,
+              "lenient_rejection_recall": 0.2909090909090909,
+              "retention_known": 0.9696969696969697,
+              "cal_retention_achieved": 0.9545454545454546
+            },
+            "op90": {
+              "strict_rejection_recall": 0.6545454545454545,
+              "lenient_rejection_recall": 0.6545454545454545,
+              "retention_known": 0.9090909090909091,
+              "cal_retention_achieved": 0.9090909090909091
+            }
+          },
+          "shipment_information.realtime_query": {
+            "auroc": 0.9151515151515152,
+            "aupr": 0.8759945491053457,
+            "fpr_at_95tpr": 0.6,
+            "op95": {
+              "strict_rejection_recall": 0.4,
+              "lenient_rejection_recall": 0.4,
+              "retention_known": 0.9696969696969697,
+              "cal_retention_achieved": 0.9545454545454546
+            },
+            "op90": {
+              "strict_rejection_recall": 0.6545454545454545,
+              "lenient_rejection_recall": 0.6545454545454545,
+              "retention_known": 0.8939393939393939,
+              "cal_retention_achieved": 0.9242424242424242
+            }
+          },
+          "yard_management": {
+            "auroc": 0.8875,
+            "aupr": 0.7974022539431906,
+            "fpr_at_95tpr": 0.65,
+            "op95": {
+              "strict_rejection_recall": 0.3,
+              "lenient_rejection_recall": 0.3,
+              "retention_known": 0.9852941176470589,
+              "cal_retention_achieved": 0.9705882352941176
+            },
+            "op90": {
+              "strict_rejection_recall": 0.525,
+              "lenient_rejection_recall": 0.525,
+              "retention_known": 0.9411764705882353,
+              "cal_retention_achieved": 0.9117647058823529
+            }
+          }
+        },
+        "mean": {
+          "auroc": 0.8806867809107114,
+          "aupr": 0.7940561357603526,
+          "fpr_at_95tpr": 0.6636363636363637,
+          "op95": {
+            "strict_rejection_recall": 0.2781818181818182,
+            "lenient_rejection_recall": 0.2781818181818182,
+            "retention_known": 0.9731729055258468,
+            "cal_retention_achieved": 0.9582887700534759
+          },
+          "op90": {
+            "strict_rejection_recall": 0.4968181818181819,
+            "lenient_rejection_recall": 0.4968181818181819,
+            "retention_known": 0.9253119429590019,
+            "cal_retention_achieved": 0.9166666666666667
+          }
+        },
+        "ci95": {
+          "auroc": {
+            "point": 0.8806867809107114,
+            "lo": 0.8517271132109868,
+            "hi": 0.9087425862907146
+          },
+          "fpr_at_95tpr": {
+            "point": 0.6636363636363637,
+            "lo": 0.4504545454545455,
+            "hi": 0.7486363636363637
+          },
+          "retention_95": {
+            "point": 0.9731729055258468,
+            "lo": 0.955169340463458,
+            "hi": 0.9881461675579324
+          },
+          "strict_recall_95": {
+            "point": 0.2781818181818182,
+            "lo": 0.22226136363636373,
+            "hi": 0.3359204545454544
+          },
+          "lenient_recall_95": {
+            "point": 0.2781818181818182,
+            "lo": 0.22226136363636373,
+            "hi": 0.3359204545454544
+          },
+          "retention_90": {
+            "point": 0.9253119429590019,
+            "lo": 0.8954545454545455,
+            "hi": 0.9522281639928698
+          },
+          "strict_recall_90": {
+            "point": 0.4968181818181819,
+            "lo": 0.4358977272727273,
+            "hi": 0.5599999999999999
+          },
+          "lenient_recall_90": {
+            "point": 0.4968181818181819,
+            "lo": 0.4358977272727273,
+            "hi": 0.5599999999999999
+          }
+        },
+        "curve_mean": {
+          "target": [
+            0.8,
+            0.81,
+            0.82,
+            0.83,
+            0.84,
+            0.85,
+            0.86,
+            0.87,
+            0.88,
+            0.89,
+            0.9,
+            0.91,
+            0.92,
+            0.93,
+            0.94,
+            0.95,
+            0.96,
+            0.97,
+            0.98,
+            0.99
+          ],
+          "retention_known": [
+            0.8451871657754012,
+            0.8629233511586453,
+            0.8689839572192513,
+            0.8719251336898397,
+            0.8927807486631016,
+            0.8927807486631016,
+            0.8927807486631016,
+            0.9076648841354723,
+            0.9076648841354723,
+            0.9164884135472372,
+            0.9253119429590019,
+            0.9283422459893048,
+            0.931283422459893,
+            0.9523172905525847,
+            0.9614081996434939,
+            0.9731729055258468,
+            0.9911764705882353,
+            0.9911764705882353,
+            1.0,
+            1.0
+          ],
+          "strict_rejection_recall": [
+            0.7563636363636363,
+            0.7363636363636362,
+            0.729090909090909,
+            0.7240909090909091,
+            0.6995454545454546,
+            0.6886363636363637,
+            0.6886363636363637,
+            0.6286363636363637,
+            0.6104545454545456,
+            0.5254545454545455,
+            0.4968181818181819,
+            0.48954545454545456,
+            0.48954545454545456,
+            0.39863636363636357,
+            0.33318181818181813,
+            0.2781818181818182,
+            0.12636363636363637,
+            0.12636363636363637,
+            0.051363636363636354,
+            0.008636363636363636
+          ]
+        },
+        "bootstrap": "estimate: row bootstrap within each holdout, stratified by known/unknown; 10000 resamples, seed 42"
+      },
+      "headline": {
+        "per_unit": {
+          "s42": {
+            "auroc": 0.8549395161290323,
+            "aupr": 0.8612112043200882,
+            "fpr_at_95tpr": 0.575,
+            "op95": {
+              "strict_rejection_recall": 0.35,
+              "lenient_rejection_recall": 0.35,
+              "retention_known": 0.967741935483871,
+              "cal_retention_achieved": 0.967741935483871
+            },
+            "op90": {
+              "strict_rejection_recall": 0.475,
+              "lenient_rejection_recall": 0.475,
+              "retention_known": 0.9193548387096774,
+              "cal_retention_achieved": 0.9032258064516129
+            }
+          },
+          "s43": {
+            "auroc": 0.864616935483871,
+            "aupr": 0.8775479167132316,
+            "fpr_at_95tpr": 0.5125,
+            "op95": {
+              "strict_rejection_recall": 0.425,
+              "lenient_rejection_recall": 0.425,
+              "retention_known": 0.967741935483871,
+              "cal_retention_achieved": 0.9516129032258065
+            },
+            "op90": {
+              "strict_rejection_recall": 0.4625,
+              "lenient_rejection_recall": 0.4625,
+              "retention_known": 0.9516129032258065,
+              "cal_retention_achieved": 0.9032258064516129
+            }
+          },
+          "s44": {
+            "auroc": 0.8762096774193548,
+            "aupr": 0.8887089647000339,
+            "fpr_at_95tpr": 0.575,
+            "op95": {
+              "strict_rejection_recall": 0.3,
+              "lenient_rejection_recall": 0.3,
+              "retention_known": 0.9516129032258065,
+              "cal_retention_achieved": 0.9516129032258065
+            },
+            "op90": {
+              "strict_rejection_recall": 0.425,
+              "lenient_rejection_recall": 0.425,
+              "retention_known": 0.9516129032258065,
+              "cal_retention_achieved": 0.9032258064516129
+            }
+          }
+        },
+        "mean": {
+          "auroc": 0.865255376344086,
+          "aupr": 0.8758226952444512,
+          "fpr_at_95tpr": 0.5541666666666666,
+          "op95": {
+            "strict_rejection_recall": 0.35833333333333334,
+            "lenient_rejection_recall": 0.35833333333333334,
+            "retention_known": 0.9623655913978495,
+            "cal_retention_achieved": 0.956989247311828
+          },
+          "op90": {
+            "strict_rejection_recall": 0.45416666666666666,
+            "lenient_rejection_recall": 0.45416666666666666,
+            "retention_known": 0.9408602150537635,
+            "cal_retention_achieved": 0.9032258064516129
+          }
+        },
+        "ci95": {
+          "auroc": {
+            "point": 0.865255376344086,
+            "lo": 0.8056779233870968,
+            "hi": 0.9179779905913978
+          },
+          "fpr_at_95tpr": {
+            "point": 0.5541666666666666,
+            "lo": 0.325,
+            "hi": 0.8209374999999985
+          },
+          "retention_95": {
+            "point": 0.9623655913978495,
+            "lo": 0.9139784946236559,
+            "hi": 1.0
+          },
+          "strict_recall_95": {
+            "point": 0.35833333333333334,
+            "lo": 0.27083333333333337,
+            "hi": 0.4458333333333333
+          },
+          "lenient_recall_95": {
+            "point": 0.35833333333333334,
+            "lo": 0.27083333333333337,
+            "hi": 0.4458333333333333
+          },
+          "retention_90": {
+            "point": 0.9408602150537635,
+            "lo": 0.8869623655913991,
+            "hi": 0.9838709677419355
+          },
+          "strict_recall_90": {
+            "point": 0.45416666666666666,
+            "lo": 0.3625,
+            "hi": 0.5458333333333333
+          },
+          "lenient_recall_90": {
+            "point": 0.45416666666666666,
+            "lo": 0.3625,
+            "hi": 0.5458333333333333
+          }
+        },
+        "curve_mean": {
+          "target": [
+            0.8,
+            0.81,
+            0.82,
+            0.83,
+            0.84,
+            0.85,
+            0.86,
+            0.87,
+            0.88,
+            0.89,
+            0.9,
+            0.91,
+            0.92,
+            0.93,
+            0.94,
+            0.95,
+            0.96,
+            0.97,
+            0.98,
+            0.99
+          ],
+          "retention_known": [
+            0.9032258064516129,
+            0.9032258064516129,
+            0.9032258064516129,
+            0.9139784946236559,
+            0.9193548387096774,
+            0.9193548387096774,
+            0.9193548387096774,
+            0.9193548387096774,
+            0.9301075268817204,
+            0.9408602150537635,
+            0.9408602150537635,
+            0.9408602150537635,
+            0.956989247311828,
+            0.956989247311828,
+            0.9623655913978495,
+            0.9623655913978495,
+            0.978494623655914,
+            0.989247311827957,
+            0.989247311827957,
+            0.989247311827957
+          ],
+          "strict_rejection_recall": [
+            0.6125,
+            0.6083333333333333,
+            0.6083333333333333,
+            0.6041666666666666,
+            0.5791666666666666,
+            0.5791666666666666,
+            0.5625,
+            0.5625,
+            0.48333333333333334,
+            0.45416666666666666,
+            0.45416666666666666,
+            0.43333333333333335,
+            0.39999999999999997,
+            0.39999999999999997,
+            0.35833333333333334,
+            0.35833333333333334,
+            0.2916666666666667,
+            0.20833333333333334,
+            0.20833333333333334,
+            0.1125
+          ]
+        },
+        "bootstrap": "estimate: row bootstrap within each holdout, stratified by known/unknown; 10000 resamples, seed 42"
+      }
+    }
+  },
+  "paired_delta_winner_minus_current": {
+    "confirm": {
+      "auroc": {
+        "mean_delta": 0.0015620786541889486,
+        "lo": -0.006414896795494865,
+        "hi": 0.009398236205639234
+      },
+      "fpr_at_95tpr": {
+        "mean_delta": -0.019418090909090916,
+        "lo": -0.09137499999999996,
+        "hi": 0.04909090909090908
+      },
+      "retention_95": {
+        "mean_delta": 0.002939839572192515,
+        "lo": -0.00909090909090915,
+        "hi": 0.015064616755793368
+      },
+      "strict_recall_95": {
+        "mean_delta": 0.050843,
+        "lo": 0.020454545454545392,
+        "hi": 0.0827272727272727
+      },
+      "lenient_recall_95": {
+        "mean_delta": 0.050843,
+        "lo": 0.020454545454545392,
+        "hi": 0.0827272727272727
+      },
+      "retention_90": {
+        "mean_delta": -0.005951470588235293,
+        "lo": -0.0149732620320856,
+        "hi": 0.0
+      },
+      "strict_recall_90": {
+        "mean_delta": 0.033184863636363644,
+        "lo": 0.008181818181818288,
+        "hi": 0.06045454545454554
+      },
+      "lenient_recall_90": {
+        "mean_delta": 0.033184863636363644,
+        "lo": 0.008181818181818288,
+        "hi": 0.06045454545454554
+      }
+    },
+    "headline": {
+      "auroc": {
+        "mean_delta": -0.005274243951612902,
+        "lo": -0.01441616263440869,
+        "hi": 0.003494623655914131
+      },
+      "fpr_at_95tpr": {
+        "mean_delta": 0.02551166666666667,
+        "lo": -0.029166666666666674,
+        "hi": 0.08749999999999991
+      },
+      "retention_95": {
+        "mean_delta": -0.005330107526881719,
+        "lo": -0.016129032258064613,
+        "hi": 0.0
+      },
+      "strict_recall_95": {
+        "mean_delta": 0.01648583333333333,
+        "lo": -0.012499999999999956,
+        "hi": 0.04583333333333334
+      },
+      "lenient_recall_95": {
+        "mean_delta": 0.01648583333333333,
+        "lo": -0.012499999999999956,
+        "hi": 0.04583333333333334
+      },
+      "retention_90": {
+        "mean_delta": -0.005345698924731193,
+        "lo": -0.016129032258064613,
+        "hi": 0.0
+      },
+      "strict_recall_90": {
+        "mean_delta": 4.958333333333327e-05,
+        "lo": -0.025000000000000022,
+        "hi": 0.025000000000000022
+      },
+      "lenient_recall_90": {
+        "mean_delta": 4.958333333333327e-05,
+        "lo": -0.025000000000000022,
+        "hi": 0.025000000000000022
+      }
+    }
+  },
+  "report_only": {
+    "confirm_mean_auroc": {
+      "base/msp": 0.8665817938745747,
+      "base/msp_temp": 0.8669863069194619,
+      "base/max_logit": 0.8737467590341922,
+      "base/neg_energy": 0.8768694295900177,
+      "base/maha_ft": 0.8790996191865176,
+      "base/knn1_ft": 0.8761523659050396,
+      "base/knn5_ft": 0.8742235861286665,
+      "base/maha_frozen": 0.665906660184735,
+      "base/knn1_frozen": 0.6497512558742505,
+      "base/knn5_frozen": 0.6386213741695026,
+      "base/maha_ml": 0.8122490277102576,
+      "base/fuse_maha_energy": 0.8806867809107114,
+      "c4/ens_maha": 0.8929332766164318,
+      "c4/ens_entropy": 0.8723428131583212,
+      "b1/b1_msp": 0.8556925538810566,
+      "b1/b1_neg_energy": 0.8531765516123805
+    },
+    "label": "report only (C4 / B1 are not eligible)"
+  },
+  "ci_note": "AUPR has a point estimate only; resampled: AUROC, FPR@95TPR, recall, retention"
+}

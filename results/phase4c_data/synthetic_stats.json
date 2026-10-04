@@ -1,0 +1,109 @@
+{
+  "label_note": "synthetic data from local qwen3:8b; texts in outputs/phase4c only",
+  "model": {
+    "tag": "qwen3:8b",
+    "digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+    "size_bytes": 5225388164
+  },
+  "think": false,
+  "temperature": 0.8,
+  "n_requested": 800,
+  "n_generated_pre_dedupe": 797,
+  "n_final": 684,
+  "n_batches": 43,
+  "batch_seeds": [
+    42000,
+    42001,
+    42002,
+    42003,
+    42004,
+    42005,
+    42006,
+    42007,
+    42008,
+    42009,
+    42010,
+    42011,
+    42012,
+    42013,
+    42014,
+    42015,
+    42016,
+    42017,
+    42018,
+    42019,
+    42020,
+    42021,
+    42022,
+    42023,
+    42024,
+    42025,
+    42026,
+    42027,
+    42028,
+    42029,
+    42030,
+    42031,
+    42032,
+    42033,
+    42034,
+    42035,
+    42036,
+    42037,
+    42038,
+    42039,
+    42040,
+    42041,
+    57880
+  ],
+  "batches_with_retry": [
+    42
+  ],
+  "parse_failures": 2,
+  "dedupe_drops": {
+    "exact": 24,
+    "cosine": 89
+  },
+  "dedupe_cos": 0.95,
+  "counts_per_lang": {
+    "en": 489,
+    "de": 50,
+    "es": 49,
+    "zh": 49,
+    "fr": 47
+  },
+  "counts_per_kind": {
+    "logistics_novel": 506,
+    "generic_oos": 178
+  },
+  "counts_per_lang_kind": {
+    "de|generic_oos": 13,
+    "de|logistics_novel": 37,
+    "en|generic_oos": 128,
+    "en|logistics_novel": 361,
+    "es|generic_oos": 13,
+    "es|logistics_novel": 36,
+    "fr|generic_oos": 12,
+    "fr|logistics_novel": 35,
+    "zh|generic_oos": 12,
+    "zh|logistics_novel": 37
+  },
+  "dataset_flag": {
+    "threshold": 0.85,
+    "n_flagged_of_final": 252,
+    "max_cos_any_dataset_row": {
+      "min": 0.7597175240516663,
+      "q05": 0.8000476777553558,
+      "q25": 0.8272227942943573,
+      "q50": 0.8431395590305328,
+      "q75": 0.8569775372743607,
+      "q95": 0.8803435742855072,
+      "max": 0.9713470935821533,
+      "mean": 0.8421371986120068
+    },
+    "note": "diagnostic only; flagged items are NOT dropped here"
+  },
+  "generation_seconds": 187.9,
+  "batches_resumed_from_cache": 0,
+  "gpu_lock_waited_s": 0.5
+}

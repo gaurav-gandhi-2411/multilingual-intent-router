@@ -1,0 +1,34 @@
+{
+  "judges": [
+    {
+      "name": "qwen3",
+      "tag": "qwen3:8b",
+      "digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+      "size_bytes": 5225388164,
+      "family": "qwen3",
+      "parameter_size": "8.2B",
+      "quantization": "Q4_K_M",
+      "think": false
+    },
+    {
+      "name": "llama3",
+      "tag": "llama3.1:8b",
+      "digest": "46e0c10c039e019119339687c3c1757cc81b9da49709a3b3924863ba87ca666e",
+      "size_bytes": 4920753328,
+      "family": "llama",
+      "parameter_size": "8.0B",
+      "quantization": "Q4_K_M",
+      "think": null
+    },
+    {
+      "name": "gemma3",
+      "tag": "gemma3:4b",
+      "digest": "a2af6cc3eb7fa8be8504abaf9b04e88f17a119ec3f04a3addf55f92841195f5a",
+      "size_bytes": 3338801804,
+      "family": "gemma3",
+      "parameter_size": "4.3B",
+      "quantization": "Q4_K_M",
+      "think": null
+    }
+  ]
+}

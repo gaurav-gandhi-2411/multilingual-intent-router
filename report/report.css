@@ -1,0 +1,91 @@
+/* Clean typographic A4 report. All layout numbers live here, never in the template. */
+@page { size: A4; margin: 11mm 12mm 13mm 12mm; }
+:root {
+  --ink: #1f2933; --muted: #52606d; --faint: #7b8794; --line: #d9e2ec; --soft: #f5f7fa;
+  --accent: #2b6cb0; --good: #2f855a; --warn: #b7791f; --bad: #c53030;
+}
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body {
+  font: 8.3pt/1.22 "Segoe UI", "Helvetica Neue", Arial, sans-serif; color: var(--ink);
+  margin: 0; counter-reset: sec app; hyphens: auto;
+}
+h1 { font-size: 14pt; line-height: 1.15; margin: 0 0 1.5mm; letter-spacing: -0.2px; }
+h2 {
+  font-size: 9.6pt; margin: 2.2mm 0 0.8mm; padding-bottom: 0.4mm; color: var(--accent);
+  border-bottom: 0.4pt solid var(--line); break-after: avoid;
+}
+main h2::before { counter-increment: sec; content: counter(sec) ".\00a0"; }
+/* appendix sections are lettered A, B, ... (data.appendix_map reads them in the same order) */
+.app h2::before { counter-increment: app; content: counter(app, upper-alpha) ".\00a0"; }
+h3 { font-size: 8.2pt; margin: 1.8mm 0 0.7mm; color: var(--ink); break-after: avoid; }
+p { margin: 0 0 0.9mm; }
+ul { margin: 0 0 1.2mm 3.6mm; padding: 0; }
+ul.tight { margin-bottom: 0.8mm; }
+li { margin: 0 0 0.4mm; }
+.sub { color: var(--muted); font-size: 7.6pt; margin-bottom: 1mm; }
+.small { font-size: 7.5pt; color: var(--muted); }
+.links { font-size: 7.8pt; margin: 0 0 1.2mm; }
+code { font: 7pt Consolas, monospace; background: var(--soft); padding: 0 1px; }
+table { border-collapse: collapse; width: 100%; font-size: 7.4pt; margin: 0.5mm 0 1mm; break-inside: avoid; }
+table.split { break-inside: auto; }
+tr { break-inside: avoid; }
+thead { display: table-header-group; }
+th, td { padding: 0.38mm 1.2mm; border-bottom: 0.3pt solid var(--line); text-align: left; vertical-align: top; }
+th { background: #edf2f7; font-weight: 600; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+th.num { white-space: normal; }
+table.wrap td.num { white-space: normal; }
+tr.ship td { background: #ebf4ff; }
+tr.warn td { background: #fffaf0; }
+.cap { font-size: 7.2pt; color: var(--muted); margin: 0.4mm 0 1mm; }
+.tag {
+  display: inline-block; font-size: 5.8pt; text-transform: uppercase; letter-spacing: 0.3px;
+  padding: 0 2px; border-radius: 2px; color: #fff; background: var(--accent); vertical-align: 1px;
+}
+.tag.e { background: var(--warn); }
+.tag.o { background: #805ad5; }
+.tag.p { background: var(--faint); }
+.box { background: var(--soft); border-left: 1.2mm solid var(--accent); padding: 1mm 2.4mm; margin: 1mm 0; }
+.box.warn { border-left-color: var(--warn); background: #fffaf0; }
+.box.bad { border-left-color: var(--bad); background: #fff5f5; }
+.qa { font-size: 7.7pt; }
+.qa p { margin-bottom: 0.9mm; }
+.qa b.q { color: var(--accent); }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; align-items: start; }
+/* Track A: the per-class table beside the confusion matrix, both legible at this size */
+.grid-fig { display: grid; grid-template-columns: 1fr 96mm; gap: 3mm; align-items: start; }
+.grid-cal { display: grid; grid-template-columns: 1fr 54mm; gap: 3mm; align-items: start; }
+figure { margin: 0 0 1mm; break-inside: avoid; }
+figure img { width: 100%; display: block; }
+.title { border-bottom: 0.8pt solid var(--accent); margin-bottom: 1.2mm; }
+.app { break-before: page; }
+.nobreak { break-inside: avoid; }
+.mono { font: 6.6pt Consolas, monospace; word-break: break-all; }
+a { color: var(--accent); text-decoration: none; }
+.box.exec { border-left-color: var(--good); background: #f0fff4; font-size: 8.3pt; }
+.box.exec p { margin-bottom: 0.6mm; }
+table.pc1 { font-size: 7.4pt; margin-top: 0; }
+table.pc1 td, table.pc1 th { padding: 0.5mm 1.2mm; }
+table.pc1 td:first-child { word-break: break-all; }
+table.pc { font-size: 6.8pt; }
+table.pc td:first-child { word-break: break-all; }
+table.head td, table.head th { padding: 0.45mm 1.2mm; }
+.app { font-size: 7.6pt; line-height: 1.25; }
+.app table { font-size: 6.9pt; margin: 0.5mm 0 1mm; }
+.app th, .app td { padding: 0.35mm 1mm; }
+.app h2 { margin: 2.2mm 0 0.8mm; }
+.app .cap { font-size: 6.9pt; }
+.app figure img { max-width: 100%; max-height: 62mm; width: auto; margin: 0 auto; }
+.nw { white-space: nowrap; word-break: normal; }
+.box.repro { font-size: 7.5pt; line-height: 1.2; padding: 1mm 2.2mm; }
+.box.repro p { margin-bottom: 0.8mm; }
+.box.repro code { font-size: 6.8pt; word-break: break-all; }
+figure img.cap-h { max-height: 36mm; width: auto; max-width: 100%; margin: 0 auto; }
+.gaps { margin-top: 0.8mm; break-inside: avoid; page-break-inside: avoid; }
+table.gaps { font-size: 7pt; table-layout: fixed; }
+table.gaps th, table.gaps td { padding: 0.45mm 1.1mm; }
+table.gaps sub { font-size: 80%; }
+.box.gap3 { border-left-color: var(--accent); font-size: 7.6pt; }
+.box.gap3 p { margin-bottom: 0.5mm; }
+table.gaps code { word-break: break-all; }

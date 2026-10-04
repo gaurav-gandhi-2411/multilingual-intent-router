@@ -1,0 +1,86 @@
+{
+  "label": "estimate from measured CONFIRM rates",
+  "shipped_method": "base/maha_ft",
+  "per_messages": 1000,
+  "formulas": {
+    "known_wrongly_abstained": "N(1-pi)(1-retention_measured)",
+    "unknowns_caught": "N*pi*rejection_recall",
+    "unknowns_misrouted": "N*pi*(1-rejection_recall)"
+  },
+  "measured_confirm_mean": {
+    "op95": {
+      "strict_rejection_recall": 0.22727272727272724,
+      "lenient_rejection_recall": 0.22727272727272724,
+      "retention_known": 0.9702317290552586,
+      "cal_retention_achieved": 0.9553475935828877
+    },
+    "op90": {
+      "strict_rejection_recall": 0.4636363636363637,
+      "lenient_rejection_recall": 0.4636363636363637,
+      "retention_known": 0.931283422459893,
+      "cal_retention_achieved": 0.9106951871657755
+    }
+  },
+  "rows": [
+    {
+      "calibration_retention_target": 0.9,
+      "prevalence": 0.01,
+      "retention_measured": 0.931283422459893,
+      "known_wrongly_abstained": 68.02941176470588,
+      "unknowns_caught_strict": 4.636363636363637,
+      "unknowns_misrouted_strict": 5.363636363636363,
+      "unknowns_caught_lenient": 4.636363636363637,
+      "unknowns_misrouted_lenient": 5.363636363636363
+    },
+    {
+      "calibration_retention_target": 0.9,
+      "prevalence": 0.05,
+      "retention_measured": 0.931283422459893,
+      "known_wrongly_abstained": 65.28074866310162,
+      "unknowns_caught_strict": 23.181818181818183,
+      "unknowns_misrouted_strict": 26.81818181818182,
+      "unknowns_caught_lenient": 23.181818181818183,
+      "unknowns_misrouted_lenient": 26.81818181818182
+    },
+    {
+      "calibration_retention_target": 0.9,
+      "prevalence": 0.1,
+      "retention_measured": 0.931283422459893,
+      "known_wrongly_abstained": 61.84491978609626,
+      "unknowns_caught_strict": 46.36363636363637,
+      "unknowns_misrouted_strict": 53.63636363636364,
+      "unknowns_caught_lenient": 46.36363636363637,
+      "unknowns_misrouted_lenient": 53.63636363636364
+    },
+    {
+      "calibration_retention_target": 0.95,
+      "prevalence": 0.01,
+      "retention_measured": 0.9702317290552586,
+      "known_wrongly_abstained": 29.470588235294024,
+      "unknowns_caught_strict": 2.2727272727272725,
+      "unknowns_misrouted_strict": 7.727272727272727,
+      "unknowns_caught_lenient": 2.2727272727272725,
+      "unknowns_misrouted_lenient": 7.727272727272727
+    },
+    {
+      "calibration_retention_target": 0.95,
+      "prevalence": 0.05,
+      "retention_measured": 0.9702317290552586,
+      "known_wrongly_abstained": 28.279857397504365,
+      "unknowns_caught_strict": 11.363636363636362,
+      "unknowns_misrouted_strict": 38.63636363636363,
+      "unknowns_caught_lenient": 11.363636363636362,
+      "unknowns_misrouted_lenient": 38.63636363636363
+    },
+    {
+      "calibration_retention_target": 0.95,
+      "prevalence": 0.1,
+      "retention_measured": 0.9702317290552586,
+      "known_wrongly_abstained": 26.791443850267292,
+      "unknowns_caught_strict": 22.727272727272723,
+      "unknowns_misrouted_strict": 77.27272727272727,
+      "unknowns_caught_lenient": 22.727272727272723,
+      "unknowns_misrouted_lenient": 77.27272727272727
+    }
+  ]
+}

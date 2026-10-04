@@ -1,0 +1,37 @@
+{
+  "seed": 42,
+  "attn_implementation": "eager",
+  "fingerprint_run1": "7ca22e16d2ace345d9dcf7737887e85fedf400a1dfc863678c2fc2663bf102bd",
+  "fingerprint_run2": "7ca22e16d2ace345d9dcf7737887e85fedf400a1dfc863678c2fc2663bf102bd",
+  "state_dict_identical": true,
+  "val": {
+    "logits": {
+      "identical": true,
+      "max_abs_diff": 0.0,
+      "sha256_run1": "936ed8aedd87b17df4551b47b49d005fc9348602c98bcfabdc84a202ee1cd787",
+      "sha256_run2": "936ed8aedd87b17df4551b47b49d005fc9348602c98bcfabdc84a202ee1cd787"
+    },
+    "softmax_float32": {
+      "identical": true,
+      "max_abs_diff": 0.0,
+      "sha256_run1": "c5d27a64456a671051b20cefdc491a9211c256e55be985de15ed7c73bb3c8564",
+      "sha256_run2": "c5d27a64456a671051b20cefdc491a9211c256e55be985de15ed7c73bb3c8564"
+    }
+  },
+  "test": {
+    "logits": {
+      "identical": true,
+      "max_abs_diff": 0.0,
+      "sha256_run1": "f03cc09ca32989bff45cc8b483f5115bfd46bc6ac5a4f320d0039d19f928e301",
+      "sha256_run2": "f03cc09ca32989bff45cc8b483f5115bfd46bc6ac5a4f320d0039d19f928e301"
+    },
+    "softmax_float32": {
+      "identical": true,
+      "max_abs_diff": 0.0,
+      "sha256_run1": "2dd61737b6f5b1eaa9bec0bb65aa1c5c222b748c0c51ec0069378140fbd9373a",
+      "sha256_run2": "2dd61737b6f5b1eaa9bec0bb65aa1c5c222b748c0c51ec0069378140fbd9373a"
+    }
+  },
+  "epoch_history_identical": true,
+  "bitwise_identical": true
+}

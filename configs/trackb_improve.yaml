@@ -1,0 +1,81 @@
+# Open-set scorer comparison Track B improvement (Open-set scorer comparison, rules fixed 2026-10-02 BEFORE any run).
+# Nothing here may change a pre-registered rule; it only wires the rules to numbers.
+final_config: configs/final.yaml        # base model / lr / 20-epoch schedule / eager attention
+trackb_config: configs/trackb.yaml      # headline holdout, LOCO exclusions, OOD settings (retention, k)
+phase3_dir: results/trackb              # open-set evaluation score CSVs + run jsons (the reproduction reference)
+results_dir: results/trackb_improve     # json + scores/<run_id>.csv (ids and numbers only, no text)
+outputs_dir: outputs/trackb_improve     # per-run npz arrays (gitignored)
+frozen_cache: outputs/trackb/frozen_e5.npz
+test_inference_log: results/trackb_improve/test_inference_log.jsonl
+final_test_log: results/final/test_eval_log.jsonl   # final_ood appends its one logged call here
+final_model_dir: outputs/final_model
+final_artifacts:
+  features_logits: outputs/final/features_logits.npz
+  test_predictions: results/final/test_predictions.csv
+  train_summary: results/final/train_summary.json
+gpu_lock_expected_s: 600
+gpu_lock_poll_s: 30
+
+# Rule fixed before the runs: DEV = draw of np.random.default_rng(42).choice(8, 3) -> CONFIRM; methods are selected
+# on DEV only, claims are made on CONFIRM + the headline holdout only.
+dev_classes:
+  - appointment_manager
+  - customer_support
+  - knowledge_base
+  - orders
+  - shipment_information.disruptions
+confirm_classes:
+  - ai_agent_performance
+  - document_processing
+  - shipment_information.analytics
+  - shipment_information.realtime_query
+  - yard_management
+headline_seeds: [42, 43, 44]
+loco_seed: 42
+
+guard:                                  # Track A guard for candidates that change training
+  fold_seed_idx: 0
+  model_seed: 0
+  n_folds: 5
+  comparator: 0.9441                    # e5 lr 3e-5, same folds / model seed (selection-robustness check)
+  tolerance: 0.010
+  threshold: 0.9341                     # asserted == comparator - tolerance at load time
+
+c1:
+  layers: [0, -4, -3, -2, -1]           # hidden_states indices: embedding output + last 4 layers
+  fusion_components: [maha_ft, neg_energy]
+c2:
+  lambdas: [0.1, 0.5]
+  temperature: 0.1
+c3:
+  model_name: intfloat/multilingual-e5-large
+  lrs: [1.0e-5, 2.0e-5]
+  batch_size: 16
+  max_len: 64
+  fit_check_steps: 3
+  fit_check_lr: 2.0e-5
+  accum_fallbacks: [[16, 1], [8, 2], [4, 4]]   # (micro-batch, accumulation steps), tried in order
+  vram_budget_gb: 8
+  latency_repeats: 1                    # passes over the val texts per thread setting
+c4:
+  seeds: [42, 43, 44, 45, 46]
+
+ood:                                    # retention operating points (pre-registered: 95% primary)
+  op_retentions: [0.95, 0.90]
+  curve: {lo: 0.80, hi: 0.99, step: 0.01}
+  safe_labels: [other, chitchat]
+
+bootstrap:                              # rows resampled within each holdout, stratified known/unknown
+  n_resamples: 10000
+  seed: 42
+  level: 0.95
+
+business:                               # estimate from measured CONFIRM rates, per 1,000 messages
+  messages: 1000
+  prevalence: [0.01, 0.05, 0.10]
+  retention: [0.90, 0.95]
+
+wandb:
+  project: intent-router
+  group_prefix: trackB-improve          # groups: trackB-improve-<candidate>
+  enabled: true

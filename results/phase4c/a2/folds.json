@@ -1,0 +1,313 @@
+{
+  "candidate": "a2",
+  "deployed_epoch": 7,
+  "smoke": false,
+  "oof_accuracy": 0.9248826291079812,
+  "oof_macro_f1": 0.9236519579771563,
+  "n_rows": 426,
+  "swap": {
+    "pooled": {
+      "n": 84,
+      "n_flips": 18,
+      "flip_rate": 0.21428571428571427,
+      "accuracy_swapped": 0.7976190476190477,
+      "accuracy_clean": 0.9285714285714286
+    },
+    "per_swap": {
+      "LD->REF": {
+        "n": 38,
+        "n_flips": 5,
+        "flip_rate": 0.13157894736842105,
+        "accuracy_swapped": 0.868421052631579,
+        "accuracy_clean": 0.9473684210526315
+      },
+      "PO->REF": {
+        "n": 19,
+        "n_flips": 5,
+        "flip_rate": 0.2631578947368421,
+        "accuracy_swapped": 0.7368421052631579,
+        "accuracy_clean": 0.9473684210526315
+      },
+      "other->REF": {
+        "n": 27,
+        "n_flips": 8,
+        "flip_rate": 0.2962962962962963,
+        "accuracy_swapped": 0.7407407407407407,
+        "accuracy_clean": 0.8888888888888888
+      }
+    }
+  },
+  "noise": {
+    "n": 426,
+    "accuracy_clean": 0.9248826291079812,
+    "accuracy_noisy": 0.7769953051643192,
+    "drop": 0.147887323943662,
+    "flip_rate": 0.19718309859154928
+  },
+  "translation": {
+    "es": {
+      "filtered": {
+        "n": 355,
+        "agreement": 0.8816901408450705,
+        "accuracy": 0.856338028169014
+      },
+      "unfiltered": {
+        "n": 370,
+        "agreement": 0.8783783783783784,
+        "accuracy": 0.8540540540540541
+      }
+    },
+    "fr": {
+      "filtered": {
+        "n": 356,
+        "agreement": 0.8848314606741573,
+        "accuracy": 0.8539325842696629
+      },
+      "unfiltered": {
+        "n": 370,
+        "agreement": 0.8864864864864865,
+        "accuracy": 0.8567567567567568
+      }
+    },
+    "de": {
+      "filtered": {
+        "n": 357,
+        "agreement": 0.8711484593837535,
+        "accuracy": 0.8627450980392157
+      },
+      "unfiltered": {
+        "n": 370,
+        "agreement": 0.8675675675675676,
+        "accuracy": 0.8594594594594595
+      }
+    },
+    "zh": {
+      "filtered": {
+        "n": 278,
+        "agreement": 0.8633093525179856,
+        "accuracy": 0.8057553956834532
+      },
+      "unfiltered": {
+        "n": 370,
+        "agreement": 0.8405405405405405,
+        "accuracy": 0.7972972972972973
+      }
+    },
+    "mean_filtered": {
+      "agreement": 0.8752448533552417,
+      "accuracy": 0.8446927765403365
+    },
+    "mean_unfiltered": {
+      "agreement": 0.8682432432432433,
+      "accuracy": 0.841891891891892
+    }
+  },
+  "folds": [
+    {
+      "fold": 0,
+      "dir": "outputs\\phase4c\\a2\\fold_models\\fold0",
+      "run_meta": {
+        "fold": 0,
+        "run_id": "p4c_a2_fs0_ms0_f0",
+        "n_train": 340,
+        "n_eval": 86,
+        "stop_epoch": 7,
+        "model_seed": 0,
+        "recipe": {
+          "a1": false,
+          "a2": true,
+          "a3": false
+        },
+        "attn_implementation": "eager",
+        "fingerprint": "b973e7d256f7537726f6063719a8084e1ba762b1a8d614bd75760e6e0e2b6f2b",
+        "extras": {
+          "factors": [
+            "a2"
+          ],
+          "oe": {
+            "n_pool": 684,
+            "n_dropped": 0,
+            "n_kept": 684,
+            "filtered_by_holdout": false
+          }
+        },
+        "final_epoch_eval": {
+          "epoch": 7,
+          "train_loss": 1.4963379163633694,
+          "eval_loss": 0.3402623409448668,
+          "macro_f1": 0.9175976800976802,
+          "accuracy": 0.9302325581395349
+        },
+        "wall_clock_s": 70.80173569999897,
+        "gpu_exclusive": true,
+        "lock_waited_s": 0.2,
+        "git_sha": "5ee1293452c151d186f3f9ad17cb63d81cc7d824-dirty"
+      }
+    },
+    {
+      "fold": 1,
+      "dir": "outputs\\phase4c\\a2\\fold_models\\fold1",
+      "run_meta": {
+        "fold": 1,
+        "run_id": "p4c_a2_fs0_ms0_f1",
+        "n_train": 341,
+        "n_eval": 85,
+        "stop_epoch": 7,
+        "model_seed": 0,
+        "recipe": {
+          "a1": false,
+          "a2": true,
+          "a3": false
+        },
+        "attn_implementation": "eager",
+        "fingerprint": "0d8d0b9cfd28942e2036d02d9cb6ec57b7cb233cb6f056293f6cd82895498cad",
+        "extras": {
+          "factors": [
+            "a2"
+          ],
+          "oe": {
+            "n_pool": 684,
+            "n_dropped": 0,
+            "n_kept": 684,
+            "filtered_by_holdout": false
+          }
+        },
+        "final_epoch_eval": {
+          "epoch": 7,
+          "train_loss": 1.5153343233872543,
+          "eval_loss": 0.3636727501364315,
+          "macro_f1": 0.920245263995264,
+          "accuracy": 0.9176470588235294
+        },
+        "wall_clock_s": 63.96449819999907,
+        "gpu_exclusive": true,
+        "lock_waited_s": 0.3,
+        "git_sha": "5ee1293452c151d186f3f9ad17cb63d81cc7d824-dirty"
+      }
+    },
+    {
+      "fold": 2,
+      "dir": "outputs\\phase4c\\a2\\fold_models\\fold2",
+      "run_meta": {
+        "fold": 2,
+        "run_id": "p4c_a2_fs0_ms0_f2",
+        "n_train": 341,
+        "n_eval": 85,
+        "stop_epoch": 7,
+        "model_seed": 0,
+        "recipe": {
+          "a1": false,
+          "a2": true,
+          "a3": false
+        },
+        "attn_implementation": "eager",
+        "fingerprint": "e84465b48ee01e93097347bb31610c1e7a4d5ce4171e733aff0c6fabd6b50327",
+        "extras": {
+          "factors": [
+            "a2"
+          ],
+          "oe": {
+            "n_pool": 684,
+            "n_dropped": 0,
+            "n_kept": 684,
+            "filtered_by_holdout": false
+          }
+        },
+        "final_epoch_eval": {
+          "epoch": 7,
+          "train_loss": 1.5064092427492142,
+          "eval_loss": 0.3643818504670087,
+          "macro_f1": 0.92525871459695,
+          "accuracy": 0.9294117647058824
+        },
+        "wall_clock_s": 66.32686280000053,
+        "gpu_exclusive": true,
+        "lock_waited_s": 0.2,
+        "git_sha": "5ee1293452c151d186f3f9ad17cb63d81cc7d824-dirty"
+      }
+    },
+    {
+      "fold": 3,
+      "dir": "outputs\\phase4c\\a2\\fold_models\\fold3",
+      "run_meta": {
+        "fold": 3,
+        "run_id": "p4c_a2_fs0_ms0_f3",
+        "n_train": 341,
+        "n_eval": 85,
+        "stop_epoch": 7,
+        "model_seed": 0,
+        "recipe": {
+          "a1": false,
+          "a2": true,
+          "a3": false
+        },
+        "attn_implementation": "eager",
+        "fingerprint": "c4adc175e593248681113792d597e15aa6542bba2af2a9b1d8688fe1ca4007be",
+        "extras": {
+          "factors": [
+            "a2"
+          ],
+          "oe": {
+            "n_pool": 684,
+            "n_dropped": 0,
+            "n_kept": 684,
+            "filtered_by_holdout": false
+          }
+        },
+        "final_epoch_eval": {
+          "epoch": 7,
+          "train_loss": 1.4807916344566778,
+          "eval_loss": 0.4641478033626781,
+          "macro_f1": 0.8799039060068473,
+          "accuracy": 0.8823529411764706
+        },
+        "wall_clock_s": 64.87755169999946,
+        "gpu_exclusive": true,
+        "lock_waited_s": 0.2,
+        "git_sha": "5ee1293452c151d186f3f9ad17cb63d81cc7d824-dirty"
+      }
+    },
+    {
+      "fold": 4,
+      "dir": "outputs\\phase4c\\a2\\fold_models\\fold4",
+      "run_meta": {
+        "fold": 4,
+        "run_id": "p4c_a2_fs0_ms0_f4",
+        "n_train": 341,
+        "n_eval": 85,
+        "stop_epoch": 7,
+        "model_seed": 0,
+        "recipe": {
+          "a1": false,
+          "a2": true,
+          "a3": false
+        },
+        "attn_implementation": "eager",
+        "fingerprint": "3fc0456d115f988b6895d0ae95f31d1653dc96be16e9c60a9eb666f0acafbf44",
+        "extras": {
+          "factors": [
+            "a2"
+          ],
+          "oe": {
+            "n_pool": 684,
+            "n_dropped": 0,
+            "n_kept": 684,
+            "filtered_by_holdout": false
+          }
+        },
+        "final_epoch_eval": {
+          "epoch": 7,
+          "train_loss": 1.508034031160853,
+          "eval_loss": 0.32646109216353475,
+          "macro_f1": 0.9640026725940039,
+          "accuracy": 0.9647058823529412
+        },
+        "wall_clock_s": 66.74166659999901,
+        "gpu_exclusive": true,
+        "lock_waited_s": 0.2,
+        "git_sha": "5ee1293452c151d186f3f9ad17cb63d81cc7d824-dirty"
+      }
+    }
+  ],
+  "git_sha": "5ee1293452c151d186f3f9ad17cb63d81cc7d824-dirty"
+}

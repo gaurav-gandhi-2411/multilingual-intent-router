@@ -1,0 +1,379 @@
+{
+  "dev_classes": [
+    "appointment_manager",
+    "customer_support",
+    "knowledge_base",
+    "orders",
+    "shipment_information.disruptions"
+  ],
+  "dev_mean_auroc": {
+    "base/msp": 0.8709589194752094,
+    "base/msp_temp": 0.8715081720553245,
+    "base/max_logit": 0.8808800421531364,
+    "base/neg_energy": 0.8823799798959169,
+    "base/maha_ft": 0.8935194112254463,
+    "base/knn1_ft": 0.8921734722441865,
+    "base/knn5_ft": 0.8892025653004009,
+    "base/maha_frozen": 0.686322784142859,
+    "base/knn1_frozen": 0.6745195068076981,
+    "base/knn5_frozen": 0.6344438627711522,
+    "base/maha_ml": 0.8324894867096742,
+    "base/fuse_maha_energy": 0.8904657820839779,
+    "c2_l0.1/msp": 0.8650328955938855,
+    "c2_l0.1/msp_temp": 0.8664716955352334,
+    "c2_l0.1/max_logit": 0.8713867924413978,
+    "c2_l0.1/neg_energy": 0.8728271775939447,
+    "c2_l0.1/maha_ft": 0.8865106941543652,
+    "c2_l0.1/knn1_ft": 0.8843642045829796,
+    "c2_l0.1/knn5_ft": 0.8816113190896087,
+    "c2_l0.1/maha_frozen": 0.686322784142859,
+    "c2_l0.1/knn1_frozen": 0.6745195068076981,
+    "c2_l0.1/knn5_frozen": 0.6344438627711522,
+    "c2_l0.1/maha_ml": 0.8445815686213919,
+    "c2_l0.1/fuse_maha_energy": 0.881055869568247,
+    "c2_l0.5/msp": 0.8639498577929983,
+    "c2_l0.5/msp_temp": 0.8651203071537938,
+    "c2_l0.5/max_logit": 0.8666505449248703,
+    "c2_l0.5/neg_energy": 0.8680961272676926,
+    "c2_l0.5/maha_ft": 0.8843648051909494,
+    "c2_l0.5/knn1_ft": 0.8800609567859159,
+    "c2_l0.5/knn5_ft": 0.8783908546113665,
+    "c2_l0.5/maha_frozen": 0.686322784142859,
+    "c2_l0.5/knn1_frozen": 0.6745195068076981,
+    "c2_l0.5/knn5_frozen": 0.6344438627711522,
+    "c2_l0.5/maha_ml": 0.833447905552011,
+    "c2_l0.5/fuse_maha_energy": 0.8789148449234766,
+    "c4/ens_maha": 0.8963385362797508,
+    "c4/ens_entropy": 0.8798628341667621,
+    "b1/b1_msp": 0.8358123681010368,
+    "b1/b1_neg_energy": 0.8374195586735669
+  },
+  "current": "base/maha_ft",
+  "current_dev_mean": 0.8935194112254463,
+  "margin_std_ddof1_over_sqrt_n": 0.011487596228003097,
+  "rule": "ship iff winner DEV mean - current DEV mean > std_ddof1(current DEV)/sqrt(5)",
+  "winner": "base/fuse_maha_energy",
+  "winner_dev_mean": 0.8904657820839779,
+  "winner_minus_current": -0.00305362914146845,
+  "ship": false,
+  "shipped": "base/maha_ft",
+  "label": "measured on DEV classes only",
+  "dev_per_class_auroc": {
+    "base/msp": {
+      "appointment_manager": 0.8809286898839138,
+      "customer_support": 0.8963235294117647,
+      "knowledge_base": 0.893014705882353,
+      "orders": 0.844776119402985,
+      "shipment_information.disruptions": 0.8397515527950311
+    },
+    "base/msp_temp": {
+      "appointment_manager": 0.8835820895522388,
+      "customer_support": 0.8955882352941177,
+      "knowledge_base": 0.893014705882353,
+      "orders": 0.844776119402985,
+      "shipment_information.disruptions": 0.8405797101449275
+    },
+    "base/max_logit": {
+      "appointment_manager": 0.9018242122719735,
+      "customer_support": 0.8860294117647058,
+      "knowledge_base": 0.9003676470588236,
+      "orders": 0.857379767827529,
+      "shipment_information.disruptions": 0.8587991718426501
+    },
+    "base/neg_energy": {
+      "appointment_manager": 0.9058043117744611,
+      "customer_support": 0.8841911764705882,
+      "knowledge_base": 0.9025735294117647,
+      "orders": 0.8613598673300166,
+      "shipment_information.disruptions": 0.8579710144927536
+    },
+    "base/maha_ft": {
+      "appointment_manager": 0.9283582089552239,
+      "customer_support": 0.8643382352941177,
+      "knowledge_base": 0.9106617647058823,
+      "orders": 0.87893864013267,
+      "shipment_information.disruptions": 0.8853002070393374
+    },
+    "base/knn1_ft": {
+      "appointment_manager": 0.9164179104477612,
+      "customer_support": 0.8768382352941176,
+      "knowledge_base": 0.9047794117647059,
+      "orders": 0.8796019900497513,
+      "shipment_information.disruptions": 0.8832298136645963
+    },
+    "base/knn5_ft": {
+      "appointment_manager": 0.9164179104477612,
+      "customer_support": 0.8761029411764706,
+      "knowledge_base": 0.9018382352941177,
+      "orders": 0.8812603648424544,
+      "shipment_information.disruptions": 0.8703933747412008
+    },
+    "base/maha_frozen": {
+      "appointment_manager": 0.6268656716417911,
+      "customer_support": 0.6691176470588235,
+      "knowledge_base": 0.8654411764705883,
+      "orders": 0.5691542288557214,
+      "shipment_information.disruptions": 0.7010351966873706
+    },
+    "base/knn1_frozen": {
+      "appointment_manager": 0.6421227197346601,
+      "customer_support": 0.638235294117647,
+      "knowledge_base": 0.8386029411764706,
+      "orders": 0.5774461028192371,
+      "shipment_information.disruptions": 0.6761904761904762
+    },
+    "base/knn5_frozen": {
+      "appointment_manager": 0.6122719734660034,
+      "customer_support": 0.5514705882352942,
+      "knowledge_base": 0.8691176470588236,
+      "orders": 0.5174129353233831,
+      "shipment_information.disruptions": 0.6219461697722567
+    },
+    "base/maha_ml": {
+      "appointment_manager": 0.817910447761194,
+      "customer_support": 0.8213235294117647,
+      "knowledge_base": 0.8841911764705882,
+      "orders": 0.8129353233830846,
+      "shipment_information.disruptions": 0.8260869565217391
+    },
+    "base/fuse_maha_energy": {
+      "appointment_manager": 0.9240464344941957,
+      "customer_support": 0.8748161764705882,
+      "knowledge_base": 0.90625,
+      "orders": 0.875787728026534,
+      "shipment_information.disruptions": 0.8714285714285714
+    },
+    "c2_l0.1/msp": {
+      "appointment_manager": 0.9041459369817578,
+      "customer_support": 0.8761029411764706,
+      "knowledge_base": 0.8647058823529412,
+      "orders": 0.8354892205638474,
+      "shipment_information.disruptions": 0.84472049689441
+    },
+    "c2_l0.1/msp_temp": {
+      "appointment_manager": 0.9067993366500829,
+      "customer_support": 0.8768382352941176,
+      "knowledge_base": 0.868014705882353,
+      "orders": 0.8351575456053068,
+      "shipment_information.disruptions": 0.8455486542443064
+    },
+    "c2_l0.1/max_logit": {
+      "appointment_manager": 0.9187396351575456,
+      "customer_support": 0.8731617647058824,
+      "knowledge_base": 0.86875,
+      "orders": 0.8407960199004975,
+      "shipment_information.disruptions": 0.8554865424430642
+    },
+    "c2_l0.1/neg_energy": {
+      "appointment_manager": 0.9213930348258706,
+      "customer_support": 0.8716911764705882,
+      "knowledge_base": 0.8709558823529412,
+      "orders": 0.8437810945273632,
+      "shipment_information.disruptions": 0.8563146997929607
+    },
+    "c2_l0.1/maha_ft": {
+      "appointment_manager": 0.9300165837479271,
+      "customer_support": 0.861764705882353,
+      "knowledge_base": 0.8863970588235294,
+      "orders": 0.8719734660033167,
+      "shipment_information.disruptions": 0.8824016563146998
+    },
+    "c2_l0.1/knn1_ft": {
+      "appointment_manager": 0.9200663349917081,
+      "customer_support": 0.8676470588235294,
+      "knowledge_base": 0.8775735294117647,
+      "orders": 0.8766169154228856,
+      "shipment_information.disruptions": 0.8799171842650103
+    },
+    "c2_l0.1/knn5_ft": {
+      "appointment_manager": 0.9213930348258706,
+      "customer_support": 0.8647058823529412,
+      "knowledge_base": 0.8753676470588235,
+      "orders": 0.8716417910447761,
+      "shipment_information.disruptions": 0.8749482401656314
+    },
+    "c2_l0.1/maha_frozen": {
+      "appointment_manager": 0.6268656716417911,
+      "customer_support": 0.6691176470588235,
+      "knowledge_base": 0.8654411764705883,
+      "orders": 0.5691542288557214,
+      "shipment_information.disruptions": 0.7010351966873706
+    },
+    "c2_l0.1/knn1_frozen": {
+      "appointment_manager": 0.6421227197346601,
+      "customer_support": 0.638235294117647,
+      "knowledge_base": 0.8386029411764706,
+      "orders": 0.5774461028192371,
+      "shipment_information.disruptions": 0.6761904761904762
+    },
+    "c2_l0.1/knn5_frozen": {
+      "appointment_manager": 0.6122719734660034,
+      "customer_support": 0.5514705882352942,
+      "knowledge_base": 0.8691176470588236,
+      "orders": 0.5174129353233831,
+      "shipment_information.disruptions": 0.6219461697722567
+    },
+    "c2_l0.1/maha_ml": {
+      "appointment_manager": 0.8669983416252073,
+      "customer_support": 0.8290441176470589,
+      "knowledge_base": 0.8632352941176471,
+      "orders": 0.8222222222222222,
+      "shipment_information.disruptions": 0.841407867494824
+    },
+    "c2_l0.1/fuse_maha_energy": {
+      "appointment_manager": 0.9275290215588723,
+      "customer_support": 0.8691176470588236,
+      "knowledge_base": 0.8768382352941176,
+      "orders": 0.8611940298507462,
+      "shipment_information.disruptions": 0.870600414078675
+    },
+    "c2_l0.5/msp": {
+      "appointment_manager": 0.891542288557214,
+      "customer_support": 0.875,
+      "knowledge_base": 0.8621323529411765,
+      "orders": 0.848424543946932,
+      "shipment_information.disruptions": 0.8426501035196687
+    },
+    "c2_l0.5/msp_temp": {
+      "appointment_manager": 0.8935323383084577,
+      "customer_support": 0.8742647058823529,
+      "knowledge_base": 0.8650735294117647,
+      "orders": 0.848424543946932,
+      "shipment_information.disruptions": 0.8443064182194617
+    },
+    "c2_l0.5/max_logit": {
+      "appointment_manager": 0.9074626865671642,
+      "customer_support": 0.8709558823529412,
+      "knowledge_base": 0.8636029411764706,
+      "orders": 0.8411276948590382,
+      "shipment_information.disruptions": 0.8501035196687371
+    },
+    "c2_l0.5/neg_energy": {
+      "appointment_manager": 0.9127694859038142,
+      "customer_support": 0.8709558823529412,
+      "knowledge_base": 0.868014705882353,
+      "orders": 0.8361525704809287,
+      "shipment_information.disruptions": 0.8525879917184265
+    },
+    "c2_l0.5/maha_ft": {
+      "appointment_manager": 0.9263681592039801,
+      "customer_support": 0.8694852941176471,
+      "knowledge_base": 0.8856617647058823,
+      "orders": 0.8819237147595357,
+      "shipment_information.disruptions": 0.8583850931677018
+    },
+    "c2_l0.5/knn1_ft": {
+      "appointment_manager": 0.9157545605306799,
+      "customer_support": 0.8621323529411765,
+      "knowledge_base": 0.8764705882352941,
+      "orders": 0.8875621890547264,
+      "shipment_information.disruptions": 0.8583850931677018
+    },
+    "c2_l0.5/knn5_ft": {
+      "appointment_manager": 0.9114427860696518,
+      "customer_support": 0.86875,
+      "knowledge_base": 0.8742647058823529,
+      "orders": 0.8849087893864013,
+      "shipment_information.disruptions": 0.8525879917184265
+    },
+    "c2_l0.5/maha_frozen": {
+      "appointment_manager": 0.6268656716417911,
+      "customer_support": 0.6691176470588235,
+      "knowledge_base": 0.8654411764705883,
+      "orders": 0.5691542288557214,
+      "shipment_information.disruptions": 0.7010351966873706
+    },
+    "c2_l0.5/knn1_frozen": {
+      "appointment_manager": 0.6421227197346601,
+      "customer_support": 0.638235294117647,
+      "knowledge_base": 0.8386029411764706,
+      "orders": 0.5774461028192371,
+      "shipment_information.disruptions": 0.6761904761904762
+    },
+    "c2_l0.5/knn5_frozen": {
+      "appointment_manager": 0.6122719734660034,
+      "customer_support": 0.5514705882352942,
+      "knowledge_base": 0.8691176470588236,
+      "orders": 0.5174129353233831,
+      "shipment_information.disruptions": 0.6219461697722567
+    },
+    "c2_l0.5/maha_ml": {
+      "appointment_manager": 0.8603648424543947,
+      "customer_support": 0.8404411764705882,
+      "knowledge_base": 0.8636029411764706,
+      "orders": 0.8119402985074626,
+      "shipment_information.disruptions": 0.7908902691511387
+    },
+    "c2_l0.5/fuse_maha_energy": {
+      "appointment_manager": 0.9194029850746268,
+      "customer_support": 0.8746323529411765,
+      "knowledge_base": 0.8825367647058824,
+      "orders": 0.8583747927031509,
+      "shipment_information.disruptions": 0.8596273291925466
+    },
+    "c4/ens_maha": {
+      "appointment_manager": 0.9220563847429519,
+      "customer_support": 0.8738970588235294,
+      "knowledge_base": 0.9084558823529412,
+      "orders": 0.8464344941956883,
+      "shipment_information.disruptions": 0.9308488612836439
+    },
+    "c4/ens_entropy": {
+      "appointment_manager": 0.9008291873963515,
+      "customer_support": 0.8841911764705882,
+      "knowledge_base": 0.8863970588235294,
+      "orders": 0.8235489220563847,
+      "shipment_information.disruptions": 0.9043478260869565
+    },
+    "b1/b1_msp": {
+      "appointment_manager": 0.8616915422885573,
+      "customer_support": 0.8077205882352941,
+      "knowledge_base": 0.8036764705882353,
+      "orders": 0.8417910447761194,
+      "shipment_information.disruptions": 0.8641821946169772
+    },
+    "b1/b1_neg_energy": {
+      "appointment_manager": 0.8653399668325041,
+      "customer_support": 0.8165441176470588,
+      "knowledge_base": 0.7875,
+      "orders": 0.8262023217247098,
+      "shipment_information.disruptions": 0.891511387163561
+    }
+  },
+  "eligible": [
+    "base/maha_ml",
+    "base/fuse_maha_energy",
+    "c2_l0.1/msp",
+    "c2_l0.1/msp_temp",
+    "c2_l0.1/max_logit",
+    "c2_l0.1/neg_energy",
+    "c2_l0.1/maha_ft",
+    "c2_l0.1/knn1_ft",
+    "c2_l0.1/knn5_ft",
+    "c2_l0.1/maha_frozen",
+    "c2_l0.1/knn1_frozen",
+    "c2_l0.1/knn5_frozen",
+    "c2_l0.1/maha_ml",
+    "c2_l0.1/fuse_maha_energy",
+    "c2_l0.5/msp",
+    "c2_l0.5/msp_temp",
+    "c2_l0.5/max_logit",
+    "c2_l0.5/neg_energy",
+    "c2_l0.5/maha_ft",
+    "c2_l0.5/knn1_ft",
+    "c2_l0.5/knn5_ft",
+    "c2_l0.5/maha_frozen",
+    "c2_l0.5/knn1_frozen",
+    "c2_l0.5/knn5_frozen",
+    "c2_l0.5/maha_ml",
+    "c2_l0.5/fuse_maha_energy"
+  ],
+  "report_only_not_eligible": [
+    "c4/ens_maha",
+    "c4/ens_entropy",
+    "b1/b1_msp",
+    "b1/b1_neg_energy"
+  ],
+  "excluded_by_guard": {},
+  "not_eligible_note": "C4 (evidence only), B1 (fairness fix) and Phase 3 methods on base are reported, never selected"
+}

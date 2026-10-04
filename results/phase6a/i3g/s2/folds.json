@@ -1,0 +1,468 @@
+{
+  "candidate": "i3g",
+  "seed": 2,
+  "deployed_epoch": 8,
+  "smoke": false,
+  "oof_accuracy": 0.92018779342723,
+  "oof_macro_f1": 0.922645210720762,
+  "n_rows": 426,
+  "swap": {
+    "pooled": {
+      "n": 84,
+      "n_flips": 24,
+      "flip_rate": 0.2857142857142857,
+      "accuracy_swapped": 0.6904761904761905,
+      "accuracy_clean": 0.9047619047619048
+    },
+    "per_swap": {
+      "LD->REF": {
+        "n": 38,
+        "n_flips": 12,
+        "flip_rate": 0.3157894736842105,
+        "accuracy_swapped": 0.6842105263157895,
+        "accuracy_clean": 0.9210526315789473
+      },
+      "PO->REF": {
+        "n": 19,
+        "n_flips": 5,
+        "flip_rate": 0.2631578947368421,
+        "accuracy_swapped": 0.6842105263157895,
+        "accuracy_clean": 0.8421052631578947
+      },
+      "other->REF": {
+        "n": 27,
+        "n_flips": 7,
+        "flip_rate": 0.25925925925925924,
+        "accuracy_swapped": 0.7037037037037037,
+        "accuracy_clean": 0.9259259259259259
+      }
+    }
+  },
+  "noise": {
+    "n": 426,
+    "accuracy_clean": 0.92018779342723,
+    "accuracy_noisy": 0.795774647887324,
+    "drop": 0.12441314553990601,
+    "flip_rate": 0.19953051643192488
+  },
+  "translation": {
+    "es": {
+      "filtered": {
+        "n": 355,
+        "agreement": 0.8647887323943662,
+        "accuracy": 0.8507042253521127
+      },
+      "unfiltered": {
+        "n": 370,
+        "agreement": 0.8648648648648649,
+        "accuracy": 0.8513513513513513
+      }
+    },
+    "fr": {
+      "filtered": {
+        "n": 356,
+        "agreement": 0.8792134831460674,
+        "accuracy": 0.8567415730337079
+      },
+      "unfiltered": {
+        "n": 370,
+        "agreement": 0.8837837837837837,
+        "accuracy": 0.8621621621621621
+      }
+    },
+    "de": {
+      "filtered": {
+        "n": 357,
+        "agreement": 0.8823529411764706,
+        "accuracy": 0.8711484593837535
+      },
+      "unfiltered": {
+        "n": 370,
+        "agreement": 0.8837837837837837,
+        "accuracy": 0.8729729729729729
+      }
+    },
+    "zh": {
+      "filtered": {
+        "n": 278,
+        "agreement": 0.7697841726618705,
+        "accuracy": 0.7446043165467626
+      },
+      "unfiltered": {
+        "n": 370,
+        "agreement": 0.7783783783783784,
+        "accuracy": 0.754054054054054
+      }
+    },
+    "mean_filtered": {
+      "agreement": 0.8490348323446937,
+      "accuracy": 0.8307996435790841
+    },
+    "mean_unfiltered": {
+      "agreement": 0.8527027027027028,
+      "accuracy": 0.8351351351351352
+    }
+  },
+  "folds": [
+    {
+      "fold": 0,
+      "stop_epoch": 8,
+      "soup": {
+        "type": "greedy",
+        "members": [
+          4,
+          5,
+          6,
+          0,
+          1
+        ],
+        "selected": [
+          1,
+          4,
+          5
+        ],
+        "order": [
+          1,
+          4,
+          0,
+          5,
+          6
+        ],
+        "inner_f1_final": 0.939807033924681,
+        "trace": [
+          {
+            "member": 1,
+            "score": 0.923302704920352,
+            "accepted": true
+          },
+          {
+            "member": 4,
+            "score": 0.939807033924681,
+            "accepted": true
+          },
+          {
+            "member": 0,
+            "score": 0.9058784624961097,
+            "accepted": false
+          },
+          {
+            "member": 5,
+            "score": 0.939807033924681,
+            "accepted": true
+          },
+          {
+            "member": 6,
+            "score": 0.924823868941516,
+            "accepted": false
+          }
+        ],
+        "member_inner_f1": {
+          "4": 0.9167301108477579,
+          "5": 0.8373238689415161,
+          "6": 0.8303210678210678,
+          "0": 0.8523070339246811,
+          "1": 0.923302704920352
+        },
+        "members_gpu_exclusive": true,
+        "members_wall_clock_s": 195.6880656999856
+      },
+      "train_spec": {
+        "key": "i3",
+        "a1": false,
+        "kl_lambda": 0.0,
+        "head_init_seed": 0,
+        "inner_frac": 0.15
+      }
+    },
+    {
+      "fold": 1,
+      "stop_epoch": 8,
+      "soup": {
+        "type": "greedy",
+        "members": [
+          4,
+          5,
+          6,
+          0,
+          1
+        ],
+        "selected": [
+          4,
+          6,
+          0,
+          1,
+          5
+        ],
+        "order": [
+          4,
+          6,
+          0,
+          1,
+          5
+        ],
+        "inner_f1_final": 0.9552900802900804,
+        "trace": [
+          {
+            "member": 4,
+            "score": 0.9552900802900804,
+            "accepted": true
+          },
+          {
+            "member": 6,
+            "score": 0.9552900802900804,
+            "accepted": true
+          },
+          {
+            "member": 0,
+            "score": 0.9552900802900804,
+            "accepted": true
+          },
+          {
+            "member": 1,
+            "score": 0.9552900802900804,
+            "accepted": true
+          },
+          {
+            "member": 5,
+            "score": 0.9552900802900804,
+            "accepted": true
+          }
+        ],
+        "member_inner_f1": {
+          "4": 0.9552900802900804,
+          "5": 0.9401385651385651,
+          "6": 0.9552900802900804,
+          "0": 0.9552900802900804,
+          "1": 0.9408572908572909
+        },
+        "members_gpu_exclusive": false,
+        "members_wall_clock_s": 182.50253529999463
+      },
+      "train_spec": {
+        "key": "i3",
+        "a1": false,
+        "kl_lambda": 0.0,
+        "head_init_seed": 0,
+        "inner_frac": 0.15
+      }
+    },
+    {
+      "fold": 2,
+      "stop_epoch": 8,
+      "soup": {
+        "type": "greedy",
+        "members": [
+          4,
+          5,
+          6,
+          0,
+          1
+        ],
+        "selected": [
+          6,
+          1,
+          4,
+          0,
+          5
+        ],
+        "order": [
+          6,
+          1,
+          4,
+          0,
+          5
+        ],
+        "inner_f1_final": 0.8916889483065954,
+        "trace": [
+          {
+            "member": 6,
+            "score": 0.8916889483065954,
+            "accepted": true
+          },
+          {
+            "member": 1,
+            "score": 0.8916889483065954,
+            "accepted": true
+          },
+          {
+            "member": 4,
+            "score": 0.8916889483065954,
+            "accepted": true
+          },
+          {
+            "member": 0,
+            "score": 0.8916889483065954,
+            "accepted": true
+          },
+          {
+            "member": 5,
+            "score": 0.8916889483065954,
+            "accepted": true
+          }
+        ],
+        "member_inner_f1": {
+          "4": 0.8900054466230937,
+          "5": 0.8704948646125117,
+          "6": 0.8916889483065954,
+          "0": 0.8900054466230937,
+          "1": 0.8916889483065954
+        },
+        "members_gpu_exclusive": true,
+        "members_wall_clock_s": 200.47882769998978
+      },
+      "train_spec": {
+        "key": "i3",
+        "a1": false,
+        "kl_lambda": 0.0,
+        "head_init_seed": 0,
+        "inner_frac": 0.15
+      }
+    },
+    {
+      "fold": 3,
+      "stop_epoch": 8,
+      "soup": {
+        "type": "greedy",
+        "members": [
+          4,
+          5,
+          6,
+          0,
+          1
+        ],
+        "selected": [
+          4
+        ],
+        "order": [
+          4,
+          5,
+          1,
+          0,
+          6
+        ],
+        "inner_f1_final": 0.966870166870167,
+        "trace": [
+          {
+            "member": 4,
+            "score": 0.966870166870167,
+            "accepted": true
+          },
+          {
+            "member": 5,
+            "score": 0.9663461538461539,
+            "accepted": false
+          },
+          {
+            "member": 1,
+            "score": 0.9663461538461539,
+            "accepted": false
+          },
+          {
+            "member": 0,
+            "score": 0.9652777777777778,
+            "accepted": false
+          },
+          {
+            "member": 6,
+            "score": 0.9371082621082621,
+            "accepted": false
+          }
+        ],
+        "member_inner_f1": {
+          "4": 0.966870166870167,
+          "5": 0.9663461538461539,
+          "6": 0.9568764568764568,
+          "0": 0.9652777777777778,
+          "1": 0.9663461538461539
+        },
+        "members_gpu_exclusive": true,
+        "members_wall_clock_s": 219.57234949998383
+      },
+      "train_spec": {
+        "key": "i3",
+        "a1": false,
+        "kl_lambda": 0.0,
+        "head_init_seed": 0,
+        "inner_frac": 0.15
+      }
+    },
+    {
+      "fold": 4,
+      "stop_epoch": 8,
+      "soup": {
+        "type": "greedy",
+        "members": [
+          4,
+          5,
+          6,
+          0,
+          1
+        ],
+        "selected": [
+          5,
+          4
+        ],
+        "order": [
+          5,
+          6,
+          0,
+          1,
+          4
+        ],
+        "inner_f1_final": 0.8609492481203009,
+        "trace": [
+          {
+            "member": 5,
+            "score": 0.8609492481203009,
+            "accepted": true
+          },
+          {
+            "member": 6,
+            "score": 0.8485394357104884,
+            "accepted": false
+          },
+          {
+            "member": 0,
+            "score": 0.8290048036758563,
+            "accepted": false
+          },
+          {
+            "member": 1,
+            "score": 0.8290048036758563,
+            "accepted": false
+          },
+          {
+            "member": 4,
+            "score": 0.8609492481203009,
+            "accepted": true
+          }
+        ],
+        "member_inner_f1": {
+          "4": 0.8290048036758563,
+          "5": 0.8609492481203009,
+          "6": 0.8485394357104884,
+          "0": 0.845734126984127,
+          "1": 0.8384181450357922
+        },
+        "members_gpu_exclusive": true,
+        "members_wall_clock_s": 215.86639949998062
+      },
+      "train_spec": {
+        "key": "i3",
+        "a1": false,
+        "kl_lambda": 0.0,
+        "head_init_seed": 0,
+        "inner_frac": 0.15
+      }
+    }
+  ],
+  "pool": "i3",
+  "train_spec": {
+    "key": "i3",
+    "a1": false,
+    "kl_lambda": 0.0,
+    "head_init_seed": 0,
+    "inner_frac": 0.15
+  },
+  "git_sha": "4536308e25696d84e01dd26bffcdac8d8f0dbdbc-dirty"
+}

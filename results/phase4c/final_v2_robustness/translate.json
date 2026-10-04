@@ -1,0 +1,106 @@
+{
+  "results": [
+    {
+      "source": "test",
+      "lang": "es",
+      "data_label": "machine-translated (synthetic)",
+      "n": 60,
+      "agreement_with_english_pred": 0.8833333333333333,
+      "accuracy": 0.85,
+      "macro_f1_gold_classes": 0.8608706108706108,
+      "english_accuracy_same_rows": 0.9333333333333333,
+      "english_macro_f1_same_rows": 0.9405363155363156
+    },
+    {
+      "source": "test",
+      "lang": "fr",
+      "data_label": "machine-translated (synthetic)",
+      "n": 60,
+      "agreement_with_english_pred": 0.9,
+      "accuracy": 0.8833333333333333,
+      "macro_f1_gold_classes": 0.8841320716320716,
+      "english_accuracy_same_rows": 0.9333333333333333,
+      "english_macro_f1_same_rows": 0.9405363155363156
+    },
+    {
+      "source": "test",
+      "lang": "de",
+      "data_label": "machine-translated (synthetic)",
+      "n": 60,
+      "agreement_with_english_pred": 0.8333333333333334,
+      "accuracy": 0.8,
+      "macro_f1_gold_classes": 0.8024262774262775,
+      "english_accuracy_same_rows": 0.9333333333333333,
+      "english_macro_f1_same_rows": 0.9405363155363156
+    },
+    {
+      "source": "test",
+      "lang": "zh",
+      "data_label": "machine-translated (synthetic)",
+      "n": 60,
+      "agreement_with_english_pred": 0.8,
+      "accuracy": 0.7666666666666667,
+      "macro_f1_gold_classes": 0.7590099715099715,
+      "english_accuracy_same_rows": 0.9333333333333333,
+      "english_macro_f1_same_rows": 0.9405363155363156
+    },
+    {
+      "source": "oof",
+      "lang": "es",
+      "data_label": "machine-translated (synthetic)",
+      "n": 370,
+      "agreement_with_english_pred": 0.9351351351351351,
+      "accuracy": 0.9,
+      "macro_f1_gold_classes": 0.8976406748072359,
+      "english_accuracy_same_rows": 0.9540540540540541,
+      "english_macro_f1_same_rows": 0.9537640120563107
+    },
+    {
+      "source": "oof",
+      "lang": "fr",
+      "data_label": "machine-translated (synthetic)",
+      "n": 370,
+      "agreement_with_english_pred": 0.9243243243243243,
+      "accuracy": 0.8972972972972973,
+      "macro_f1_gold_classes": 0.8957233317433347,
+      "english_accuracy_same_rows": 0.9540540540540541,
+      "english_macro_f1_same_rows": 0.9537640120563107
+    },
+    {
+      "source": "oof",
+      "lang": "de",
+      "data_label": "machine-translated (synthetic)",
+      "n": 370,
+      "agreement_with_english_pred": 0.9,
+      "accuracy": 0.8702702702702703,
+      "macro_f1_gold_classes": 0.8687881685058612,
+      "english_accuracy_same_rows": 0.9540540540540541,
+      "english_macro_f1_same_rows": 0.9537640120563107
+    },
+    {
+      "source": "oof",
+      "lang": "zh",
+      "data_label": "machine-translated (synthetic)",
+      "n": 370,
+      "agreement_with_english_pred": 0.8621621621621621,
+      "accuracy": 0.8486486486486486,
+      "macro_f1_gold_classes": 0.8468997248819345,
+      "english_accuracy_same_rows": 0.9540540540540541,
+      "english_macro_f1_same_rows": 0.9537640120563107
+    }
+  ],
+  "data_label": "machine-translated (synthetic)",
+  "translator": "facebook/nllb-200-distilled-600M",
+  "decoding": {
+    "num_beams": 1,
+    "max_new_tokens": 128
+  },
+  "include_oof": true,
+  "timings": {},
+  "provenance": {
+    "git_sha": "39b342ad568094ee4fb13b3fb435b6d046c492d9-dirty",
+    "final_model_fingerprint": "db5b580843db236481ac09c98eface5186742a58f477c0b7d07617f49161a12b",
+    "fold_models_dir": "outputs\\phase4c\\a3\\fold_models",
+    "smoke": false
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "scorer": "i1a",
+  "thr_rule": "global",
+  "mode": "raw",
+  "per_retention": {
+    "95": {
+      "global": -17.58847459062327
+    },
+    "90": {
+      "global": -16.59410616622302
+    }
+  },
+  "weights": "i3u",
+  "run_id": "i3u_loco_appointment_manager_s0"
+}

@@ -1,0 +1,92 @@
+{
+  "stage": "quality",
+  "contended": false,
+  "split": "val",
+  "n_rows": 74,
+  "ids_sha256": "7facc966ddfff4a97c492195810573e1908462b41897cf16dc495098f07f6165",
+  "model_fingerprint": "7ca22e16d2ace345d9dcf7737887e85fedf400a1dfc863678c2fc2663bf102bd",
+  "model_version": "v1",
+  "ood_threshold": -128.06341286077185,
+  "temperature": 1.0228290548483843,
+  "environment": {
+    "torch": "2.11.0+cpu",
+    "onnxruntime": "1.30.0",
+    "transformers": "5.18.0",
+    "numpy": "2.5.3",
+    "python": "3.12.12",
+    "cpu_model": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+    "os_cpu_count": 16,
+    "torch_default_threads": 8,
+    "platform": "Windows-11-10.0.26300-SP0"
+  },
+  "sizes_bytes": {
+    "torch_safetensors": 1112235768,
+    "onnx_fp32": 1112438669,
+    "onnx_int8": 279258677
+  },
+  "settings": {
+    "warmup": 10,
+    "repeats": 3,
+    "threads": [
+      1,
+      8
+    ],
+    "quality_batch": 16,
+    "backends": [
+      "torch",
+      "onnx_fp32",
+      "onnx_int8"
+    ]
+  },
+  "quality": {
+    "torch": {
+      "macro_f1": 0.8888059516735988,
+      "accuracy": 0.8918918918918919,
+      "abstention_rate": 0.04054054054054054,
+      "n_abstained": 3,
+      "pred_agreement_vs_torch": 1.0,
+      "ood_spearman_vs_torch": 1.0,
+      "abstention_agreement_vs_torch": 1.0,
+      "max_abs_diff_prob_vs_torch": 0.0,
+      "max_abs_diff_ood_vs_torch": 0.0,
+      "pred_disagreement_ids": [],
+      "abstention_disagreement_ids": []
+    },
+    "onnx_fp32": {
+      "macro_f1": 0.8888059516735988,
+      "accuracy": 0.8918918918918919,
+      "abstention_rate": 0.05405405405405406,
+      "n_abstained": 4,
+      "pred_agreement_vs_torch": 1.0,
+      "ood_spearman_vs_torch": 1.0,
+      "abstention_agreement_vs_torch": 0.9864864864864865,
+      "max_abs_diff_prob_vs_torch": 2.985496303509194e-06,
+      "max_abs_diff_ood_vs_torch": 0.00015280088078384324,
+      "pred_disagreement_ids": [],
+      "abstention_disagreement_ids": [
+        "syn-0109"
+      ]
+    },
+    "onnx_int8": {
+      "macro_f1": 0.836096554517607,
+      "accuracy": 0.8378378378378378,
+      "abstention_rate": 0.04054054054054054,
+      "n_abstained": 3,
+      "pred_agreement_vs_torch": 0.9459459459459459,
+      "ood_spearman_vs_torch": 0.9760681229174379,
+      "abstention_agreement_vs_torch": 0.972972972972973,
+      "max_abs_diff_prob_vs_torch": 0.4300282297843876,
+      "max_abs_diff_ood_vs_torch": 21.467396679711314,
+      "pred_disagreement_ids": [
+        "syn-0011",
+        "syn-0109",
+        "syn-0153",
+        "syn-0181"
+      ],
+      "abstention_disagreement_ids": [
+        "syn-0109",
+        "syn-0363"
+      ]
+    }
+  }
+}

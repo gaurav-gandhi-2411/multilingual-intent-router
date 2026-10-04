@@ -1,0 +1,46 @@
+{
+  "note": "sequential wall seconds per message (retry included); model load excluded (load_s = first tiny chat after unload, reported separately)",
+  "smoke": false,
+  "configs": {
+    "qwen3|zero": {
+      "load_s": 10.87,
+      "model_tag": "qwen3:8b",
+      "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+      "n": 74,
+      "p50_s": 0.1815,
+      "p95_s": 0.22224999999999998,
+      "mean_s": 0.18243783783783782,
+      "throughput_msg_per_s": 5.481319072027496
+    },
+    "qwen3|five": {
+      "load_s": 0.14,
+      "model_tag": "qwen3:8b",
+      "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+      "n": 74,
+      "p50_s": 0.1846,
+      "p95_s": 0.23293499999999998,
+      "mean_s": 0.18915135135135136,
+      "throughput_msg_per_s": 5.286771640042294
+    },
+    "llama3|zero": {
+      "load_s": 6.56,
+      "model_tag": "llama3.1:8b",
+      "model_digest": "46e0c10c039e019119339687c3c1757cc81b9da49709a3b3924863ba87ca666e",
+      "n": 74,
+      "p50_s": 0.17035,
+      "p95_s": 0.208115,
+      "mean_s": 0.17399054054054053,
+      "throughput_msg_per_s": 5.747438894627698
+    },
+    "llama3|five": {
+      "load_s": 0.14,
+      "model_tag": "llama3.1:8b",
+      "model_digest": "46e0c10c039e019119339687c3c1757cc81b9da49709a3b3924863ba87ca666e",
+      "n": 74,
+      "p50_s": 0.17049999999999998,
+      "p95_s": 0.21496999999999997,
+      "mean_s": 0.1739554054054054,
+      "throughput_msg_per_s": 5.7485997498582275
+    }
+  }
+}

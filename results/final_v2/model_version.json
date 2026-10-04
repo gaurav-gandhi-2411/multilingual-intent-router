@@ -1,0 +1,38 @@
+{
+  "version": "v2",
+  "factors": [
+    "a3"
+  ],
+  "deployed_epoch": 9,
+  "train_config": {
+    "model_name": "intfloat/multilingual-e5-base",
+    "query_prefix": "query: ",
+    "lr": 3e-05,
+    "weight_decay": 0.01,
+    "warmup_ratio": 0.1,
+    "batch_size": 16,
+    "precision": "fp16",
+    "max_len": 64,
+    "epochs": 20,
+    "stop_epoch": 9,
+    "model_seed": 42,
+    "attn_implementation": "eager",
+    "label_smoothing": 0.0,
+    "class_weighted": false
+  },
+  "extras": {
+    "factors": [
+      "a3"
+    ],
+    "a3": {
+      "n_rows": 704,
+      "n_excluded_not_train": 148
+    }
+  },
+  "model_fingerprint": "db5b580843db236481ac09c98eface5186742a58f477c0b7d07617f49161a12b",
+  "model_dir": "outputs\\final_model_v2",
+  "shipped_ood_score": "maha_ft",
+  "archived_v1": "results/final_v1",
+  "git_sha": "39b342ad568094ee4fb13b3fb435b6d046c492d9-dirty",
+  "smoke": false
+}

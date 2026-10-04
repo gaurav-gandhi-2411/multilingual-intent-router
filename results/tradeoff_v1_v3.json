@@ -1,0 +1,719 @@
+{
+  "label": "v1 (shipped) vs v3 (robustness variant); all deltas are v3 minus v1",
+  "generated_by": "scripts/build_tradeoff.py (reads results/ JSON only; no inference)",
+  "versions": {
+    "v1": {
+      "model_fingerprint": {
+        "value": "7ca22e16d2ace345d9dcf7737887e85fedf400a1dfc863678c2fc2663bf102bd",
+        "source": "phase4e/final_v1_vs_v3.json:$.v1.model_fingerprint"
+      }
+    },
+    "v3": {
+      "model_fingerprint": {
+        "value": "78df88429cbbf26b9ad8c303fb083ac379bf3a59f1c163c25a04d355ff8d252e",
+        "source": "phase4e/final_v1_vs_v3.json:$.v3.model_fingerprint"
+      }
+    }
+  },
+  "track_a_test": {
+    "label": "test split, one logged evaluation each (v2 for the record, not shipped)",
+    "label_source": "phase4e/final_v1_vs_v3.json:$.label",
+    "v1": {
+      "model_fingerprint": {
+        "value": "7ca22e16d2ace345d9dcf7737887e85fedf400a1dfc863678c2fc2663bf102bd",
+        "source": "phase4e/final_v1_vs_v3.json:$.v1.model_fingerprint"
+      },
+      "macro_f1": {
+        "point": 0.9465160656337127,
+        "lo": 0.8650649587985115,
+        "hi": 0.9892037786774629,
+        "source": "phase4e/final_v1_vs_v3.json:$.v1.macro_f1"
+      },
+      "accuracy": {
+        "point": 0.9459459459459459,
+        "lo": 0.8918918918918919,
+        "hi": 0.9864864864864865,
+        "source": "phase4e/final_v1_vs_v3.json:$.v1.accuracy"
+      },
+      "temperature": {
+        "value": 1.0228290548483843,
+        "source": "phase4e/final_v1_vs_v3.json:$.v1.temperature"
+      },
+      "ece_test_after_scaling": {
+        "value": 0.056326028865736906,
+        "source": "phase4e/final_v1_vs_v3.json:$.v1.ece_test_after"
+      },
+      "parent_accuracy": {
+        "value": 0.9459459459459459,
+        "source": "final_v1/track_a.json:$.test.hierarchy.parent_accuracy"
+      },
+      "selective_prediction": {
+        "threshold": {
+          "value": 0.48950669169425964,
+          "source": "phase4e/final_v1_vs_v3.json:$.v1.selective_at_threshold.threshold"
+        },
+        "coverage": {
+          "value": 0.9864864864864865,
+          "source": "phase4e/final_v1_vs_v3.json:$.v1.selective_at_threshold.coverage"
+        },
+        "accuracy_on_accepted": {
+          "value": 0.958904109589041,
+          "source": "phase4e/final_v1_vs_v3.json:$.v1.selective_at_threshold.accuracy"
+        },
+        "macro_f1_present": {
+          "value": 0.9574786324786325,
+          "source": "phase4e/final_v1_vs_v3.json:$.v1.selective_at_threshold.macro_f1_present"
+        },
+        "n_accepted": {
+          "value": 73,
+          "source": "phase4e/final_v1_vs_v3.json:$.v1.selective_at_threshold.n_accepted"
+        },
+        "aurc_temp_scaled_msp": {
+          "value": 0.0051235063658982526,
+          "source": "final_v1/track_a.json:$.test.selective.aurc_temp_scaled_msp"
+        }
+      }
+    },
+    "v3": {
+      "model_fingerprint": {
+        "value": "78df88429cbbf26b9ad8c303fb083ac379bf3a59f1c163c25a04d355ff8d252e",
+        "source": "phase4e/final_v1_vs_v3.json:$.v3.model_fingerprint"
+      },
+      "macro_f1": {
+        "point": 0.960812879930527,
+        "lo": 0.8791367226183403,
+        "hi": 1.0,
+        "source": "phase4e/final_v1_vs_v3.json:$.v3.macro_f1"
+      },
+      "accuracy": {
+        "point": 0.9594594594594594,
+        "lo": 0.9054054054054054,
+        "hi": 1.0,
+        "source": "phase4e/final_v1_vs_v3.json:$.v3.accuracy"
+      },
+      "temperature": {
+        "value": 1.2747115980216495,
+        "source": "phase4e/final_v1_vs_v3.json:$.v3.temperature"
+      },
+      "ece_test_after_scaling": {
+        "value": 0.048783076776040574,
+        "source": "phase4e/final_v1_vs_v3.json:$.v3.ece_test_after"
+      },
+      "parent_accuracy": {
+        "value": 0.9594594594594594,
+        "source": "final_v3/track_a.json:$.test.hierarchy.parent_accuracy"
+      },
+      "selective_prediction": {
+        "threshold": {
+          "value": 0.6161727905273438,
+          "source": "phase4e/final_v1_vs_v3.json:$.v3.selective_at_threshold.threshold"
+        },
+        "coverage": {
+          "value": 0.9864864864864865,
+          "source": "phase4e/final_v1_vs_v3.json:$.v3.selective_at_threshold.coverage"
+        },
+        "accuracy_on_accepted": {
+          "value": 0.958904109589041,
+          "source": "phase4e/final_v1_vs_v3.json:$.v3.selective_at_threshold.accuracy"
+        },
+        "macro_f1_present": {
+          "value": 0.9591293782470253,
+          "source": "phase4e/final_v1_vs_v3.json:$.v3.selective_at_threshold.macro_f1_present"
+        },
+        "n_accepted": {
+          "value": 73,
+          "source": "phase4e/final_v1_vs_v3.json:$.v3.selective_at_threshold.n_accepted"
+        },
+        "aurc_temp_scaled_msp": {
+          "value": 0.0026399092886667894,
+          "source": "final_v3/track_a.json:$.test.selective.aurc_temp_scaled_msp"
+        }
+      }
+    }
+  },
+  "cv": {
+    "note": "CV axis (a): macro-F1, seeds averaged inside each paired bootstrap resample",
+    "v1_epoch_e_star": {
+      "value": 9,
+      "source": "phase4e/axes.json:$.v1_epoch.e_star"
+    },
+    "v1_own_argmax_epoch": {
+      "value": 8,
+      "source": "phase4e/axes.json:$.v1_epoch.own_argmax"
+    },
+    "v3_epoch_e_star": {
+      "value": 6,
+      "source": "phase4e/axes.json:$.candidates.a1a3.e_star"
+    },
+    "v3_vs_v1_at_e_star": {
+      "v1": 0.9336261403486693,
+      "v3": 0.9338332559789014,
+      "delta_v3_minus_v1": 0.00020711563023222783,
+      "ci95": [
+        -0.010266976080150546,
+        0.01106415836324667
+      ],
+      "ci_negated_from_reduction": false,
+      "source": "phase4e/axes.json:$.candidates.a1a3.axes.a"
+    },
+    "v3_vs_v1_at_own_argmax_sensitivity": {
+      "v1": 0.9439867242034427,
+      "v3": 0.9338332559789014,
+      "delta_v3_minus_v1": -0.01015346822454107,
+      "ci95": [
+        -0.022631062877256025,
+        0.002548693988902933
+      ],
+      "ci_negated_from_reduction": false,
+      "source": "phase4e/axes.json:$.candidates.a1a3.sensitivity_a_v1_at_own_argmax"
+    }
+  },
+  "trackb_dev": {
+    "note": "Track B DEV (4e axis b), CV out-of-fold open-set scoring (maha_ft)",
+    "auroc": {
+      "v1": 0.8798780412374049,
+      "v3": 0.87792389592653,
+      "delta_v3_minus_v1": -0.0019541453108748996,
+      "ci95": [
+        -0.017732111987307116,
+        0.013385697815069464
+      ],
+      "ci_negated_from_reduction": false,
+      "source": "phase4e/axes.json:$.candidates.a1a3.axes.b.auroc"
+    },
+    "rej95": {
+      "v1": 0.4200793650793651,
+      "v3": 0.40156084656084656,
+      "delta_v3_minus_v1": -0.018518518518518545,
+      "ci95": [
+        -0.06674735449735451,
+        0.030925925925925857
+      ],
+      "ci_negated_from_reduction": false,
+      "source": "phase4e/axes.json:$.candidates.a1a3.axes.b.rej95"
+    }
+  },
+  "trackb_holdout": {
+    "confirm": {
+      "auroc": {
+        "label": "AUROC",
+        "higher_is_better": true,
+        "v1": {
+          "point": 0.8790996191865176,
+          "lo": 0.8495092975206613,
+          "hi": 0.9076966911764704,
+          "source": "phase4e/confirm_a1a3.json:$.v1.confirm.ci95.auroc"
+        },
+        "v3": {
+          "point": 0.8650824420677361,
+          "lo": 0.8343383568303355,
+          "hi": 0.894764224801491,
+          "source": "phase4e/confirm_a1a3.json:$.candidate.confirm.ci95.auroc"
+        },
+        "delta_v3_minus_v1": -0.014156178010046995,
+        "ci95": [
+          -0.03729240601199142,
+          0.009057709447415359
+        ],
+        "source": "phase4e/confirm_a1a3.json:$.paired_delta_candidate_minus_v1.confirm.auroc"
+      },
+      "strict_recall_95": {
+        "label": "strict rejection recall @95% retention",
+        "higher_is_better": true,
+        "v1": {
+          "point": 0.22727272727272724,
+          "lo": 0.17409090909090913,
+          "hi": 0.2831818181818182,
+          "source": "phase4e/confirm_a1a3.json:$.v1.confirm.ci95.strict_recall_95"
+        },
+        "v3": {
+          "point": 0.24318181818181817,
+          "lo": 0.19454545454545455,
+          "hi": 0.29636363636363633,
+          "source": "phase4e/confirm_a1a3.json:$.candidate.confirm.ci95.strict_recall_95"
+        },
+        "delta_v3_minus_v1": 0.015658,
+        "ci95": [
+          -0.04999999999999999,
+          0.08136363636363636
+        ],
+        "source": "phase4e/confirm_a1a3.json:$.paired_delta_candidate_minus_v1.confirm.strict_recall_95"
+      },
+      "strict_recall_90": {
+        "label": "strict rejection recall @90% retention",
+        "higher_is_better": true,
+        "v1": {
+          "point": 0.4636363636363637,
+          "lo": 0.40226136363636367,
+          "hi": 0.5268181818181817,
+          "source": "phase4e/confirm_a1a3.json:$.v1.confirm.ci95.strict_recall_90"
+        },
+        "v3": {
+          "point": 0.36136363636363633,
+          "lo": 0.30272727272727273,
+          "hi": 0.4213636363636364,
+          "source": "phase4e/confirm_a1a3.json:$.candidate.confirm.ci95.strict_recall_90"
+        },
+        "delta_v3_minus_v1": -0.10227354545454544,
+        "ci95": [
+          -0.17501136363636358,
+          -0.0304545454545454
+        ],
+        "source": "phase4e/confirm_a1a3.json:$.paired_delta_candidate_minus_v1.confirm.strict_recall_90"
+      },
+      "retention_95": {
+        "label": "known retention @95",
+        "higher_is_better": true,
+        "v1": {
+          "point": 0.9702317290552586,
+          "lo": 0.9496434937611408,
+          "hi": 0.9880570409982175,
+          "source": "phase4e/confirm_a1a3.json:$.v1.confirm.ci95.retention_95"
+        },
+        "v3": {
+          "point": 0.9612299465240642,
+          "lo": 0.9401069518716578,
+          "hi": 0.9793226381461675,
+          "source": "phase4e/confirm_a1a3.json:$.candidate.confirm.ci95.retention_95"
+        },
+        "delta_v3_minus_v1": -0.009126274509803915,
+        "ci95": [
+          -0.029679144385026723,
+          0.009001782531194324
+        ],
+        "source": "phase4e/confirm_a1a3.json:$.paired_delta_candidate_minus_v1.confirm.retention_95"
+      },
+      "retention_90": {
+        "label": "known retention @90",
+        "higher_is_better": true,
+        "v1": {
+          "point": 0.931283422459893,
+          "lo": 0.9016042780748664,
+          "hi": 0.9580213903743315,
+          "source": "phase4e/confirm_a1a3.json:$.v1.confirm.ci95.retention_90"
+        },
+        "v3": {
+          "point": 0.9313725490196079,
+          "lo": 0.9016934046345811,
+          "hi": 0.9580236185383246,
+          "source": "phase4e/confirm_a1a3.json:$.candidate.confirm.ci95.retention_90"
+        },
+        "delta_v3_minus_v1": 0.00016558823529411,
+        "ci95": [
+          -0.02370766488413556,
+          0.023975044563279924
+        ],
+        "source": "phase4e/confirm_a1a3.json:$.paired_delta_candidate_minus_v1.confirm.retention_90"
+      },
+      "fpr_at_95tpr": {
+        "label": "FPR @95% TPR",
+        "higher_is_better": false,
+        "v1": {
+          "point": 0.6504545454545455,
+          "lo": 0.4704545454545455,
+          "hi": 0.7672840909090908,
+          "source": "phase4e/confirm_a1a3.json:$.v1.confirm.ci95.fpr_at_95tpr"
+        },
+        "v3": {
+          "point": 0.6968181818181819,
+          "lo": 0.4868068181818182,
+          "hi": 0.8122727272727273,
+          "source": "phase4e/confirm_a1a3.json:$.candidate.confirm.ci95.fpr_at_95tpr"
+        },
+        "delta_v3_minus_v1": 0.025458590909090906,
+        "ci95": [
+          -0.1436477272727271,
+          0.18545454545454543
+        ],
+        "source": "phase4e/confirm_a1a3.json:$.paired_delta_candidate_minus_v1.confirm.fpr_at_95tpr"
+      }
+    },
+    "headline": {
+      "auroc": {
+        "label": "AUROC",
+        "higher_is_better": true,
+        "v1": {
+          "point": 0.870497311827957,
+          "lo": 0.8111559139784946,
+          "hi": 0.9228511424731183,
+          "source": "phase4e/confirm_a1a3.json:$.v1.headline.ci95.auroc"
+        },
+        "v3": {
+          "point": 0.8292338709677419,
+          "lo": 0.7620950940860215,
+          "hi": 0.8895833333333334,
+          "source": "phase4e/confirm_a1a3.json:$.candidate.headline.ci95.auroc"
+        },
+        "delta_v3_minus_v1": -0.04145904569892474,
+        "ci95": [
+          -0.07587365591397843,
+          -0.010482190860215087
+        ],
+        "source": "phase4e/confirm_a1a3.json:$.paired_delta_candidate_minus_v1.headline.auroc"
+      },
+      "strict_recall_95": {
+        "label": "strict rejection recall @95% retention",
+        "higher_is_better": true,
+        "v1": {
+          "point": 0.34166666666666673,
+          "lo": 0.2625,
+          "hi": 0.425,
+          "source": "phase4e/confirm_a1a3.json:$.v1.headline.ci95.strict_recall_95"
+        },
+        "v3": {
+          "point": 0.20833333333333334,
+          "lo": 0.14166666666666666,
+          "hi": 0.2833333333333333,
+          "source": "phase4e/confirm_a1a3.json:$.candidate.headline.ci95.strict_recall_95"
+        },
+        "delta_v3_minus_v1": -0.13302750000000002,
+        "ci95": [
+          -0.2041666666666667,
+          -0.06666666666666662
+        ],
+        "source": "phase4e/confirm_a1a3.json:$.paired_delta_candidate_minus_v1.headline.strict_recall_95"
+      },
+      "strict_recall_90": {
+        "label": "strict rejection recall @90% retention",
+        "higher_is_better": true,
+        "v1": {
+          "point": 0.4541666666666666,
+          "lo": 0.3625,
+          "hi": 0.5458333333333334,
+          "source": "phase4e/confirm_a1a3.json:$.v1.headline.ci95.strict_recall_90"
+        },
+        "v3": {
+          "point": 0.3541666666666667,
+          "lo": 0.275,
+          "hi": 0.4375,
+          "source": "phase4e/confirm_a1a3.json:$.candidate.headline.ci95.strict_recall_90"
+        },
+        "delta_v3_minus_v1": -0.09971916666666668,
+        "ci95": [
+          -0.175,
+          -0.024999999999999967
+        ],
+        "source": "phase4e/confirm_a1a3.json:$.paired_delta_candidate_minus_v1.headline.strict_recall_90"
+      },
+      "retention_95": {
+        "label": "known retention @95",
+        "higher_is_better": true,
+        "v1": {
+          "point": 0.967741935483871,
+          "lo": 0.9247311827956989,
+          "hi": 1.0,
+          "source": "phase4e/confirm_a1a3.json:$.v1.headline.ci95.retention_95"
+        },
+        "v3": {
+          "point": 0.978494623655914,
+          "lo": 0.946236559139785,
+          "hi": 1.0,
+          "source": "phase4e/confirm_a1a3.json:$.candidate.headline.ci95.retention_95"
+        },
+        "delta_v3_minus_v1": 0.01071935483870968,
+        "ci95": [
+          0.0,
+          0.026881720430107614
+        ],
+        "source": "phase4e/confirm_a1a3.json:$.paired_delta_candidate_minus_v1.headline.retention_95"
+      },
+      "retention_90": {
+        "label": "known retention @90",
+        "higher_is_better": true,
+        "v1": {
+          "point": 0.946236559139785,
+          "lo": 0.8924731182795699,
+          "hi": 0.989247311827957,
+          "source": "phase4e/confirm_a1a3.json:$.v1.headline.ci95.retention_90"
+        },
+        "v3": {
+          "point": 0.956989247311828,
+          "lo": 0.9139784946236559,
+          "hi": 0.9893817204301055,
+          "source": "phase4e/confirm_a1a3.json:$.candidate.headline.ci95.retention_90"
+        },
+        "delta_v3_minus_v1": 0.010714516129032247,
+        "ci95": [
+          -0.010752688172043001,
+          0.037634408602150504
+        ],
+        "source": "phase4e/confirm_a1a3.json:$.paired_delta_candidate_minus_v1.headline.retention_90"
+      },
+      "fpr_at_95tpr": {
+        "label": "FPR @95% TPR",
+        "higher_is_better": false,
+        "v1": {
+          "point": 0.5583333333333333,
+          "lo": 0.2916666666666667,
+          "hi": 0.7875,
+          "source": "phase4e/confirm_a1a3.json:$.v1.headline.ci95.fpr_at_95tpr"
+        },
+        "v3": {
+          "point": 0.6208333333333333,
+          "lo": 0.425,
+          "hi": 0.85,
+          "source": "phase4e/confirm_a1a3.json:$.candidate.headline.ci95.fpr_at_95tpr"
+        },
+        "delta_v3_minus_v1": 0.09141583333333334,
+        "ci95": [
+          -0.04583333333333339,
+          0.24166666666666664
+        ],
+        "source": "phase4e/confirm_a1a3.json:$.paired_delta_candidate_minus_v1.headline.fpr_at_95tpr"
+      }
+    }
+  },
+  "robustness_cv": {
+    "neutral_swap_flip_rate (axis c, lower is better)": {
+      "v1": 0.23809523809523805,
+      "v3": 0.05158730158730159,
+      "delta_v3_minus_v1": -0.18650793650793646,
+      "ci95": [
+        -0.25000000000000006,
+        -0.12301587301587302
+      ],
+      "ci_negated_from_reduction": true,
+      "source": "phase4e/axes.json:$.candidates.a1a3.axes.c"
+    },
+    "translation_agreement (axis d, higher is better)": {
+      "v1": 0.8534184862583615,
+      "v3": 0.8996812868325588,
+      "delta_v3_minus_v1": 0.046262800574197294,
+      "ci95": [
+        0.02720682239995476,
+        0.06581200779652988
+      ],
+      "ci_negated_from_reduction": false,
+      "source": "phase4e/axes.json:$.candidates.a1a3.axes.d"
+    },
+    "oof_ece (axis e, lower is better)": {
+      "v1": 0.026269854537571313,
+      "v3": 0.025955195624690276,
+      "delta_v3_minus_v1": -0.00031465891288103703,
+      "ci95": [
+        -0.011561127089208843,
+        0.01112327738453711
+      ],
+      "ci_negated_from_reduction": true,
+      "source": "phase4e/axes.json:$.candidates.a1a3.axes.e"
+    }
+  },
+  "serving": {
+    "v1": {
+      "shipped_ood_method": {
+        "value": "maha_ft",
+        "source": "final_v1/ood_shipped.json:$.method"
+      },
+      "ood_threshold": {
+        "value": -128.06341286077185,
+        "source": "final_v1/ood_shipped.json:$.threshold"
+      },
+      "val_retention_achieved": {
+        "value": 0.9594594594594594,
+        "source": "final_v1/ood_shipped.json:$.val_retention_achieved"
+      },
+      "test_coverage_at_threshold": {
+        "value": 0.9864864864864865,
+        "source": "final_v1/ood_shipped.json:$.test_coverage_at_threshold"
+      }
+    },
+    "v3": {
+      "shipped_ood_method": {
+        "value": "maha_ft",
+        "source": "final_v3/ood_shipped.json:$.method"
+      },
+      "ood_threshold": {
+        "value": -178.56018886545607,
+        "source": "final_v3/ood_shipped.json:$.threshold"
+      },
+      "val_retention_achieved": {
+        "value": 0.9594594594594594,
+        "source": "final_v3/ood_shipped.json:$.val_retention_achieved"
+      },
+      "test_coverage_at_threshold": {
+        "value": 0.972972972972973,
+        "source": "final_v3/ood_shipped.json:$.test_coverage_at_threshold"
+      }
+    }
+  },
+  "verdict": {
+    "rows": [
+      {
+        "axis": "Track A test macro-F1",
+        "higher_is_better": true,
+        "better_by_point": "v3",
+        "ci_excludes_zero": null,
+        "separate_cis_overlap": true,
+        "text": "Track A test macro-F1: v3 better by point estimate (v3-v1 = +0.0143; separate 95% CIs overlap; no paired CI)"
+      },
+      {
+        "axis": "Track A test accuracy",
+        "higher_is_better": true,
+        "better_by_point": "v3",
+        "ci_excludes_zero": null,
+        "separate_cis_overlap": true,
+        "text": "Track A test accuracy: v3 better by point estimate (v3-v1 = +0.0135; separate 95% CIs overlap; no paired CI)"
+      },
+      {
+        "axis": "CV macro-F1 (v1 at e*=shipped epoch)",
+        "higher_is_better": true,
+        "better_by_point": "v3",
+        "ci_excludes_zero": false,
+        "text": "CV macro-F1 (v1 at e*=shipped epoch): v3 better by point estimate (v3-v1 = +0.0002, 95% CI [-0.0103, +0.0111]; CI includes zero (not distinguishable))"
+      },
+      {
+        "axis": "CV macro-F1 (v1 at its own argmax epoch)",
+        "higher_is_better": true,
+        "better_by_point": "v1",
+        "ci_excludes_zero": false,
+        "text": "CV macro-F1 (v1 at its own argmax epoch): v1 better by point estimate (v3-v1 = -0.0102, 95% CI [-0.0226, +0.0025]; CI includes zero (not distinguishable))"
+      },
+      {
+        "axis": "Track B DEV AUROC",
+        "higher_is_better": true,
+        "better_by_point": "v1",
+        "ci_excludes_zero": false,
+        "text": "Track B DEV AUROC: v1 better by point estimate (v3-v1 = -0.0020, 95% CI [-0.0177, +0.0134]; CI includes zero (not distinguishable))"
+      },
+      {
+        "axis": "Track B DEV rejection@95",
+        "higher_is_better": true,
+        "better_by_point": "v1",
+        "ci_excludes_zero": false,
+        "text": "Track B DEV rejection@95: v1 better by point estimate (v3-v1 = -0.0185, 95% CI [-0.0667, +0.0309]; CI includes zero (not distinguishable))"
+      },
+      {
+        "axis": "Track B CONFIRM AUROC",
+        "higher_is_better": true,
+        "better_by_point": "v1",
+        "ci_excludes_zero": false,
+        "text": "Track B CONFIRM AUROC: v1 better by point estimate (v3-v1 = -0.0142, 95% CI [-0.0373, +0.0091]; CI includes zero (not distinguishable))"
+      },
+      {
+        "axis": "Track B CONFIRM strict rejection recall @95% retention",
+        "higher_is_better": true,
+        "better_by_point": "v3",
+        "ci_excludes_zero": false,
+        "text": "Track B CONFIRM strict rejection recall @95% retention: v3 better by point estimate (v3-v1 = +0.0157, 95% CI [-0.0500, +0.0814]; CI includes zero (not distinguishable))"
+      },
+      {
+        "axis": "Track B CONFIRM strict rejection recall @90% retention",
+        "higher_is_better": true,
+        "better_by_point": "v1",
+        "ci_excludes_zero": true,
+        "text": "Track B CONFIRM strict rejection recall @90% retention: v1 better by point estimate (v3-v1 = -0.1023, 95% CI [-0.1750, -0.0305]; CI excludes zero)"
+      },
+      {
+        "axis": "Track B CONFIRM known retention @95",
+        "higher_is_better": true,
+        "better_by_point": "v1",
+        "ci_excludes_zero": false,
+        "text": "Track B CONFIRM known retention @95: v1 better by point estimate (v3-v1 = -0.0091, 95% CI [-0.0297, +0.0090]; CI includes zero (not distinguishable))"
+      },
+      {
+        "axis": "Track B CONFIRM known retention @90",
+        "higher_is_better": true,
+        "better_by_point": "v3",
+        "ci_excludes_zero": false,
+        "text": "Track B CONFIRM known retention @90: v3 better by point estimate (v3-v1 = +0.0002, 95% CI [-0.0237, +0.0240]; CI includes zero (not distinguishable))"
+      },
+      {
+        "axis": "Track B CONFIRM FPR @95% TPR",
+        "higher_is_better": false,
+        "better_by_point": "v1",
+        "ci_excludes_zero": false,
+        "text": "Track B CONFIRM FPR @95% TPR: v1 better by point estimate (v3-v1 = +0.0255, 95% CI [-0.1436, +0.1855]; CI includes zero (not distinguishable))"
+      },
+      {
+        "axis": "Track B HEADLINE AUROC",
+        "higher_is_better": true,
+        "better_by_point": "v1",
+        "ci_excludes_zero": true,
+        "text": "Track B HEADLINE AUROC: v1 better by point estimate (v3-v1 = -0.0415, 95% CI [-0.0759, -0.0105]; CI excludes zero)"
+      },
+      {
+        "axis": "Track B HEADLINE strict rejection recall @95% retention",
+        "higher_is_better": true,
+        "better_by_point": "v1",
+        "ci_excludes_zero": true,
+        "text": "Track B HEADLINE strict rejection recall @95% retention: v1 better by point estimate (v3-v1 = -0.1330, 95% CI [-0.2042, -0.0667]; CI excludes zero)"
+      },
+      {
+        "axis": "Track B HEADLINE strict rejection recall @90% retention",
+        "higher_is_better": true,
+        "better_by_point": "v1",
+        "ci_excludes_zero": true,
+        "text": "Track B HEADLINE strict rejection recall @90% retention: v1 better by point estimate (v3-v1 = -0.0997, 95% CI [-0.1750, -0.0250]; CI excludes zero)"
+      },
+      {
+        "axis": "Track B HEADLINE known retention @95",
+        "higher_is_better": true,
+        "better_by_point": "v3",
+        "ci_excludes_zero": false,
+        "text": "Track B HEADLINE known retention @95: v3 better by point estimate (v3-v1 = +0.0107, 95% CI [+0.0000, +0.0269]; CI includes zero (not distinguishable))"
+      },
+      {
+        "axis": "Track B HEADLINE known retention @90",
+        "higher_is_better": true,
+        "better_by_point": "v3",
+        "ci_excludes_zero": false,
+        "text": "Track B HEADLINE known retention @90: v3 better by point estimate (v3-v1 = +0.0107, 95% CI [-0.0108, +0.0376]; CI includes zero (not distinguishable))"
+      },
+      {
+        "axis": "Track B HEADLINE FPR @95% TPR",
+        "higher_is_better": false,
+        "better_by_point": "v1",
+        "ci_excludes_zero": false,
+        "text": "Track B HEADLINE FPR @95% TPR: v1 better by point estimate (v3-v1 = +0.0914, 95% CI [-0.0458, +0.2417]; CI includes zero (not distinguishable))"
+      },
+      {
+        "axis": "neutral-swap flip rate",
+        "higher_is_better": false,
+        "better_by_point": "v3",
+        "ci_excludes_zero": true,
+        "text": "neutral-swap flip rate: v3 better by point estimate (v3-v1 = -0.1865, 95% CI [-0.2500, -0.1230]; CI excludes zero)"
+      },
+      {
+        "axis": "translation agreement",
+        "higher_is_better": true,
+        "better_by_point": "v3",
+        "ci_excludes_zero": true,
+        "text": "translation agreement: v3 better by point estimate (v3-v1 = +0.0463, 95% CI [+0.0272, +0.0658]; CI excludes zero)"
+      },
+      {
+        "axis": "OOF ECE",
+        "higher_is_better": false,
+        "better_by_point": "v3",
+        "ci_excludes_zero": false,
+        "text": "OOF ECE: v3 better by point estimate (v3-v1 = -0.0003, 95% CI [-0.0116, +0.0111]; CI includes zero (not distinguishable))"
+      }
+    ],
+    "text": [
+      "Track A test macro-F1: v3 better by point estimate (v3-v1 = +0.0143; separate 95% CIs overlap; no paired CI)",
+      "Track A test accuracy: v3 better by point estimate (v3-v1 = +0.0135; separate 95% CIs overlap; no paired CI)",
+      "CV macro-F1 (v1 at e*=shipped epoch): v3 better by point estimate (v3-v1 = +0.0002, 95% CI [-0.0103, +0.0111]; CI includes zero (not distinguishable))",
+      "CV macro-F1 (v1 at its own argmax epoch): v1 better by point estimate (v3-v1 = -0.0102, 95% CI [-0.0226, +0.0025]; CI includes zero (not distinguishable))",
+      "Track B DEV AUROC: v1 better by point estimate (v3-v1 = -0.0020, 95% CI [-0.0177, +0.0134]; CI includes zero (not distinguishable))",
+      "Track B DEV rejection@95: v1 better by point estimate (v3-v1 = -0.0185, 95% CI [-0.0667, +0.0309]; CI includes zero (not distinguishable))",
+      "Track B CONFIRM AUROC: v1 better by point estimate (v3-v1 = -0.0142, 95% CI [-0.0373, +0.0091]; CI includes zero (not distinguishable))",
+      "Track B CONFIRM strict rejection recall @95% retention: v3 better by point estimate (v3-v1 = +0.0157, 95% CI [-0.0500, +0.0814]; CI includes zero (not distinguishable))",
+      "Track B CONFIRM strict rejection recall @90% retention: v1 better by point estimate (v3-v1 = -0.1023, 95% CI [-0.1750, -0.0305]; CI excludes zero)",
+      "Track B CONFIRM known retention @95: v1 better by point estimate (v3-v1 = -0.0091, 95% CI [-0.0297, +0.0090]; CI includes zero (not distinguishable))",
+      "Track B CONFIRM known retention @90: v3 better by point estimate (v3-v1 = +0.0002, 95% CI [-0.0237, +0.0240]; CI includes zero (not distinguishable))",
+      "Track B CONFIRM FPR @95% TPR: v1 better by point estimate (v3-v1 = +0.0255, 95% CI [-0.1436, +0.1855]; CI includes zero (not distinguishable))",
+      "Track B HEADLINE AUROC: v1 better by point estimate (v3-v1 = -0.0415, 95% CI [-0.0759, -0.0105]; CI excludes zero)",
+      "Track B HEADLINE strict rejection recall @95% retention: v1 better by point estimate (v3-v1 = -0.1330, 95% CI [-0.2042, -0.0667]; CI excludes zero)",
+      "Track B HEADLINE strict rejection recall @90% retention: v1 better by point estimate (v3-v1 = -0.0997, 95% CI [-0.1750, -0.0250]; CI excludes zero)",
+      "Track B HEADLINE known retention @95: v3 better by point estimate (v3-v1 = +0.0107, 95% CI [+0.0000, +0.0269]; CI includes zero (not distinguishable))",
+      "Track B HEADLINE known retention @90: v3 better by point estimate (v3-v1 = +0.0107, 95% CI [-0.0108, +0.0376]; CI includes zero (not distinguishable))",
+      "Track B HEADLINE FPR @95% TPR: v1 better by point estimate (v3-v1 = +0.0914, 95% CI [-0.0458, +0.2417]; CI includes zero (not distinguishable))",
+      "neutral-swap flip rate: v3 better by point estimate (v3-v1 = -0.1865, 95% CI [-0.2500, -0.1230]; CI excludes zero)",
+      "translation agreement: v3 better by point estimate (v3-v1 = +0.0463, 95% CI [+0.0272, +0.0658]; CI excludes zero)",
+      "OOF ECE: v3 better by point estimate (v3-v1 = -0.0003, 95% CI [-0.0116, +0.0111]; CI includes zero (not distinguishable))"
+    ]
+  },
+  "deployment_guidance": [
+    "v1 = ship default (better open-set rejection on the scored headline holdout)",
+    "v3 = choose when ID-prefix shortcut robustness and translation robustness matter more than open-set rejection"
+  ]
+}

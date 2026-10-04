@@ -1,0 +1,287 @@
+{
+  "model_fingerprint": "7ca22e16d2ace345d9dcf7737887e85fedf400a1dfc863678c2fc2663bf102bd",
+  "model_version": "v1",
+  "ood_threshold": -128.06341286077185,
+  "temperature": 1.0228290548483843,
+  "environment": {
+    "torch": "2.11.0+cpu",
+    "onnxruntime": "1.30.0",
+    "transformers": "5.18.0",
+    "numpy": "2.5.3",
+    "python": "3.12.12",
+    "cpu_model": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+    "os_cpu_count": 16,
+    "torch_default_threads": 8,
+    "platform": "Windows-11-10.0.26300-SP0"
+  },
+  "git_sha": "f3c79f40714e3cb9b500d0140a9b31eb3d7d10bd",
+  "sizes_bytes": {
+    "torch_safetensors": 1112235768,
+    "onnx_fp32": 1112438669,
+    "onnx_int8": 279258677,
+    "onnx_int8_encoder": 858239498
+  },
+  "adoption_rule": "adopt int8 (encoder_linear_only) as an OPTION only if macro-F1 delta (int8 - torch fp32) >= -0.005 on BOTH val and test; else rejected. Variants (max 3) selected on val only.",
+  "protocol": "v1 quantisation study: torch fp32 vs ONNX fp32 vs ONNX int8 (encoder Linear layers only).\n\n    python -m intent_router.quantization_eval --serve-dir serve_model         --out-val results/serving/quantization_v1_val.json         --out-test results/serving/quantization_v1_test.json         --allow-test --test-log results/final/test_eval_log.jsonl\n\nPRE-REGISTERED PROTOCOL (fixed before any number was seen; not to be tuned afterwards)\n  Variants (at most three, tried in this order, each fully logged):\n    V1 per_channel=True,  reduce_range=True    (dev CPU: AVX2 without VNNI, u8*s8 guard)\n    V2 per_channel=True,  reduce_range=False\n    V3 per_channel=False, reduce_range=True\n  Selection on VAL only: the first variant whose val macro-F1 delta vs torch fp32 is >= -0.005;\n  if none qualifies, the variant with the best val macro-F1 (ties: earliest) is carried to test.\n  TEST is read once for the carried variant (plus torch + onnx_fp32), as an inference-only\n  quantisation comparison logged as call_type `quantization_inference`: NOT a Track A evaluation.\n  Adoption rule: adopt int8 as an OPTION only if macro-F1 delta (int8 - torch fp32) >= -0.005 on\n  BOTH val and test; otherwise the decision is `rejected` and the numbers are recorded.\n",
+  "settings": {
+    "quality_batch": 16,
+    "threads": null,
+    "quantize_dynamic": {
+      "op_types_to_quantize": [
+        "MatMul"
+      ],
+      "weight_type": "QInt8",
+      "mode": "encoder_linear_only"
+    }
+  },
+  "variants": [
+    {
+      "name": "V1",
+      "per_channel": true,
+      "reduce_range": true,
+      "size_bytes": 858239498,
+      "node_counts": {
+        "fp32_graph_ops": {
+          "MatMul": 96,
+          "Gemm": 2,
+          "Gather": 34
+        },
+        "quantized_graph_ops": {
+          "MatMul": 26,
+          "MatMulInteger": 72,
+          "Gather": 34
+        },
+        "n_matmul_fp32_graph": 96,
+        "n_head_gemm_fp32_graph": 2,
+        "n_quantized_encoder_linear_expected": 72,
+        "n_matmul_integer_in_quantized": 72,
+        "n_matmul_left_fp32_act_act": 24,
+        "n_head_linear_left_fp32": 2,
+        "n_head_linear_with_float_weights": 2,
+        "n_gather_tables": 3,
+        "n_gather_tables_fp32": 3,
+        "exclude_list_size": 28
+      },
+      "val": {
+        "macro_f1": 0.8649050024050026,
+        "accuracy": 0.8648648648648649,
+        "abstention_rate": 0.05405405405405406,
+        "n_abstained": 4,
+        "pred_agreement_vs_torch": 0.9594594594594594,
+        "ood_spearman_vs_torch": 0.9810440577563865,
+        "abstention_agreement_vs_torch": 0.9864864864864865,
+        "max_abs_diff_prob_vs_torch": 0.2841073253568238,
+        "max_abs_diff_ood_vs_torch": 25.625590797841006,
+        "pred_disagreement_ids": [
+          "syn-0153",
+          "syn-0181",
+          "syn-0363"
+        ],
+        "abstention_disagreement_ids": [
+          "syn-0109"
+        ]
+      },
+      "val_macro_f1_delta_vs_torch": -0.023900949268596205,
+      "val_passes_bar": false
+    },
+    {
+      "name": "V2",
+      "per_channel": true,
+      "reduce_range": false,
+      "size_bytes": 858239498,
+      "node_counts": {
+        "fp32_graph_ops": {
+          "MatMul": 96,
+          "Gemm": 2,
+          "Gather": 34
+        },
+        "quantized_graph_ops": {
+          "MatMul": 26,
+          "MatMulInteger": 72,
+          "Gather": 34
+        },
+        "n_matmul_fp32_graph": 96,
+        "n_head_gemm_fp32_graph": 2,
+        "n_quantized_encoder_linear_expected": 72,
+        "n_matmul_integer_in_quantized": 72,
+        "n_matmul_left_fp32_act_act": 24,
+        "n_head_linear_left_fp32": 2,
+        "n_head_linear_with_float_weights": 2,
+        "n_gather_tables": 3,
+        "n_gather_tables_fp32": 3,
+        "exclude_list_size": 28
+      },
+      "val": {
+        "macro_f1": 0.8346174780385307,
+        "accuracy": 0.8378378378378378,
+        "abstention_rate": 0.22972972972972974,
+        "n_abstained": 17,
+        "pred_agreement_vs_torch": 0.9054054054054054,
+        "ood_spearman_vs_torch": 0.8352610144390966,
+        "abstention_agreement_vs_torch": 0.8108108108108109,
+        "max_abs_diff_prob_vs_torch": 0.7747019326680717,
+        "max_abs_diff_ood_vs_torch": 82.83185290372089,
+        "pred_disagreement_ids": [
+          "syn-0090",
+          "syn-0171",
+          "syn-0181",
+          "syn-0363",
+          "syn-0407",
+          "syn-0408",
+          "syn-0437"
+        ],
+        "abstention_disagreement_ids": [
+          "syn-0011",
+          "syn-0027",
+          "syn-0032",
+          "syn-0041",
+          "syn-0082",
+          "syn-0094",
+          "syn-0109",
+          "syn-0127",
+          "syn-0153",
+          "syn-0183",
+          "syn-0333",
+          "syn-0366",
+          "syn-0408",
+          "syn-0437"
+        ]
+      },
+      "val_macro_f1_delta_vs_torch": -0.05418847363506807,
+      "val_passes_bar": false
+    },
+    {
+      "name": "V3",
+      "per_channel": false,
+      "reduce_range": true,
+      "size_bytes": 857824418,
+      "node_counts": {
+        "fp32_graph_ops": {
+          "MatMul": 96,
+          "Gemm": 2,
+          "Gather": 34
+        },
+        "quantized_graph_ops": {
+          "MatMul": 26,
+          "MatMulInteger": 72,
+          "Gather": 34
+        },
+        "n_matmul_fp32_graph": 96,
+        "n_head_gemm_fp32_graph": 2,
+        "n_quantized_encoder_linear_expected": 72,
+        "n_matmul_integer_in_quantized": 72,
+        "n_matmul_left_fp32_act_act": 24,
+        "n_head_linear_left_fp32": 2,
+        "n_head_linear_with_float_weights": 2,
+        "n_gather_tables": 3,
+        "n_gather_tables_fp32": 3,
+        "exclude_list_size": 28
+      },
+      "val": {
+        "macro_f1": 0.8363811569693923,
+        "accuracy": 0.8378378378378378,
+        "abstention_rate": 0.1891891891891892,
+        "n_abstained": 14,
+        "pred_agreement_vs_torch": 0.8648648648648649,
+        "ood_spearman_vs_torch": 0.9300111069974084,
+        "abstention_agreement_vs_torch": 0.8513513513513513,
+        "max_abs_diff_prob_vs_torch": 0.5578923759367247,
+        "max_abs_diff_ood_vs_torch": 60.42665448573832,
+        "pred_disagreement_ids": [
+          "syn-0011",
+          "syn-0041",
+          "syn-0109",
+          "syn-0153",
+          "syn-0171",
+          "syn-0181",
+          "syn-0183",
+          "syn-0247",
+          "syn-0272",
+          "syn-0363"
+        ],
+        "abstention_disagreement_ids": [
+          "syn-0011",
+          "syn-0082",
+          "syn-0109",
+          "syn-0127",
+          "syn-0185",
+          "syn-0190",
+          "syn-0229",
+          "syn-0247",
+          "syn-0353",
+          "syn-0388",
+          "syn-0408"
+        ]
+      },
+      "val_macro_f1_delta_vs_torch": -0.05242479470420647,
+      "val_passes_bar": false
+    }
+  ],
+  "selected_variant": "V1",
+  "selected_settings": {
+    "per_channel": true,
+    "reduce_range": true
+  },
+  "split": "val",
+  "n_rows": 74,
+  "ids_sha256": "7facc966ddfff4a97c492195810573e1908462b41897cf16dc495098f07f6165",
+  "quality": {
+    "torch": {
+      "macro_f1": 0.8888059516735988,
+      "accuracy": 0.8918918918918919,
+      "abstention_rate": 0.04054054054054054,
+      "n_abstained": 3
+    },
+    "onnx_fp32": {
+      "macro_f1": 0.8888059516735988,
+      "accuracy": 0.8918918918918919,
+      "abstention_rate": 0.05405405405405406,
+      "n_abstained": 4,
+      "pred_agreement_vs_torch": 1.0,
+      "ood_spearman_vs_torch": 1.0,
+      "abstention_agreement_vs_torch": 0.9864864864864865,
+      "max_abs_diff_prob_vs_torch": 2.985496303509194e-06,
+      "max_abs_diff_ood_vs_torch": 0.00015280088078384324,
+      "pred_disagreement_ids": [],
+      "abstention_disagreement_ids": [
+        "syn-0109"
+      ]
+    },
+    "onnx_int8_encoder": {
+      "macro_f1": 0.8649050024050026,
+      "accuracy": 0.8648648648648649,
+      "abstention_rate": 0.05405405405405406,
+      "n_abstained": 4,
+      "pred_agreement_vs_torch": 0.9594594594594594,
+      "ood_spearman_vs_torch": 0.9810440577563865,
+      "abstention_agreement_vs_torch": 0.9864864864864865,
+      "max_abs_diff_prob_vs_torch": 0.2841073253568238,
+      "max_abs_diff_ood_vs_torch": 25.625590797841006,
+      "pred_disagreement_ids": [
+        "syn-0153",
+        "syn-0181",
+        "syn-0363"
+      ],
+      "abstention_disagreement_ids": [
+        "syn-0109"
+      ]
+    }
+  },
+  "decision": {
+    "rule": "adopt int8 (encoder_linear_only) as an OPTION only if macro-F1 delta (int8 - torch fp32) >= -0.005 on BOTH val and test; else rejected. Variants (max 3) selected on val only.",
+    "margin": -0.005,
+    "macro_f1_delta_vs_torch": {
+      "val": -0.023900949268596205,
+      "test": 0.014461845344198254
+    },
+    "passes": {
+      "val": false,
+      "test": true
+    },
+    "decision": "rejected",
+    "onnx_fp32_macro_f1_delta_vs_torch": {
+      "val": 0.0,
+      "test": 0.0
+    }
+  }
+}

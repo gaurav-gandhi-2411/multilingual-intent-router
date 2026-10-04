@@ -1,0 +1,206 @@
+{
+  "run_id": "i4b_loco_appointment_manager_s1",
+  "weights": "i4b",
+  "kind": "loco",
+  "holdout": [
+    "appointment_manager"
+  ],
+  "seed": 1,
+  "replicate": 1,
+  "labels": [
+    "ai_agent_performance",
+    "chitchat",
+    "customer_support",
+    "document_processing",
+    "knowledge_base",
+    "orders",
+    "other",
+    "shipment_information.analytics",
+    "shipment_information.disruptions",
+    "shipment_information.realtime_query",
+    "yard_management"
+  ],
+  "call_type": "phase6a_trackb",
+  "git_sha": "4536308e25696d84e01dd26bffcdac8d8f0dbdbc-dirty",
+  "smoke": false,
+  "audit": {
+    "holdout": [
+      "appointment_manager"
+    ],
+    "n_labels": 11,
+    "n_train": 321,
+    "n_cal": 67,
+    "n_eval_known": 67,
+    "n_eval_unknown": 45,
+    "assertions": {
+      "no_heldout_rows_in_train": true,
+      "no_heldout_rows_in_cal": true,
+      "no_heldout_rows_in_eval_known": true,
+      "eval_unknown_only_heldout": true,
+      "eval_unknown_has_every_heldout_row": true,
+      "label_space_is_remaining_classes": true,
+      "every_remaining_class_in_train": true,
+      "train_cal_disjoint": true,
+      "train_eval_known_disjoint": true,
+      "train_unknown_disjoint": true,
+      "cal_unknown_disjoint": true,
+      "no_test_rows_in_train_or_cal": true,
+      "eval_known_is_test_split_only": true,
+      "cal_is_val_split_only": true
+    },
+    "ids_sha256": {
+      "train": "999d8bc256b0de3f522088def0c1ce31a85311160a8fdb54a4316a17620c29ad",
+      "cal": "c81a2960e9a767f1ab83c85a349971aeeca27a45cf044d61f8e5c9f75917d77e",
+      "eval_known": "7a1d7477e5ab6815f6a648967ad41904e9c738c46a12d971d106c45e99f68253",
+      "eval_unknown": "1a490003bd10484c87bb61f8d2c9d8516734dc7b43c7f9c140bdc52a6d6caea1"
+    },
+    "smoke": false
+  },
+  "train_spec": {
+    "key": "i4b",
+    "a1": true,
+    "kl_lambda": 1.0,
+    "head_init_seed": null,
+    "inner_frac": 0.0
+  },
+  "training": {
+    "config": {
+      "model_name": "intfloat/multilingual-e5-base",
+      "lr": 3e-05,
+      "epochs": 20,
+      "batch_size": 16,
+      "warmup_ratio": 0.1,
+      "weight_decay": 0.01,
+      "max_len": 64,
+      "precision": "fp16",
+      "model_seed": 1,
+      "class_weighted": false,
+      "label_smoothing": 0.0,
+      "layer_decay": null,
+      "entity_masking": false,
+      "hier_aux": false,
+      "hier_lambda": 0.5,
+      "max_grad_norm": 1.0,
+      "attn_implementation": "eager",
+      "stop_epoch": 14,
+      "supcon_lambda": null,
+      "supcon_temperature": 0.1,
+      "grad_accum": 1,
+      "id_randomize_p": 0.5,
+      "oe_lambda": 0.0,
+      "oe_batch_size": 16,
+      "wandb_project": "intent-router",
+      "wandb_group": "phase6a-i4b",
+      "model_short": "e5"
+    },
+    "epochs": [
+      {
+        "epoch": 1,
+        "train_loss": 2.4048116434188116,
+        "eval_loss": 2.357693273629715,
+        "macro_f1": 0.04496995541771661,
+        "accuracy": 0.11940298507462686
+      },
+      {
+        "epoch": 2,
+        "train_loss": 2.2573366846357072,
+        "eval_loss": 2.1293091702817093,
+        "macro_f1": 0.11967640202934322,
+        "accuracy": 0.23880597014925373
+      },
+      {
+        "epoch": 3,
+        "train_loss": 1.81877715247018,
+        "eval_loss": 1.5413206940266624,
+        "macro_f1": 0.6018420972966428,
+        "accuracy": 0.6268656716417911
+      },
+      {
+        "epoch": 4,
+        "train_loss": 1.185672782716297,
+        "eval_loss": 1.0544047711500482,
+        "macro_f1": 0.751062376358819,
+        "accuracy": 0.746268656716418
+      },
+      {
+        "epoch": 5,
+        "train_loss": 0.6915998870418185,
+        "eval_loss": 0.7083789839673398,
+        "macro_f1": 0.8247250357298204,
+        "accuracy": 0.8208955223880597
+      },
+      {
+        "epoch": 6,
+        "train_loss": 0.3529253126609893,
+        "eval_loss": 0.47232150853569826,
+        "macro_f1": 0.8334388724763055,
+        "accuracy": 0.835820895522388
+      },
+      {
+        "epoch": 7,
+        "train_loss": 0.1720115127308028,
+        "eval_loss": 0.40780264606226735,
+        "macro_f1": 0.8835218702865762,
+        "accuracy": 0.8805970149253731
+      },
+      {
+        "epoch": 8,
+        "train_loss": 0.09422712844042551,
+        "eval_loss": 0.3251289204875035,
+        "macro_f1": 0.8835218702865762,
+        "accuracy": 0.8805970149253731
+      },
+      {
+        "epoch": 9,
+        "train_loss": 0.05406367885214942,
+        "eval_loss": 0.38506220948340286,
+        "macro_f1": 0.8815571683218741,
+        "accuracy": 0.8805970149253731
+      },
+      {
+        "epoch": 10,
+        "train_loss": 0.032791508095605035,
+        "eval_loss": 0.33303376109297594,
+        "macro_f1": 0.8835218702865762,
+        "accuracy": 0.8805970149253731
+      },
+      {
+        "epoch": 11,
+        "train_loss": 0.023912052668276288,
+        "eval_loss": 0.36491532262359094,
+        "macro_f1": 0.8835218702865762,
+        "accuracy": 0.8805970149253731
+      },
+      {
+        "epoch": 12,
+        "train_loss": 0.018725205434574968,
+        "eval_loss": 0.3361102269211812,
+        "macro_f1": 0.8835218702865762,
+        "accuracy": 0.8805970149253731
+      },
+      {
+        "epoch": 13,
+        "train_loss": 0.016423813954350493,
+        "eval_loss": 0.35070941791828,
+        "macro_f1": 0.8835218702865762,
+        "accuracy": 0.8805970149253731
+      },
+      {
+        "epoch": 14,
+        "train_loss": 0.014567017067401182,
+        "eval_loss": 0.3654460693751253,
+        "macro_f1": 0.8835218702865762,
+        "accuracy": 0.8805970149253731
+      }
+    ],
+    "wall_clock_s": 91.71244259999366,
+    "peak_vram_mb": 5377.81982421875,
+    "gpu_exclusive": true,
+    "gpu_foreign_seen": [],
+    "nan_detected": false,
+    "fingerprint": "679679876cce760326fc5d0713fd62cb004e0e0a3f601eb76ea43a61942f00e1",
+    "gpu_lock_waited_s": 0.2,
+    "wandb_url": "https://wandb.ai/gauravgandhi429-gaurav-gandhi/intent-router/runs/aggj4rs4",
+    "run_total_s": 106.2322537
+  }
+}

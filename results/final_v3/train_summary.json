@@ -1,0 +1,275 @@
+{
+  "smoke": false,
+  "git_sha": "06d5d205f472afe80c4950c3356a7d7d4e2c8771-dirty",
+  "stage_wall_clock_s": 231.25739890000114,
+  "gpu_lock": {
+    "project": "intent-router",
+    "pid": 3436,
+    "host": "Legion",
+    "start_time": "2026-10-02T22:58:43+05:30",
+    "expected_duration_s": 1800,
+    "command": "intent-router final",
+    "waited_s": 1.2
+  },
+  "model_fingerprint": "78df88429cbbf26b9ad8c303fb083ac379bf3a59f1c163c25a04d355ff8d252e",
+  "model_dir": "outputs\\final_model_v3",
+  "runs": {
+    "run1": {
+      "config": {
+        "model_name": "intfloat/multilingual-e5-base",
+        "lr": 3e-05,
+        "epochs": 20,
+        "batch_size": 16,
+        "warmup_ratio": 0.1,
+        "weight_decay": 0.01,
+        "max_len": 64,
+        "precision": "fp16",
+        "model_seed": 42,
+        "class_weighted": false,
+        "label_smoothing": 0.0,
+        "layer_decay": null,
+        "entity_masking": false,
+        "hier_aux": false,
+        "hier_lambda": 0.5,
+        "max_grad_norm": 1.0,
+        "attn_implementation": "eager",
+        "stop_epoch": 6,
+        "supcon_lambda": null,
+        "supcon_temperature": 0.1,
+        "grad_accum": 1,
+        "id_randomize_p": 0.5,
+        "oe_lambda": 0.0,
+        "oe_batch_size": 16,
+        "wandb_project": "intent-router",
+        "wandb_group": "phase4e-final-v3",
+        "model_short": "e5"
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "train_loss": 2.4509928768331353,
+          "eval_loss": 2.2924959852888778,
+          "macro_f1": 0.1142583470169677,
+          "accuracy": 0.25675675675675674
+        },
+        {
+          "epoch": 2,
+          "train_loss": 1.7918944133050514,
+          "eval_loss": 1.0774275805499103,
+          "macro_f1": 0.7755822880822881,
+          "accuracy": 0.7837837837837838
+        },
+        {
+          "epoch": 3,
+          "train_loss": 0.5718514165191939,
+          "eval_loss": 0.405783292409536,
+          "macro_f1": 0.8626536317712791,
+          "accuracy": 0.8648648648648649
+        },
+        {
+          "epoch": 4,
+          "train_loss": 0.095491771134689,
+          "eval_loss": 0.32721563368230255,
+          "macro_f1": 0.884731553849201,
+          "accuracy": 0.8918918918918919
+        },
+        {
+          "epoch": 5,
+          "train_loss": 0.019557957043589064,
+          "eval_loss": 0.36778796222564336,
+          "macro_f1": 0.883740877858525,
+          "accuracy": 0.8918918918918919
+        },
+        {
+          "epoch": 6,
+          "train_loss": 0.01040402070308725,
+          "eval_loss": 0.33049752845152003,
+          "macro_f1": 0.9026858218034689,
+          "accuracy": 0.9054054054054054
+        }
+      ],
+      "wall_clock_s": 88.86086060000525,
+      "load_s": 9.119477500003995,
+      "train_epoch_s": [
+        15.34354760000133,
+        16.342127300005814,
+        13.478340699999535,
+        13.847060400003102,
+        13.478738199999498,
+        13.816576599994733
+      ],
+      "eval_epoch_s": [
+        0.38597760000266135,
+        0.261661999997159,
+        0.26937829999951646,
+        0.2566374999951222,
+        0.24778820000210544,
+        0.2567163999992772
+      ],
+      "peak_vram_mb": 5377.6044921875,
+      "gpu_exclusive": true,
+      "gpu_foreign_seen": [],
+      "gpu_snapshot_start": {
+        "time": "2026-10-02T22:58:53+05:30",
+        "processes": [],
+        "foreign": [],
+        "memory": "0 MiB, 8192 MiB, 0 %",
+        "error": null
+      },
+      "gpu_snapshot_end": {
+        "time": "2026-10-02T23:00:40+05:30",
+        "processes": [
+          {
+            "pid": 3436,
+            "process_name": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+            "used_memory_mb": null
+          }
+        ],
+        "foreign": [],
+        "memory": "5913 MiB, 8192 MiB, 15 %",
+        "error": null
+      },
+      "nan_detected": false,
+      "precision": "fp16",
+      "wandb_url": "https://wandb.ai/gauravgandhi429-gaurav-gandhi/intent-router/runs/xaasxazz",
+      "wandb_logged": true,
+      "fingerprint": "78df88429cbbf26b9ad8c303fb083ac379bf3a59f1c163c25a04d355ff8d252e"
+    },
+    "run2": {
+      "config": {
+        "model_name": "intfloat/multilingual-e5-base",
+        "lr": 3e-05,
+        "epochs": 20,
+        "batch_size": 16,
+        "warmup_ratio": 0.1,
+        "weight_decay": 0.01,
+        "max_len": 64,
+        "precision": "fp16",
+        "model_seed": 42,
+        "class_weighted": false,
+        "label_smoothing": 0.0,
+        "layer_decay": null,
+        "entity_masking": false,
+        "hier_aux": false,
+        "hier_lambda": 0.5,
+        "max_grad_norm": 1.0,
+        "attn_implementation": "eager",
+        "stop_epoch": 6,
+        "supcon_lambda": null,
+        "supcon_temperature": 0.1,
+        "grad_accum": 1,
+        "id_randomize_p": 0.5,
+        "oe_lambda": 0.0,
+        "oe_batch_size": 16,
+        "wandb_project": "intent-router",
+        "wandb_group": "phase4e-final-v3",
+        "model_short": "e5"
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "train_loss": 2.4509928768331353,
+          "eval_loss": 2.2924959852888778,
+          "macro_f1": 0.1142583470169677,
+          "accuracy": 0.25675675675675674
+        },
+        {
+          "epoch": 2,
+          "train_loss": 1.7918944133050514,
+          "eval_loss": 1.0774275805499103,
+          "macro_f1": 0.7755822880822881,
+          "accuracy": 0.7837837837837838
+        },
+        {
+          "epoch": 3,
+          "train_loss": 0.5718514165191939,
+          "eval_loss": 0.405783292409536,
+          "macro_f1": 0.8626536317712791,
+          "accuracy": 0.8648648648648649
+        },
+        {
+          "epoch": 4,
+          "train_loss": 0.095491771134689,
+          "eval_loss": 0.32721563368230255,
+          "macro_f1": 0.884731553849201,
+          "accuracy": 0.8918918918918919
+        },
+        {
+          "epoch": 5,
+          "train_loss": 0.019557957043589064,
+          "eval_loss": 0.36778796222564336,
+          "macro_f1": 0.883740877858525,
+          "accuracy": 0.8918918918918919
+        },
+        {
+          "epoch": 6,
+          "train_loss": 0.01040402070308725,
+          "eval_loss": 0.33049752845152003,
+          "macro_f1": 0.9026858218034689,
+          "accuracy": 0.9054054054054054
+        }
+      ],
+      "wall_clock_s": 89.75784530000237,
+      "load_s": 6.600500100001227,
+      "train_epoch_s": [
+        13.901721999995061,
+        13.545357499999227,
+        13.74165379999613,
+        15.530508499999996,
+        15.80032690000371,
+        14.80781289999868
+      ],
+      "eval_epoch_s": [
+        0.2746298999991268,
+        0.25433540000085486,
+        0.27137519999814685,
+        0.24941750000289176,
+        0.27422200000000885,
+        0.2712268999966909
+      ],
+      "peak_vram_mb": 5377.6044921875,
+      "gpu_exclusive": true,
+      "gpu_foreign_seen": [],
+      "gpu_snapshot_start": {
+        "time": "2026-10-02T23:00:48+05:30",
+        "processes": [
+          {
+            "pid": 3436,
+            "process_name": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+            "used_memory_mb": null
+          }
+        ],
+        "foreign": [],
+        "memory": "251 MiB, 8192 MiB, 0 %",
+        "error": null
+      },
+      "gpu_snapshot_end": {
+        "time": "2026-10-02T23:02:27+05:30",
+        "processes": [
+          {
+            "pid": 3436,
+            "process_name": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.12.12-windows-x86_64-none\\python.exe",
+            "used_memory_mb": null
+          }
+        ],
+        "foreign": [],
+        "memory": "5913 MiB, 8192 MiB, 19 %",
+        "error": null
+      },
+      "nan_detected": false,
+      "precision": "fp16",
+      "wandb_url": "https://wandb.ai/gauravgandhi429-gaurav-gandhi/intent-router/runs/jh8lrmw0",
+      "wandb_logged": true,
+      "fingerprint": "78df88429cbbf26b9ad8c303fb083ac379bf3a59f1c163c25a04d355ff8d252e"
+    }
+  },
+  "val_macro_f1_fp32_run1": 0.9026858218034689,
+  "eval_headline_run1": {
+    "macro_f1": 0.960812879930527,
+    "accuracy": 0.9594594594594594,
+    "n": 74,
+    "label": "unbiased (single test evaluation)"
+  },
+  "speed_eager_vs_sdpa": null,
+  "test_eval_log": "results\\final\\test_eval_log.jsonl"
+}

@@ -1,0 +1,37 @@
+# Robustness evaluation (robustness evaluation). Training settings come from final_config.
+final_config: configs/final.yaml
+results_dir: results/robustness     # ids, perturbation types, predictions, flags only: NO texts
+figures_dir: results/figures
+outputs_dir: outputs/robustness     # texts (translations.csv), cached fold models (gitignored)
+seed: 42
+predict_batch_size: 32
+gpu_lock_expected_s: 2400
+
+fold_models:                        # OOF rows: fold-seed s0 fold models, model seed 0, eager
+  fold_seed_idx: 0
+  n_folds: 5
+  model_seed: 0
+  attn_implementation: eager        # same training config as the final model (20-epoch schedule,
+                                    # stop at final.yaml train.stop_epoch)
+  expected_run_s_per_fold: 600
+
+translation:                        # machine-translated (synthetic) evaluation data
+  model: facebook/nllb-200-distilled-600M
+  src_lang: eng_Latn
+  targets: {es: spa_Latn, fr: fra_Latn, de: deu_Latn, zh: zho_Hans}
+  batch_size: 16
+  max_new_tokens: 128
+  num_beams: 1                      # greedy
+  fp16: true
+  include_oof: true                 # also translate OOF English rows (scored by fold models)
+  spot_check_per_lang: 3            # printed to stdout only, never written to results/
+
+noise:
+  rates: [0.05, 0.10]               # fraction of alphabetic characters perturbed
+  seed: 42
+  bootstrap: {n_resamples: 10000, seed: 42}
+
+wandb:
+  project: intent-router
+  group: stretch-robustness
+  enabled: true

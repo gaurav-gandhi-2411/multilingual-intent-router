@@ -1,0 +1,1695 @@
+{
+  "oracle": true,
+  "label": "ORACLE: uses the held-out class labels (known-vs-unknown supervision). Report-only; never a selection input; never read by the training/selection module.",
+  "probe": {
+    "features": "L2-normalised, in-fold standardised",
+    "model": "LogisticRegression",
+    "C": 1.0,
+    "class_weight": "balanced",
+    "max_iter": 5000,
+    "cv": "5-fold StratifiedGroupKFold by dup_group, shuffle, seed 42",
+    "pool": "all rows (known + held-out classes)",
+    "extra_pool": "unseen_known_only = drop known TRAIN rows (the v1 encoder was trained on them)",
+    "v1_finetuned_model": "per-holdout v1 model, seed 42 (headline) / LOCO seed 42, epoch 9"
+  },
+  "n2_decision": {
+    "oracle": true,
+    "rule": "frozen e5-large headline oracle AUROC >= frozen e5-base + 0.02",
+    "margin": 0.02,
+    "metric": "headline holdout, pool = all rows, PRIMARY = mean of fold AUROCs",
+    "values": {
+      "e5_base_mean_of_folds": 0.9699404761904761,
+      "e5_large_mean_of_folds": 0.9744047619047619,
+      "diff_mean_of_folds": 0.0044642857142858094,
+      "e5_base_pooled_oof": 0.9711607142857143,
+      "e5_large_pooled_oof": 0.974047619047619,
+      "diff_pooled_oof": 0.002886904761904785
+    },
+    "run_n2": false,
+    "run_n2_pooled_variant": false,
+    "primary_and_pooled_agree": true,
+    "label": "ORACLE: uses the held-out class labels (known-vs-unknown supervision). Report-only; never a selection input; never read by the training/selection module.",
+    "smoke": false,
+    "git_sha": "4536308e25696d84e01dd26bffcdac8d8f0dbdbc-dirty"
+  },
+  "holdouts": {
+    "headline": {
+      "holdout": [
+        "document_processing",
+        "yard_management"
+      ],
+      "feature_sets": {
+        "v1_finetuned": {
+          "all_rows": {
+            "auroc_pooled_oof": 0.9921130952380952,
+            "auroc_pooled_oof_ci": [
+              0.9858711367145979,
+              0.9968666799546659
+            ],
+            "auroc_mean_of_folds": 0.9928571428571429,
+            "auroc_mean_of_folds_ci": [
+              0.9866843801845964,
+              0.9974217246198697
+            ],
+            "per_fold_auroc": [
+              0.9933035714285714,
+              0.9858630952380952,
+              0.9955357142857143,
+              0.9933035714285714,
+              0.9962797619047619
+            ],
+            "n_pos": 80,
+            "n_neg": 420,
+            "n_groups": 498,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 500
+          },
+          "unseen_known_only": {
+            "auroc_pooled_oof": 0.9720766129032258,
+            "auroc_pooled_oof_ci": [
+              0.948590603799452,
+              0.9899791593259958
+            ],
+            "auroc_mean_of_folds": 0.9687291666666666,
+            "auroc_mean_of_folds_ci": [
+              0.9417992340140678,
+              0.9899481662952911
+            ],
+            "per_fold_auroc": [
+              0.975,
+              1.0,
+              1.0,
+              0.965,
+              0.9036458333333334
+            ],
+            "n_pos": 80,
+            "n_neg": 124,
+            "n_groups": 203,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 204
+          }
+        },
+        "frozen_e5_base": {
+          "all_rows": {
+            "auroc_pooled_oof": 0.9711607142857143,
+            "auroc_pooled_oof_ci": [
+              0.9479511088039582,
+              0.9891886480342313
+            ],
+            "auroc_mean_of_folds": 0.9699404761904761,
+            "auroc_mean_of_folds_ci": [
+              0.9429711111166252,
+              0.9899612759819766
+            ],
+            "per_fold_auroc": [
+              0.9754464285714286,
+              0.9880952380952381,
+              0.9188988095238095,
+              0.9813988095238095,
+              0.9858630952380952
+            ],
+            "n_pos": 80,
+            "n_neg": 420,
+            "n_groups": 498,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 500
+          },
+          "unseen_known_only": {
+            "auroc_pooled_oof": 0.9591733870967742,
+            "auroc_pooled_oof_ci": [
+              0.9302728451489514,
+              0.9819838867515073
+            ],
+            "auroc_mean_of_folds": 0.9523333333333334,
+            "auroc_mean_of_folds_ci": [
+              0.9185064132565376,
+              0.978590873213139
+            ],
+            "per_fold_auroc": [
+              0.9375,
+              0.965,
+              0.9725,
+              0.97,
+              0.9166666666666666
+            ],
+            "n_pos": 80,
+            "n_neg": 124,
+            "n_groups": 203,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 204
+          }
+        },
+        "frozen_e5_large": {
+          "all_rows": {
+            "auroc_pooled_oof": 0.974047619047619,
+            "auroc_pooled_oof_ci": [
+              0.9522696876606175,
+              0.9898074260580476
+            ],
+            "auroc_mean_of_folds": 0.9744047619047619,
+            "auroc_mean_of_folds_ci": [
+              0.9501613343046058,
+              0.9906558493287647
+            ],
+            "per_fold_auroc": [
+              0.9799107142857143,
+              0.9947916666666666,
+              0.9330357142857143,
+              0.9791666666666666,
+              0.9851190476190477
+            ],
+            "n_pos": 80,
+            "n_neg": 420,
+            "n_groups": 498,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 500
+          },
+          "unseen_known_only": {
+            "auroc_pooled_oof": 0.9698588709677419,
+            "auroc_pooled_oof_ci": [
+              0.9451206777105364,
+              0.9897747963307164
+            ],
+            "auroc_mean_of_folds": 0.9697500000000001,
+            "auroc_mean_of_folds_ci": [
+              0.9430852736906714,
+              0.9904179831280059
+            ],
+            "per_fold_auroc": [
+              0.935,
+              0.975,
+              0.99,
+              0.98,
+              0.96875
+            ],
+            "n_pos": 80,
+            "n_neg": 124,
+            "n_groups": 203,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 204
+          }
+        },
+        "frozen_bge_m3": {
+          "all_rows": {
+            "auroc_pooled_oof": 0.9800297619047619,
+            "auroc_pooled_oof_ci": [
+              0.9665086880882013,
+              0.9905740722526769
+            ],
+            "auroc_mean_of_folds": 0.9794642857142858,
+            "auroc_mean_of_folds_ci": [
+              0.9633300443487713,
+              0.9911528922766318
+            ],
+            "per_fold_auroc": [
+              0.9761904761904762,
+              1.0,
+              0.9538690476190477,
+              0.9761904761904762,
+              0.9910714285714286
+            ],
+            "n_pos": 80,
+            "n_neg": 420,
+            "n_groups": 498,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 500
+          },
+          "unseen_known_only": {
+            "auroc_pooled_oof": 0.9742943548387096,
+            "auroc_pooled_oof_ci": [
+              0.9529426781475961,
+              0.9906582639129932
+            ],
+            "auroc_mean_of_folds": 0.9751666666666667,
+            "auroc_mean_of_folds_ci": [
+              0.9525530179813861,
+              0.9928639558726086
+            ],
+            "per_fold_auroc": [
+              0.95,
+              0.9725,
+              0.9975,
+              0.9975,
+              0.9583333333333334
+            ],
+            "n_pos": 80,
+            "n_neg": 124,
+            "n_groups": 203,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 204
+          }
+        },
+        "frozen_labse": {
+          "all_rows": {
+            "auroc_pooled_oof": 0.9398511904761905,
+            "auroc_pooled_oof_ci": [
+              0.9150766948030254,
+              0.9600618211450278
+            ],
+            "auroc_mean_of_folds": 0.9395833333333332,
+            "auroc_mean_of_folds_ci": [
+              0.9119917843285872,
+              0.9605460440760571
+            ],
+            "per_fold_auroc": [
+              0.9389880952380952,
+              0.9441964285714286,
+              0.9397321428571429,
+              0.9479166666666666,
+              0.9270833333333334
+            ],
+            "n_pos": 80,
+            "n_neg": 420,
+            "n_groups": 498,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 500
+          },
+          "unseen_known_only": {
+            "auroc_pooled_oof": 0.8975806451612903,
+            "auroc_pooled_oof_ci": [
+              0.850323776187263,
+              0.9407717479337387
+            ],
+            "auroc_mean_of_folds": 0.8990208333333334,
+            "auroc_mean_of_folds_ci": [
+              0.8484895913348365,
+              0.9462569443107726
+            ],
+            "per_fold_auroc": [
+              0.8875,
+              0.91,
+              0.9375,
+              0.8825,
+              0.8776041666666666
+            ],
+            "n_pos": 80,
+            "n_neg": 124,
+            "n_groups": 203,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 204
+          }
+        }
+      },
+      "unsupervised_finetuned_mahalanobis": {
+        "source": "results\\trackb",
+        "method": "maha_ft",
+        "phase3_results": {
+          "mean_3_seeds": 0.870497311827957,
+          "values_by_seed": [
+            0.8612903225806452,
+            0.8780241935483871,
+            0.8721774193548387
+          ]
+        },
+        "recomputed_from_this_run_seed_42": 0.8612903225806452
+      }
+    },
+    "appointment_manager": {
+      "holdout": [
+        "appointment_manager"
+      ],
+      "feature_sets": {
+        "v1_finetuned": {
+          "all_rows": {
+            "auroc_pooled_oof": 0.9965811965811966,
+            "auroc_pooled_oof_ci": [
+              0.9924620609776561,
+              0.9993466119023758
+            ],
+            "auroc_mean_of_folds": 0.9948717948717949,
+            "auroc_mean_of_folds_ci": [
+              0.9880626262215866,
+              0.9993713603540647
+            ],
+            "per_fold_auroc": [
+              1.0,
+              0.9975579975579976,
+              0.9951159951159951,
+              0.9902319902319903,
+              0.9914529914529915
+            ],
+            "n_pos": 45,
+            "n_neg": 455,
+            "n_groups": 498,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 500
+          },
+          "unseen_known_only": {
+            "auroc_pooled_oof": 0.9951907131011609,
+            "auroc_pooled_oof_ci": [
+              0.9876251094396535,
+              0.9993315535943246
+            ],
+            "auroc_mean_of_folds": 0.9924343146565369,
+            "auroc_mean_of_folds_ci": [
+              0.9788773384353741,
+              1.0
+            ],
+            "per_fold_auroc": [
+              1.0,
+              1.0,
+              1.0,
+              0.9786324786324786,
+              0.9835390946502057
+            ],
+            "n_pos": 45,
+            "n_neg": 134,
+            "n_groups": 178,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 179
+          }
+        },
+        "frozen_e5_base": {
+          "all_rows": {
+            "auroc_pooled_oof": 0.9972649572649572,
+            "auroc_pooled_oof_ci": [
+              0.9935703961608567,
+              0.9997175673131237
+            ],
+            "auroc_mean_of_folds": 0.9973137973137973,
+            "auroc_mean_of_folds_ci": [
+              0.9929979839342948,
+              1.0
+            ],
+            "per_fold_auroc": [
+              1.0,
+              1.0,
+              0.9975579975579976,
+              0.9963369963369964,
+              0.9926739926739927
+            ],
+            "n_pos": 45,
+            "n_neg": 455,
+            "n_groups": 498,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 500
+          },
+          "unseen_known_only": {
+            "auroc_pooled_oof": 0.9968490878938641,
+            "auroc_pooled_oof_ci": [
+              0.9900062862669246,
+              1.0
+            ],
+            "auroc_mean_of_folds": 0.9975308641975309,
+            "auroc_mean_of_folds_ci": [
+              0.9914282019704433,
+              1.0
+            ],
+            "per_fold_auroc": [
+              1.0,
+              0.9958847736625515,
+              0.9917695473251029,
+              1.0,
+              1.0
+            ],
+            "n_pos": 45,
+            "n_neg": 134,
+            "n_groups": 178,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 179
+          }
+        },
+        "frozen_e5_large": {
+          "all_rows": {
+            "auroc_pooled_oof": 0.9989743589743589,
+            "auroc_pooled_oof_ci": [
+              0.9970375430971817,
+              1.0
+            ],
+            "auroc_mean_of_folds": 0.9987789987789988,
+            "auroc_mean_of_folds_ci": [
+              0.9958333333333333,
+              1.0
+            ],
+            "per_fold_auroc": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              0.9938949938949939
+            ],
+            "n_pos": 45,
+            "n_neg": 455,
+            "n_groups": 498,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 500
+          },
+          "unseen_known_only": {
+            "auroc_pooled_oof": 0.9981757877280265,
+            "auroc_pooled_oof_ci": [
+              0.994437060088634,
+              1.0
+            ],
+            "auroc_mean_of_folds": 0.9982905982905983,
+            "auroc_mean_of_folds_ci": [
+              0.991766975308642,
+              1.0
+            ],
+            "per_fold_auroc": [
+              1.0,
+              1.0,
+              1.0,
+              0.9914529914529915,
+              1.0
+            ],
+            "n_pos": 45,
+            "n_neg": 134,
+            "n_groups": 178,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 179
+          }
+        },
+        "frozen_bge_m3": {
+          "all_rows": {
+            "auroc_pooled_oof": 0.9985836385836386,
+            "auroc_pooled_oof_ci": [
+              0.9966179568773713,
+              0.9998628300160146
+            ],
+            "auroc_mean_of_folds": 0.9987789987789988,
+            "auroc_mean_of_folds_ci": [
+              0.9962955467704151,
+              1.0
+            ],
+            "per_fold_auroc": [
+              1.0,
+              1.0,
+              0.9987789987789988,
+              0.9987789987789988,
+              0.9963369963369964
+            ],
+            "n_pos": 45,
+            "n_neg": 455,
+            "n_groups": 498,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 500
+          },
+          "unseen_known_only": {
+            "auroc_pooled_oof": 0.9966832504145937,
+            "auroc_pooled_oof_ci": [
+              0.9908229344957303,
+              1.0
+            ],
+            "auroc_mean_of_folds": 0.9967078189300412,
+            "auroc_mean_of_folds_ci": [
+              0.988461247220305,
+              1.0
+            ],
+            "per_fold_auroc": [
+              1.0,
+              0.9876543209876543,
+              0.9958847736625515,
+              1.0,
+              1.0
+            ],
+            "n_pos": 45,
+            "n_neg": 134,
+            "n_groups": 178,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 179
+          }
+        },
+        "frozen_labse": {
+          "all_rows": {
+            "auroc_pooled_oof": 0.9797802197802198,
+            "auroc_pooled_oof_ci": [
+              0.9646125991058772,
+              0.9918620743230742
+            ],
+            "auroc_mean_of_folds": 0.9782661782661783,
+            "auroc_mean_of_folds_ci": [
+              0.9603813247396433,
+              0.9923364866662502
+            ],
+            "per_fold_auroc": [
+              0.9963369963369964,
+              0.9755799755799756,
+              0.9841269841269841,
+              0.9743589743589743,
+              0.960927960927961
+            ],
+            "n_pos": 45,
+            "n_neg": 455,
+            "n_groups": 498,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 500
+          },
+          "unseen_known_only": {
+            "auroc_pooled_oof": 0.9713101160862355,
+            "auroc_pooled_oof_ci": [
+              0.9456220068149902,
+              0.9910150987876066
+            ],
+            "auroc_mean_of_folds": 0.9697689142133588,
+            "auroc_mean_of_folds_ci": [
+              0.9374049249739473,
+              0.9938215073066263
+            ],
+            "per_fold_auroc": [
+              0.9835390946502057,
+              0.9711934156378601,
+              0.9753086419753086,
+              0.9188034188034188,
+              1.0
+            ],
+            "n_pos": 45,
+            "n_neg": 134,
+            "n_groups": 178,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 179
+          }
+        }
+      },
+      "unsupervised_finetuned_mahalanobis": {
+        "source": "results\\trackb",
+        "method": "maha_ft",
+        "phase3_results": {
+          "seed_42": 0.9283582089552239
+        },
+        "recomputed_from_this_run_seed_42": 0.9283582089552239
+      }
+    },
+    "customer_support": {
+      "holdout": [
+        "customer_support"
+      ],
+      "feature_sets": {
+        "v1_finetuned": {
+          "all_rows": {
+            "auroc_pooled_oof": 0.9579347826086957,
+            "auroc_pooled_oof_ci": [
+              0.9104613959217484,
+              0.9942932685892785
+            ],
+            "auroc_mean_of_folds": 0.9603260869565217,
+            "auroc_mean_of_folds_ci": [
+              0.9096991135916664,
+              0.9950974951763236
+            ],
+            "per_fold_auroc": [
+              0.9891304347826086,
+              0.9592391304347826,
+              0.938858695652174,
+              0.9184782608695652,
+              0.9959239130434783
+            ],
+            "n_pos": 40,
+            "n_neg": 460,
+            "n_groups": 498,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 500
+          },
+          "unseen_known_only": {
+            "auroc_pooled_oof": 0.9382352941176471,
+            "auroc_pooled_oof_ci": [
+              0.8825395561002178,
+              0.982457111087578
+            ],
+            "auroc_mean_of_folds": 0.9488425925925925,
+            "auroc_mean_of_folds_ci": [
+              0.8961101248418853,
+              0.9875101106351106
+            ],
+            "per_fold_auroc": [
+              0.9398148148148148,
+              1.0,
+              0.9907407407407407,
+              0.9074074074074074,
+              0.90625
+            ],
+            "n_pos": 40,
+            "n_neg": 136,
+            "n_groups": 175,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 176
+          }
+        },
+        "frozen_e5_base": {
+          "all_rows": {
+            "auroc_pooled_oof": 0.9926630434782608,
+            "auroc_pooled_oof_ci": [
+              0.9860259966307366,
+              0.997111222730588
+            ],
+            "auroc_mean_of_folds": 0.9959239130434782,
+            "auroc_mean_of_folds_ci": [
+              0.9899557354049799,
+              0.9997639617253782
+            ],
+            "per_fold_auroc": [
+              1.0,
+              0.9904891304347826,
+              0.9959239130434783,
+              0.9932065217391305,
+              1.0
+            ],
+            "n_pos": 40,
+            "n_neg": 460,
+            "n_groups": 498,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 500
+          },
+          "unseen_known_only": {
+            "auroc_pooled_oof": 0.9886029411764706,
+            "auroc_pooled_oof_ci": [
+              0.9749552969118186,
+              0.9973469387755102
+            ],
+            "auroc_mean_of_folds": 0.9917328042328043,
+            "auroc_mean_of_folds_ci": [
+              0.9771979679802957,
+              1.0
+            ],
+            "per_fold_auroc": [
+              0.9907407407407407,
+              0.9814814814814815,
+              0.9953703703703703,
+              1.0,
+              0.9910714285714286
+            ],
+            "n_pos": 40,
+            "n_neg": 136,
+            "n_groups": 175,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 176
+          }
+        },
+        "frozen_e5_large": {
+          "all_rows": {
+            "auroc_pooled_oof": 0.9876630434782608,
+            "auroc_pooled_oof_ci": [
+              0.9766417711453068,
+              0.9956548826970129
+            ],
+            "auroc_mean_of_folds": 0.9915760869565219,
+            "auroc_mean_of_folds_ci": [
+              0.982530832181272,
+              0.9977933044291629
+            ],
+            "per_fold_auroc": [
+              1.0,
+              0.9809782608695652,
+              0.9836956521739131,
+              0.9972826086956522,
+              0.9959239130434783
+            ],
+            "n_pos": 40,
+            "n_neg": 460,
+            "n_groups": 498,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 500
+          },
+          "unseen_known_only": {
+            "auroc_pooled_oof": 0.9770220588235294,
+            "auroc_pooled_oof_ci": [
+              0.9518088194237193,
+              0.994307588893901
+            ],
+            "auroc_mean_of_folds": 0.9743055555555555,
+            "auroc_mean_of_folds_ci": [
+              0.9454773799261085,
+              0.9946693633952255
+            ],
+            "per_fold_auroc": [
+              0.9907407407407407,
+              0.9212962962962963,
+              1.0,
+              0.9907407407407407,
+              0.96875
+            ],
+            "n_pos": 40,
+            "n_neg": 136,
+            "n_groups": 175,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 176
+          }
+        },
+        "frozen_bge_m3": {
+          "all_rows": {
+            "auroc_pooled_oof": 0.9838586956521739,
+            "auroc_pooled_oof_ci": [
+              0.9680929599724943,
+              0.9950232866866162
+            ],
+            "auroc_mean_of_folds": 0.9866847826086957,
+            "auroc_mean_of_folds_ci": [
+              0.9712141908221752,
+              0.996924312267831
+            ],
+            "per_fold_auroc": [
+              0.9959239130434783,
+              0.9796195652173914,
+              0.9932065217391305,
+              0.967391304347826,
+              0.9972826086956522
+            ],
+            "n_pos": 40,
+            "n_neg": 460,
+            "n_groups": 498,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 500
+          },
+          "unseen_known_only": {
+            "auroc_pooled_oof": 0.9889705882352942,
+            "auroc_pooled_oof_ci": [
+              0.9741563657680036,
+              0.998704782790309
+            ],
+            "auroc_mean_of_folds": 0.9898478835978836,
+            "auroc_mean_of_folds_ci": [
+              0.9719658840388007,
+              1.0
+            ],
+            "per_fold_auroc": [
+              0.9953703703703703,
+              0.9675925925925926,
+              1.0,
+              0.9907407407407407,
+              0.9955357142857143
+            ],
+            "n_pos": 40,
+            "n_neg": 136,
+            "n_groups": 175,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 176
+          }
+        },
+        "frozen_labse": {
+          "all_rows": {
+            "auroc_pooled_oof": 0.9864673913043478,
+            "auroc_pooled_oof_ci": [
+              0.9744915542096393,
+              0.9949310904466049
+            ],
+            "auroc_mean_of_folds": 0.9872282608695653,
+            "auroc_mean_of_folds_ci": [
+              0.975387163519054,
+              0.9959240212552448
+            ],
+            "per_fold_auroc": [
+              0.9972826086956522,
+              0.9836956521739131,
+              0.9796195652173914,
+              0.9782608695652174,
+              0.9972826086956522
+            ],
+            "n_pos": 40,
+            "n_neg": 460,
+            "n_groups": 498,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 500
+          },
+          "unseen_known_only": {
+            "auroc_pooled_oof": 0.98125,
+            "auroc_pooled_oof_ci": [
+              0.9616680059327679,
+              0.9944853495338705
+            ],
+            "auroc_mean_of_folds": 0.9789021164021164,
+            "auroc_mean_of_folds_ci": [
+              0.954721432875999,
+              0.9949825268817205
+            ],
+            "per_fold_auroc": [
+              0.9814814814814815,
+              0.9444444444444444,
+              1.0,
+              0.9953703703703703,
+              0.9732142857142857
+            ],
+            "n_pos": 40,
+            "n_neg": 136,
+            "n_groups": 175,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 176
+          }
+        }
+      },
+      "unsupervised_finetuned_mahalanobis": {
+        "source": "results\\trackb",
+        "method": "maha_ft",
+        "phase3_results": {
+          "seed_42": 0.8643382352941177
+        },
+        "recomputed_from_this_run_seed_42": 0.8643382352941177
+      }
+    },
+    "knowledge_base": {
+      "holdout": [
+        "knowledge_base"
+      ],
+      "feature_sets": {
+        "v1_finetuned": {
+          "all_rows": {
+            "auroc_pooled_oof": 0.9920652173913044,
+            "auroc_pooled_oof_ci": [
+              0.98128654565364,
+              0.99866533182702
+            ],
+            "auroc_mean_of_folds": 0.9915760869565217,
+            "auroc_mean_of_folds_ci": [
+              0.9789593555156864,
+              0.9992492806089297
+            ],
+            "per_fold_auroc": [
+              0.9891304347826086,
+              0.9741847826086957,
+              1.0,
+              0.9945652173913043,
+              1.0
+            ],
+            "n_pos": 40,
+            "n_neg": 460,
+            "n_groups": 498,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 500
+          },
+          "unseen_known_only": {
+            "auroc_pooled_oof": 0.9827205882352941,
+            "auroc_pooled_oof_ci": [
+              0.9611371525895285,
+              0.9962468154218633
+            ],
+            "auroc_mean_of_folds": 0.9836970899470898,
+            "auroc_mean_of_folds_ci": [
+              0.9610853402955386,
+              0.997335688405797
+            ],
+            "per_fold_auroc": [
+              0.9508928571428571,
+              0.9907407407407407,
+              1.0,
+              1.0,
+              0.9768518518518519
+            ],
+            "n_pos": 40,
+            "n_neg": 136,
+            "n_groups": 175,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 176
+          }
+        },
+        "frozen_e5_base": {
+          "all_rows": {
+            "auroc_pooled_oof": 0.9896195652173913,
+            "auroc_pooled_oof_ci": [
+              0.9816877745910003,
+              0.9958904986036378
+            ],
+            "auroc_mean_of_folds": 0.989945652173913,
+            "auroc_mean_of_folds_ci": [
+              0.9812704594639484,
+              0.996526528476916
+            ],
+            "per_fold_auroc": [
+              0.9904891304347826,
+              0.9932065217391305,
+              0.9877717391304348,
+              0.9877717391304348,
+              0.9904891304347826
+            ],
+            "n_pos": 40,
+            "n_neg": 460,
+            "n_groups": 498,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 500
+          },
+          "unseen_known_only": {
+            "auroc_pooled_oof": 0.9834558823529411,
+            "auroc_pooled_oof_ci": [
+              0.9670530578063068,
+              0.9952039514557908
+            ],
+            "auroc_mean_of_folds": 0.9870701058201059,
+            "auroc_mean_of_folds_ci": [
+              0.9693989009093373,
+              0.9989422123015873
+            ],
+            "per_fold_auroc": [
+              0.9955357142857143,
+              0.9722222222222222,
+              1.0,
+              0.9953703703703703,
+              0.9722222222222222
+            ],
+            "n_pos": 40,
+            "n_neg": 136,
+            "n_groups": 175,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 176
+          }
+        },
+        "frozen_e5_large": {
+          "all_rows": {
+            "auroc_pooled_oof": 0.9939673913043479,
+            "auroc_pooled_oof_ci": [
+              0.9872439940149987,
+              0.9989559581142399
+            ],
+            "auroc_mean_of_folds": 0.9945652173913043,
+            "auroc_mean_of_folds_ci": [
+              0.9876393797227657,
+              0.9992674659183244
+            ],
+            "per_fold_auroc": [
+              0.998641304347826,
+              1.0,
+              0.9932065217391305,
+              0.9932065217391305,
+              0.9877717391304348
+            ],
+            "n_pos": 40,
+            "n_neg": 460,
+            "n_groups": 498,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 500
+          },
+          "unseen_known_only": {
+            "auroc_pooled_oof": 0.9904411764705883,
+            "auroc_pooled_oof_ci": [
+              0.9779538204170557,
+              0.9983430163247173
+            ],
+            "auroc_mean_of_folds": 0.9972222222222221,
+            "auroc_mean_of_folds_ci": [
+              0.9885714285714287,
+              1.0
+            ],
+            "per_fold_auroc": [
+              1.0,
+              1.0,
+              1.0,
+              0.9861111111111112,
+              1.0
+            ],
+            "n_pos": 40,
+            "n_neg": 136,
+            "n_groups": 175,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 176
+          }
+        },
+        "frozen_bge_m3": {
+          "all_rows": {
+            "auroc_pooled_oof": 0.9915760869565218,
+            "auroc_pooled_oof_ci": [
+              0.9844750214415395,
+              0.9969180247132493
+            ],
+            "auroc_mean_of_folds": 0.9918478260869567,
+            "auroc_mean_of_folds_ci": [
+              0.9830599613430381,
+              0.9977720688935882
+            ],
+            "per_fold_auroc": [
+              0.9959239130434783,
+              1.0,
+              0.9891304347826086,
+              0.9809782608695652,
+              0.9932065217391305
+            ],
+            "n_pos": 40,
+            "n_neg": 460,
+            "n_groups": 498,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 500
+          },
+          "unseen_known_only": {
+            "auroc_pooled_oof": 0.9764705882352941,
+            "auroc_pooled_oof_ci": [
+              0.9541314573747802,
+              0.9935387177919239
+            ],
+            "auroc_mean_of_folds": 0.9769179894179894,
+            "auroc_mean_of_folds_ci": [
+              0.9507480054793462,
+              0.9960000000000001
+            ],
+            "per_fold_auroc": [
+              0.9910714285714286,
+              0.9629629629629629,
+              1.0,
+              0.9629629629629629,
+              0.9675925925925926
+            ],
+            "n_pos": 40,
+            "n_neg": 136,
+            "n_groups": 175,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 176
+          }
+        },
+        "frozen_labse": {
+          "all_rows": {
+            "auroc_pooled_oof": 0.9897826086956522,
+            "auroc_pooled_oof_ci": [
+              0.9808999872568427,
+              0.9964731561139043
+            ],
+            "auroc_mean_of_folds": 0.9877717391304348,
+            "auroc_mean_of_folds_ci": [
+              0.9773423659449707,
+              0.9958314230069909
+            ],
+            "per_fold_auroc": [
+              0.9850543478260869,
+              0.9864130434782609,
+              0.998641304347826,
+              0.9728260869565217,
+              0.9959239130434783
+            ],
+            "n_pos": 40,
+            "n_neg": 460,
+            "n_groups": 498,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 500
+          },
+          "unseen_known_only": {
+            "auroc_pooled_oof": 0.9830882352941176,
+            "auroc_pooled_oof_ci": [
+              0.9664735056874287,
+              0.995231896442935
+            ],
+            "auroc_mean_of_folds": 0.9880952380952381,
+            "auroc_mean_of_folds_ci": [
+              0.9698792355409597,
+              1.0
+            ],
+            "per_fold_auroc": [
+              0.9821428571428571,
+              1.0,
+              1.0,
+              0.9861111111111112,
+              0.9722222222222222
+            ],
+            "n_pos": 40,
+            "n_neg": 136,
+            "n_groups": 175,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 176
+          }
+        }
+      },
+      "unsupervised_finetuned_mahalanobis": {
+        "source": "results\\trackb",
+        "method": "maha_ft",
+        "phase3_results": {
+          "seed_42": 0.9106617647058823
+        },
+        "recomputed_from_this_run_seed_42": 0.9106617647058823
+      }
+    },
+    "orders": {
+      "holdout": [
+        "orders"
+      ],
+      "feature_sets": {
+        "v1_finetuned": {
+          "all_rows": {
+            "auroc_pooled_oof": 0.9960927960927961,
+            "auroc_pooled_oof_ci": [
+              0.991629921560427,
+              0.9989944741039862
+            ],
+            "auroc_mean_of_folds": 0.9968253968253968,
+            "auroc_mean_of_folds_ci": [
+              0.9911440344070939,
+              1.0
+            ],
+            "per_fold_auroc": [
+              1.0,
+              0.9975579975579976,
+              1.0,
+              0.9938949938949939,
+              0.9926739926739927
+            ],
+            "n_pos": 45,
+            "n_neg": 455,
+            "n_groups": 498,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 500
+          },
+          "unseen_known_only": {
+            "auroc_pooled_oof": 0.9925373134328358,
+            "auroc_pooled_oof_ci": [
+              0.9826663938193807,
+              0.9985408157875528
+            ],
+            "auroc_mean_of_folds": 0.9916745805634694,
+            "auroc_mean_of_folds_ci": [
+              0.9777146946349033,
+              1.0
+            ],
+            "per_fold_auroc": [
+              0.9917695473251029,
+              0.9835390946502057,
+              1.0,
+              0.9871794871794872,
+              0.9958847736625515
+            ],
+            "n_pos": 45,
+            "n_neg": 134,
+            "n_groups": 178,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 179
+          }
+        },
+        "frozen_e5_base": {
+          "all_rows": {
+            "auroc_pooled_oof": 0.9932112332112332,
+            "auroc_pooled_oof_ci": [
+              0.9870043923027362,
+              0.998113418030903
+            ],
+            "auroc_mean_of_folds": 0.9936507936507937,
+            "auroc_mean_of_folds_ci": [
+              0.9866433046667721,
+              0.9985963133160375
+            ],
+            "per_fold_auroc": [
+              0.9951159951159951,
+              0.9951159951159951,
+              0.9902319902319903,
+              0.9975579975579976,
+              0.9902319902319903
+            ],
+            "n_pos": 45,
+            "n_neg": 455,
+            "n_groups": 498,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 500
+          },
+          "unseen_known_only": {
+            "auroc_pooled_oof": 0.9917081260364843,
+            "auroc_pooled_oof_ci": [
+              0.9791436853375215,
+              0.9995166647694569
+            ],
+            "auroc_mean_of_folds": 0.9925925925925926,
+            "auroc_mean_of_folds_ci": [
+              0.9787712643678161,
+              1.0
+            ],
+            "per_fold_auroc": [
+              0.9917695473251029,
+              0.9711934156378601,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "n_pos": 45,
+            "n_neg": 134,
+            "n_groups": 178,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 179
+          }
+        },
+        "frozen_e5_large": {
+          "all_rows": {
+            "auroc_pooled_oof": 0.9940903540903541,
+            "auroc_pooled_oof_ci": [
+              0.9887786376092799,
+              0.9983526252237188
+            ],
+            "auroc_mean_of_folds": 0.9958485958485959,
+            "auroc_mean_of_folds_ci": [
+              0.9911669502306043,
+              0.9991489963586023
+            ],
+            "per_fold_auroc": [
+              0.9951159951159951,
+              0.9914529914529915,
+              1.0,
+              0.9951159951159951,
+              0.9975579975579976
+            ],
+            "n_pos": 45,
+            "n_neg": 455,
+            "n_groups": 498,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 500
+          },
+          "unseen_known_only": {
+            "auroc_pooled_oof": 0.9932006633499171,
+            "auroc_pooled_oof_ci": [
+              0.9811555047002717,
+              1.0
+            ],
+            "auroc_mean_of_folds": 0.9909465020576131,
+            "auroc_mean_of_folds_ci": [
+              0.9738559577677226,
+              1.0
+            ],
+            "per_fold_auroc": [
+              1.0,
+              0.9547325102880658,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "n_pos": 45,
+            "n_neg": 134,
+            "n_groups": 178,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 179
+          }
+        },
+        "frozen_bge_m3": {
+          "all_rows": {
+            "auroc_pooled_oof": 0.9957020757020757,
+            "auroc_pooled_oof_ci": [
+              0.990203834440753,
+              0.9992351092278219
+            ],
+            "auroc_mean_of_folds": 0.9965811965811966,
+            "auroc_mean_of_folds_ci": [
+              0.9914585130381867,
+              0.9997389251997095
+            ],
+            "per_fold_auroc": [
+              0.9975579975579976,
+              0.9963369963369964,
+              0.9951159951159951,
+              1.0,
+              0.9938949938949939
+            ],
+            "n_pos": 45,
+            "n_neg": 455,
+            "n_groups": 498,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 500
+          },
+          "unseen_known_only": {
+            "auroc_pooled_oof": 0.9946932006633499,
+            "auroc_pooled_oof_ci": [
+              0.9862177384076991,
+              0.9996688044154229
+            ],
+            "auroc_mean_of_folds": 0.9942386831275719,
+            "auroc_mean_of_folds_ci": [
+              0.9827569074765612,
+              1.0
+            ],
+            "per_fold_auroc": [
+              1.0,
+              0.9753086419753086,
+              0.9958847736625515,
+              1.0,
+              1.0
+            ],
+            "n_pos": 45,
+            "n_neg": 134,
+            "n_groups": 178,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 179
+          }
+        },
+        "frozen_labse": {
+          "all_rows": {
+            "auroc_pooled_oof": 0.9927228327228327,
+            "auroc_pooled_oof_ci": [
+              0.9858693222400029,
+              0.997935434003084
+            ],
+            "auroc_mean_of_folds": 0.9929181929181929,
+            "auroc_mean_of_folds_ci": [
+              0.9854513436624538,
+              0.9984018933316997
+            ],
+            "per_fold_auroc": [
+              0.9975579975579976,
+              0.9975579975579976,
+              0.9902319902319903,
+              0.9877899877899878,
+              0.9914529914529915
+            ],
+            "n_pos": 45,
+            "n_neg": 455,
+            "n_groups": 498,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 500
+          },
+          "unseen_known_only": {
+            "auroc_pooled_oof": 0.9898839137645108,
+            "auroc_pooled_oof_ci": [
+              0.97528106837838,
+              0.9991831473968897
+            ],
+            "auroc_mean_of_folds": 0.9883507439062995,
+            "auroc_mean_of_folds_ci": [
+              0.9700474837662338,
+              1.0
+            ],
+            "per_fold_auroc": [
+              0.9958847736625515,
+              0.9629629629629629,
+              1.0,
+              0.9829059829059829,
+              1.0
+            ],
+            "n_pos": 45,
+            "n_neg": 134,
+            "n_groups": 178,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 179
+          }
+        }
+      },
+      "unsupervised_finetuned_mahalanobis": {
+        "source": "results\\trackb",
+        "method": "maha_ft",
+        "phase3_results": {
+          "seed_42": 0.87893864013267
+        },
+        "recomputed_from_this_run_seed_42": 0.87893864013267
+      }
+    },
+    "shipment_information.disruptions": {
+      "holdout": [
+        "shipment_information.disruptions"
+      ],
+      "feature_sets": {
+        "v1_finetuned": {
+          "all_rows": {
+            "auroc_pooled_oof": 0.9983410138248848,
+            "auroc_pooled_oof_ci": [
+              0.9959012714634958,
+              0.999793798238416
+            ],
+            "auroc_mean_of_folds": 0.9972350230414746,
+            "auroc_mean_of_folds_ci": [
+              0.9925327768289061,
+              1.0
+            ],
+            "per_fold_auroc": [
+              0.9969278033794163,
+              1.0,
+              0.9907834101382489,
+              1.0,
+              0.9984639016897081
+            ],
+            "n_pos": 35,
+            "n_neg": 465,
+            "n_groups": 498,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 500
+          },
+          "unseen_known_only": {
+            "auroc_pooled_oof": 0.9857142857142858,
+            "auroc_pooled_oof_ci": [
+              0.9690390197357308,
+              0.9970677072316341
+            ],
+            "auroc_mean_of_folds": 0.9862433862433863,
+            "auroc_mean_of_folds_ci": [
+              0.9662895351363092,
+              1.0
+            ],
+            "per_fold_auroc": [
+              1.0,
+              0.9523809523809523,
+              0.9788359788359788,
+              1.0,
+              1.0
+            ],
+            "n_pos": 35,
+            "n_neg": 138,
+            "n_groups": 172,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 173
+          }
+        },
+        "frozen_e5_base": {
+          "all_rows": {
+            "auroc_pooled_oof": 0.9946543778801843,
+            "auroc_pooled_oof_ci": [
+              0.9839422465352762,
+              0.9999242427364763
+            ],
+            "auroc_mean_of_folds": 0.9969278033794163,
+            "auroc_mean_of_folds_ci": [
+              0.9907520481483738,
+              1.0
+            ],
+            "per_fold_auroc": [
+              0.9969278033794163,
+              1.0,
+              0.9877112135176651,
+              1.0,
+              1.0
+            ],
+            "n_pos": 35,
+            "n_neg": 465,
+            "n_groups": 498,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 500
+          },
+          "unseen_known_only": {
+            "auroc_pooled_oof": 0.9838509316770186,
+            "auroc_pooled_oof_ci": [
+              0.9560162836337018,
+              0.9997112336688798
+            ],
+            "auroc_mean_of_folds": 0.9800075585789871,
+            "auroc_mean_of_folds_ci": [
+              0.9439683384848192,
+              1.0
+            ],
+            "per_fold_auroc": [
+              1.0,
+              0.9841269841269841,
+              0.9312169312169312,
+              1.0,
+              0.9846938775510204
+            ],
+            "n_pos": 35,
+            "n_neg": 138,
+            "n_groups": 172,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 173
+          }
+        },
+        "frozen_e5_large": {
+          "all_rows": {
+            "auroc_pooled_oof": 0.9968663594470046,
+            "auroc_pooled_oof_ci": [
+              0.9918043116430213,
+              0.9998696713780474
+            ],
+            "auroc_mean_of_folds": 0.9969278033794163,
+            "auroc_mean_of_folds_ci": [
+              0.9912947447355244,
+              1.0
+            ],
+            "per_fold_auroc": [
+              0.9938556067588326,
+              1.0,
+              0.9907834101382489,
+              1.0,
+              1.0
+            ],
+            "n_pos": 35,
+            "n_neg": 465,
+            "n_groups": 498,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 500
+          },
+          "unseen_known_only": {
+            "auroc_pooled_oof": 0.9877846790890269,
+            "auroc_pooled_oof_ci": [
+              0.9716350692397979,
+              0.998404601307827
+            ],
+            "auroc_mean_of_folds": 0.9852985638699925,
+            "auroc_mean_of_folds_ci": [
+              0.9614813186813186,
+              1.0
+            ],
+            "per_fold_auroc": [
+              1.0,
+              0.9841269841269841,
+              0.9576719576719577,
+              1.0,
+              0.9846938775510204
+            ],
+            "n_pos": 35,
+            "n_neg": 138,
+            "n_groups": 172,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 173
+          }
+        },
+        "frozen_bge_m3": {
+          "all_rows": {
+            "auroc_pooled_oof": 0.9947772657450077,
+            "auroc_pooled_oof_ci": [
+              0.987174412208839,
+              0.9997176086011753
+            ],
+            "auroc_mean_of_folds": 0.9953917050691243,
+            "auroc_mean_of_folds_ci": [
+              0.9884113579987477,
+              1.0
+            ],
+            "per_fold_auroc": [
+              1.0,
+              0.9984639016897081,
+              0.9861751152073732,
+              1.0,
+              0.9923195084485407
+            ],
+            "n_pos": 35,
+            "n_neg": 465,
+            "n_groups": 498,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 500
+          },
+          "unseen_known_only": {
+            "auroc_pooled_oof": 0.9857142857142858,
+            "auroc_pooled_oof_ci": [
+              0.9647756775582573,
+              0.9983904750384414
+            ],
+            "auroc_mean_of_folds": 0.9831821617535903,
+            "auroc_mean_of_folds_ci": [
+              0.954415272529403,
+              1.0
+            ],
+            "per_fold_auroc": [
+              1.0,
+              0.9841269841269841,
+              0.9470899470899471,
+              1.0,
+              0.9846938775510204
+            ],
+            "n_pos": 35,
+            "n_neg": 138,
+            "n_groups": 172,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 173
+          }
+        },
+        "frozen_labse": {
+          "all_rows": {
+            "auroc_pooled_oof": 0.9946543778801843,
+            "auroc_pooled_oof_ci": [
+              0.9849354592210264,
+              0.9998664601101634
+            ],
+            "auroc_mean_of_folds": 0.9947772657450077,
+            "auroc_mean_of_folds_ci": [
+              0.9823055555555554,
+              1.0
+            ],
+            "per_fold_auroc": [
+              0.9984639016897081,
+              1.0,
+              0.9754224270353302,
+              1.0,
+              1.0
+            ],
+            "n_pos": 35,
+            "n_neg": 465,
+            "n_groups": 498,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 500
+          },
+          "unseen_known_only": {
+            "auroc_pooled_oof": 0.99648033126294,
+            "auroc_pooled_oof_ci": [
+              0.9879430581929828,
+              1.0
+            ],
+            "auroc_mean_of_folds": 0.9978835978835978,
+            "auroc_mean_of_folds_ci": [
+              0.990391984126984,
+              1.0
+            ],
+            "per_fold_auroc": [
+              1.0,
+              1.0,
+              0.9894179894179894,
+              1.0,
+              1.0
+            ],
+            "n_pos": 35,
+            "n_neg": 138,
+            "n_groups": 172,
+            "n_boot": 2000,
+            "ci": "percentile 95%, bootstrap over dup_groups",
+            "n_rows": 173
+          }
+        }
+      },
+      "unsupervised_finetuned_mahalanobis": {
+        "source": "results\\trackb",
+        "method": "maha_ft",
+        "phase3_results": {
+          "seed_42": 0.8853002070393374
+        },
+        "recomputed_from_this_run_seed_42": 0.8853002070393374
+      }
+    }
+  },
+  "smoke": false,
+  "git_sha": "4536308e25696d84e01dd26bffcdac8d8f0dbdbc-dirty"
+}

@@ -1,0 +1,102 @@
+# Multi-axis selection (pre-registered 2026-10-02 BEFORE any 4e
+# run). Nothing here may change a pre-registered rule; it only wires the rules to
+# numbers. Training settings (model, lr, 20-epoch schedule, eager attention) come from final.yaml.
+final_config: configs/final.yaml
+trackb_improve_config: configs/trackb_improve.yaml   # dev classes, OOD settings, safe labels
+robustness_config: configs/robustness.yaml           # final_retrain only (test-row robustness)
+results_dir: results/phase4e        # ids + numbers only: NO dataset or synthetic text
+outputs_dir: outputs/phase4e        # fold models (deleted after OOF), per-run npz, OOF parts
+predict_batch_size: 32
+gpu_lock_expected_s: 900            # per fold-run / LOCO run, incl. waiting headroom
+gpu_lock_poll_s: 30
+
+candidates: [v1, a3, a1, a1a3]      # run keys; a1a3 must not collide with phase4c's `comb`
+model_seeds: [0, 1, 2]              # curves, fold models and LOCO runs all use these
+v1:
+  deployed_epoch: 9                 # pre-registered: v1 is evaluated at its shipped epoch; own argmax reported
+
+inputs:                             # written by phase4c_data.py; consumed read-only (same files as 4c)
+  synthetic_oe: outputs/phase4c/synthetic_oe.csv
+  synthetic_oe_emb: outputs/phase4c/synthetic_oe_emb.npy
+  a3_aug: outputs/phase4c/a3_aug.csv
+  eval_mt: outputs/phase4c/eval_mt.csv
+  expected_cv_rows: 426
+  expected_en_rows: 370
+
+guard:                              # phase4c.make_env asserts threshold == comparator - tolerance and
+  fold_seed_idx: 0                  # Env reads fold_seed_idx / n_folds. The Track A guard itself is
+  model_seed: 0                     # NOT a 4e rule; model_seed here is overridden per seed.
+  n_folds: 5
+  comparator: 0.9441
+  tolerance: 0.010
+  threshold: 0.9341
+
+factors:                            # identical to phase4c.yaml (reuse of 4c curves is gated on it)
+  a1:
+    id_randomize_p: 0.5
+  a2:
+    oe_lambda: 0.5
+    oe_batch_size: 16
+    holdout_cos_drop: 0.85
+    auroc_margin: 0.0115
+  a3:
+    kinds: [mt, noise]
+
+reuse_4c:                           # seed-0 artifacts of phase4c, reused only after the checks
+  config: configs/phase4c.yaml
+  results_dir: results/phase4c
+  seed: 0
+  keys: {v1: current, a1: a1, a3: a3}   # 4e candidate -> 4c candidate key
+
+trackb:
+  score: maha_ft                    # the only score that participates in selection
+  retention: 0.95                   # known-calibration retention (ceil rule), strict rejection
+
+neutral_swaps: ["LD->REF", "PO->REF", "other->REF"]
+noise:
+  perturbation: char_mixed_10
+  seed: 42
+translation:
+  langs: [es, fr, de, zh]
+  quality_cos: 0.80                 # the `kept` column of eval_mt.csv
+
+calibration:
+  ece_bins: 15
+
+# Eligibility thresholds (pre-registered "Axes"), candidate vs v1.
+thresholds:
+  a_max_drop: 0.010                 # CV macro-F1 delta >= -0.010
+  b_max_auroc_drop: 0.010           # dAUROC >= -0.010
+  b_max_rej95_drop: 0.03            # dRejection@95 >= -0.03
+  c_max_flip_increase: 0.02         # candidate flip rate <= v1 + 0.02
+  d_max_agreement_drop: 0.010       # translation agreement delta >= -0.010
+  e_max_ece_increase: 0.02          # candidate ECE <= v1 + 0.02
+
+bootstrap:
+  n_resamples: 10000
+  seed: 42
+  level: 0.95
+
+# Post-selection stages (pre-registered "If the selection is not v1"). Wiring only: no rule is changed here.
+confirm_final:                      # stage confirm_final: CONFIRM + headline, chosen candidate vs v1
+  v1_trackb_dir: results/trackb_improve   # v1 comparator = Open-set scorer comparison base runs (seeds 42/43/44)
+  results_subdir: confirm_a1a3_runs       # score tables / run jsons, under results/phase4e/
+  outputs_subdir: confirm_a1a3            # per-run npz, under outputs/phase4e/
+  test_log: confirm_test_inference_log.jsonl   # under results/phase4e/; call_type phase4e_confirm
+
+final_v3:                           # stage final_retrain
+  version: v3
+  archive_results: results/final_v1
+  archive_outputs: outputs/final_v1
+  v2_results: results/final_v2      # archived v2 (4c), quoted for the record only
+  model_dir: outputs/final_model_v3
+  results_dir: results/phase4e/final_v3        # derived config + CV stand-ins (ids and numbers only)
+  robustness_results: results/phase4e/final_v3_robustness
+  side_by_side: results/phase4e/final_v1_vs_v3.json
+  sdpa_timing_run: false            # v1 already measured eager vs sdpa; no new timing claim
+  oof_predictions_per_id: 3         # 3 model seeds x fold-seed s0 (v1 had 9, v2 had 1)
+
+wandb:
+  project: intent-router
+  group_prefix: phase4e             # groups: phase4e-<candidate>
+  enabled: true

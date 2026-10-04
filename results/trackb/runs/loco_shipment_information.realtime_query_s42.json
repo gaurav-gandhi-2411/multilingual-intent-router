@@ -1,0 +1,530 @@
+{
+  "run_id": "loco_shipment_information.realtime_query_s42",
+  "track": "B",
+  "kind": "loco",
+  "holdout": [
+    "shipment_information.realtime_query"
+  ],
+  "n_labels": 11,
+  "git_sha": "696df48ed117ae449eb221f656b42f00c4e67ea0-dirty",
+  "smoke": false,
+  "seed": 42,
+  "label_smoothing": 0.0,
+  "group": "trackB-loco",
+  "labels": [
+    "ai_agent_performance",
+    "appointment_manager",
+    "chitchat",
+    "customer_support",
+    "document_processing",
+    "knowledge_base",
+    "orders",
+    "other",
+    "shipment_information.analytics",
+    "shipment_information.disruptions",
+    "yard_management"
+  ],
+  "label2id": {
+    "ai_agent_performance": 0,
+    "appointment_manager": 1,
+    "chitchat": 2,
+    "customer_support": 3,
+    "document_processing": 4,
+    "knowledge_base": 5,
+    "orders": 6,
+    "other": 7,
+    "shipment_information.analytics": 8,
+    "shipment_information.disruptions": 9,
+    "yard_management": 10
+  },
+  "smoke_label": null,
+  "audit": {
+    "holdout": [
+      "shipment_information.realtime_query"
+    ],
+    "n_labels": 11,
+    "n_train": 313,
+    "n_cal": 66,
+    "n_eval_known": 66,
+    "n_eval_unknown": 55,
+    "assertions": {
+      "no_heldout_rows_in_train": true,
+      "no_heldout_rows_in_cal": true,
+      "no_heldout_rows_in_eval_known": true,
+      "eval_unknown_only_heldout": true,
+      "eval_unknown_has_every_heldout_row": true,
+      "label_space_is_remaining_classes": true,
+      "every_remaining_class_in_train": true,
+      "train_cal_disjoint": true,
+      "train_eval_known_disjoint": true,
+      "train_unknown_disjoint": true,
+      "cal_unknown_disjoint": true,
+      "no_test_rows_in_train_or_cal": true,
+      "eval_known_is_test_split_only": true,
+      "cal_is_val_split_only": true
+    },
+    "ids_sha256": {
+      "train": "3d42039742e1a5d450cd07233cca7d6a198eb4adc3ebcffc9cc91160c0b721ed",
+      "cal": "603d4d2e0ae93b9f109e23b0c94cf16908e87bbce8f4113ae3e9d15dc951914d",
+      "eval_known": "8ebfd2a81302c3077542642f4a3f22a6404cac11b92fad44f63201c0bf9c7046",
+      "eval_unknown": "b2168d7d44efa890e57530165efc73d556679e7014b0c5374b47f1c289752b0f"
+    },
+    "smoke": false,
+    "fit_sources": {
+      "model_weights": "train split minus held-out classes; per-epoch curves on the calibration rows; no epoch/checkpoint selection (stop_epoch fixed by the Phase 1 CV)",
+      "temperature": "calibration rows (val split minus held-out classes): NLL, LBFGS",
+      "threshold_per_method": "calibration rows (known only), 95% retention",
+      "mahalanobis_ft": "class means + Ledoit-Wolf covariance: train minus held-out, fine-tuned penultimate features",
+      "knn_ft_bank": "train minus held-out, fine-tuned penultimate features",
+      "mahalanobis_frozen": "class means + Ledoit-Wolf covariance: train minus held-out, frozen e5 features",
+      "knn_frozen_bank": "train minus held-out, frozen e5 features",
+      "knn_k": "fixed {1, 5}, reported, not tuned",
+      "design_note": "lr / stop_epoch / model were chosen in Phase 1 by 12-class CV on train+val rows, which includes the held-out classes as KNOWN classes; no unknown-class data is used by any fitted quantity of a Track B run, but those design choices pre-date the holdouts"
+    },
+    "temperature": 1.0609617150818966,
+    "ledoit_wolf_shrinkage": {
+      "fine_tuned": 0.26567940943954044,
+      "frozen": 0.3709403640098998
+    },
+    "test_split_inference": "one guarded call"
+  },
+  "training": {
+    "config": {
+      "model_name": "intfloat/multilingual-e5-base",
+      "lr": 3e-05,
+      "epochs": 20,
+      "batch_size": 16,
+      "warmup_ratio": 0.1,
+      "weight_decay": 0.01,
+      "max_len": 64,
+      "precision": "fp16",
+      "model_seed": 42,
+      "class_weighted": false,
+      "label_smoothing": 0.0,
+      "layer_decay": null,
+      "entity_masking": false,
+      "hier_aux": false,
+      "hier_lambda": 0.5,
+      "max_grad_norm": 1.0,
+      "attn_implementation": "eager",
+      "stop_epoch": 9,
+      "wandb_project": "intent-router",
+      "wandb_group": "trackB-loco",
+      "model_short": "e5"
+    },
+    "epochs": [
+      {
+        "epoch": 1,
+        "train_loss": 2.412354826927185,
+        "eval_loss": 2.3652226563655967,
+        "macro_f1": 0.03830068236847897,
+        "accuracy": 0.09090909090909091
+      },
+      {
+        "epoch": 2,
+        "train_loss": 2.2526040077209473,
+        "eval_loss": 2.122391751318267,
+        "macro_f1": 0.26591968637423186,
+        "accuracy": 0.3484848484848485
+      },
+      {
+        "epoch": 3,
+        "train_loss": 1.8019115328788757,
+        "eval_loss": 1.5632606636394153,
+        "macro_f1": 0.7908132271768635,
+        "accuracy": 0.7878787878787878
+      },
+      {
+        "epoch": 4,
+        "train_loss": 1.1583004206418992,
+        "eval_loss": 1.0020564595858257,
+        "macro_f1": 0.8461467825104187,
+        "accuracy": 0.8484848484848485
+      },
+      {
+        "epoch": 5,
+        "train_loss": 0.5938539370894432,
+        "eval_loss": 0.6560933129353956,
+        "macro_f1": 0.8632034632034632,
+        "accuracy": 0.8636363636363636
+      },
+      {
+        "epoch": 6,
+        "train_loss": 0.2840386159718037,
+        "eval_loss": 0.44751808566577506,
+        "macro_f1": 0.8928653046300106,
+        "accuracy": 0.8939393939393939
+      },
+      {
+        "epoch": 7,
+        "train_loss": 0.13131854310631752,
+        "eval_loss": 0.3956378832685225,
+        "macro_f1": 0.8928653046300106,
+        "accuracy": 0.8939393939393939
+      },
+      {
+        "epoch": 8,
+        "train_loss": 0.06263902597129345,
+        "eval_loss": 0.41886855989243044,
+        "macro_f1": 0.9081500199147258,
+        "accuracy": 0.9090909090909091
+      },
+      {
+        "epoch": 9,
+        "train_loss": 0.035578443016856906,
+        "eval_loss": 0.4004599398961573,
+        "macro_f1": 0.9061520179167238,
+        "accuracy": 0.9090909090909091
+      }
+    ],
+    "wall_clock_s": 31.681111099998816,
+    "load_s": 5.362428300002648,
+    "peak_vram_mb": 5359.962890625,
+    "gpu_exclusive": true,
+    "gpu_foreign_seen": [],
+    "nan_detected": false,
+    "fingerprint": "b4034a0ade4bb9042b7021291e1919922d89fe7640519383634d391bc277135f",
+    "gpu_lock_waited_s": 0.2,
+    "wandb_url": "https://wandb.ai/gauravgandhi429-gaurav-gandhi/intent-router/runs/pw93j16f",
+    "run_total_s": 52.16293510000105
+  },
+  "metrics_at_run_time": {
+    "n_cal": 66,
+    "n_eval_known": 66,
+    "n_eval_unknown": 55,
+    "retention_target": 0.95,
+    "closed_set_known": {
+      "n_known_eval": 66,
+      "macro_f1": 0.9557775557775557,
+      "accuracy": 0.9545454545454546,
+      "note": "closed-set, all known eval rows, no abstention; context for Track A"
+    },
+    "methods": {
+      "msp": {
+        "auroc": 0.9162534435261708,
+        "aupr": 0.8674042246764219,
+        "fpr_at_95tpr": 0.5272727272727272,
+        "aurc_open_set": 0.17646777471059297,
+        "cal_retention_achieved": 0.9545454545454546,
+        "threshold": 0.6022292375564575,
+        "retention_known": 0.9696969696969697,
+        "n_known_accepted": 64,
+        "strict_rejection_recall": 0.4,
+        "lenient_rejection_recall": 0.4,
+        "n_unknown_not_rejected": 33,
+        "known_accepted_routed_to_safe": 9,
+        "known_accepted_routed_to_safe_gold_not_safe": 0,
+        "known_accepted_routed_to_safe_frac_of_known": 0.13636363636363635,
+        "known_accepted_routed_to_safe_gold_not_safe_frac_of_known": 0.0,
+        "unknown_not_rejected_by_pred_label": {
+          "orders": 2,
+          "shipment_information.analytics": 12,
+          "shipment_information.disruptions": 11,
+          "yard_management": 8
+        },
+        "unknown_all_by_pred_label": {
+          "knowledge_base": 1,
+          "orders": 4,
+          "shipment_information.analytics": 16,
+          "shipment_information.disruptions": 20,
+          "yard_management": 14
+        },
+        "known_accepted_macro_f1_present": 0.9545060999606455,
+        "known_accepted_accuracy": 0.953125
+      },
+      "msp_temp": {
+        "auroc": 0.9168044077134986,
+        "aupr": 0.8684432010240213,
+        "fpr_at_95tpr": 0.5272727272727272,
+        "aurc_open_set": 0.17644808963768577,
+        "cal_retention_achieved": 0.9545454545454546,
+        "threshold": 0.5783324837684631,
+        "retention_known": 0.9545454545454546,
+        "n_known_accepted": 63,
+        "strict_rejection_recall": 0.41818181818181815,
+        "lenient_rejection_recall": 0.41818181818181815,
+        "n_unknown_not_rejected": 32,
+        "known_accepted_routed_to_safe": 9,
+        "known_accepted_routed_to_safe_gold_not_safe": 0,
+        "known_accepted_routed_to_safe_frac_of_known": 0.13636363636363635,
+        "known_accepted_routed_to_safe_gold_not_safe_frac_of_known": 0.0,
+        "unknown_not_rejected_by_pred_label": {
+          "orders": 2,
+          "shipment_information.analytics": 12,
+          "shipment_information.disruptions": 11,
+          "yard_management": 7
+        },
+        "unknown_all_by_pred_label": {
+          "knowledge_base": 1,
+          "orders": 4,
+          "shipment_information.analytics": 16,
+          "shipment_information.disruptions": 20,
+          "yard_management": 14
+        },
+        "known_accepted_macro_f1_present": 0.9535736990282445,
+        "known_accepted_accuracy": 0.9523809523809523
+      },
+      "max_logit": {
+        "auroc": 0.9305785123966942,
+        "aupr": 0.9046563467767081,
+        "fpr_at_95tpr": 0.41818181818181815,
+        "aurc_open_set": 0.17463693357990132,
+        "cal_retention_achieved": 0.9545454545454546,
+        "threshold": 3.1079211235046387,
+        "retention_known": 0.9848484848484849,
+        "n_known_accepted": 65,
+        "strict_rejection_recall": 0.41818181818181815,
+        "lenient_rejection_recall": 0.41818181818181815,
+        "n_unknown_not_rejected": 32,
+        "known_accepted_routed_to_safe": 9,
+        "known_accepted_routed_to_safe_gold_not_safe": 0,
+        "known_accepted_routed_to_safe_frac_of_known": 0.13636363636363635,
+        "known_accepted_routed_to_safe_gold_not_safe_frac_of_known": 0.0,
+        "unknown_not_rejected_by_pred_label": {
+          "orders": 2,
+          "shipment_information.analytics": 12,
+          "shipment_information.disruptions": 11,
+          "yard_management": 7
+        },
+        "unknown_all_by_pred_label": {
+          "knowledge_base": 1,
+          "orders": 4,
+          "shipment_information.analytics": 16,
+          "shipment_information.disruptions": 20,
+          "yard_management": 14
+        },
+        "known_accepted_macro_f1_present": 0.9545060999606455,
+        "known_accepted_accuracy": 0.9538461538461539
+      },
+      "neg_energy": {
+        "auroc": 0.9355371900826446,
+        "aupr": 0.9163352674436613,
+        "fpr_at_95tpr": 0.34545454545454546,
+        "aurc_open_set": 0.17395836313983384,
+        "cal_retention_achieved": 0.9545454545454546,
+        "threshold": 3.607445990598173,
+        "retention_known": 0.9848484848484849,
+        "n_known_accepted": 65,
+        "strict_rejection_recall": 0.38181818181818183,
+        "lenient_rejection_recall": 0.38181818181818183,
+        "n_unknown_not_rejected": 34,
+        "known_accepted_routed_to_safe": 9,
+        "known_accepted_routed_to_safe_gold_not_safe": 0,
+        "known_accepted_routed_to_safe_frac_of_known": 0.13636363636363635,
+        "known_accepted_routed_to_safe_gold_not_safe_frac_of_known": 0.0,
+        "unknown_not_rejected_by_pred_label": {
+          "knowledge_base": 1,
+          "orders": 2,
+          "shipment_information.analytics": 14,
+          "shipment_information.disruptions": 10,
+          "yard_management": 7
+        },
+        "unknown_all_by_pred_label": {
+          "knowledge_base": 1,
+          "orders": 4,
+          "shipment_information.analytics": 16,
+          "shipment_information.disruptions": 20,
+          "yard_management": 14
+        },
+        "known_accepted_macro_f1_present": 0.9545060999606455,
+        "known_accepted_accuracy": 0.9538461538461539
+      },
+      "maha_ft": {
+        "auroc": 0.8942148760330578,
+        "aupr": 0.8299677186577724,
+        "fpr_at_95tpr": 0.7818181818181819,
+        "aurc_open_set": 0.18824119413530124,
+        "cal_retention_achieved": 0.9545454545454546,
+        "threshold": -116.2624290124569,
+        "retention_known": 0.9545454545454546,
+        "n_known_accepted": 63,
+        "strict_rejection_recall": 0.21818181818181817,
+        "lenient_rejection_recall": 0.21818181818181817,
+        "n_unknown_not_rejected": 43,
+        "known_accepted_routed_to_safe": 9,
+        "known_accepted_routed_to_safe_gold_not_safe": 0,
+        "known_accepted_routed_to_safe_frac_of_known": 0.13636363636363635,
+        "known_accepted_routed_to_safe_gold_not_safe_frac_of_known": 0.0,
+        "unknown_not_rejected_by_pred_label": {
+          "knowledge_base": 1,
+          "orders": 2,
+          "shipment_information.analytics": 14,
+          "shipment_information.disruptions": 17,
+          "yard_management": 9
+        },
+        "unknown_all_by_pred_label": {
+          "knowledge_base": 1,
+          "orders": 4,
+          "shipment_information.analytics": 16,
+          "shipment_information.disruptions": 20,
+          "yard_management": 14
+        },
+        "known_accepted_macro_f1_present": 0.9535736990282445,
+        "known_accepted_accuracy": 0.9523809523809523
+      },
+      "knn1_ft": {
+        "auroc": 0.928374655647383,
+        "aupr": 0.8851259070195434,
+        "fpr_at_95tpr": 0.4727272727272727,
+        "aurc_open_set": 0.17568278796799933,
+        "cal_retention_achieved": 0.9545454545454546,
+        "threshold": 0.684523081004889,
+        "retention_known": 0.9242424242424242,
+        "n_known_accepted": 61,
+        "strict_rejection_recall": 0.5636363636363636,
+        "lenient_rejection_recall": 0.5636363636363636,
+        "n_unknown_not_rejected": 24,
+        "known_accepted_routed_to_safe": 9,
+        "known_accepted_routed_to_safe_gold_not_safe": 0,
+        "known_accepted_routed_to_safe_frac_of_known": 0.13636363636363635,
+        "known_accepted_routed_to_safe_gold_not_safe_frac_of_known": 0.0,
+        "unknown_not_rejected_by_pred_label": {
+          "orders": 1,
+          "shipment_information.analytics": 11,
+          "shipment_information.disruptions": 9,
+          "yard_management": 3
+        },
+        "unknown_all_by_pred_label": {
+          "knowledge_base": 1,
+          "orders": 4,
+          "shipment_information.analytics": 16,
+          "shipment_information.disruptions": 20,
+          "yard_management": 14
+        },
+        "known_accepted_macro_f1_present": 0.9514091968637424,
+        "known_accepted_accuracy": 0.9508196721311475
+      },
+      "knn5_ft": {
+        "auroc": 0.9245179063360881,
+        "aupr": 0.8807604491737332,
+        "fpr_at_95tpr": 0.43636363636363634,
+        "aurc_open_set": 0.17489410024279556,
+        "cal_retention_achieved": 0.9545454545454546,
+        "threshold": 0.6669395340138029,
+        "retention_known": 0.9393939393939394,
+        "n_known_accepted": 62,
+        "strict_rejection_recall": 0.5818181818181818,
+        "lenient_rejection_recall": 0.5818181818181818,
+        "n_unknown_not_rejected": 23,
+        "known_accepted_routed_to_safe": 9,
+        "known_accepted_routed_to_safe_gold_not_safe": 0,
+        "known_accepted_routed_to_safe_frac_of_known": 0.13636363636363635,
+        "known_accepted_routed_to_safe_gold_not_safe_frac_of_known": 0.0,
+        "unknown_not_rejected_by_pred_label": {
+          "orders": 1,
+          "shipment_information.analytics": 11,
+          "shipment_information.disruptions": 8,
+          "yard_management": 3
+        },
+        "unknown_all_by_pred_label": {
+          "knowledge_base": 1,
+          "orders": 4,
+          "shipment_information.analytics": 16,
+          "shipment_information.disruptions": 20,
+          "yard_management": 14
+        },
+        "known_accepted_macro_f1_present": 0.9514091968637424,
+        "known_accepted_accuracy": 0.9516129032258065
+      },
+      "maha_frozen": {
+        "auroc": 0.5911845730027548,
+        "aupr": 0.5124779863160709,
+        "fpr_at_95tpr": 1.0,
+        "aurc_open_set": 0.40105129686230084,
+        "cal_retention_achieved": 0.9545454545454546,
+        "threshold": -36.07037657650812,
+        "retention_known": 0.9393939393939394,
+        "n_known_accepted": 62,
+        "strict_rejection_recall": 0.0,
+        "lenient_rejection_recall": 0.0,
+        "n_unknown_not_rejected": 55,
+        "known_accepted_routed_to_safe": 6,
+        "known_accepted_routed_to_safe_gold_not_safe": 0,
+        "known_accepted_routed_to_safe_frac_of_known": 0.09090909090909091,
+        "known_accepted_routed_to_safe_gold_not_safe_frac_of_known": 0.0,
+        "unknown_not_rejected_by_pred_label": {
+          "knowledge_base": 1,
+          "orders": 4,
+          "shipment_information.analytics": 16,
+          "shipment_information.disruptions": 20,
+          "yard_management": 14
+        },
+        "unknown_all_by_pred_label": {
+          "knowledge_base": 1,
+          "orders": 4,
+          "shipment_information.analytics": 16,
+          "shipment_information.disruptions": 20,
+          "yard_management": 14
+        },
+        "known_accepted_macro_f1_present": 0.9557775557775557,
+        "known_accepted_accuracy": 0.9516129032258065
+      },
+      "knn1_frozen": {
+        "auroc": 0.615426997245179,
+        "aupr": 0.49621807642756777,
+        "fpr_at_95tpr": 1.0,
+        "aurc_open_set": 0.3304576532515463,
+        "cal_retention_achieved": 0.9545454545454546,
+        "threshold": 0.8398684994804777,
+        "retention_known": 0.8787878787878788,
+        "n_known_accepted": 58,
+        "strict_rejection_recall": 0.05454545454545454,
+        "lenient_rejection_recall": 0.05454545454545454,
+        "n_unknown_not_rejected": 52,
+        "known_accepted_routed_to_safe": 6,
+        "known_accepted_routed_to_safe_gold_not_safe": 0,
+        "known_accepted_routed_to_safe_frac_of_known": 0.09090909090909091,
+        "known_accepted_routed_to_safe_gold_not_safe_frac_of_known": 0.0,
+        "unknown_not_rejected_by_pred_label": {
+          "knowledge_base": 1,
+          "orders": 3,
+          "shipment_information.analytics": 16,
+          "shipment_information.disruptions": 19,
+          "yard_management": 13
+        },
+        "unknown_all_by_pred_label": {
+          "knowledge_base": 1,
+          "orders": 4,
+          "shipment_information.analytics": 16,
+          "shipment_information.disruptions": 20,
+          "yard_management": 14
+        },
+        "known_accepted_macro_f1_present": 0.9545060999606455,
+        "known_accepted_accuracy": 0.9482758620689655
+      },
+      "knn5_frozen": {
+        "auroc": 0.5537190082644629,
+        "aupr": 0.48495681630862886,
+        "fpr_at_95tpr": 0.9818181818181818,
+        "aurc_open_set": 0.4169401379760829,
+        "cal_retention_achieved": 0.9545454545454546,
+        "threshold": 0.8133462324738698,
+        "retention_known": 0.9242424242424242,
+        "n_known_accepted": 61,
+        "strict_rejection_recall": 0.03636363636363636,
+        "lenient_rejection_recall": 0.03636363636363636,
+        "n_unknown_not_rejected": 53,
+        "known_accepted_routed_to_safe": 6,
+        "known_accepted_routed_to_safe_gold_not_safe": 0,
+        "known_accepted_routed_to_safe_frac_of_known": 0.09090909090909091,
+        "known_accepted_routed_to_safe_gold_not_safe_frac_of_known": 0.0,
+        "unknown_not_rejected_by_pred_label": {
+          "knowledge_base": 1,
+          "orders": 4,
+          "shipment_information.analytics": 16,
+          "shipment_information.disruptions": 20,
+          "yard_management": 12
+        },
+        "unknown_all_by_pred_label": {
+          "knowledge_base": 1,
+          "orders": 4,
+          "shipment_information.analytics": 16,
+          "shipment_information.disruptions": 20,
+          "yard_management": 14
+        },
+        "known_accepted_macro_f1_present": 0.9557775557775557,
+        "known_accepted_accuracy": 0.9508196721311475
+      }
+    }
+  }
+}

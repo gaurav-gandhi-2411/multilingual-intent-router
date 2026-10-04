@@ -1,0 +1,15 @@
+{
+  "scorer": "i1a",
+  "thr_rule": "global",
+  "mode": "raw",
+  "per_retention": {
+    "95": {
+      "global": -56.78187450907335
+    },
+    "90": {
+      "global": -52.97242950184951
+    }
+  },
+  "weights": "ref",
+  "run_id": "ref_loco_orders_s0"
+}

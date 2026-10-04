@@ -1,0 +1,34 @@
+# Label-ambiguity audit (pre-registered). Local Ollama only: the code refuses
+# any non-loopback host (dataset text never leaves the machine).
+data_path: data/dataset.csv
+splits_path: splits/splits.csv
+oof_path: results/oof/e5_lr3e-05.csv
+n_classes: 12
+oof_per_id: 9                 # 3 fold-seeds x 3 model seeds
+results_dir: results/llm_audit          # ids / labels / judge choices only, NEVER dataset text
+outputs_dir: outputs/llm_audit          # prompts + raw responses with text (gitignored)
+smoke_dir: outputs/llm_audit_smoke
+seed: 42
+
+items:
+  n_controls: 20
+  n_calibration: 10
+  control_conf_max: 0.98      # DEVIATION from pre-reg 0.99: max averaged OOF prob of any correct row is 0.9889, so 0.99 is unattainable; 0.98 is the nearest threshold leaving >=10 classes populated
+  calibration_conf_min: 0.98  # same deviation (see above)
+
+ollama:
+  base_url: http://127.0.0.1:11434   # validated loopback-only at run time
+  num_ctx: 1024
+  num_predict: 48
+  timeout_s: 300
+  keep_alive: 0               # unload after each judge's batch to free VRAM
+
+# 3 families, <= 8B, default Ollama 4-bit tags. think=false only where the model has a thinking mode.
+judges:
+  - {name: qwen3, tag: "qwen3:8b", think: false}
+  - {name: llama3, tag: "llama3.1:8b", think: null}
+  - {name: gemma3, tag: "gemma3:4b", think: null}
+
+gate:
+  calibration_min_accuracy: 0.9
+expected_duration_s: 1800

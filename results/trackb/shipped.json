@@ -1,0 +1,52 @@
+{
+  "method": "maha_ft",
+  "k": null,
+  "selection": {
+    "rule": "best mean LOCO AUROC (strict mode) across the leave-one-class-out runs",
+    "note": "a design choice made across holdout experiments",
+    "n_loco_runs": 10,
+    "mean_auroc_by_method": {
+      "msp": 0.8687703566748921,
+      "msp_temp": 0.8692472394873931,
+      "max_logit": 0.8773134005936642,
+      "neg_energy": 0.8796247047429674,
+      "maha_ft": 0.8863095152059819,
+      "knn1_ft": 0.8841629190746131,
+      "knn5_ft": 0.8817130757145335,
+      "maha_frozen": 0.6761147221637971,
+      "knn1_frozen": 0.6621353813409744,
+      "knn5_frozen": 0.6365326184703273
+    },
+    "ranking": [
+      "maha_ft",
+      "knn1_ft",
+      "knn5_ft",
+      "neg_energy",
+      "max_logit",
+      "msp_temp",
+      "msp",
+      "maha_frozen",
+      "knn1_frozen",
+      "knn5_frozen"
+    ],
+    "shipped_method": "maha_ft"
+  },
+  "threshold": -128.06341286077185,
+  "threshold_source": "95% retention on val (all 12 classes known)",
+  "tie_handling": "accept = score >= threshold; ties at the threshold are accepted, so achieved retention is >= the target",
+  "temperature": 1.0228290548483843,
+  "temperature_source": "val NLL, LBFGS",
+  "n_val": 74,
+  "val_retention_achieved": 0.9594594594594594,
+  "n_test": 74,
+  "n_test_accepted": 73,
+  "test_coverage_at_threshold": 0.9864864864864865,
+  "test_accepted_macro_f1_present": 0.9574786324786325,
+  "test_accepted_accuracy": 0.958904109589041,
+  "test_all_accuracy": 0.9459459459459459,
+  "test_predictions_match_saved_csv": true,
+  "sources": {
+    "arrays": "outputs\\final\\features_logits.npz",
+    "test_inference": "none: saved test logits/features from final.py"
+  }
+}

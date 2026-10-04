@@ -1,0 +1,23 @@
+{
+  "scorer": "maha_ft",
+  "thr_rule": "i6b",
+  "mode": "raw",
+  "per_retention": {
+    "95": {
+      "global": -95.62785241956804,
+      "crossfit_threshold": -42.29648606210853,
+      "n_crossfit_rows": 392,
+      "folds": 5,
+      "seed": 42
+    },
+    "90": {
+      "global": -87.02073723441809,
+      "crossfit_threshold": -36.1325679088728,
+      "n_crossfit_rows": 392,
+      "folds": 5,
+      "seed": 42
+    }
+  },
+  "weights": "ref",
+  "run_id": "ref_loco_customer_support_s1"
+}

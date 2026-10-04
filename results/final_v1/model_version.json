@@ -1,0 +1,28 @@
+{
+  "version": "v1",
+  "factors": [],
+  "deployed_epoch": 9,
+  "train_config": {
+    "model_name": "intfloat/multilingual-e5-base",
+    "query_prefix": "query: ",
+    "lr": 3e-05,
+    "weight_decay": 0.01,
+    "warmup_ratio": 0.1,
+    "batch_size": 16,
+    "precision": "fp16",
+    "max_len": 64,
+    "epochs": 20,
+    "stop_epoch": 9,
+    "model_seed": 42,
+    "attn_implementation": "eager",
+    "label_smoothing": 0.0,
+    "class_weighted": false
+  },
+  "extras": {},
+  "model_fingerprint": "7ca22e16d2ace345d9dcf7737887e85fedf400a1dfc863678c2fc2663bf102bd",
+  "model_dir": "outputs\\final_model",
+  "shipped_ood_score": "maha_ft",
+  "archived_v2": "results/final_v2",
+  "note": "v1 restored as the final model on 2026-10-02 (the author's decision); v2 archived, not shipped",
+  "restored_at_git_sha": "46e80275c23ad45d0db7aac5eefb6168451a2f22"
+}

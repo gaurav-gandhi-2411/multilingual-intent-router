@@ -1,0 +1,34 @@
+# Shared config for EDA + split. Runtime config only; tool config lives in pyproject.toml.
+data_path: data/dataset.csv
+splits_path: splits/splits.csv
+results_dir: results
+seed: 42
+
+split:
+  test_frac: 0.15
+  val_frac: 0.15
+  cv_folds: 5
+  # cv_fold_s0..s2 correspond to these StratifiedGroupKFold shuffle seeds
+  cv_seeds: [42, 43, 44]
+
+# char_wb 3-5 TF-IDF cosine above this => same dup_group
+dup_threshold: 0.8
+# cross-label pairs above this are reported (label-noise check)
+cross_label_threshold: 0.7
+
+candidate_tokenizers:
+  - intfloat/multilingual-e5-base
+  - FacebookAI/xlm-roberta-base
+  - microsoft/mdeberta-v3-base
+# prefix applied before tokenization (must match training/inference)
+query_prefix:
+  intfloat/multilingual-e5-base: "query: "
+
+eda:
+  default_max_len: 64
+  wordlist_tokenizer: bert-base-uncased
+  # lingua language-ID guards (documented in results/eda.json)
+  lang_min_letters: 6
+  lang_min_confidence: 0.4
+  segment_min_words: 3
+  segment_min_confidence: 0.9

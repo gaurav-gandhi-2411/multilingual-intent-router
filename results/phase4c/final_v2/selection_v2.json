@@ -1,0 +1,13 @@
+{
+  "candidates": {
+    "comb_a3": {
+      "chosen_epoch": 9,
+      "n_runs": 5,
+      "macro_f1_mean": 0.9562010565687036,
+      "macro_f1_std": 0.02763255167217096,
+      "accuracy_mean": 0.9577291381668946,
+      "accuracy_std": 0.02580391454189261,
+      "note": "v2 config: 5 folds, fold-seed s0, model seed 0 (v1 used 9 fold-runs per id)"
+    }
+  }
+}

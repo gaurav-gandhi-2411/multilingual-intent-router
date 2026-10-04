@@ -1,0 +1,62 @@
+{
+  "label": "measured, 3 real AdamW steps, fp32 weights + fp16 autocast, max_len 64",
+  "model_name": "intfloat/multilingual-e5-large",
+  "gpu": "NVIDIA GeForce RTX 3070 Laptop GPU",
+  "vram_budget_gb": 8,
+  "arithmetic": {
+    "n_params": 559902732,
+    "weights_fp32_mb": 2135.859420776367,
+    "grads_fp32_mb": 2135.859420776367,
+    "adamw_state_fp32_mb": 4271.718841552734,
+    "static_total_mb": 8543.437683105469,
+    "device_total_mb": 8191.5,
+    "note": "static = weights + grads + 2 AdamW moments, all fp32; gradient accumulation shrinks activations only, NOT these; fp16 autocast adds weight-cast copies on top"
+  },
+  "attempts": [
+    {
+      "micro_batch": 16,
+      "accum": 1,
+      "step_s": [
+        4.604131599999846,
+        2.1037811999999576,
+        2.0539369000002807
+      ],
+      "outcome": "completed",
+      "max_memory_allocated_mb": 10703.193359375,
+      "max_memory_reserved_mb": 11064.0,
+      "spilled_past_vram": true,
+      "fits": false
+    },
+    {
+      "micro_batch": 8,
+      "accum": 2,
+      "step_s": [
+        2.9711464000001797,
+        1.609020800000053,
+        1.6934734999999819
+      ],
+      "outcome": "completed",
+      "max_memory_allocated_mb": 10701.064453125,
+      "max_memory_reserved_mb": 10980.0,
+      "spilled_past_vram": true,
+      "fits": false
+    },
+    {
+      "micro_batch": 4,
+      "accum": 4,
+      "step_s": [
+        2.9488022000000456,
+        2.2835139000003437,
+        2.1909449999998287
+      ],
+      "outcome": "completed",
+      "max_memory_allocated_mb": 10699.640625,
+      "max_memory_reserved_mb": 10908.0,
+      "spilled_past_vram": true,
+      "fits": false
+    }
+  ],
+  "chosen": null,
+  "aborted": true,
+  "decision": "C3 aborted per the rule fixed beforehand (a step does not fit in 8 GB)"
+}

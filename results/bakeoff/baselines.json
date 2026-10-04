@@ -1,0 +1,234 @@
+{
+  "B0": {
+    "per_fold": [
+      {
+        "fold_seed_idx": 0,
+        "fold": 0,
+        "best_C": 3.0,
+        "macro_f1": 0.7534250986297022,
+        "accuracy": 0.7906976744186046
+      },
+      {
+        "fold_seed_idx": 0,
+        "fold": 1,
+        "best_C": 100.0,
+        "macro_f1": 0.805148852639262,
+        "accuracy": 0.8117647058823529
+      },
+      {
+        "fold_seed_idx": 0,
+        "fold": 2,
+        "best_C": 3.0,
+        "macro_f1": 0.7929855003384415,
+        "accuracy": 0.8
+      },
+      {
+        "fold_seed_idx": 0,
+        "fold": 3,
+        "best_C": 1.0,
+        "macro_f1": 0.8158209845709846,
+        "accuracy": 0.8235294117647058
+      },
+      {
+        "fold_seed_idx": 0,
+        "fold": 4,
+        "best_C": 30.0,
+        "macro_f1": 0.7901746401746402,
+        "accuracy": 0.8
+      },
+      {
+        "fold_seed_idx": 1,
+        "fold": 0,
+        "best_C": 100.0,
+        "macro_f1": 0.7649378521089049,
+        "accuracy": 0.7790697674418605
+      },
+      {
+        "fold_seed_idx": 1,
+        "fold": 1,
+        "best_C": 10.0,
+        "macro_f1": 0.7861747170957698,
+        "accuracy": 0.8
+      },
+      {
+        "fold_seed_idx": 1,
+        "fold": 2,
+        "best_C": 1.0,
+        "macro_f1": 0.7733974358974359,
+        "accuracy": 0.788235294117647
+      },
+      {
+        "fold_seed_idx": 1,
+        "fold": 3,
+        "best_C": 100.0,
+        "macro_f1": 0.7457283715023654,
+        "accuracy": 0.7647058823529411
+      },
+      {
+        "fold_seed_idx": 1,
+        "fold": 4,
+        "best_C": 3.0,
+        "macro_f1": 0.8117407510789864,
+        "accuracy": 0.8352941176470589
+      },
+      {
+        "fold_seed_idx": 2,
+        "fold": 0,
+        "best_C": 3.0,
+        "macro_f1": 0.7975903811817124,
+        "accuracy": 0.8255813953488372
+      },
+      {
+        "fold_seed_idx": 2,
+        "fold": 1,
+        "best_C": 3.0,
+        "macro_f1": 0.7784711633395843,
+        "accuracy": 0.8
+      },
+      {
+        "fold_seed_idx": 2,
+        "fold": 2,
+        "best_C": 3.0,
+        "macro_f1": 0.7059972434972436,
+        "accuracy": 0.7176470588235294
+      },
+      {
+        "fold_seed_idx": 2,
+        "fold": 3,
+        "best_C": 100.0,
+        "macro_f1": 0.8985495985495985,
+        "accuracy": 0.9058823529411765
+      },
+      {
+        "fold_seed_idx": 2,
+        "fold": 4,
+        "best_C": 1.0,
+        "macro_f1": 0.7487380810910224,
+        "accuracy": 0.7647058823529411
+      }
+    ],
+    "macro_f1_mean": 0.7845920447797103,
+    "macro_f1_std": 0.043001467827240354,
+    "accuracy_mean": 0.8004742362061104,
+    "accuracy_std": 0.04117575206849277,
+    "n_fold_runs": 15,
+    "wall_clock_s": 92.13595569999961,
+    "wandb_url": "https://wandb.ai/gauravgandhi429-gaurav-gandhi/intent-router/runs/0uendmsh"
+  },
+  "B1": {
+    "per_fold": [
+      {
+        "fold_seed_idx": 0,
+        "fold": 0,
+        "best_C": 30.0,
+        "macro_f1": 0.9403679653679652,
+        "accuracy": 0.9418604651162791
+      },
+      {
+        "fold_seed_idx": 0,
+        "fold": 1,
+        "best_C": 100.0,
+        "macro_f1": 0.9104950604950606,
+        "accuracy": 0.9058823529411765
+      },
+      {
+        "fold_seed_idx": 0,
+        "fold": 2,
+        "best_C": 30.0,
+        "macro_f1": 0.8916731502644817,
+        "accuracy": 0.8941176470588236
+      },
+      {
+        "fold_seed_idx": 0,
+        "fold": 3,
+        "best_C": 30.0,
+        "macro_f1": 0.9149613544350386,
+        "accuracy": 0.9176470588235294
+      },
+      {
+        "fold_seed_idx": 0,
+        "fold": 4,
+        "best_C": 30.0,
+        "macro_f1": 0.9408204540557481,
+        "accuracy": 0.9411764705882353
+      },
+      {
+        "fold_seed_idx": 1,
+        "fold": 0,
+        "best_C": 100.0,
+        "macro_f1": 0.8749123769247609,
+        "accuracy": 0.8837209302325582
+      },
+      {
+        "fold_seed_idx": 1,
+        "fold": 1,
+        "best_C": 30.0,
+        "macro_f1": 0.932203371677056,
+        "accuracy": 0.9294117647058824
+      },
+      {
+        "fold_seed_idx": 1,
+        "fold": 2,
+        "best_C": 100.0,
+        "macro_f1": 0.9287407123320436,
+        "accuracy": 0.9294117647058824
+      },
+      {
+        "fold_seed_idx": 1,
+        "fold": 3,
+        "best_C": 30.0,
+        "macro_f1": 0.8891404891404893,
+        "accuracy": 0.8941176470588236
+      },
+      {
+        "fold_seed_idx": 1,
+        "fold": 4,
+        "best_C": 100.0,
+        "macro_f1": 0.9315247252747253,
+        "accuracy": 0.9294117647058824
+      },
+      {
+        "fold_seed_idx": 2,
+        "fold": 0,
+        "best_C": 100.0,
+        "macro_f1": 0.8722109883294094,
+        "accuracy": 0.872093023255814
+      },
+      {
+        "fold_seed_idx": 2,
+        "fold": 1,
+        "best_C": 30.0,
+        "macro_f1": 0.8968442863179704,
+        "accuracy": 0.8941176470588236
+      },
+      {
+        "fold_seed_idx": 2,
+        "fold": 2,
+        "best_C": 100.0,
+        "macro_f1": 0.9303018876548289,
+        "accuracy": 0.9294117647058824
+      },
+      {
+        "fold_seed_idx": 2,
+        "fold": 3,
+        "best_C": 100.0,
+        "macro_f1": 0.9104450560332914,
+        "accuracy": 0.9058823529411765
+      },
+      {
+        "fold_seed_idx": 2,
+        "fold": 4,
+        "best_C": 10.0,
+        "macro_f1": 0.9412685439775222,
+        "accuracy": 0.9411764705882353
+      }
+    ],
+    "macro_f1_mean": 0.9137273614853594,
+    "macro_f1_std": 0.02388872411887592,
+    "accuracy_mean": 0.9139626082991338,
+    "accuracy_std": 0.022689566016009237,
+    "n_fold_runs": 15,
+    "wall_clock_s": 46.6549658999993,
+    "wandb_url": "https://wandb.ai/gauravgandhi429-gaurav-gandhi/intent-router/runs/43y7td8u"
+  }
+}

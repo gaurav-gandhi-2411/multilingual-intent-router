@@ -1,0 +1,242 @@
+{
+  "run_id": "v1_loco_customer_support_s1",
+  "candidate": "v1",
+  "recipe": [],
+  "kind": "loco",
+  "holdout": [
+    "customer_support"
+  ],
+  "seed": 1,
+  "labels": [
+    "ai_agent_performance",
+    "appointment_manager",
+    "chitchat",
+    "document_processing",
+    "knowledge_base",
+    "orders",
+    "other",
+    "shipment_information.analytics",
+    "shipment_information.disruptions",
+    "shipment_information.realtime_query",
+    "yard_management"
+  ],
+  "call_type": "phase4e_trackb",
+  "git_sha": "unknown",
+  "smoke": false,
+  "extras": {
+    "factors": []
+  },
+  "audit": {
+    "holdout": [
+      "customer_support"
+    ],
+    "n_labels": 11,
+    "n_train": 324,
+    "n_cal": 68,
+    "n_eval_known": 68,
+    "n_eval_unknown": 40,
+    "assertions": {
+      "no_heldout_rows_in_train": true,
+      "no_heldout_rows_in_cal": true,
+      "no_heldout_rows_in_eval_known": true,
+      "eval_unknown_only_heldout": true,
+      "eval_unknown_has_every_heldout_row": true,
+      "label_space_is_remaining_classes": true,
+      "every_remaining_class_in_train": true,
+      "train_cal_disjoint": true,
+      "train_eval_known_disjoint": true,
+      "train_unknown_disjoint": true,
+      "cal_unknown_disjoint": true,
+      "no_test_rows_in_train_or_cal": true,
+      "eval_known_is_test_split_only": true,
+      "cal_is_val_split_only": true
+    },
+    "ids_sha256": {
+      "train": "9621c3a01c5a9932575279782845cfe003fdc9d1b9ca8934dd1bf7ccb273d632",
+      "cal": "7ded49a03f1451d1603fff2f0c423c6612aa57ded53cac8bd00ba7b3f68b4f3f",
+      "eval_known": "a59159b01104ba3c94ef07b17315493483a591768d457ff36ae8ee910cde855c",
+      "eval_unknown": "61a793197a642b58721234dc9a2e8b340d1b0a5135ae2215b2969e333882bf9c"
+    },
+    "smoke": false,
+    "temperature": 0.9971043129398194,
+    "ledoit_wolf_shrinkage": {
+      "fine_tuned": 0.26245343449556,
+      "multi_layer": [
+        0.1646916457537109,
+        0.2397319705948471,
+        0.27557717968445244,
+        0.2761731975756863,
+        0.34507954555298015
+      ]
+    },
+    "multi_layer_cal_mu": [
+      -37.66042594270856,
+      -35.93850833684981,
+      -40.13532582818552,
+      -43.00011148562359,
+      -49.82113870433665
+    ],
+    "multi_layer_cal_sd": [
+      9.34571908448357,
+      8.507076019173212,
+      12.190734640642711,
+      16.486556516148013,
+      24.896199481320036
+    ]
+  },
+  "training": {
+    "config": {
+      "model_name": "intfloat/multilingual-e5-base",
+      "lr": 3e-05,
+      "epochs": 20,
+      "batch_size": 16,
+      "warmup_ratio": 0.1,
+      "weight_decay": 0.01,
+      "max_len": 64,
+      "precision": "fp16",
+      "model_seed": 1,
+      "class_weighted": false,
+      "label_smoothing": 0.0,
+      "layer_decay": null,
+      "entity_masking": false,
+      "hier_aux": false,
+      "hier_lambda": 0.5,
+      "max_grad_norm": 1.0,
+      "attn_implementation": "eager",
+      "stop_epoch": 9,
+      "supcon_lambda": null,
+      "supcon_temperature": 0.1,
+      "grad_accum": 1,
+      "id_randomize_p": 0.0,
+      "oe_lambda": 0.0,
+      "oe_batch_size": 16,
+      "wandb_project": "intent-router",
+      "wandb_group": "phase4e-v1",
+      "model_short": "e5"
+    },
+    "epochs": [
+      {
+        "epoch": 1,
+        "train_loss": 2.3942622457231795,
+        "eval_loss": 2.353976109448601,
+        "macro_f1": 0.0786056049213944,
+        "accuracy": 0.16176470588235295
+      },
+      {
+        "epoch": 2,
+        "train_loss": 2.2654160885583785,
+        "eval_loss": 2.110465470482321,
+        "macro_f1": 0.24770431588613404,
+        "accuracy": 0.27941176470588236
+      },
+      {
+        "epoch": 3,
+        "train_loss": 1.8062544890812464,
+        "eval_loss": 1.4776247389176314,
+        "macro_f1": 0.7387592205774023,
+        "accuracy": 0.7647058823529411
+      },
+      {
+        "epoch": 4,
+        "train_loss": 1.113450186593192,
+        "eval_loss": 0.8870075695654925,
+        "macro_f1": 0.8612993067538522,
+        "accuracy": 0.8529411764705882
+      },
+      {
+        "epoch": 5,
+        "train_loss": 0.6041865150133768,
+        "eval_loss": 0.5213015254806069,
+        "macro_f1": 0.9429253455991424,
+        "accuracy": 0.9411764705882353
+      },
+      {
+        "epoch": 6,
+        "train_loss": 0.27758704622586566,
+        "eval_loss": 0.39808203236145134,
+        "macro_f1": 0.8977136632639025,
+        "accuracy": 0.8970588235294118
+      },
+      {
+        "epoch": 7,
+        "train_loss": 0.1255179216109571,
+        "eval_loss": 0.27130366248242993,
+        "macro_f1": 0.9275619211448088,
+        "accuracy": 0.9264705882352942
+      },
+      {
+        "epoch": 8,
+        "train_loss": 0.0651739232596897,
+        "eval_loss": 0.2580346533042543,
+        "macro_f1": 0.9275619211448088,
+        "accuracy": 0.9264705882352942
+      },
+      {
+        "epoch": 9,
+        "train_loss": 0.03513978732128938,
+        "eval_loss": 0.29009954017751355,
+        "macro_f1": 0.9158820977002796,
+        "accuracy": 0.9117647058823529
+      }
+    ],
+    "wall_clock_s": 37.61559799999668,
+    "load_s": 5.433152300000074,
+    "peak_vram_mb": 5377.79931640625,
+    "gpu_exclusive": false,
+    "gpu_foreign_seen": [
+      {
+        "pid": 29384,
+        "process_name": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.11.15-windows-x86_64-none\\python.exe",
+        "used_memory_mb": null,
+        "epoch": 3
+      },
+      {
+        "pid": null,
+        "process_name": "nvidia-smi-unavailable",
+        "error": "nvidia-smi exit 3221225794: ",
+        "epoch": 4
+      },
+      {
+        "pid": null,
+        "process_name": "nvidia-smi-unavailable",
+        "error": "nvidia-smi exit 3221225794: ",
+        "epoch": 5
+      },
+      {
+        "pid": null,
+        "process_name": "nvidia-smi-unavailable",
+        "error": "nvidia-smi exit 3221225794: ",
+        "epoch": 6
+      },
+      {
+        "pid": null,
+        "process_name": "nvidia-smi-unavailable",
+        "error": "nvidia-smi exit 3221225794: ",
+        "epoch": 7
+      },
+      {
+        "pid": null,
+        "process_name": "nvidia-smi-unavailable",
+        "error": "nvidia-smi exit 3221225794: ",
+        "epoch": 8
+      },
+      {
+        "pid": null,
+        "process_name": "nvidia-smi-unavailable",
+        "error": "nvidia-smi exit 3221225794: ",
+        "epoch": 9
+      },
+      {
+        "pid": null,
+        "process_name": "nvidia-smi-unavailable",
+        "error": "nvidia-smi exit 3221225794: ",
+        "epoch": "end"
+      }
+    ],
+    "nan_detected": false,
+    "fingerprint": "81cc4fef6ba7a7a4f1f5793ba7cb75fb1c2353183382c9bc1b54e8a77db677e1",
+    "gpu_lock_waited_s": 0.2,
+    "wandb_url": "https://wandb.ai/gauravgandhi429-gaurav-gandhi/intent-router/runs/u6al782o",
+    "run_total_s": 64.27649229999952
+  }
+}

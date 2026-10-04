@@ -1,0 +1,156 @@
+{
+  "run_id": "a1a3_loco_ai_agent_performance_s42",
+  "recipe": "a1a3",
+  "kind": "loco",
+  "holdout": [
+    "ai_agent_performance"
+  ],
+  "seed": 42,
+  "train_fraction": 1.0,
+  "stop_epoch": 6,
+  "labels": [
+    "appointment_manager",
+    "chitchat",
+    "customer_support",
+    "document_processing",
+    "knowledge_base",
+    "orders",
+    "other",
+    "shipment_information.analytics",
+    "shipment_information.disruptions",
+    "shipment_information.realtime_query",
+    "yard_management"
+  ],
+  "extras": {
+    "factors": [
+      "a1",
+      "a3"
+    ],
+    "a3": {
+      "n_rows": 648,
+      "n_excluded_not_train": 204
+    }
+  },
+  "n_train": 324,
+  "n_cal": 68,
+  "audit": {
+    "holdout": [
+      "ai_agent_performance"
+    ],
+    "n_labels": 11,
+    "n_train": 324,
+    "n_cal": 68,
+    "n_eval_known": 68,
+    "n_eval_unknown": 40,
+    "assertions": {
+      "no_heldout_rows_in_train": true,
+      "no_heldout_rows_in_cal": true,
+      "no_heldout_rows_in_eval_known": true,
+      "eval_unknown_only_heldout": true,
+      "eval_unknown_has_every_heldout_row": true,
+      "label_space_is_remaining_classes": true,
+      "every_remaining_class_in_train": true,
+      "train_cal_disjoint": true,
+      "train_eval_known_disjoint": true,
+      "train_unknown_disjoint": true,
+      "cal_unknown_disjoint": true,
+      "no_test_rows_in_train_or_cal": true,
+      "eval_known_is_test_split_only": true,
+      "cal_is_val_split_only": true
+    },
+    "ids_sha256": {
+      "train": "9552fcc7da6b1930ec6c45cfd235a6316f71cf24db8962772160ffd7e6d16b66",
+      "cal": "8d01a11b9338f7b39de9459eae36ec5aeefec6e5f819c66a755e7e8dadfae94a",
+      "eval_known": "7ca475ea8e574c6191d1d97da3361a1ab3c8d8b928158239277d3a0aa48f463a",
+      "eval_unknown": "4e2fc20052b0f8675c2819c8e05a32e59163b89ec480e634f25e00949fd058f2"
+    },
+    "smoke": false
+  },
+  "smoke": false,
+  "git_sha": "4536308e25696d84e01dd26bffcdac8d8f0dbdbc-dirty",
+  "call_type": "phase6a_diag",
+  "training": {
+    "config": {
+      "model_name": "intfloat/multilingual-e5-base",
+      "lr": 3e-05,
+      "epochs": 20,
+      "batch_size": 16,
+      "warmup_ratio": 0.1,
+      "weight_decay": 0.01,
+      "max_len": 64,
+      "precision": "fp16",
+      "model_seed": 42,
+      "class_weighted": false,
+      "label_smoothing": 0.0,
+      "layer_decay": null,
+      "entity_masking": false,
+      "hier_aux": false,
+      "hier_lambda": 0.5,
+      "max_grad_norm": 1.0,
+      "attn_implementation": "eager",
+      "stop_epoch": 6,
+      "supcon_lambda": null,
+      "supcon_temperature": 0.1,
+      "grad_accum": 1,
+      "id_randomize_p": 0.5,
+      "oe_lambda": 0.0,
+      "oe_batch_size": 16,
+      "wandb_project": "intent-router",
+      "wandb_group": "phase4e-a1a3",
+      "model_short": "e5"
+    },
+    "epochs": [
+      {
+        "epoch": 1,
+        "train_loss": 2.369564685665193,
+        "eval_loss": 2.2381453233606674,
+        "macro_f1": 0.09987285441830895,
+        "accuracy": 0.20588235294117646
+      },
+      {
+        "epoch": 2,
+        "train_loss": 1.8121290382791737,
+        "eval_loss": 1.2582917564055498,
+        "macro_f1": 0.6094572094572095,
+        "accuracy": 0.6323529411764706
+      },
+      {
+        "epoch": 3,
+        "train_loss": 0.6459779221503461,
+        "eval_loss": 0.46701519629534555,
+        "macro_f1": 0.8535490653137713,
+        "accuracy": 0.8529411764705882
+      },
+      {
+        "epoch": 4,
+        "train_loss": 0.16536059047355026,
+        "eval_loss": 0.38674642233287587,
+        "macro_f1": 0.8793795628020227,
+        "accuracy": 0.8823529411764706
+      },
+      {
+        "epoch": 5,
+        "train_loss": 0.03527153087932555,
+        "eval_loss": 0.32630203751956716,
+        "macro_f1": 0.8927548981024916,
+        "accuracy": 0.8970588235294118
+      },
+      {
+        "epoch": 6,
+        "train_loss": 0.01521095586177267,
+        "eval_loss": 0.40684643081005883,
+        "macro_f1": 0.8777632349824863,
+        "accuracy": 0.8823529411764706
+      }
+    ],
+    "wall_clock_s": 73.30776110000443,
+    "load_s": 5.9830891999881715,
+    "peak_vram_mb": 5378.1533203125,
+    "gpu_exclusive": true,
+    "gpu_foreign_seen": [],
+    "nan_detected": false,
+    "fingerprint": "8ed5e6ffd390ef71e97091318dc8ba711acef66a22665fe8e0605ccaf48a0318",
+    "gpu_lock_waited_s": 0.2,
+    "run_total_s": 83.3222764999955
+  }
+}
